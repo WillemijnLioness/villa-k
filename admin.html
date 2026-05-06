@@ -270,6 +270,50 @@ a { color: inherit; }
 .reset-btn:hover { color: var(--terracotta); }
 .reset-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
+/* ---------- Multi-image thumbnail strip ---------- */
+.thumb-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bone);
+  min-height: 90px;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+.thumb {
+  position: relative;
+  width: 86px;
+  height: 64px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb-del {
+  position: absolute;
+  top: 3px; right: 3px;
+  background: rgba(31,29,24,0.72);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 18px; height: 18px;
+  font-size: 9px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.15s;
+}
+.thumb-del:hover { background: var(--terracotta); }
+.btn-add {
+  background: var(--saffron);
+  color: var(--cream-soft);
+}
+.btn-add:hover { background: #a07030; }
+
 /* ---------- Modal ---------- */
 .modal-backdrop {
   position: fixed;
@@ -391,26 +435,46 @@ async function renderSlots() {
   container.innerHTML = '';
 
   for (const [key, slot] of Object.entries(slots)) {
-    const hasOverride = !!(siteOverrides[key]?.[0]);
+    const overrideUrls = siteOverrides[key] || [];
+    const hasOverride = overrideUrls.length > 0;
+    const isMulti = overrideUrls.length > 1;
     const previewUrl = getPhotoUrlFromOverrides(currentSite, key, overrides, 0);
+
+    /* Thumbnail strip (multi-image overrides only) */
+    const thumbsHtml = isMulti
+      ? `<div class="thumb-strip">${overrideUrls.map((url, i) => `
+          <div class="thumb">
+            <img src="${url}" alt="">
+            <button class="thumb-del" data-site="${currentSite}" data-key="${key}" data-index="${i}" title="Remove this photo">✕</button>
+          </div>`).join('')}</div>`
+      : `<div class="slot-preview">
+          ${previewUrl ? `<img src="${previewUrl}" alt="${slot.label}">` : '<div class="empty">No image set</div>'}
+          <div class="slot-badge ${hasOverride ? 'override' : ''}">${hasOverride ? '✓ Custom' : 'Default'}</div>
+        </div>`;
+
+    const badge = isMulti
+      ? `<div class="slot-badge override" style="position:absolute;top:10px;left:10px;z-index:2">✓ ${overrideUrls.length} photos</div>`
+      : '';
 
     const card = document.createElement('div');
     card.className = 'slot' + (hasOverride ? ' has-override' : '');
+    card.style.position = 'relative';
 
     card.innerHTML = `
-      <div class="slot-preview">
-        ${previewUrl ? `<img src="${previewUrl}" alt="${slot.label}">` : '<div class="empty">No image set</div>'}
-        ${hasOverride ? '<div class="slot-badge override">✓ Custom</div>' : '<div class="slot-badge">Default</div>'}
-      </div>
+      ${isMulti ? `<div style="position:relative">${thumbsHtml}${badge}</div>` : thumbsHtml}
       <div class="slot-body">
         <div class="slot-label">${slot.label}</div>
         <div class="slot-key">${currentSite}:${key}</div>
         <div class="slot-hint">${slot.hint}</div>
         <div class="slot-actions">
           <label class="upload-btn">
-            ${hasOverride ? 'Replace photo' : 'Upload photo'}
-            <input type="file" accept="image/*" data-site="${currentSite}" data-key="${key}">
+            ${hasOverride ? 'Replace all' : 'Upload photo'}
+            <input type="file" accept="image/*" data-site="${currentSite}" data-key="${key}" data-action="replace">
           </label>
+          ${hasOverride ? `<label class="upload-btn btn-add">
+            + Add photo
+            <input type="file" accept="image/*" data-site="${currentSite}" data-key="${key}" data-action="append">
+          </label>` : ''}
           ${hasOverride ? `<button class="reset-btn" data-site="${currentSite}" data-key="${key}">Reset to default</button>` : ''}
         </div>
       </div>
@@ -424,13 +488,16 @@ async function renderSlots() {
   container.querySelectorAll('.reset-btn').forEach(btn => {
     btn.addEventListener('click', handleReset);
   });
+  container.querySelectorAll('.thumb-del').forEach(btn => {
+    btn.addEventListener('click', handleThumbDelete);
+  });
 }
 
 async function handleUpload(e) {
   const input = e.target;
   const file = input.files?.[0];
   if (!file) return;
-  const { site, key } = input.dataset;
+  const { site, key, action } = input.dataset;
 
   const label = input.closest('.upload-btn');
   const originalText = label.childNodes[0].textContent.trim();
@@ -439,7 +506,11 @@ async function handleUpload(e) {
   label.childNodes[0].textContent = 'Uploading…';
 
   try {
-    await putPhotoSlot(site, key, file);
+    if (action === 'append') {
+      await appendPhotoSlot(site, key, file);
+    } else {
+      await putPhotoSlot(site, key, file);
+    }
     await renderSlots();
   } catch (err) {
     label.style.opacity = '';
@@ -460,6 +531,22 @@ async function handleReset(e) {
   } catch (err) {
     e.target.disabled = false;
     alert('Reset failed: ' + err.message);
+  }
+}
+
+async function handleThumbDelete(e) {
+  const { site, key, index } = e.target.dataset;
+  const idx = parseInt(index, 10);
+  const label = PHOTO_REGISTRY[site]?.[key]?.label || key;
+  if (!confirm(`Remove photo ${idx + 1} from "${label}"?`)) return;
+
+  e.target.disabled = true;
+  try {
+    await deletePhotoSlotAt(site, key, idx);
+    await renderSlots();
+  } catch (err) {
+    e.target.disabled = false;
+    alert('Delete failed: ' + err.message);
   }
 }
 

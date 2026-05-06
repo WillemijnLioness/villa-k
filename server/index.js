@@ -55,11 +55,13 @@ app.use(express.static(PUBLIC_DIR));
 
 /* ================================================================
    PHOTO API
-   GET    /api/photos               → current overrides (public)
-   PUT    /api/photos/:site/:slot   → upload + resize (admin)
-   DELETE /api/photos/:site/:slot   → remove slot override (admin)
-   DELETE /api/photos               → reset all overrides (admin)
-   POST   /api/photos/import        → replace overrides with JSON body (admin)
+   GET    /api/photos                     → current overrides (public)
+   PUT    /api/photos/:site/:slot         → replace slot with single image (admin)
+   POST   /api/photos/:site/:slot         → append image to slot array (admin)
+   DELETE /api/photos/:site/:slot         → remove entire slot override (admin)
+   DELETE /api/photos/:site/:slot/:index  → remove one image from slot (admin)
+   DELETE /api/photos                     → reset all overrides (admin)
+   POST   /api/photos/import              → replace overrides with JSON body (admin)
 ================================================================ */
 
 app.get('/api/photos', async (_req, res) => {
@@ -98,12 +100,66 @@ app.put('/api/photos/:site/:slot', adminAuth, upload.single('image'), async (req
   }
 });
 
+/* Append one image to a slot's array (POST) */
+app.post('/api/photos/:site/:slot', adminAuth, upload.single('image'), async (req, res) => {
+  const { site, slot } = req.params;
+  if (!req.file) return res.status(400).json({ error: 'No image uploaded' });
+
+  const filename = `${site}-${slot}-${Date.now()}.jpg`;
+  const finalPath = path.join(UPLOADS_DIR, filename);
+
+  try {
+    if (sharp) {
+      await sharp(req.file.path)
+        .resize({ width: 2000, withoutEnlargement: true })
+        .jpeg({ quality: 88, mozjpeg: true })
+        .toFile(finalPath);
+      await fs.unlink(req.file.path);
+    } else {
+      await copyFile(req.file.path, finalPath);
+      await fs.unlink(req.file.path);
+    }
+
+    const url = `/uploads/${filename}`;
+    const overrides = await readOverrides();
+    if (!overrides[site]) overrides[site] = {};
+    if (!Array.isArray(overrides[site][slot])) overrides[site][slot] = [];
+    overrides[site][slot].push(url);
+    await writeOverrides(overrides);
+
+    res.json({ url, urls: overrides[site][slot] });
+  } catch (err) {
+    await fs.unlink(req.file.path).catch(() => {});
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/* Remove entire slot override */
 app.delete('/api/photos/:site/:slot', adminAuth, async (req, res) => {
   const { site, slot } = req.params;
   const overrides = await readOverrides();
   if (overrides[site]) {
     delete overrides[site][slot];
     if (Object.keys(overrides[site]).length === 0) delete overrides[site];
+    await writeOverrides(overrides);
+  }
+  res.json({ ok: true });
+});
+
+/* Remove one image by index from a slot */
+app.delete('/api/photos/:site/:slot/:index', adminAuth, async (req, res) => {
+  const { site, slot } = req.params;
+  const idx = parseInt(req.params.index, 10);
+  if (isNaN(idx)) return res.status(400).json({ error: 'Invalid index' });
+
+  const overrides = await readOverrides();
+  const urls = overrides[site]?.[slot];
+  if (Array.isArray(urls) && urls[idx] !== undefined) {
+    urls.splice(idx, 1);
+    if (urls.length === 0) {
+      delete overrides[site][slot];
+      if (Object.keys(overrides[site]).length === 0) delete overrides[site];
+    }
     await writeOverrides(overrides);
   }
   res.json({ ok: true });

@@ -167,10 +167,35 @@ async function putPhotoSlot(site, slot, file) {
   return data.url;
 }
 
+async function appendPhotoSlot(site, slot, file) {
+  const fd = new FormData();
+  fd.append('image', file);
+  const res = await fetch(`/api/photos/${site}/${slot}`, { method: 'POST', body: fd });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ error: res.statusText }));
+    throw new Error(err.error || res.statusText);
+  }
+  const data = await res.json();
+  if (_cachedOverrides) {
+    if (!_cachedOverrides[site]) _cachedOverrides[site] = {};
+    _cachedOverrides[site][slot] = data.urls;
+  }
+  return data.urls;
+}
+
 async function deletePhotoSlot(site, slot) {
   const res = await fetch(`/api/photos/${site}/${slot}`, { method: 'DELETE' });
   if (!res.ok) throw new Error(res.statusText);
   if (_cachedOverrides?.[site]) delete _cachedOverrides[site][slot];
+}
+
+async function deletePhotoSlotAt(site, slot, index) {
+  const res = await fetch(`/api/photos/${site}/${slot}/${index}`, { method: 'DELETE' });
+  if (!res.ok) throw new Error(res.statusText);
+  if (_cachedOverrides?.[site]?.[slot]) {
+    _cachedOverrides[site][slot].splice(index, 1);
+    if (_cachedOverrides[site][slot].length === 0) delete _cachedOverrides[site][slot];
+  }
 }
 
 async function resetAllPhotos() {
@@ -189,6 +214,12 @@ function getPhotoUrlFromOverrides(siteKey, slotKey, overrides, index = 0) {
   return slot.defaults[index] || slot.defaults[0] || null;
 }
 
+function getAllUrlsForSlot(siteKey, slotKey, overrides) {
+  const userUrls = overrides[siteKey]?.[slotKey];
+  if (userUrls && userUrls.length) return userUrls;
+  return PHOTO_REGISTRY[siteKey]?.[slotKey]?.defaults || [];
+}
+
 /* Apply overrides to all data-photo-slot images on the page. Async — called once on load. */
 async function applyPhotoOverrides(root = document) {
   const imgs = root.querySelectorAll('img[data-photo-slot]');
@@ -196,9 +227,17 @@ async function applyPhotoOverrides(root = document) {
   const overrides = await loadOverrides();
   imgs.forEach(img => {
     const [siteKey, slotKey] = img.dataset.photoSlot.split(':');
-    const index = parseInt(img.dataset.photoIndex || '0', 10);
-    const url = getPhotoUrlFromOverrides(siteKey, slotKey, overrides, index);
-    if (url && img.src !== url) img.src = url;
+    const urls = getAllUrlsForSlot(siteKey, slotKey, overrides);
+    if (!urls.length) return;
+    if (urls.length > 1 && typeof window.buildCarousel === 'function') {
+      window.buildCarousel(img, urls);
+    } else {
+      if (img.src !== urls[0]) img.src = urls[0];
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        if (typeof window.openLightbox === 'function') window.openLightbox(urls, 0);
+      });
+    }
   });
 }
 
