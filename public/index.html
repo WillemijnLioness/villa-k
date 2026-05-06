@@ -114,19 +114,17 @@ section { padding: 100px 0; }
   box-shadow: 0 1px 0 var(--line);
 }
 .nav-brand {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: 1.35rem;
-  letter-spacing: 0.01em;
-  color: var(--ink);
   display: flex;
   align-items: center;
-  gap: 10px;
+  text-decoration: none;
 }
-.nav-brand .owl {
-  width: 24px; height: 24px;
-  display: inline-block;
+.nav-brand img {
+  height: 44px;
+  width: auto;
+  display: block;
+  transition: height 0.3s ease;
 }
+.nav.scrolled .nav-brand img { height: 36px; }
 .nav-links {
   display: flex;
   gap: 36px;
@@ -965,18 +963,7 @@ section { padding: 100px 0; }
      ========================================================= -->
 <nav class="nav" id="nav">
   <a href="#top" class="nav-brand">
-    <svg class="owl-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Minimal owl icon -->
-      <circle cx="8" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
-      <circle cx="16" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
-      <circle cx="8" cy="10" r="0.9" fill="currentColor"/>
-      <circle cx="16" cy="10" r="0.9" fill="currentColor"/>
-      <path d="M12 12.5 L11 14 L13 14 Z" fill="currentColor"/>
-      <path d="M4 7 Q5 3 8 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-      <path d="M20 7 Q19 3 16 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-      <path d="M6 15 Q12 21 18 15" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-    </svg>
-    Villa Koukouvayia
+    <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms">
   </a>
   <div class="nav-links">
     <a href="#journey">Your Stay</a>
@@ -1514,7 +1501,7 @@ section { padding: 100px 0; }
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="brand-mark">Villa Koukouvayia Farms</span>
+        <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms" style="height:60px;width:auto;display:block;margin-bottom:16px;">
         <p>A fully-equipped coastal estate among the olive groves of Crete — hosted with care by the Palola-Harriman family since 2019.</p>
         <p style="font-size: 0.8rem; opacity: 0.5;">Greek RMA Lodging #: 000/023/140/23</p>
       </div>

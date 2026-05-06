@@ -104,16 +104,17 @@ section { padding: 100px 0; }
   box-shadow: 0 1px 0 var(--line);
 }
 .nav-brand {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: 1.35rem;
-  letter-spacing: 0.01em;
-  color: var(--ink);
   display: flex;
   align-items: center;
-  gap: 10px;
+  text-decoration: none;
 }
-.nav-brand em { font-style: italic; color: var(--saffron-deep); }
+.nav-brand img {
+  height: 44px;
+  width: auto;
+  display: block;
+  transition: height 0.3s ease;
+}
+.nav.scrolled .nav-brand img { height: 36px; }
 .nav-links {
   display: flex;
   gap: 36px;
@@ -783,7 +784,7 @@ section { padding: 100px 0; }
 <!-- =====================  NAV  ===================== -->
 <nav class="nav" id="nav">
   <a href="#top" class="nav-brand">
-    Cretan Destination <em>Retreats</em>
+    <img src="/logo-cdr.png" alt="Cretan Destination Retreats">
   </a>
   <div class="nav-links">
     <a href="#retreats">Retreats</a>
@@ -1280,7 +1281,7 @@ section { padding: 100px 0; }
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <span class="brand-mark">Cretan Destination <em>Retreats</em></span>
+        <img src="/logo-cdr.png" alt="Cretan Destination Retreats" style="height:60px;width:auto;display:block;margin-bottom:16px;">
         <p>Hand-crafted journeys through Crete and Greece. Hosted by Heidi &amp; Richard since 2003.</p>
       </div>
       <div>
