@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Manager · Villa Koukouvayia &amp; CDR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cream: #F4EEE2;
+  --cream-soft: #FAF6EE;
+  --bone: #EDE4D2;
+  --olive-deep: #3F4A2E;
+  --olive: #5C6B45;
+  --olive-soft: #8A9675;
+  --terracotta: #B4633F;
+  --terracotta-deep: #8E4A2C;
+  --saffron: #C28840;
+  --ink: #1F1D18;
+  --ink-soft: #4A463C;
+  --muted: #8B8577;
+  --line: rgba(31, 29, 24, 0.12);
+  --shadow-soft: 0 1px 2px rgba(31, 29, 24, 0.04), 0 8px 24px rgba(31, 29, 24, 0.06);
+  --shadow-lift: 0 4px 12px rgba(31, 29, 24, 0.08), 0 24px 48px rgba(31, 29, 24, 0.10);
+  --radius: 8px;
+  --radius-lg: 16px;
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 300; line-height: 1.1; }
+a { color: inherit; }
+
+/* ---------- Header ---------- */
+.header {
+  background: var(--ink);
+  color: var(--cream-soft);
+  padding: 24px 0;
+  border-bottom: 1px solid rgba(244, 238, 226, 0.1);
+}
+.header-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+.brand small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.6;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--terracotta); color: var(--cream-soft); }
+.btn-primary:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--cream-soft);
+  border: 1px solid rgba(244, 238, 226, 0.3);
+}
+.btn-ghost:hover { border-color: var(--cream-soft); }
+.btn-danger {
+  background: transparent;
+  color: var(--terracotta);
+  border: 1px solid currentColor;
+}
+.btn-danger:hover { background: var(--terracotta); color: var(--cream-soft); }
+.btn-small { padding: 7px 14px; font-size: 0.75rem; }
+
+/* ---------- Tabs ---------- */
+.tabs {
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.tabs-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  gap: 4px;
+}
+.tab {
+  background: transparent;
+  border: none;
+  padding: 18px 24px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  color: var(--muted);
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.tab:hover { color: var(--ink); }
+.tab.active { color: var(--ink); border-bottom-color: var(--terracotta); }
+.tab[data-site="rpl"].active { border-bottom-color: var(--saffron); }
+
+/* ---------- Main content ---------- */
+.main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 32px 80px;
+}
+.section-intro {
+  margin-bottom: 32px;
+}
+.section-intro h1 {
+  font-size: 2rem;
+  margin-bottom: 8px;
+}
+.section-intro p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  max-width: 60ch;
+}
+
+/* ---------- Slot grid ---------- */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+.slot {
+  background: var(--cream-soft);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s;
+}
+.slot:hover { box-shadow: var(--shadow-soft); }
+.slot.has-override { border-color: var(--olive-soft); box-shadow: 0 0 0 1px var(--olive-soft); }
+
+.slot-preview {
+  aspect-ratio: 4 / 3;
+  background: var(--bone);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slot-preview img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.slot-preview .empty {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.slot-badge {
+  position: absolute;
+  top: 12px; left: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(244, 238, 226, 0.94);
+  backdrop-filter: blur(8px);
+  color: var(--olive-deep);
+}
+.slot-badge.override {
+  background: var(--olive);
+  color: var(--cream-soft);
+}
+.slot-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+.slot-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  color: var(--ink);
+}
+.slot-key {
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.slot-hint {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  flex: 1;
+  line-height: 1.4;
+}
+.slot-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.upload-btn {
+  background: var(--olive);
+  color: var(--cream-soft);
+  cursor: pointer;
+  padding: 9px 16px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+.upload-btn:hover { background: var(--olive-deep); }
+.upload-btn input { display: none; }
+.reset-btn {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 9px 12px;
+  border-radius: 999px;
+  transition: color 0.2s;
+}
+.reset-btn:hover { color: var(--terracotta); }
+.reset-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ---------- Modal ---------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(31, 29, 24, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal-backdrop.visible { display: flex; }
+.modal {
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  max-width: 540px;
+  width: 100%;
+  box-shadow: var(--shadow-lift);
+}
+.modal h3 { font-size: 1.4rem; margin-bottom: 12px; }
+.modal p { color: var(--ink-soft); margin-bottom: 16px; font-size: 0.92rem; }
+.modal pre {
+  background: var(--bone);
+  border-radius: var(--radius);
+  padding: 16px;
+  font-size: 0.78rem;
+  font-family: 'SF Mono', Menlo, monospace;
+  max-height: 300px;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+.modal-actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+
+@media (max-width: 640px) {
+  .header-inner { flex-direction: column; align-items: flex-start; }
+  .tabs-inner { padding: 0 20px; }
+  .main { padding: 24px 20px 60px; }
+  .slots { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div>
+      <small>Photo Manager</small>
+      <div class="brand">Villa Koukouvayia &amp; CDR</div>
+    </div>
+    <div class="header-actions">
+      <a href="/" target="_blank" rel="noopener" class="btn btn-ghost">View VKF ↗</a>
+      <a href="/retreats" target="_blank" rel="noopener" class="btn btn-ghost">View CDR ↗</a>
+      <button class="btn btn-primary" onclick="exportConfig()">Export config</button>
+    </div>
+  </div>
+</header>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <button class="tab active" data-site="vkf" onclick="switchTab('vkf')">Villa Koukouvayia</button>
+    <button class="tab" data-site="rpl" onclick="switchTab('rpl')">Cretan Destination Retreats</button>
+  </div>
+</div>
+
+<main class="main">
+  <div class="section-intro">
+    <h1 id="sectionTitle">Villa Koukouvayia photos</h1>
+    <p id="sectionDescription">Upload a new image for any slot to override the default. Replaced images are processed and stored on the server — changes appear immediately on both sites (next page load).</p>
+  </div>
+
+  <div class="slots" id="slotsContainer">
+    <p style="color: var(--muted); font-style: italic; padding: 20px 0;">Loading…</p>
+  </div>
+</main>
+
+<!-- Export Modal -->
+<div class="modal-backdrop" id="exportModal">
+  <div class="modal">
+    <h3>Photo configuration</h3>
+    <p>Current server-side overrides. Download this JSON to back it up, or use Import to restore it on a new deployment.</p>
+    <pre id="exportData"></pre>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" style="color: var(--ink); border-color: var(--line);" onclick="copyExport()">Copy</button>
+      <button class="btn btn-ghost" style="color: var(--ink); border-color: var(--line);" onclick="downloadExport()">Download JSON</button>
+      <label class="btn btn-primary" style="cursor: pointer;">
+        Import config
+        <input type="file" accept=".json,application/json" style="display: none;" onchange="importConfig(event)">
+      </label>
+      <button class="btn btn-danger" onclick="resetAll()">Reset all</button>
+      <button class="btn btn-ghost" style="color: var(--ink); border-color: var(--line);" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Photo registry (production API version) -->
+<script src="/photo-registry.js"></script>
+<script>
+let currentSite = 'vkf';
+
+function switchTab(site) {
+  currentSite = site;
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.site === site);
+  });
+  document.getElementById('sectionTitle').textContent =
+    site === 'vkf' ? 'Villa Koukouvayia photos' : 'Cretan Destination Retreats photos';
+  renderSlots();
+}
+
+async function renderSlots() {
+  const container = document.getElementById('slotsContainer');
+  container.innerHTML = '<p style="color: var(--muted); font-style: italic; padding: 20px 0;">Loading…</p>';
+
+  const overrides = await loadOverrides();
+  const slots = PHOTO_REGISTRY[currentSite];
+  const siteOverrides = overrides[currentSite] || {};
+
+  container.innerHTML = '';
+
+  for (const [key, slot] of Object.entries(slots)) {
+    const hasOverride = !!(siteOverrides[key]?.[0]);
+    const previewUrl = getPhotoUrlFromOverrides(currentSite, key, overrides, 0);
+
+    const card = document.createElement('div');
+    card.className = 'slot' + (hasOverride ? ' has-override' : '');
+
+    card.innerHTML = `
+      <div class="slot-preview">
+        ${previewUrl ? `<img src="${previewUrl}" alt="${slot.label}">` : '<div class="empty">No image set</div>'}
+        ${hasOverride ? '<div class="slot-badge override">✓ Custom</div>' : '<div class="slot-badge">Default</div>'}
+      </div>
+      <div class="slot-body">
+        <div class="slot-label">${slot.label}</div>
+        <div class="slot-key">${currentSite}:${key}</div>
+        <div class="slot-hint">${slot.hint}</div>
+        <div class="slot-actions">
+          <label class="upload-btn">
+            ${hasOverride ? 'Replace photo' : 'Upload photo'}
+            <input type="file" accept="image/*" data-site="${currentSite}" data-key="${key}">
+          </label>
+          ${hasOverride ? `<button class="reset-btn" data-site="${currentSite}" data-key="${key}">Reset to default</button>` : ''}
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  }
+
+  container.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', handleUpload);
+  });
+  container.querySelectorAll('.reset-btn').forEach(btn => {
+    btn.addEventListener('click', handleReset);
+  });
+}
+
+async function handleUpload(e) {
+  const input = e.target;
+  const file = input.files?.[0];
+  if (!file) return;
+  const { site, key } = input.dataset;
+
+  const label = input.closest('.upload-btn');
+  const originalText = label.childNodes[0].textContent.trim();
+  label.style.opacity = '0.6';
+  label.style.pointerEvents = 'none';
+  label.childNodes[0].textContent = 'Uploading…';
+
+  try {
+    await putPhotoSlot(site, key, file);
+    await renderSlots();
+  } catch (err) {
+    label.style.opacity = '';
+    label.style.pointerEvents = '';
+    label.childNodes[0].textContent = originalText;
+    alert('Upload failed: ' + err.message);
+  }
+}
+
+async function handleReset(e) {
+  const { site, key } = e.target.dataset;
+  if (!confirm(`Reset "${PHOTO_REGISTRY[site][key].label}" to its default image?`)) return;
+
+  e.target.disabled = true;
+  try {
+    await deletePhotoSlot(site, key);
+    await renderSlots();
+  } catch (err) {
+    e.target.disabled = false;
+    alert('Reset failed: ' + err.message);
+  }
+}
+
+/* ---------- Export / Import ---------- */
+async function exportConfig() {
+  const overrides = await loadOverrides();
+  const exportObj = { exported_at: new Date().toISOString(), overrides };
+  document.getElementById('exportData').textContent = JSON.stringify(exportObj, null, 2);
+  document.getElementById('exportModal').classList.add('visible');
+}
+
+function closeModal() {
+  document.getElementById('exportModal').classList.remove('visible');
+}
+
+function copyExport() {
+  const text = document.getElementById('exportData').textContent;
+  navigator.clipboard.writeText(text)
+    .then(() => alert('Copied to clipboard.'))
+    .catch(err => alert('Copy failed: ' + err.message));
+}
+
+function downloadExport() {
+  const text = document.getElementById('exportData').textContent;
+  const blob = new Blob([text], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `villa-k-photos-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importConfig(e) {
+  const file = e.target.files?.[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = async (ev) => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      const overrides = data.overrides || data;
+      if (!confirm('This will replace all current photo overrides on the server. Continue?')) return;
+      const res = await fetch('/api/photos/import', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ overrides })
+      });
+      if (!res.ok) throw new Error((await res.json().catch(() => ({}))).error || res.statusText);
+      const result = await res.json();
+      await renderSlots();
+      closeModal();
+      alert(`Imported successfully. ${result.slots ?? ''} slot(s) restored.`);
+    } catch (err) {
+      alert('Import failed: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+async function resetAll() {
+  if (!confirm('Reset ALL photo overrides on both sites to defaults? This cannot be undone (unless you exported first).')) return;
+  try {
+    await resetAllPhotos();
+    await renderSlots();
+    closeModal();
+  } catch (err) {
+    alert('Reset failed: ' + err.message);
+  }
+}
+
+// Init
+renderSlots();
+</script>
+
+</body>
+</html>

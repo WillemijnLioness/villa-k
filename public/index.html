@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Villa Koukouvayia Farms — A Coastal Estate on Crete</title>
+<meta name="description" content="A three-residence coastal estate on Crete. Holidays, retreats, remote work-stays and destination weddings, hosted by the Palola-Harriman family.">
+
+<!-- Fonts: Fraunces (serif display) + Manrope (humanist body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   VILLA KOUKOUVAYIA FARMS
+   Design tokens
+   ========================================================= */
+:root {
+  --cream: #F4EEE2;
+  --cream-soft: #FAF6EE;
+  --bone: #EDE4D2;
+  --olive-deep: #3F4A2E;
+  --olive: #5C6B45;
+  --olive-soft: #8A9675;
+  --terracotta: #B4633F;
+  --terracotta-deep: #8E4A2C;
+  --aegean: #2C5669;
+  --aegean-deep: #1B3A48;
+  --ink: #1F1D18;
+  --ink-soft: #4A463C;
+  --muted: #8B8577;
+  --line: rgba(31, 29, 24, 0.12);
+  --shadow-soft: 0 1px 2px rgba(31, 29, 24, 0.04), 0 8px 24px rgba(31, 29, 24, 0.06);
+  --shadow-lift: 0 4px 12px rgba(31, 29, 24, 0.08), 0 24px 48px rgba(31, 29, 24, 0.10);
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 16px;
+
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.5rem, 6vw, 5.5rem); font-weight: 300; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; }
+h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 400; }
+h4 { font-size: 1.15rem; font-weight: 500; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--olive);
+}
+
+.lead { font-size: 1.12rem; color: var(--ink-soft); max-width: 42em; }
+
+a { color: inherit; text-decoration: none; }
+
+/* Layout */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+section { padding: 100px 0; }
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .container { padding: 0 20px; }
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+.nav.scrolled {
+  background: rgba(244, 238, 226, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 32px;
+  box-shadow: 0 1px 0 var(--line);
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-brand .owl {
+  width: 24px; height: 24px;
+  display: inline-block;
+}
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.nav-links a { color: var(--ink); opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-cta {
+  background: var(--terracotta);
+  color: var(--cream-soft) !important;
+  padding: 10px 20px;
+  border-radius: 999px;
+  opacity: 1 !important;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--ink); }
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav.mobile-open .nav-links {
+    display: flex;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--cream-soft);
+    padding: 24px;
+    gap: 20px;
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--olive-deep);
+}
+.hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: kenBurns 24s ease-in-out infinite alternate;
+}
+@keyframes kenBurns {
+  from { transform: scale(1.02) translate(0, 0); }
+  to { transform: scale(1.12) translate(-1%, -1%); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(31,29,24,0.25) 0%, rgba(31,29,24,0.05) 35%, rgba(31,29,24,0.75) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 140px 32px 60px;
+  color: var(--cream-soft);
+}
+.hero-content .container { max-width: 1280px; }
+.hero-eyebrow {
+  color: var(--cream-soft);
+  opacity: 0.85;
+  margin-bottom: 20px;
+  animation: fadeUp 1s ease 0.2s both;
+}
+.hero h1 {
+  color: var(--cream-soft);
+  max-width: 15ch;
+  margin-bottom: 28px;
+  animation: fadeUp 1.2s ease 0.4s both;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cream-soft);
+}
+.hero-sub {
+  font-size: 1.15rem;
+  max-width: 42ch;
+  opacity: 0.88;
+  margin-bottom: 48px;
+  animation: fadeUp 1.2s ease 0.6s both;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   BOOKING STRIP (sticky-ish, under hero and callable anywhere)
+   ========================================================= */
+.book-strip {
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  box-shadow: var(--shadow-lift);
+  display: grid;
+  grid-template-columns: 1.2fr 1.2fr 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+  animation: fadeUp 1.4s ease 0.8s both;
+}
+.book-strip.in-hero { margin-top: 20px; }
+.book-field { display: flex; flex-direction: column; }
+.book-field label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--olive);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.book-field input, .book-field select {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  background: transparent;
+  color: var(--ink);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.book-field input:focus, .book-field select:focus { border-color: var(--olive); }
+.book-submit {
+  background: var(--terracotta);
+  color: var(--cream-soft);
+  border: none;
+  padding: 16px 28px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  white-space: nowrap;
+}
+.book-submit:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+
+@media (max-width: 900px) {
+  .book-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .book-submit { grid-column: 1 / -1; padding: 16px; }
+}
+
+/* =========================================================
+   WELCOME / INTRO
+   ========================================================= */
+.intro { background: var(--cream); }
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 100px;
+  align-items: center;
+}
+@media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.intro-side .eyebrow { margin-bottom: 16px; }
+.intro-side h2 { margin-bottom: 24px; }
+.intro-side h2 em { font-style: italic; color: var(--olive); font-weight: 300; }
+.intro-side p { color: var(--ink-soft); margin-bottom: 16px; }
+.intro-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--olive);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.intro-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+.intro-media img { width: 100%; height: 100%; object-fit: cover; }
+.intro-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.25));
+}
+
+/* =========================================================
+   GUIDED JOURNEY
+   ========================================================= */
+.journey { background: var(--bone); }
+.journey-header { text-align: center; max-width: 720px; margin: 0 auto 60px; }
+.journey-header .eyebrow { margin-bottom: 16px; }
+.journey-header p { margin: 16px auto 0; color: var(--ink-soft); }
+
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1000px) { .journey-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .journey-grid { grid-template-columns: 1fr; } }
+
+.journey-card {
+  background: var(--cream-soft);
+  padding: 36px 28px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+.journey-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+  border-color: var(--olive-soft);
+}
+.journey-card.selected {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  border-color: var(--olive-deep);
+}
+.journey-card.selected h3,
+.journey-card.selected .journey-icon { color: var(--cream-soft); }
+.journey-card.selected .journey-suggest {
+  color: var(--bone);
+  border-top-color: rgba(244, 238, 226, 0.2);
+}
+.journey-icon {
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--olive);
+  margin-bottom: 20px;
+}
+.journey-card h3 { font-size: 1.35rem; margin-bottom: 12px; font-weight: 400; }
+.journey-card p { font-size: 0.95rem; color: var(--ink-soft); }
+.journey-card.selected p { color: var(--bone); }
+.journey-suggest {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--olive);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   PROPERTY / RESIDENCES
+   ========================================================= */
+.residences { background: var(--cream); }
+.residences-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+.residences-header h2 { max-width: 16ch; }
+.residences-header p { max-width: 36ch; color: var(--ink-soft); }
+
+.residence {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  padding: 60px 0;
+  border-top: 1px solid var(--line);
+}
+.residence:first-of-type { border-top: none; padding-top: 20px; }
+.residence.reverse { grid-template-columns: 1fr 1.1fr; }
+.residence.reverse .residence-media { order: 2; }
+.residence.reverse .residence-text { order: 1; }
+
+@media (max-width: 900px) {
+  .residence, .residence.reverse {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .residence.reverse .residence-media { order: 0; }
+  .residence.reverse .residence-text { order: 0; }
+}
+
+.residence-media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-soft);
+}
+.residence-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1s ease;
+}
+.residence-media:hover img { transform: scale(1.04); }
+.residence-badge {
+  position: absolute;
+  top: 20px; left: 20px;
+  background: rgba(244, 238, 226, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--olive-deep);
+}
+
+.residence-text .eyebrow { margin-bottom: 12px; }
+.residence-text h3 { margin-bottom: 16px; }
+.residence-text h3 em { font-style: italic; font-weight: 300; color: var(--olive); }
+.residence-text > p { color: var(--ink-soft); margin-bottom: 24px; }
+
+.residence-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+  margin-bottom: 24px;
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.spec { display: flex; align-items: center; gap: 10px; }
+.spec-icon { color: var(--olive); display: flex; }
+.spec-label {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.spec-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.residence-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px 20px;
+  margin-bottom: 28px;
+}
+.residence-features li {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  padding-left: 20px;
+  position: relative;
+}
+.residence-features li::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--terracotta);
+  border-radius: 50%;
+  position: absolute;
+  left: 0; top: 0.6em;
+}
+
+.residence-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.price-from {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.price-from-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.price-from-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 300;
+  color: var(--ink);
+}
+.price-from-unit {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+.btn-primary { background: var(--terracotta); color: var(--cream-soft); }
+.btn-primary:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--olive-deep);
+  border: 1px solid var(--olive-deep);
+}
+.btn-outline:hover { background: var(--olive-deep); color: var(--cream-soft); }
+.btn-ghost { background: transparent; color: var(--ink); padding-left: 0; padding-right: 0; }
+.btn-ghost:hover { color: var(--terracotta); }
+
+/* =========================================================
+   LOCATION & HOSTS
+   ========================================================= */
+.location {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  position: relative;
+  overflow: hidden;
+}
+.location::before {
+  content: '';
+  position: absolute;
+  top: -50%; right: -20%;
+  width: 60%; height: 200%;
+  background: radial-gradient(circle, rgba(180, 99, 63, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.location h2 { color: var(--cream-soft); }
+.location h2 em { font-style: italic; color: var(--bone); }
+.location .eyebrow { color: var(--bone); }
+.location-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 900px) { .location-grid { grid-template-columns: 1fr; gap: 40px; } }
+.location-text p {
+  color: var(--bone);
+  margin-bottom: 20px;
+  opacity: 0.9;
+}
+.location-media {
+  aspect-ratio: 5 / 6;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+.location-media img { width: 100%; height: 100%; object-fit: cover; }
+
+.hosts-card {
+  margin-top: 40px;
+  padding: 28px;
+  background: rgba(244, 238, 226, 0.08);
+  border: 1px solid rgba(244, 238, 226, 0.15);
+  border-radius: var(--radius-lg);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.hosts-card .hosts-text { flex: 1; }
+.hosts-card h4 { color: var(--cream-soft); margin-bottom: 6px; }
+.hosts-card p { font-size: 0.92rem; opacity: 0.85; margin: 0; }
+
+/* =========================================================
+   REVIEWS
+   ========================================================= */
+.reviews { background: var(--cream-soft); }
+.reviews-header { text-align: center; margin-bottom: 60px; }
+.reviews-header .eyebrow { margin-bottom: 16px; }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+.review {
+  background: var(--cream);
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.review-stars { color: var(--terracotta); font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 16px; }
+.review-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  flex: 1;
+}
+.review-author {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  font-weight: 500;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.review-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* =========================================================
+   BOOKING CALCULATOR
+   ========================================================= */
+.booking {
+  background: var(--cream);
+  position: relative;
+}
+.booking-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 60px;
+  align-items: flex-start;
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 60px;
+  box-shadow: var(--shadow-soft);
+}
+@media (max-width: 900px) {
+  .booking-wrap { grid-template-columns: 1fr; gap: 40px; padding: 32px; }
+}
+
+.booking-side .eyebrow { margin-bottom: 16px; }
+.booking-side h2 { margin-bottom: 16px; }
+.booking-side h2 em { font-style: italic; color: var(--olive); font-weight: 300; }
+.booking-side > p { color: var(--ink-soft); margin-bottom: 24px; }
+
+.booking-form { display: flex; flex-direction: column; gap: 20px; }
+.booking-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-field { display: flex; flex-direction: column; }
+.form-field label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--olive);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--olive);
+  box-shadow: 0 0 0 3px rgba(92, 107, 69, 0.12);
+}
+.form-field textarea { resize: vertical; min-height: 100px; font-weight: 400; }
+
+.quote-card {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.quote-card::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(180, 99, 63, 0.18) 0%, transparent 70%);
+}
+.quote-card h3 {
+  color: var(--cream-soft);
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+.quote-card .quote-sub {
+  color: var(--bone);
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 24px;
+}
+
+.quote-empty {
+  padding: 32px 0;
+  text-align: center;
+  color: var(--bone);
+  opacity: 0.75;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+.quote-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(244, 238, 226, 0.12);
+  font-size: 0.95rem;
+}
+.quote-line .label { opacity: 0.85; }
+.quote-line .value { font-weight: 600; text-align: right; }
+.quote-line.sub { font-size: 0.82rem; opacity: 0.7; padding: 6px 0; border-bottom: none; }
+.quote-line.sub .value { font-weight: 400; }
+.quote-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 20px 0 0;
+  margin-top: 10px;
+  font-family: var(--font-display);
+}
+.quote-total .label { font-size: 1rem; opacity: 0.9; }
+.quote-total .value {
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--cream-soft);
+}
+.quote-note {
+  margin-top: 20px;
+  font-size: 0.78rem;
+  color: var(--bone);
+  opacity: 0.7;
+  line-height: 1.5;
+}
+.quote-warn {
+  background: rgba(180, 99, 63, 0.15);
+  border: 1px solid rgba(180, 99, 63, 0.35);
+  color: #F0C5AE;
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 0.85rem;
+  margin-top: 14px;
+  line-height: 1.45;
+}
+
+.submit-full {
+  width: 100%;
+  margin-top: 20px;
+  padding: 18px;
+  font-size: 0.88rem;
+}
+
+.confirmation {
+  display: none;
+  background: var(--olive);
+  color: var(--cream-soft);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  margin-top: 20px;
+  text-align: center;
+}
+.confirmation.visible { display: block; animation: fadeUp 0.5s ease; }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  background: var(--ink);
+  color: var(--bone);
+  padding: 80px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+
+.footer h4 {
+  color: var(--cream-soft);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.footer-brand p {
+  color: var(--bone);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+  max-width: 32ch;
+}
+.footer-brand .brand-mark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--cream-soft);
+  margin-bottom: 16px;
+  display: block;
+}
+.footer ul { list-style: none; }
+.footer ul li { margin-bottom: 10px; }
+.footer ul a {
+  color: var(--bone);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.footer ul a:hover { opacity: 1; color: var(--terracotta); }
+.footer-bottom {
+  border-top: 1px solid rgba(244, 238, 226, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* =========================================================
+   UTILITY ANIMATIONS / MISC
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scroll indicator in hero */
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  z-index: 3;
+  color: var(--cream-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.8;
+}
+.hero-scroll::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--cream-soft);
+  animation: pulseLine 2s ease-in-out infinite;
+}
+@keyframes pulseLine {
+  0%, 100% { opacity: 0.3; width: 30px; }
+  50% { opacity: 1; width: 50px; }
+}
+
+/* Small owl SVG used as brand mark */
+.owl-svg { display: inline-block; vertical-align: middle; }
+
+/* =========================================================
+   RESPONSIVE TWEAKS
+   ========================================================= */
+@media (max-width: 640px) {
+  .hero-content { padding: 120px 20px 40px; }
+  .booking-wrap { padding: 28px 20px; }
+  .booking-row { grid-template-columns: 1fr; }
+  .residence-footer { flex-direction: column; align-items: flex-start; }
+  .residence-features { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     NAV
+     ========================================================= -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-brand">
+    <svg class="owl-svg" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Minimal owl icon -->
+      <circle cx="8" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      <circle cx="16" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4" fill="none"/>
+      <circle cx="8" cy="10" r="0.9" fill="currentColor"/>
+      <circle cx="16" cy="10" r="0.9" fill="currentColor"/>
+      <path d="M12 12.5 L11 14 L13 14 Z" fill="currentColor"/>
+      <path d="M4 7 Q5 3 8 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M20 7 Q19 3 16 4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path d="M6 15 Q12 21 18 15" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+    </svg>
+    Villa Koukouvayia
+  </a>
+  <div class="nav-links">
+    <a href="#journey">Your Stay</a>
+    <a href="#residences">The Property</a>
+    <a href="#location">Crete</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#booking" class="nav-cta">Book Direct</a>
+  </div>
+  <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('mobile-open')" aria-label="Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<header class="hero" id="top">
+  <div class="hero-media">
+    <img data-photo-slot="vkf:hero" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265474-7GSHD4W7HHH1ORTASBW5/VKF1.png" alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-eyebrow eyebrow">Between the Sea &amp; Sky of Greece · Crete</div>
+      <h1>A place to discover,<br>a stay to <em>remember.</em></h1>
+      <p class="hero-sub">An intimate three-residence estate among the olive groves of northwest Crete — for families, friends, remote workers, retreats, and the occasional wedding under the stars.</p>
+
+      <!-- Quick booking strip -->
+      <form class="book-strip in-hero" id="heroBookForm" onsubmit="jumpToBooking(event)">
+        <div class="book-field">
+          <label for="heroCheckIn">Check in</label>
+          <input type="date" id="heroCheckIn" required>
+        </div>
+        <div class="book-field">
+          <label for="heroCheckOut">Check out</label>
+          <input type="date" id="heroCheckOut" required>
+        </div>
+        <div class="book-field">
+          <label for="heroGuests">Guests</label>
+          <select id="heroGuests">
+            <option value="2">2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4" selected>4 guests</option>
+            <option value="5">5 guests</option>
+            <option value="6">6 guests</option>
+            <option value="7">7 guests</option>
+            <option value="8">8 guests</option>
+            <option value="10">10 guests</option>
+            <option value="12">12 guests</option>
+            <option value="16">16 guests</option>
+            <option value="20">20 guests</option>
+            <option value="24">24 guests</option>
+          </select>
+        </div>
+        <div class="book-field">
+          <label for="heroProperty">Residence</label>
+          <select id="heroProperty">
+            <option value="auto" selected>Suggest best fit</option>
+            <option value="guest">Guest House</option>
+            <option value="main">Main House</option>
+            <option value="garden">Garden Suite</option>
+            <option value="estate">Entire Estate</option>
+          </select>
+        </div>
+        <button type="submit" class="book-submit">See Price →</button>
+      </form>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</header>
+
+<!-- =========================================================
+     INTRO / WELCOME
+     ========================================================= -->
+<section class="intro">
+  <div class="container intro-grid">
+    <div class="intro-side reveal">
+      <div class="eyebrow">Welcome to Villa K</div>
+      <h2>A coastal estate,<br><em>not a hotel.</em></h2>
+      <p>Koukouvayia is the Greek word for owl — wise, watchful, and a little bit magical. Our estate carries the same spirit: a home you inhabit rather than a room you occupy.</p>
+      <p>Three private residences share an olive grove, a plunging pool with a toddler's waterfall, a star-gazing roof terrace, and endless Aegean views. Book one house for an intimate escape, or take the entire estate for 24.</p>
+      <div class="intro-stats">
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Residences</div>
+        </div>
+        <div>
+          <div class="stat-num">24</div>
+          <div class="stat-label">Max Guests</div>
+        </div>
+        <div>
+          <div class="stat-num">★ 5.0</div>
+          <div class="stat-label">Avg Review</div>
+        </div>
+      </div>
+    </div>
+    <div class="intro-media reveal">
+      <img data-photo-slot="vkf:intro" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg" alt="Main House terrace with Aegean view">
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     GUIDED JOURNEY
+     ========================================================= -->
+<section class="journey" id="journey">
+  <div class="container">
+    <div class="journey-header reveal">
+      <div class="eyebrow">Your Stay, Your Way</div>
+      <h2>What brings you to Crete?</h2>
+      <p>Choose the shape of your visit. We'll steer you toward the residence that fits best.</p>
+    </div>
+    <div class="journey-grid">
+      <!-- Holiday -->
+      <div class="journey-card reveal" data-intent="holiday" onclick="selectJourney(this)">
+        <div class="journey-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 12 L12 4 L21 12"/>
+            <path d="M5 10 V20 H19 V10"/>
+            <path d="M10 20 V14 H14 V20"/>
+          </svg>
+        </div>
+        <h3>A Holiday</h3>
+        <p>With family or friends. Pool, beaches, tavernas, long lunches and soft evenings.</p>
+        <div class="journey-suggest">Best fit → your group size</div>
+      </div>
+      <!-- Workstay -->
+      <div class="journey-card reveal" data-intent="work" onclick="selectJourney(this)">
+        <div class="journey-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="5" width="18" height="13" rx="1"/>
+            <path d="M8 21 H16"/>
+            <path d="M12 18 V21"/>
+          </svg>
+        </div>
+        <h3>A Work-Stay</h3>
+        <p>Remote work or sabbatical. Fibre internet, a proper office, a horizon that resets you.</p>
+        <div class="journey-suggest">Best fit → Guest House or Main House</div>
+      </div>
+      <!-- Retreat -->
+      <div class="journey-card reveal" data-intent="retreat" onclick="selectJourney(this)">
+        <div class="journey-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="8" r="3"/>
+            <path d="M12 14 Q7 14 5 20"/>
+            <path d="M12 14 Q17 14 19 20"/>
+            <path d="M12 14 V20"/>
+          </svg>
+        </div>
+        <h3>A Retreat</h3>
+        <p>Yoga, writing, wellness, team offsites. A private campus for programs of 8 to 24.</p>
+        <div class="journey-suggest">Best fit → Garden Suite or Entire Estate</div>
+      </div>
+      <!-- Wedding -->
+      <div class="journey-card reveal" data-intent="event" onclick="selectJourney(this)">
+        <div class="journey-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 20 L6 10 Q6 4 12 4 Q18 4 18 10 L18 20"/>
+            <path d="M4 20 H20"/>
+            <path d="M10 14 Q12 12 14 14"/>
+          </svg>
+        </div>
+        <h3>A Celebration</h3>
+        <p>Destination weddings, family reunions, milestone birthdays. Under olive trees, under stars.</p>
+        <div class="journey-suggest">Best fit → Entire Estate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CDR PARTNER CALLOUT
+     ========================================================= -->
+<section style="background: var(--cream); padding: 0 0 80px;">
+  <div class="container">
+    <div style="background: var(--bone); border-radius: var(--radius-lg); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 12px;">Sister brand</div>
+        <h3 style="margin-bottom: 12px;">Don't want to plan it all yourself?</h3>
+        <p style="color: var(--ink-soft); max-width: 44ch;">Our partners at Cretan Destination Retreats run four curated programs from the estate each year — photography, alpine trekking, ancient cities, and the olive harvest.</p>
+      </div>
+      <a href="/retreats" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Explore CDR Retreats →</a>
+    </div>
+  </div>
+</section>
+
+<!-- RESIDENCES -->
+<section class="residences" id="residences">
+  <div class="container">
+    <div class="residences-header reveal">
+      <div>
+        <div class="eyebrow">The Property</div>
+        <h2>Three residences.<br>One estate.</h2>
+      </div>
+      <p>Each home stands on its own. Combine them as you grow, up to the entire estate for twenty-four.</p>
+    </div>
+
+    <!-- GUEST HOUSE -->
+    <article class="residence reveal" id="guest">
+      <div class="residence-media">
+        <div class="residence-badge">Sleeps 4</div>
+        <img data-photo-slot="vkf:gh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912538543-OD3YLBKMIUQNS2PI8BMA/GH2.png" alt="Guest House at Villa Koukouvayia">
+      </div>
+      <div class="residence-text">
+        <div class="eyebrow">The Guest House</div>
+        <h3>Intimate, <em>easy,</em><br>close to the sea.</h3>
+        <p>Two bedrooms, panoramic Aegean views from the master balcony, bunk beds with their own sea-facing windows for the kids. Ideal for couples, small families, and remote work — five minutes from beach and taverna.</p>
+        <div class="residence-specs">
+          <div class="spec">
+            <span class="spec-icon">🛏</span>
+            <div><div class="spec-label">Beds</div><div class="spec-value">2 bedrooms</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🛁</span>
+            <div><div class="spec-label">Bath</div><div class="spec-value">1 full + guest WC</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">👥</span>
+            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 4 adults</div></div>
+          </div>
+        </div>
+        <ul class="residence-features">
+          <li>Private roof terrace with outdoor shower</li>
+          <li>Fully equipped kitchen &amp; open-plan living</li>
+          <li>4-metre verandas, sun or shade</li>
+          <li>Shared pool, bikes, snorkels, table tennis</li>
+        </ul>
+        <div class="residence-footer">
+          <div class="price-from">
+            <span class="price-from-label">From</span>
+            <span class="price-from-value">€120</span>
+            <span class="price-from-unit">/ night</span>
+          </div>
+          <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- MAIN HOUSE -->
+    <article class="residence reverse reveal" id="main">
+      <div class="residence-media">
+        <div class="residence-badge">Sleeps 7</div>
+        <img data-photo-slot="vkf:mh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg" alt="Main House at Villa Koukouvayia">
+      </div>
+      <div class="residence-text">
+        <div class="eyebrow">The Main House</div>
+        <h3>Three storeys, a stone fireplace, <em>a spiral to the stars.</em></h3>
+        <p>A sunken living room, a stone fireplace, a private office, three character bedrooms — including the Griffon Nest in a stone turret with 180° views across the island's western edge to its northern Aegean shore.</p>
+        <div class="residence-specs">
+          <div class="spec">
+            <span class="spec-icon">🛏</span>
+            <div><div class="spec-label">Beds</div><div class="spec-value">3 bedrooms</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🛁</span>
+            <div><div class="spec-label">Bath</div><div class="spec-value">2 full + guest WC</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">👥</span>
+            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 7</div></div>
+          </div>
+        </div>
+        <ul class="residence-features">
+          <li>Hand-carved king teak bed, master suite</li>
+          <li>Private office with docking &amp; printer</li>
+          <li>Stone fireplace &amp; sunken living room</li>
+          <li>Moonlit mountain chapel views</li>
+        </ul>
+        <div class="residence-footer">
+          <div class="price-from">
+            <span class="price-from-label">From</span>
+            <span class="price-from-value">€180</span>
+            <span class="price-from-unit">/ night</span>
+          </div>
+          <a href="#booking" class="btn btn-primary" onclick="preselectProperty('main')">Check Dates →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- GARDEN SUITE -->
+    <article class="residence reveal" id="garden">
+      <div class="residence-media">
+        <div class="residence-badge">Sleeps 13</div>
+        <img data-photo-slot="vkf:gs_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265386-JXN9VM21R4GNDPH7I3EP/VKF2.png" alt="Garden Suite at Villa Koukouvayia">
+      </div>
+      <div class="residence-text">
+        <div class="eyebrow">The Garden Suite</div>
+        <h3>Grove-level living for <em>larger groups.</em></h3>
+        <p>Tucked into the olive grove at garden level, this is the estate's largest standalone residence. Built for extended families, retreat cohorts and the kind of long communal dinners where no-one wants to leave the table.</p>
+        <div class="residence-specs">
+          <div class="spec">
+            <span class="spec-icon">🛏</span>
+            <div><div class="spec-label">Beds</div><div class="spec-value">3 bedrooms</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🛁</span>
+            <div><div class="spec-label">Bath</div><div class="spec-value">2 bathrooms</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">👥</span>
+            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 13</div></div>
+          </div>
+        </div>
+        <ul class="residence-features">
+          <li>Direct access to olive groves &amp; grounds</li>
+          <li>Full kitchen &amp; indoor-outdoor dining</li>
+          <li>Ideal for retreats &amp; multi-generational groups</li>
+          <li>Shared pool &amp; recreation barn</li>
+        </ul>
+        <div class="residence-footer">
+          <div class="price-from">
+            <span class="price-from-label">From</span>
+            <span class="price-from-value">€200</span>
+            <span class="price-from-unit">/ night</span>
+          </div>
+          <a href="#booking" class="btn btn-primary" onclick="preselectProperty('garden')">Check Dates →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ENTIRE ESTATE -->
+    <article class="residence reverse reveal" id="estate">
+      <div class="residence-media">
+        <div class="residence-badge">Sleeps 24</div>
+        <img data-photo-slot="vkf:estate_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png" alt="Entire Estate at Villa Koukouvayia">
+      </div>
+      <div class="residence-text">
+        <div class="eyebrow">The Entire Estate</div>
+        <h3>All three homes, <em>all yours.</em></h3>
+        <p>Eight bedrooms, twenty beds, six bathrooms. The roof terrace becomes a star-lit dance floor, the groves a ceremony aisle, the pool a gathering point. Built for weddings, reunions, and purpose-driven programs where community and privacy both matter.</p>
+        <div class="residence-specs">
+          <div class="spec">
+            <span class="spec-icon">🛏</span>
+            <div><div class="spec-label">Beds</div><div class="spec-value">8 bedrooms / 20 beds</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🛁</span>
+            <div><div class="spec-label">Bath</div><div class="spec-value">6 bathrooms</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">👥</span>
+            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 24</div></div>
+          </div>
+        </div>
+        <ul class="residence-features">
+          <li>Star-gazing roof terrace</li>
+          <li>Wedding-ready olive grove ceremony space</li>
+          <li>Professional-grade retreat campus</li>
+          <li>Exercise room &amp; table tennis</li>
+        </ul>
+        <div class="residence-footer">
+          <div class="price-from">
+            <span class="price-from-label">From</span>
+            <span class="price-from-value">€480</span>
+            <span class="price-from-unit">/ night</span>
+          </div>
+          <a href="#booking" class="btn btn-primary" onclick="preselectProperty('estate')">Check Dates →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- =========================================================
+     LOCATION & HOSTS
+     ========================================================= -->
+<section class="location" id="location">
+  <div class="container location-grid">
+    <div class="location-text reveal">
+      <div class="eyebrow">Where you'll be</div>
+      <h2>Crete, <em>between the sea &amp; sky</em> of Greece.</h2>
+      <p>You'll find us on the Kourthiana Agricultural Road in Kaloudiana, Kissamos, northwest Crete — among the earliest footprints of man, the birthplace of Zeus, and Minoan tombs beside pristine beaches and towering mountains.</p>
+      <p>Five minutes to local tavernas and beaches. Forty-five to Chania. Everything slower than you expect. Everything further than it looks.</p>
+
+      <div class="hosts-card">
+        <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--cream-soft);">
+            <circle cx="8" cy="10" r="2.5"/>
+            <circle cx="16" cy="10" r="2.5"/>
+            <path d="M6 16 Q12 22 18 16"/>
+          </svg>
+        </div>
+        <div class="hosts-text">
+          <h4>Hosted by the Palola-Harriman family</h4>
+          <p>Heidi, Richard &amp; Logan the dog — on-site, always, and helpful to the degree you'd like.</p>
+        </div>
+      </div>
+    </div>
+    <div class="location-media reveal">
+      <img data-photo-slot="vkf:location" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913276068-WMFI73UGU4W9E032AF91/VKF9.png" alt="Crete landscape at Villa Koukouvayia">
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     REVIEWS
+     ========================================================= -->
+<section class="reviews" id="reviews">
+  <div class="container">
+    <div class="reviews-header reveal">
+      <div class="eyebrow">Guest Reviews · All 5-star</div>
+      <h2>In their own words.</h2>
+    </div>
+    <div class="reviews-grid">
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Every inch of the house is totally thought-out. Heidi, Richard and Logan (the best dog on Crete) are the best hosts. This is truly a magical place."</div>
+        <div class="review-author">Georgie &amp; Brian</div>
+        <div class="review-meta">Holiday Stay · May 2025</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"I fully recommend this place — to digital nomads especially. The internet connection is flawless, and the house is equipped with everything you can imagine."</div>
+        <div class="review-author">Sonia &amp; Wojciech</div>
+        <div class="review-meta">Work-Stay · March 2025</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"A wonderful stay with spectacular views. Extremely well-equipped. We would definitely recommend — and we'll definitely be back."</div>
+        <div class="review-author">Niels, Satrina &amp; family</div>
+        <div class="review-meta">Holiday Stay · May 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     BOOKING CALCULATOR
+     ========================================================= -->
+<section class="booking" id="booking">
+  <div class="container">
+    <div class="booking-wrap reveal">
+      <div class="booking-side">
+        <div class="eyebrow">Book Direct · No Platform Fees</div>
+        <h2>Your stay, <em>your price.</em></h2>
+        <p>Pick dates, a group size and a residence. We'll calculate an indicative quote, then confirm final pricing within 24 hours — with a direct-booking saving over Airbnb and VRBO.</p>
+
+        <form class="booking-form" id="bookingForm" onsubmit="submitBooking(event)">
+          <div class="booking-row">
+            <div class="form-field">
+              <label for="checkIn">Check in</label>
+              <input type="date" id="checkIn" required>
+            </div>
+            <div class="form-field">
+              <label for="checkOut">Check out</label>
+              <input type="date" id="checkOut" required>
+            </div>
+          </div>
+          <div class="booking-row">
+            <div class="form-field">
+              <label for="guests">Guests</label>
+              <select id="guests">
+                <option value="1">1 guest</option>
+                <option value="2">2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4" selected>4 guests</option>
+                <option value="5">5 guests</option>
+                <option value="6">6 guests</option>
+                <option value="7">7 guests</option>
+                <option value="8">8 guests</option>
+                <option value="10">10 guests</option>
+                <option value="12">12 guests</option>
+                <option value="14">14 guests</option>
+                <option value="16">16 guests</option>
+                <option value="18">18 guests</option>
+                <option value="20">20 guests</option>
+                <option value="22">22 guests</option>
+                <option value="24">24 guests</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label for="property">Residence</label>
+              <select id="property">
+                <option value="auto" selected>Suggest best fit</option>
+                <option value="guest">Guest House (to 4)</option>
+                <option value="main">Main House (to 7)</option>
+                <option value="garden">Garden Suite (to 13)</option>
+                <option value="estate">Entire Estate (to 24)</option>
+              </select>
+            </div>
+          </div>
+          <div class="booking-row">
+            <div class="form-field">
+              <label for="fullName">Your name</label>
+              <input type="text" id="fullName" placeholder="First and last" required>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="intent">What's the occasion? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <select id="intent">
+              <option value="">Choose…</option>
+              <option value="holiday">Holiday with family or friends</option>
+              <option value="work">Remote work-stay / sabbatical</option>
+              <option value="retreat">Retreat or program</option>
+              <option value="event">Wedding, celebration or reunion</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="notes">Anything else? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <textarea id="notes" placeholder="Children's ages, dietary needs, flight timing, flexibility on dates…"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary submit-full">Request to Book →</button>
+        </form>
+
+        <div class="confirmation" id="confirmation">
+          <strong>Thank you.</strong> Your request is in. Heidi or Richard will write back within 24 hours with a confirmed offer and payment options.
+        </div>
+      </div>
+
+      <!-- Live Quote -->
+      <aside class="quote-card">
+        <h3 id="quoteTitle">Your Indicative Quote</h3>
+        <p class="quote-sub" id="quoteSubtitle">Pick dates to see pricing</p>
+        <div id="quoteBody">
+          <div class="quote-empty">Select check-in &amp; check-out dates →</div>
+        </div>
+        <div class="quote-note">
+          Quote includes 18% Greek VAT and the Climate Resilience surtax. Final pricing confirmed by your hosts within 24 hours. Direct bookings save ~10–15% vs Airbnb &amp; VRBO. Security deposit held separately, returned on checkout.
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-mark">Villa Koukouvayia Farms</span>
+        <p>A fully-equipped coastal estate among the olive groves of Crete — hosted with care by the Palola-Harriman family since 2019.</p>
+        <p style="font-size: 0.8rem; opacity: 0.5;">Greek RMA Lodging #: 000/023/140/23</p>
+      </div>
+      <div>
+        <h4>The Property</h4>
+        <ul>
+          <li><a href="#guest">Guest House</a></li>
+          <li><a href="#main">Main House</a></li>
+          <li><a href="#garden">Garden Suite</a></li>
+          <li><a href="#estate">Entire Estate</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Your Stay</h4>
+        <ul>
+          <li><a href="#journey">Holidays</a></li>
+          <li><a href="#journey">Work-stays</a></li>
+          <li><a href="#journey">Retreats</a></li>
+          <li><a href="#journey">Weddings &amp; Events</a></li>
+          <li><a href="/retreats" style="color: var(--terracotta); opacity: 1;">Curated programs ↗</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Find Us</h4>
+        <ul>
+          <li>Kourthiana Agricultural Rd</li>
+          <li>Kaloudiana, Kissamos 73400</li>
+          <li>Chania, Crete — Greece</li>
+          <li><a href="#booking" style="color: var(--terracotta); opacity: 1;">Inquire Now →</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Villa Koukouvayia Farms. All rights reserved. · Sister brand: <a href="/retreats" style="color: var(--terracotta); opacity: 1;">Cretan Destination Retreats</a></div>
+      <div>Built with care · Booking &amp; Stay Policy · Cookies &amp; Privacy</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   BOOKING ENGINE — easy to edit
+   Replace these base rates with your real seasonal numbers.
+   ========================================================= */
+
+// Base rates per night, by property and season
+const RATES = {
+  guest:  { low: 120, shoulder: 160, high: 220 },
+  main:   { low: 180, shoulder: 240, high: 340 },
+  garden: { low: 200, shoulder: 280, high: 380 },
+  estate: { low: 480, shoulder: 650, high: 880 }
+};
+
+// Which guests are included in the base rate per property
+const INCLUDED_GUESTS = {
+  guest: 4,
+  main: 5,
+  garden: 8,
+  estate: 16
+};
+
+// Max capacity per property
+const MAX_GUESTS = {
+  guest: 4,
+  main: 7,
+  garden: 13,
+  estate: 24
+};
+
+// Minimum stay (nights)
+const MIN_STAY = {
+  guest: 2,
+  main: 3,
+  garden: 3,
+  estate: 4
+};
+
+// Climate Resilience tax per night (low / high period)
+// (Low = Nov–Mar, High = Apr–Oct — mirrors the hosts' published policy)
+const CLIMATE_TAX = {
+  guest: { low: 2, high: 8 },
+  main: { low: 4, high: 15 },
+  garden: { low: 4, high: 15 },
+  estate: { low: 4, high: 15 } // Note: estate tax is likely higher; confirm with hosts
+};
+
+const EXTRA_GUEST_FEE = 10; // €/extra guest/night
+const VAT_RATE = 0.18;
+
+// Extended-stay discounts (applied before taxes)
+const DISCOUNTS = [
+  { nights: 30, pct: 0.20 },
+  { nights: 14, pct: 0.10 }
+];
+
+// Season lookup by month (1–12)
+// High: Jun 15 – Sep 15; Shoulder: Apr–May, Sep 16–Oct; Low: Nov–Mar
+function getSeason(date) {
+  const m = date.getMonth() + 1;
+  const d = date.getDate();
+  if ((m === 6 && d >= 15) || m === 7 || m === 8 || (m === 9 && d <= 15)) return 'high';
+  if (m === 4 || m === 5 || (m === 9 && d > 15) || m === 10) return 'shoulder';
+  return 'low';
+}
+
+// Climate-tax season: Apr–Oct high, Nov–Mar low
+function getClimateTier(date) {
+  const m = date.getMonth() + 1;
+  return (m >= 4 && m <= 10) ? 'high' : 'low';
+}
+
+// Pick a best-fit property from guest count
+function suggestProperty(guests) {
+  if (guests <= 4) return 'guest';
+  if (guests <= 7) return 'main';
+  if (guests <= 13) return 'garden';
+  return 'estate';
+}
+
+function propertyLabel(p) {
+  return {guest:'Guest House', main:'Main House', garden:'Garden Suite', estate:'Entire Estate'}[p];
+}
+
+function fmt(n) {
+  return '€' + Math.round(n).toLocaleString('en-US');
+}
+
+// Core calculator — produces a line-item quote
+function calculateQuote(checkIn, checkOut, guests, propertyKey) {
+  if (!checkIn || !checkOut || checkOut <= checkIn) return null;
+
+  let chosen = propertyKey;
+  if (chosen === 'auto') chosen = suggestProperty(guests);
+
+  // Capacity check
+  if (guests > MAX_GUESTS[chosen]) {
+    return { error: `${propertyLabel(chosen)} sleeps up to ${MAX_GUESTS[chosen]}. Try ${propertyLabel(suggestProperty(guests))} instead.` };
+  }
+
+  const msPerDay = 24 * 60 * 60 * 1000;
+  const nights = Math.round((checkOut - checkIn) / msPerDay);
+  if (nights < MIN_STAY[chosen]) {
+    return { error: `${propertyLabel(chosen)} has a ${MIN_STAY[chosen]}-night minimum. You've selected ${nights} night${nights===1?'':'s'}.` };
+  }
+
+  // Walk each night, apply seasonal rate & climate tax
+  const rates = RATES[chosen];
+  const climate = CLIMATE_TAX[chosen];
+  const included = INCLUDED_GUESTS[chosen];
+  const extraGuests = Math.max(0, guests - included);
+
+  let lodging = 0;
+  let climateTotal = 0;
+  const seasonBreakdown = { low: 0, shoulder: 0, high: 0 };
+
+  for (let i = 0; i < nights; i++) {
+    const day = new Date(checkIn.getTime() + i * msPerDay);
+    const season = getSeason(day);
+    const tier = getClimateTier(day);
+    lodging += rates[season];
+    seasonBreakdown[season]++;
+    climateTotal += climate[tier];
+  }
+
+  // Extended-stay discount
+  let discountPct = 0;
+  for (const d of DISCOUNTS) {
+    if (nights >= d.nights) { discountPct = d.pct; break; }
+  }
+  const discount = lodging * discountPct;
+  const lodgingAfterDiscount = lodging - discount;
+
+  // Extra guests charge
+  const extraGuestsCharge = extraGuests * EXTRA_GUEST_FEE * nights;
+
+  // Subtotal before VAT
+  const subtotal = lodgingAfterDiscount + extraGuestsCharge;
+
+  // VAT
+  const vat = subtotal * VAT_RATE;
+
+  // Final total
+  const total = subtotal + vat + climateTotal;
+
+  return {
+    property: chosen,
+    propertyName: propertyLabel(chosen),
+    nights,
+    guests,
+    included,
+    extraGuests,
+    lodging,
+    seasonBreakdown,
+    discountPct,
+    discount,
+    extraGuestsCharge,
+    subtotal,
+    vat,
+    climateTotal,
+    total
+  };
+}
+
+function renderQuote(q) {
+  const body = document.getElementById('quoteBody');
+  const subtitle = document.getElementById('quoteSubtitle');
+  const title = document.getElementById('quoteTitle');
+
+  if (!q) {
+    body.innerHTML = '<div class="quote-empty">Select check-in &amp; check-out dates →</div>';
+    subtitle.textContent = 'Pick dates to see pricing';
+    title.textContent = 'Your Indicative Quote';
+    return;
+  }
+
+  if (q.error) {
+    body.innerHTML = `<div class="quote-warn">${q.error}</div>`;
+    subtitle.textContent = 'Please adjust your selection';
+    return;
+  }
+
+  title.textContent = q.propertyName;
+  subtitle.textContent = `${q.nights} night${q.nights===1?'':'s'} · ${q.guests} guest${q.guests===1?'':'s'}`;
+
+  const seasonLabels = [];
+  if (q.seasonBreakdown.high) seasonLabels.push(`${q.seasonBreakdown.high} high`);
+  if (q.seasonBreakdown.shoulder) seasonLabels.push(`${q.seasonBreakdown.shoulder} shoulder`);
+  if (q.seasonBreakdown.low) seasonLabels.push(`${q.seasonBreakdown.low} low`);
+
+  let html = '';
+  html += `<div class="quote-line"><span class="label">Lodging (${q.nights} nights)</span><span class="value">${fmt(q.lodging)}</span></div>`;
+  if (seasonLabels.length) {
+    html += `<div class="quote-line sub"><span class="label">${seasonLabels.join(' · ')} season</span><span class="value"></span></div>`;
+  }
+  if (q.discountPct > 0) {
+    html += `<div class="quote-line"><span class="label">Extended-stay discount (${Math.round(q.discountPct*100)}%)</span><span class="value">− ${fmt(q.discount)}</span></div>`;
+  }
+  if (q.extraGuests > 0) {
+    html += `<div class="quote-line"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.nights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
+  }
+  html += `<div class="quote-line"><span class="label">Greek VAT (18%)</span><span class="value">${fmt(q.vat)}</span></div>`;
+  html += `<div class="quote-line"><span class="label">Climate Resilience tax</span><span class="value">${fmt(q.climateTotal)}</span></div>`;
+  html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
+
+  body.innerHTML = html;
+}
+
+// Recalculate on form change
+function recalc() {
+  const ci = document.getElementById('checkIn').value;
+  const co = document.getElementById('checkOut').value;
+  const guests = parseInt(document.getElementById('guests').value, 10);
+  const property = document.getElementById('property').value;
+
+  const checkIn = ci ? new Date(ci) : null;
+  const checkOut = co ? new Date(co) : null;
+
+  if (checkIn && checkOut) {
+    const q = calculateQuote(checkIn, checkOut, guests, property);
+    renderQuote(q);
+  } else {
+    renderQuote(null);
+  }
+}
+
+// Wire up listeners
+['checkIn', 'checkOut', 'guests', 'property'].forEach(id => {
+  document.getElementById(id).addEventListener('change', recalc);
+});
+
+// Sync hero form → booking form, then scroll & recalc
+function jumpToBooking(e) {
+  e.preventDefault();
+  const ci = document.getElementById('heroCheckIn').value;
+  const co = document.getElementById('heroCheckOut').value;
+  const g = document.getElementById('heroGuests').value;
+  const p = document.getElementById('heroProperty').value;
+  if (ci) document.getElementById('checkIn').value = ci;
+  if (co) document.getElementById('checkOut').value = co;
+  if (g) document.getElementById('guests').value = g;
+  if (p) document.getElementById('property').value = p;
+  recalc();
+  document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Residence "Check Dates" buttons preselect property
+function preselectProperty(key) {
+  document.getElementById('property').value = key;
+  recalc();
+}
+
+// Submit booking request
+async function submitBooking(e) {
+  e.preventDefault();
+  const btn = document.querySelector('#bookingForm [type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const payload = {
+    site: 'vkf',
+    checkIn: document.getElementById('checkIn').value,
+    checkOut: document.getElementById('checkOut').value,
+    guests: document.getElementById('guests').value,
+    property: document.getElementById('property').value,
+    name: document.getElementById('fullName').value,
+    email: document.getElementById('email').value,
+    intent: document.getElementById('intent').value,
+    notes: document.getElementById('notes').value
+  };
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Request failed');
+    }
+    document.getElementById('bookingForm').style.display = 'none';
+    document.getElementById('confirmation').classList.add('visible');
+    document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Request to Book →';
+    alert('Something went wrong: ' + err.message + '\n\nPlease email us directly at info@koukouvayia.com');
+  }
+}
+
+// Journey card selection → preselect intent + suggest property
+function selectJourney(card) {
+  document.querySelectorAll('.journey-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  const intent = card.dataset.intent;
+  document.getElementById('intent').value = intent;
+  // Nudge property selection
+  const propMap = { holiday: 'auto', work: 'guest', retreat: 'garden', event: 'estate' };
+  document.getElementById('property').value = propMap[intent] || 'auto';
+  recalc();
+  setTimeout(() => {
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+  }, 300);
+}
+
+/* =========================================================
+   UX polish: nav scroll state, reveal-on-scroll
+   ========================================================= */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('in-view');
+      io.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Sensible default dates: today + 7, today + 14
+(() => {
+  const d = new Date();
+  const toISO = (dt) => dt.toISOString().split('T')[0];
+  const inDays = (n) => { const x = new Date(d); x.setDate(x.getDate() + n); return toISO(x); };
+  document.getElementById('heroCheckIn').min = toISO(d);
+  document.getElementById('heroCheckOut').min = inDays(1);
+  document.getElementById('checkIn').min = toISO(d);
+  document.getElementById('checkOut').min = inDays(1);
+})();
+</script>
+<script src="/photo-registry.js"></script>
+</body>
+</html>

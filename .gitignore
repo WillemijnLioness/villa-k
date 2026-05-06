@@ -1,0 +1,8 @@
+node_modules/
+.env
+tmp/
+# uploaded photos are persisted via Railway volume, not git
+public/uploads/*.jpg
+public/uploads/*.jpeg
+public/uploads/*.png
+public/uploads/*.webp

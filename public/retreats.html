@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cretan Destination Retreats — Retreat, Play, Love.</title>
+<meta name="description" content="Four hand-crafted retreats on Crete in 2026 — photography, alpine trekking, ancient cities, and the olive harvest. Hosted by Heidi & Richard.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =============================================================================
+   CRETAN DESTINATION RETREATS  —  Design tokens
+   Sister palette to Villa Koukouvayia — same neutrals, saffron primary instead
+   of terracotta to distinguish "journeys" from "residences".
+   ============================================================================= */
+:root {
+  --cream: #F4EEE2;
+  --cream-soft: #FAF6EE;
+  --bone: #EDE4D2;
+  --olive-deep: #3F4A2E;
+  --olive: #5C6B45;
+  --olive-soft: #8A9675;
+  --saffron: #C28840;
+  --saffron-deep: #9C6B30;
+  --aegean: #2C5669;
+  --aegean-deep: #1B3A48;
+  --ink: #1F1D18;
+  --ink-soft: #4A463C;
+  --muted: #8B8577;
+  --line: rgba(31, 29, 24, 0.12);
+  --shadow-soft: 0 1px 2px rgba(31, 29, 24, 0.04), 0 8px 24px rgba(31, 29, 24, 0.06);
+  --shadow-lift: 0 4px 12px rgba(31, 29, 24, 0.08), 0 24px 48px rgba(31, 29, 24, 0.10);
+  --radius: 8px;
+  --radius-lg: 16px;
+
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.8rem, 7vw, 6rem); font-weight: 300; letter-spacing: -0.02em; }
+h2 { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; }
+h3 { font-size: clamp(1.4rem, 2.4vw, 2rem); font-weight: 400; }
+h4 { font-size: 1.15rem; font-weight: 500; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--saffron-deep);
+}
+a { color: inherit; text-decoration: none; }
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+section { padding: 100px 0; }
+@media (max-width: 768px) {
+  section { padding: 64px 0; }
+  .container { padding: 0 20px; }
+}
+
+/* ---------- NAV ---------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+}
+.nav.scrolled {
+  background: rgba(244, 238, 226, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 14px 32px;
+  box-shadow: 0 1px 0 var(--line);
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-brand em { font-style: italic; color: var(--saffron-deep); }
+.nav-links {
+  display: flex;
+  gap: 36px;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.nav-links a { color: var(--ink); opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-partner {
+  font-size: 0.78rem;
+  opacity: 0.55;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-partner:hover { opacity: 0.9; }
+.nav-cta {
+  background: var(--saffron);
+  color: var(--cream-soft) !important;
+  padding: 10px 20px;
+  border-radius: 999px;
+  opacity: 1 !important;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--saffron-deep); transform: translateY(-1px); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--ink); }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav.mobile-open .nav-links {
+    display: flex;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--cream-soft);
+    padding: 24px;
+    gap: 20px;
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  background: var(--olive-deep);
+}
+.hero-media { position: absolute; inset: 0; z-index: 0; }
+.hero-media img {
+  width: 100%; height: 100%; object-fit: cover;
+  animation: kenBurns 24s ease-in-out infinite alternate;
+}
+@keyframes kenBurns {
+  from { transform: scale(1.02) translate(0, 0); }
+  to { transform: scale(1.12) translate(-1%, -1%); }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(31,29,24,0.20) 0%, rgba(31,29,24,0.10) 35%, rgba(31,29,24,0.80) 100%);
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 140px 32px 60px;
+  color: var(--cream-soft);
+}
+.hero-eyebrow { color: var(--cream-soft); opacity: 0.85; margin-bottom: 24px; animation: fadeUp 1s ease 0.2s both; }
+.hero h1 {
+  color: var(--cream-soft);
+  max-width: 16ch;
+  margin-bottom: 28px;
+  animation: fadeUp 1.2s ease 0.4s both;
+}
+.hero h1 em { font-style: italic; font-weight: 300; color: var(--cream-soft); }
+.hero h1 .saffron { color: #E8B66E; }
+.hero-sub {
+  font-size: 1.2rem;
+  max-width: 46ch;
+  opacity: 0.9;
+  margin-bottom: 36px;
+  animation: fadeUp 1.2s ease 0.6s both;
+}
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: fadeUp 1.2s ease 0.8s both;
+}
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  right: 32px;
+  z-index: 3;
+  color: var(--cream-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.8;
+}
+.hero-scroll::after {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--cream-soft);
+  animation: pulseLine 2s ease-in-out infinite;
+}
+@keyframes pulseLine {
+  0%, 100% { opacity: 0.3; width: 30px; }
+  50% { opacity: 1; width: 50px; }
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+.btn-primary { background: var(--saffron); color: var(--cream-soft); }
+.btn-primary:hover { background: var(--saffron-deep); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--cream-soft);
+  border: 1px solid rgba(244, 238, 226, 0.4);
+}
+.btn-outline:hover { border-color: var(--cream-soft); }
+.btn-outline-dark {
+  background: transparent;
+  color: var(--olive-deep);
+  border: 1px solid var(--olive-deep);
+}
+.btn-outline-dark:hover { background: var(--olive-deep); color: var(--cream-soft); }
+
+/* ---------- INTRO / HOSTS ---------- */
+.intro { background: var(--cream); }
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 100px;
+  align-items: center;
+}
+@media (max-width: 900px) { .intro-grid { grid-template-columns: 1fr; gap: 40px; } }
+.intro-side .eyebrow { margin-bottom: 16px; }
+.intro-side h2 { margin-bottom: 24px; }
+.intro-side h2 em { font-style: italic; color: var(--saffron-deep); font-weight: 300; }
+.intro-side p { color: var(--ink-soft); margin-bottom: 16px; }
+.intro-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+.stat-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 300;
+  color: var(--saffron-deep);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-top: 6px;
+}
+.intro-media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+}
+.intro-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- RETREATS GRID ---------- */
+.retreats { background: var(--bone); }
+.retreats-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.retreats-header h2 { max-width: 14ch; }
+.retreats-header h2 em { font-style: italic; color: var(--saffron-deep); font-weight: 300; }
+.retreats-header p { max-width: 40ch; color: var(--ink-soft); }
+
+.retreats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+@media (max-width: 760px) { .retreats-grid { grid-template-columns: 1fr; } }
+
+.retreat-card {
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+}
+.retreat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+.retreat-img {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  position: relative;
+}
+.retreat-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1s ease;
+}
+.retreat-card:hover .retreat-img img { transform: scale(1.04); }
+.retreat-month {
+  position: absolute;
+  top: 18px; left: 18px;
+  background: rgba(244, 238, 226, 0.95);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--saffron-deep);
+}
+.retreat-availability {
+  position: absolute;
+  top: 18px; right: 18px;
+  background: var(--saffron);
+  color: var(--cream-soft);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.retreat-body { padding: 32px; flex: 1; display: flex; flex-direction: column; }
+.retreat-card h3 {
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+.retreat-card h3 em { font-style: italic; color: var(--saffron-deep); font-weight: 300; }
+.retreat-meta {
+  display: flex;
+  gap: 24px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.retreat-meta strong { color: var(--ink); font-weight: 600; }
+.retreat-card p {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+  flex: 1;
+}
+.retreat-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.retreat-price {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: var(--ink);
+}
+.retreat-price small {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--muted);
+  font-weight: 400;
+  margin-left: 6px;
+}
+
+/* ---------- RETREAT DETAIL PANELS ---------- */
+.detail { background: var(--cream); padding: 80px 0; }
+.detail + .detail { padding-top: 0; }
+.detail-card {
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 56px 56px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 64px;
+  box-shadow: var(--shadow-soft);
+}
+@media (max-width: 900px) {
+  .detail-card { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
+}
+.detail-text .eyebrow { margin-bottom: 12px; }
+.detail-text h3 { margin-bottom: 8px; }
+.detail-text .lead {
+  font-size: 1.05rem;
+  color: var(--saffron-deep);
+  font-style: italic;
+  font-family: var(--font-display);
+  margin-bottom: 20px;
+}
+.detail-text > p { color: var(--ink-soft); margin-bottom: 16px; }
+.detail-text h4 {
+  margin-top: 28px;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--olive);
+  font-weight: 600;
+}
+.detail-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.detail-features li {
+  position: relative;
+  padding-left: 24px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.detail-features li::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0.65em;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--saffron);
+}
+.detail-aside {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.detail-aside::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -20%;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(194, 136, 64, 0.22) 0%, transparent 70%);
+  pointer-events: none;
+}
+.aside-img {
+  position: relative;
+  margin: -32px -32px 24px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.aside-img img { width: 100%; height: 100%; object-fit: cover; }
+.detail-aside h4 {
+  color: var(--cream-soft);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.detail-stats { display: flex; flex-direction: column; gap: 14px; position: relative; }
+.detail-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(244, 238, 226, 0.12);
+  font-size: 0.95rem;
+}
+.detail-stat .label { opacity: 0.8; }
+.detail-stat .value { font-weight: 600; color: var(--cream-soft); font-family: var(--font-display); font-size: 1.1rem; }
+.detail-discounts {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(244, 238, 226, 0.18);
+  position: relative;
+}
+.detail-discounts ul { list-style: none; margin-top: 10px; }
+.detail-discounts li {
+  font-size: 0.85rem;
+  padding: 4px 0;
+  opacity: 0.85;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.detail-discounts li .v { font-weight: 600; color: #E8B66E; white-space: nowrap; }
+.detail-cta { margin-top: 24px; position: relative; }
+.detail-cta .btn { width: 100%; justify-content: center; background: var(--saffron); }
+.detail-cta .btn:hover { background: #D89B5A; }
+
+/* ---------- LODGING NOTE ---------- */
+.lodging {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  position: relative;
+  overflow: hidden;
+}
+.lodging::before {
+  content: '';
+  position: absolute;
+  top: 50%; right: -10%;
+  transform: translateY(-50%);
+  width: 50%; height: 200%;
+  background: radial-gradient(circle, rgba(194, 136, 64, 0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+.lodging-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+@media (max-width: 900px) { .lodging-grid { grid-template-columns: 1fr; gap: 32px; } }
+.lodging h2 { color: var(--cream-soft); }
+.lodging h2 em { font-style: italic; color: #E8B66E; font-weight: 300; }
+.lodging .eyebrow { color: var(--saffron); }
+.lodging-text p { color: var(--bone); opacity: 0.92; margin-bottom: 20px; }
+.lodging-card {
+  background: rgba(244, 238, 226, 0.06);
+  border: 1px solid rgba(244, 238, 226, 0.15);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.lodging-card-img {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.lodging-card-img img { width: 100%; height: 100%; object-fit: cover; }
+.lodging-card-body { padding: 28px; }
+.lodging-card h4 { color: var(--cream-soft); font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; margin-bottom: 8px; }
+.lodging-card p { font-size: 0.92rem; color: var(--bone); opacity: 0.9; margin-bottom: 20px; }
+.lodging-card .btn { background: var(--saffron); color: var(--cream-soft); }
+.lodging-card .btn:hover { background: #D89B5A; }
+
+/* ---------- CUSTOM RETREAT ---------- */
+.custom { background: var(--cream); }
+.custom-card {
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 64px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  box-shadow: var(--shadow-soft);
+}
+@media (max-width: 900px) { .custom-card { grid-template-columns: 1fr; padding: 32px; gap: 32px; } }
+.custom-side .eyebrow { margin-bottom: 16px; }
+.custom-side h2 { margin-bottom: 20px; }
+.custom-side h2 em { font-style: italic; color: var(--saffron-deep); font-weight: 300; }
+.custom-side p { color: var(--ink-soft); margin-bottom: 16px; }
+.custom-img {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.custom-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- CONTACT ---------- */
+.contact { background: var(--bone); }
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 60px;
+  align-items: flex-start;
+}
+@media (max-width: 900px) { .contact-wrap { grid-template-columns: 1fr; gap: 40px; } }
+.contact-side .eyebrow { margin-bottom: 16px; }
+.contact-side h2 { margin-bottom: 16px; }
+.contact-side h2 em { font-style: italic; color: var(--saffron-deep); font-weight: 300; }
+.contact-side p { color: var(--ink-soft); margin-bottom: 16px; }
+.contact-channels {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+.contact-channel a { color: var(--saffron-deep); font-weight: 600; }
+
+.contact-form {
+  background: var(--cream-soft);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+@media (max-width: 600px) { .contact-form { padding: 28px; } }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+.form-field { display: flex; flex-direction: column; }
+.form-field label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--olive);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cream);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-weight: 500;
+}
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--saffron);
+  box-shadow: 0 0 0 3px rgba(194, 136, 64, 0.18);
+}
+.form-field textarea { resize: vertical; min-height: 100px; font-weight: 400; }
+
+.contact-submit { width: 100%; padding: 18px; font-size: 0.88rem; }
+.confirmation {
+  display: none;
+  background: var(--olive);
+  color: var(--cream-soft);
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+.confirmation.visible { display: block; animation: fadeUp 0.5s ease; }
+
+/* ---------- FOOTER ---------- */
+.footer {
+  background: var(--ink);
+  color: var(--bone);
+  padding: 80px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+.footer h4 {
+  color: var(--cream-soft);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.footer-brand .brand-mark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--cream-soft);
+  margin-bottom: 16px;
+  display: block;
+}
+.footer-brand .brand-mark em { font-style: italic; color: #E8B66E; }
+.footer-brand p {
+  color: var(--bone);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+  max-width: 32ch;
+}
+.footer ul { list-style: none; }
+.footer ul li { margin-bottom: 10px; }
+.footer ul a {
+  color: var(--bone);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  transition: opacity 0.2s;
+}
+.footer ul a:hover { opacity: 1; color: var(--saffron); }
+.footer-partner {
+  background: rgba(244, 238, 226, 0.05);
+  border: 1px solid rgba(244, 238, 226, 0.12);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+.footer-partner h4 { color: #E8B66E; }
+.footer-partner p { font-size: 0.82rem; opacity: 0.8; margin-bottom: 12px; }
+.footer-partner a { color: var(--saffron); font-size: 0.85rem; font-weight: 600; }
+.footer-bottom {
+  border-top: 1px solid rgba(244, 238, 226, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+.footer-social { display: flex; gap: 16px; }
+.footer-social a { color: var(--bone); opacity: 0.7; }
+.footer-social a:hover { opacity: 1; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  .hero-content { padding: 120px 20px 40px; }
+  .retreat-body { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- =====================  NAV  ===================== -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-brand">
+    Cretan Destination <em>Retreats</em>
+  </a>
+  <div class="nav-links">
+    <a href="#retreats">Retreats</a>
+    <a href="#custom">Custom</a>
+    <a href="https://www.koukouvayia.com/" class="nav-partner" target="_blank" rel="noopener">
+      ↗ Villa Koukouvayia
+    </a>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+  </div>
+  <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('mobile-open')" aria-label="Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+
+<!-- =====================  HERO  ===================== -->
+<header class="hero" id="top">
+  <div class="hero-media">
+    <img data-photo-slot="rpl:hero" src="" alt="Cretan landscape — Retreat Play Love">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-eyebrow eyebrow">23 years on Crete · 2026 retreat season</div>
+      <h1>Retreat,<br>Play, <em class="saffron">Love.</em></h1>
+      <p class="hero-sub">Four hand-crafted journeys through the island we call home — photography, alpine trekking, ancient cities, and the olive harvest. Hosted with care by Heidi &amp; Richard.</p>
+      <div class="hero-actions">
+        <a href="#retreats" class="btn btn-primary">Discover the 2026 Retreats →</a>
+        <a href="#custom" class="btn btn-outline">Build your own</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</header>
+
+<!-- =====================  INTRO  ===================== -->
+<section class="intro">
+  <div class="container intro-grid">
+    <div class="intro-side reveal">
+      <div class="eyebrow">Hi, we're Heidi &amp; Richard</div>
+      <h2>Crete is our home. <em>You're invited in.</em></h2>
+      <p>Twenty-three years of living on Crete have given us deep relationships with the island's hidden trails, working olive mills, mountain refuges, and the families who run them. Each of our retreats is built from those relationships — not from a brochure.</p>
+      <p>Programs run from March through November, capped at twelve guests. Lodging is at our own estate, Villa Koukouvayia Farms — except where the journey calls for somewhere only Crete can offer (a mountain refuge, a working monastery, a Thessaloniki waterfront).</p>
+      <div class="intro-stats">
+        <div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">Retreats / Year</div>
+        </div>
+        <div>
+          <div class="stat-num">12</div>
+          <div class="stat-label">Max Group Size</div>
+        </div>
+        <div>
+          <div class="stat-num">23</div>
+          <div class="stat-label">Years on Crete</div>
+        </div>
+      </div>
+    </div>
+    <div class="intro-media reveal">
+      <img data-photo-slot="rpl:intro" src="" alt="Heidi and Richard, your hosts on Crete">
+    </div>
+  </div>
+</section>
+
+<!-- =====================  RETREATS GRID  ===================== -->
+<section class="retreats" id="retreats">
+  <div class="container">
+    <div class="retreats-header reveal">
+      <div>
+        <div class="eyebrow">2026 Season</div>
+        <h2>Four journeys.<br>One island. <em>All yours.</em></h2>
+      </div>
+      <p>From dawn light at Elafonisi Beach to the highest peaks of the Lefka Ori, each retreat draws on a different facet of Crete. Pick the one that calls.</p>
+    </div>
+    <div class="retreats-grid">
+
+      <!-- Photography Retreat -->
+      <a href="#photography" class="retreat-card reveal">
+        <div class="retreat-img">
+          <div class="retreat-month">March &amp; November</div>
+          <img data-photo-slot="rpl:photography" src="" alt="Cretan Collaborative Photography Retreat">
+        </div>
+        <div class="retreat-body">
+          <h3>Cretan Collaborative <em>Photography</em> Retreat</h3>
+          <div class="retreat-meta">
+            <span><strong>7 nights</strong> · Nov 12–19, 2026</span>
+            <span><strong>6–12</strong> guests</span>
+          </div>
+          <p>Field sessions in magic-light hours at Elafonisi Beach, Xania's Old Town and the Omalos Plateau. A one-day seminar with a local pro photographer. Sharing &amp; critique sessions through the week.</p>
+          <div class="retreat-footer">
+            <div class="retreat-price">€1,950 <small>/ person</small></div>
+            <span style="color: var(--saffron-deep); font-size: 0.85rem; font-weight: 600;">Find out more →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- White Mountain Trek -->
+      <a href="#trek" class="retreat-card reveal">
+        <div class="retreat-img">
+          <div class="retreat-month">May &amp; October</div>
+          <img data-photo-slot="rpl:trek" src="" alt="Advanced Cretan Lefka Ori White Mountain Trek">
+        </div>
+        <div class="retreat-body">
+          <h3>Advanced Cretan <em>Lefka Ori Trek</em></h3>
+          <div class="retreat-meta">
+            <span><strong>10 nights</strong> · Oct 16–27, 2026</span>
+            <span><strong>6–12</strong> hikers</span>
+          </div>
+          <p>The full White Mountains massif, east to west. Samaria Gorge uphill, Gigalos Peak, the Greleskas Observatory trail. Mountain inns each night, beach rest days at Agia Roumeli and Sougia.</p>
+          <div class="retreat-footer">
+            <div class="retreat-price">€2,050 <small>/ person</small></div>
+            <span style="color: var(--saffron-deep); font-size: 0.85rem; font-weight: 600;">Find out more →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Cities of History -->
+      <a href="#cities" class="retreat-card reveal">
+        <div class="retreat-img">
+          <div class="retreat-month">Early July</div>
+          <img data-photo-slot="rpl:cities" src="" alt="Cities of History Mountains of Myth retreat">
+        </div>
+        <div class="retreat-body">
+          <h3>Cities of History, <em>Mountains of Myth</em></h3>
+          <div class="retreat-meta">
+            <span><strong>7 nights</strong> · July 2–9, 2026</span>
+            <span><strong>6–12</strong> guests</span>
+          </div>
+          <p>Three nights in Thessaloniki's Ladadika district, ancient Dion, Litochoro, then up Mount Olympus to the Agapitos Spilios mountain refuge. History, hiking, and the camaraderie of the trail.</p>
+          <div class="retreat-footer">
+            <div class="retreat-price">€1,950 <small>/ person</small></div>
+            <span style="color: var(--saffron-deep); font-size: 0.85rem; font-weight: 600;">Find out more →</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Harvest -->
+      <a href="#harvest" class="retreat-card reveal">
+        <div class="retreat-img">
+          <div class="retreat-month">Early November</div>
+          <div class="retreat-availability">Only 6 slots left</div>
+          <img data-photo-slot="rpl:harvest" src="" alt="The Cretan Harvest Season">
+        </div>
+        <div class="retreat-body">
+          <h3>The <em>Cretan Harvest</em> Season</h3>
+          <div class="retreat-meta">
+            <span><strong>8 nights</strong> · Nov 3–11, 2026</span>
+            <span><strong>5–12</strong> guests</span>
+          </div>
+          <p>Olive picking at a working farm, lunch at Biolea's organic mill, vineyards at Manousakis &amp; Agia Triada, sunrise at Seitan Limani, Chania's Old Town, and a cooking lesson with a local Cretan chef.</p>
+          <div class="retreat-footer">
+            <div class="retreat-price">€1,850 <small>/ person</small></div>
+            <span style="color: var(--saffron-deep); font-size: 0.85rem; font-weight: 600;">Find out more →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================  PHOTOGRAPHY DETAIL  ===================== -->
+<section class="detail" id="photography">
+  <div class="container">
+    <div class="detail-card reveal">
+      <div class="detail-text">
+        <div class="eyebrow">Retreat 01 · March &amp; November</div>
+        <h3>Cretan Collaborative <em>Photography</em> Retreat</h3>
+        <p class="lead">A practicum to improve, share, and capture Crete's photogenic landscapes in seasonal light.</p>
+        <p>Morning and evening field trips in the magic-light hours alternate with sharing sessions — work, technique, and the camaraderie of others on the same path. A day-long seminar and customised 1-on-1 critique with a local professional Greek landscape photographer anchors the week.</p>
+
+        <h4>What's included</h4>
+        <ul class="detail-features">
+          <li>Lodging at Villa Koukouvayia Farms among the olive groves</li>
+          <li>Magic-light field sessions at Elafonisi, Old Town Xania, Omalos Plateau, Kallergi Refuge above Samaria Gorge</li>
+          <li>Day-long seminar with a professional Greek landscape photographer</li>
+          <li>Post-production &amp; sharing sessions with supportive peer critique</li>
+          <li>One free day for individual exploration</li>
+          <li>All meals, ground transport, and a great group of fellow photographers</li>
+        </ul>
+
+        <h4>Who should come</h4>
+        <p style="font-size: 0.92rem;">Anyone who loves the art and craft of photography and wants to share that passion with others. A digital camera is recommended (not phone-only). Willingness to share, learn, and enjoy company is the only real prerequisite.</p>
+      </div>
+
+      <aside class="detail-aside">
+        <div class="aside-img">
+          <img data-photo-slot="rpl:photography" src="" alt="">
+        </div>
+        <h4>The essentials</h4>
+        <div class="detail-stats">
+          <div class="detail-stat"><span class="label">Length</span><span class="value">7 nights</span></div>
+          <div class="detail-stat"><span class="label">Dates</span><span class="value">Nov 12–19, 2026</span></div>
+          <div class="detail-stat"><span class="label">Group size</span><span class="value">6 to 12</span></div>
+          <div class="detail-stat"><span class="label">Base price</span><span class="value">€1,950</span></div>
+          <div class="detail-stat"><span class="label">Sign-up by</span><span class="value">Aug 12, 2026</span></div>
+        </div>
+        <div class="detail-discounts">
+          <h4>Adjustments</h4>
+          <ul>
+            <li><span>Group of 3+ signing up</span><span class="v">−5%</span></li>
+            <li><span>Sharing the no-view "Swallow's Nest"</span><span class="v">−€200</span></li>
+            <li><span>Triple / quad occupancy</span><span class="v">−€350</span></li>
+            <li><span>Single-occupancy supplement</span><span class="v">+€500</span></li>
+            <li><span>Luxury Koukouvayia Suite</span><span class="v">+€500</span></li>
+          </ul>
+        </div>
+        <div class="detail-cta">
+          <a href="#contact" class="btn btn-primary" onclick="prefillRetreat('photography')">Enquire about this retreat →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =====================  TREK DETAIL  ===================== -->
+<section class="detail" id="trek">
+  <div class="container">
+    <div class="detail-card reveal">
+      <div class="detail-text">
+        <div class="eyebrow">Retreat 02 · May &amp; October</div>
+        <h3>Advanced Cretan <em>Lefka Ori Trek</em></h3>
+        <p class="lead">High-alpine hiking at its best and most challenging — a ten-day east-to-west traverse of Crete's White Mountains.</p>
+        <p>Difficult, non-technical trails for experienced hikers. Each night spent at a great mountain inn with a real meal, with rest days at the pristine beaches of the southern coast — a balance of glamping with tramping.</p>
+
+        <h4>What's included</h4>
+        <ul class="detail-features">
+          <li>Askifou Plateau and Asfendou Gorge</li>
+          <li>Samaria Gorge — the uphill traverse from Libyan Sea to Omalos Plateau</li>
+          <li>Gigalos Peak and the Greleskas Observatory trail to historic Koustagerako</li>
+          <li>Rest days at Agios Ioannis, Agia Roumeli &amp; Sougia, with optional supported routes</li>
+          <li>Mountain inns each night for great food and trail-camaraderie</li>
+        </ul>
+
+        <h4>Your guide</h4>
+        <p style="font-size: 0.92rem;">Daniel Kolibius, certified mountain trek leader, has been hiking Crete's deeper mountains since age 10 — also an avid Cretan history buff, birder and naturalist. He'll lead and enrich every step.</p>
+
+        <h4>Limitations</h4>
+        <p style="font-size: 0.92rem;">Participants should have appropriate gear and be able to carry a full pack (minus sleeping &amp; cooking kits) on trails covering 0–2,000m+ elevation, often exceeding 10km/day.</p>
+      </div>
+
+      <aside class="detail-aside">
+        <div class="aside-img">
+          <img data-photo-slot="rpl:trek" src="" alt="">
+        </div>
+        <h4>The essentials</h4>
+        <div class="detail-stats">
+          <div class="detail-stat"><span class="label">Length</span><span class="value">10 nights</span></div>
+          <div class="detail-stat"><span class="label">Dates</span><span class="value">Oct 16–27, 2026</span></div>
+          <div class="detail-stat"><span class="label">Group size</span><span class="value">6 to 12</span></div>
+          <div class="detail-stat"><span class="label">Base price</span><span class="value">€2,050</span></div>
+          <div class="detail-stat"><span class="label">Sign-up by</span><span class="value">Aug 31, 2026</span></div>
+        </div>
+        <div class="detail-discounts">
+          <h4>Adjustments</h4>
+          <ul>
+            <li><span>Group of 3+ signing up</span><span class="v">−5%</span></li>
+            <li><span>Triple occupancy</span><span class="v">−€150</span></li>
+            <li><span>Quad occupancy</span><span class="v">−€250</span></li>
+          </ul>
+        </div>
+        <div class="detail-cta">
+          <a href="#contact" class="btn btn-primary" onclick="prefillRetreat('trek')">Enquire about this retreat →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =====================  CITIES DETAIL  ===================== -->
+<section class="detail" id="cities">
+  <div class="container">
+    <div class="detail-card reveal">
+      <div class="detail-text">
+        <div class="eyebrow">Retreat 03 · Early July</div>
+        <h3>Cities of History, <em>Mountains of Myth</em></h3>
+        <p class="lead">Greece's cultural capital plus the ascent of Mount Olympus — a primer of the country's depth.</p>
+        <p>Four days touring the historical-epoch sites in Thessaloniki — the oldest continuously inhabited city in Europe, with a far broader repository of significant historical sites than Athens. Then south for ancient Dion, an Aegean swim, the mountain village of Litochoro, and an ascent to the luxurious Agapitos Spilios mountain refuge to spend two final days exploring the cloud-laced home of the Gods.</p>
+
+        <h4>Highlights</h4>
+        <ul class="detail-features">
+          <li>Three nights at a Thessaloniki hotel in the historic waterfront Ladadika district</li>
+          <li>Preserved Macedonian Tombs, Emperor Galerius' Roman Palace Complex, Byzantine &amp; Ottoman walking tour</li>
+          <li>The bustling Modiano Market and great Old-Town tavernas</li>
+          <li>Guided tour of ancient Dion, Aegean swim, seaside meal at the foot of Olympus</li>
+          <li>Free night in the mountain village of Litochoro</li>
+          <li>Easy hike from refuge to Skala &amp; Skoleio peaks; optional Mytikas summit</li>
+          <li>Program ends in a perfect location to grab a car and continue elsewhere in Greece</li>
+        </ul>
+
+        <h4>Who should come</h4>
+        <p style="font-size: 0.92rem;">A perfect primer for anyone on their first visit to Greece, or returning to explore more deeply. Active retirees, parents of young children, and anyone who loves great food, great cities, and dramatic mountains.</p>
+      </div>
+
+      <aside class="detail-aside">
+        <div class="aside-img">
+          <img data-photo-slot="rpl:cities" src="" alt="">
+        </div>
+        <h4>The essentials</h4>
+        <div class="detail-stats">
+          <div class="detail-stat"><span class="label">Length</span><span class="value">7 nights</span></div>
+          <div class="detail-stat"><span class="label">Dates</span><span class="value">July 2–9, 2026</span></div>
+          <div class="detail-stat"><span class="label">Group size</span><span class="value">6 to 12</span></div>
+          <div class="detail-stat"><span class="label">Base price</span><span class="value">€1,950</span></div>
+          <div class="detail-stat"><span class="label">Sign-up by</span><span class="value">May 31, 2026</span></div>
+        </div>
+        <div class="detail-discounts">
+          <h4>Adjustments</h4>
+          <ul>
+            <li><span>Children under 2</span><span class="v">Free</span></li>
+            <li><span>Group of 3+ signing up</span><span class="v">−5%</span></li>
+            <li><span>Triple occupancy (where avail.)</span><span class="v">−€150</span></li>
+            <li><span>Quad occupancy (where avail.)</span><span class="v">−€250</span></li>
+            <li><span>Private room (Thess. &amp; Litochoro)</span><span class="v">+€400</span></li>
+          </ul>
+        </div>
+        <div class="detail-cta">
+          <a href="#contact" class="btn btn-primary" onclick="prefillRetreat('cities')">Enquire about this retreat →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =====================  HARVEST DETAIL  ===================== -->
+<section class="detail" id="harvest">
+  <div class="container">
+    <div class="detail-card reveal">
+      <div class="detail-text">
+        <div class="eyebrow">Retreat 04 · Early November</div>
+        <h3>The <em>Cretan Harvest</em> Season</h3>
+        <p class="lead">Olives, wine, food &amp; fun. The Crete that few visitors ever see.</p>
+        <p>Not the tourist mecca but the agricultural powerhouse. You'll explore — and participate in — the gathering and processing of Cretan olives, and take home oil you yourself have harvested. Tour an historic organic olive mill and dine at their cliffside estate. Visit two historic vineyards. Mix in a sunrise walk to Seitan Limani's wild pink-sand cove, a tour of Xania's Old Town, and a cooking lesson with a local chef.</p>
+
+        <h4>Highlights</h4>
+        <ul class="detail-features">
+          <li>Lodging at Villa Koukouvayia Farms — among the olive groves themselves</li>
+          <li>Joining the annual harvest's community &amp; camaraderie, witnessing oil from tree to table</li>
+          <li>Agia Triada Monastery's vineyard on the Akrotiri plateau</li>
+          <li>Manousakis Winery in the orange- and avocado-filled Moussouron valley</li>
+          <li>Tour and lunch at Biolea's organic olive-oil estate</li>
+          <li>Sunrise visit to Seitan Limani's pink sands and blue water</li>
+          <li>Old Town Chania — Bronze-Age homes through fascist bombings of 1941</li>
+          <li>Cooking lessons from "Do It Like a Cretan" chef Frini</li>
+          <li>Final hike to Milia's hidden village and dinner at the farm-to-fork taverna</li>
+          <li>Optional yoga &amp; experiential wellness with Audrey Paar</li>
+        </ul>
+
+        <h4>Who should come</h4>
+        <p style="font-size: 0.92rem;">Foodies, oenophiles, and those who travel to take experiences into their heart rather than selfies on their phone. All ages welcome — restless kids will love the active nature of the harvest itself.</p>
+      </div>
+
+      <aside class="detail-aside">
+        <div class="aside-img">
+          <img data-photo-slot="rpl:harvest" src="" alt="">
+        </div>
+        <h4>The essentials</h4>
+        <div class="detail-stats">
+          <div class="detail-stat"><span class="label">Length</span><span class="value">8 nights</span></div>
+          <div class="detail-stat"><span class="label">Dates</span><span class="value">Nov 3–11, 2026</span></div>
+          <div class="detail-stat"><span class="label">Group size</span><span class="value">5 to 12</span></div>
+          <div class="detail-stat"><span class="label">Base price</span><span class="value">€1,850</span></div>
+          <div class="detail-stat"><span class="label">Sign-up by</span><span class="value">Aug 1, 2026</span></div>
+        </div>
+        <div class="detail-discounts">
+          <h4>Adjustments</h4>
+          <ul>
+            <li><span>Children under 2</span><span class="v">Free</span></li>
+            <li><span>Accompanying minor (≤12)</span><span class="v">−€500</span></li>
+            <li><span>Group of 3+ signing up</span><span class="v">−5%</span></li>
+            <li><span>Sharing the "Swallow's Nest"</span><span class="v">−€200</span></li>
+            <li><span>Triple / quad occupancy</span><span class="v">−€250</span></li>
+            <li><span>Premium room (Hawk/Falcon/Griffon)</span><span class="v">+€250</span></li>
+            <li><span>Luxury Koukouvayia Suite</span><span class="v">+€500</span></li>
+            <li><span>Yoga &amp; wellness add-on</span><span class="v">+€250</span></li>
+          </ul>
+        </div>
+        <div class="detail-cta">
+          <a href="#contact" class="btn btn-primary" onclick="prefillRetreat('harvest')">Enquire about this retreat →</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- =====================  LODGING NOTE  ===================== -->
+<section class="lodging">
+  <div class="container lodging-grid">
+    <div class="lodging-text reveal">
+      <div class="eyebrow">Where you'll sleep</div>
+      <h2>Three Cretan retreats <em>lodge here.</em></h2>
+      <p>Our base for the Photography, Harvest, and most custom retreats is Villa Koukouvayia Farms — our family's three-residence olive-grove estate in northwest Crete. Standard, premium and luxury rooms, all in walking distance of the breakfast table.</p>
+      <p>The White Mountain Trek and the Cities/Olympus retreat lodge at mountain inns, refuges and Thessaloniki hotels — places only those journeys can offer.</p>
+    </div>
+    <div class="lodging-card reveal">
+      <div class="lodging-card-img">
+        <img data-photo-slot="vkf:hero" src="" alt="Villa Koukouvayia Farms">
+      </div>
+      <div class="lodging-card-body">
+        <h4>Villa Koukouvayia Farms</h4>
+        <p>Three-residence coastal estate, hosted by us. Private rooms, shared meals, olive groves, a plunging pool, a star-gazing roof terrace.</p>
+        <a href="https://www.koukouvayia.com/" class="btn btn-primary" target="_blank" rel="noopener">Visit Villa K →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================  CUSTOM RETREAT  ===================== -->
+<section class="custom" id="custom">
+  <div class="container">
+    <div class="custom-card reveal">
+      <div class="custom-side">
+        <div class="eyebrow">Build your own</div>
+        <h2>A retreat <em>shaped to your group.</em></h2>
+        <p>Bringing a yoga cohort, a writing group, a corporate offsite, or twenty cousins for a wedding-week? We custom-design itineraries on the same foundations as our scheduled retreats — local relationships, real meals, the right pace, and lodging that works for your group's size and budget.</p>
+        <p>Tell us roughly when, who, and what you'd love to do. We'll come back with a draft within a few days.</p>
+        <a href="#contact" class="btn btn-outline-dark" onclick="prefillRetreat('custom')">Start a custom enquiry →</a>
+      </div>
+      <div class="custom-img">
+        <img data-photo-slot="rpl:custom" src="" alt="A custom Cretan retreat">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =====================  CONTACT  ===================== -->
+<section class="contact" id="contact">
+  <div class="container contact-wrap">
+    <div class="contact-side reveal">
+      <div class="eyebrow">Get in touch</div>
+      <h2>Ready to join? <em>Or just curious?</em></h2>
+      <p>Drop us a note. We'll write back within 24 hours, usually faster — Heidi handles enquiries personally, and Logan the dog supervises.</p>
+
+      <div class="contact-channels">
+        <div class="contact-channel">
+          ✉️&nbsp;&nbsp;<a href="mailto:info@retreatplaylove.com">info@retreatplaylove.com</a>
+        </div>
+        <div class="contact-channel">
+          📱&nbsp;&nbsp;<a href="https://www.instagram.com/cdretreats/" target="_blank" rel="noopener">@cdretreats</a> on Instagram
+        </div>
+        <div class="contact-channel">
+          🎥&nbsp;&nbsp;<a href="https://www.youtube.com/@CretanDestinationRetreats" target="_blank" rel="noopener">YouTube tours of Crete</a>
+        </div>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" onsubmit="submitContact(event)">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cName">Your name</label>
+          <input type="text" id="cName" required placeholder="First and last">
+        </div>
+        <div class="form-field">
+          <label for="cEmail">Email</label>
+          <input type="email" id="cEmail" required placeholder="you@example.com">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="cRetreat">Which retreat?</label>
+        <select id="cRetreat" required>
+          <option value="">Choose one…</option>
+          <option value="photography">Cretan Collaborative Photography Retreat</option>
+          <option value="trek">Advanced Cretan Lefka Ori (White Mtn) Trek</option>
+          <option value="cities">Cities of History, Mountains of Myth</option>
+          <option value="harvest">The Cretan Harvest Season</option>
+          <option value="curious">I don't know yet — tell me more</option>
+          <option value="custom">I need a fully personalized itinerary</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="cGroup">Group size</label>
+          <input type="number" id="cGroup" min="1" placeholder="e.g. 6">
+        </div>
+        <div class="form-field">
+          <label for="cDates">Preferred dates / month</label>
+          <input type="text" id="cDates" placeholder="e.g. Oct 2026">
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="cMessage">Tell us a bit more</label>
+        <textarea id="cMessage" placeholder="Anything we should know — fitness levels, dietary needs, special requests, what you're hoping to get out of this…"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary contact-submit">Send your enquiry →</button>
+
+      <div class="confirmation" id="confirmation">
+        <strong>Thank you.</strong> Your enquiry is in. Heidi will write back within 24 hours.
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- =====================  FOOTER  ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="brand-mark">Cretan Destination <em>Retreats</em></span>
+        <p>Hand-crafted journeys through Crete and Greece. Hosted by Heidi &amp; Richard since 2003.</p>
+      </div>
+      <div>
+        <h4>2026 Retreats</h4>
+        <ul>
+          <li><a href="#photography">Photography</a></li>
+          <li><a href="#trek">White Mountain Trek</a></li>
+          <li><a href="#cities">Cities of History</a></li>
+          <li><a href="#harvest">Cretan Harvest</a></li>
+          <li><a href="#custom">Custom itineraries</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Find us</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/cdretreats/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.facebook.com/cdretreats" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://www.youtube.com/@CretanDestinationRetreats" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="mailto:info@retreatplaylove.com">Email</a></li>
+        </ul>
+      </div>
+      <div class="footer-partner">
+        <h4>Where we lodge</h4>
+        <p>Most retreats stay at our family's three-residence estate.</p>
+        <a href="https://www.koukouvayia.com/" target="_blank" rel="noopener">Villa Koukouvayia Farms ↗</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Cretan Destination Retreats. All rights reserved.</div>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/cdretreats/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/cdretreats" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.youtube.com/@CretanDestinationRetreats" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Photo registry must load before page-specific JS -->
+<script src="/photo-registry.js"></script>
+<script>
+function prefillRetreat(kind) {
+  const select = document.getElementById('cRetreat');
+  if (select) select.value = kind;
+}
+
+async function submitContact(e) {
+  e.preventDefault();
+  const btn = document.querySelector('#contactForm .contact-submit');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+  const payload = {
+    site: 'rpl',
+    name: document.getElementById('cName').value,
+    email: document.getElementById('cEmail').value,
+    retreat: document.getElementById('cRetreat').value,
+    group: document.getElementById('cGroup').value,
+    dates: document.getElementById('cDates').value,
+    message: document.getElementById('cMessage').value
+  };
+  try {
+    const res = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Request failed');
+    }
+    document.getElementById('contactForm').querySelectorAll('.form-row, .form-field, .contact-submit').forEach(el => el.style.display = 'none');
+    document.getElementById('confirmation').classList.add('visible');
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Send your enquiry →';
+    alert('Something went wrong: ' + err.message + '\n\nPlease email us directly at info@retreatplaylove.com');
+  }
+}
+
+// Scroll-state nav
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 40) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+
+// Reveal-on-scroll
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
