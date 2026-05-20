@@ -48,6 +48,7 @@ app.use('/uploads', express.static(UPLOADS_DIR));
 /* --- Named page routes --- */
 app.get('/', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'index.html')));
 app.get('/retreats', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'retreats.html')));
+app.get('/about', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'about.html')));
 app.get('/admin', adminAuth, (_req, res) => res.sendFile(path.join(__dirname, '../admin.html')));
 
 /* --- Static assets (js, fonts, uploads fallback) --- */

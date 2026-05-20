@@ -86,6 +86,12 @@ const PHOTO_REGISTRY = {
       hint: 'Vertical 5:6. Landscape, sea, mountains, or estate exterior.',
       multiple: false,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913276068-WMFI73UGU4W9E032AF91/VKF9.png']
+    },
+    hosts_portrait: {
+      label: 'About page — Heidi, Richard & Logan portrait',
+      hint: 'Warm, candid photo of the hosts at the property. 4:5 portrait works best. Can also be a lifestyle shot of the estate.',
+      multiple: false,
+      defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg']
     }
   },
 
