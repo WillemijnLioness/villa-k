@@ -10,9 +10,9 @@ const PHOTO_REGISTRY = {
   /* ---------- Villa Koukouvayia Farms ---------- */
   vkf: {
     hero: {
-      label: 'Hero — main banner',
-      hint: 'Wide landscape image at the very top of the homepage. Aim for 2400×1600px.',
-      multiple: false,
+      label: 'Hero — landing slideshow',
+      hint: 'Upload in this order: (1) estate wide shot — long linger opener, (2–3) aerial drone estate N→S and S→N, (4) both buildings together, (5) Guest House feature, (6) Garden Suite. Landscape 2400×1600px. Auto-advances every 7s.',
+      multiple: true,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265474-7GSHD4W7HHH1ORTASBW5/VKF1.png']
     },
     intro: {
@@ -21,28 +21,28 @@ const PHOTO_REGISTRY = {
       multiple: false,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg']
     },
-    gh_main: {
-      label: 'Guest House — feature image',
-      hint: '4:3 landscape. The hero shot for the Guest House.',
-      multiple: false,
-      defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912538543-OD3YLBKMIUQNS2PI8BMA/GH2.png']
-    },
     mh_main: {
-      label: 'Main House — feature image',
-      hint: '4:3 landscape. The hero shot for the Main House.',
-      multiple: false,
+      label: 'Main House — slideshow',
+      hint: 'Upload in order: exterior verandas, interior living spaces, kitchen, bedrooms (Koukouvayia Suite, Gryphon\'s Nest, Falcon\'s Nest), bathrooms, roof terrace. 4:3 landscape.',
+      multiple: true,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg']
     },
+    gh_main: {
+      label: 'Guest House — slideshow',
+      hint: 'Upload in order: exterior verandas, southeast patio, interior living, kitchen, Hawk\'s Nest master bedroom, Crow\'s Nest bedroom, roof terrace, private garden. 4:3 landscape.',
+      multiple: true,
+      defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912538543-OD3YLBKMIUQNS2PI8BMA/GH2.png']
+    },
     gs_main: {
-      label: 'Garden Suite — feature image',
-      hint: '4:3 landscape. The hero shot for the Garden Suite.',
-      multiple: false,
+      label: 'Garden Suite — slideshow',
+      hint: 'Upload in order: exterior garden view, grove access, interior living room, kitchen/dining, bedrooms, bathrooms, outdoor garden. 4:3 landscape.',
+      multiple: true,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265386-JXN9VM21R4GNDPH7I3EP/VKF2.png']
     },
     estate_main: {
-      label: 'Entire Estate — feature image',
-      hint: '4:3 landscape. Wider/aerial shot showing the full property works well.',
-      multiple: false,
+      label: 'Entire Estate — slideshow',
+      hint: 'Upload in order: aerial/drone overview, pool area, ceremony grove, roof terraces, social spaces. Wide/aerial shots work best. 4:3 landscape.',
+      multiple: true,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png']
     },
     combo_mgh_left: {

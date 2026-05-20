@@ -850,12 +850,13 @@ section { padding: 100px 0; }
 }
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1.4fr;
   gap: 40px;
   margin-bottom: 60px;
 }
-@media (max-width: 900px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
-@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 32px; } }
+@media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
 
 .footer h4 {
   color: var(--cream-soft);
@@ -965,6 +966,130 @@ section { padding: 100px 0; }
   .book-submit { grid-column: auto; width: 100%; }
   .hero-sub { max-width: 100%; }
 }
+
+/* =========================================================
+   JOURNEY CARD — sub-question line
+   ========================================================= */
+.journey-sub {
+  font-style: italic;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+  line-height: 1.45;
+}
+.journey-card.selected .journey-sub { color: var(--bone); }
+
+/* =========================================================
+   HERO SLIDESHOW — auto-advance only, no nav UI
+   ========================================================= */
+.hero-media .carousel-btn { display: none; }
+.hero-media .carousel-dots { display: none; }
+.hero-media .carousel-slide {
+  animation: kenBurns 22s ease-in-out infinite alternate;
+}
+
+/* =========================================================
+   WATCH VIDEO BUTTON (location section)
+   ========================================================= */
+.btn-video {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  border: 1px solid rgba(244,238,226,0.35);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--bone);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  background: rgba(244,238,226,0.08);
+  font-family: var(--font-body);
+  transition: background 0.2s, border-color 0.2s;
+  margin-top: 20px;
+}
+.btn-video:hover { background: rgba(244,238,226,0.18); border-color: rgba(244,238,226,0.6); }
+
+/* =========================================================
+   VIDEO MODAL
+   ========================================================= */
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  z-index: 9500;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.video-modal.open { display: flex; }
+.video-modal-inner {
+  width: min(860px, 92vw);
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+}
+.video-modal-inner iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.video-modal-close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  background: none;
+  border: none;
+  color: rgba(244,238,226,0.75);
+  font-size: 2.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 6px;
+  transition: color 0.2s;
+}
+.video-modal-close:hover { color: #F4EEE2; }
+
+/* =========================================================
+   REVIEWS — "Read all" CTA
+   ========================================================= */
+.reviews-cta {
+  margin-top: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.reviews-cta p { color: var(--ink-soft); margin-bottom: 22px; font-size: 0.95rem; }
+.reviews-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.review-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid var(--olive-deep);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--olive-deep);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.review-link-btn:hover { background: var(--olive-deep); color: var(--cream-soft); }
+
+/* =========================================================
+   FOOTER CDR column
+   ========================================================= */
+.footer-cdr p {
+  color: var(--bone);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+  max-width: 30ch;
+  line-height: 1.55;
+}
 </style>
 </head>
 <body>
@@ -993,14 +1118,14 @@ section { padding: 100px 0; }
      ========================================================= -->
 <header class="hero" id="top">
   <div class="hero-media">
-    <img data-photo-slot="vkf:hero" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265474-7GSHD4W7HHH1ORTASBW5/VKF1.png" alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
+    <img data-photo-slot="vkf:hero" data-carousel-interval="7000" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265474-7GSHD4W7HHH1ORTASBW5/VKF1.png" alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="container">
       <div class="hero-eyebrow eyebrow">Between the Sea &amp; Sky of Greece · Crete</div>
       <h1>A place to discover,<br>a stay to <em>remember.</em></h1>
-      <p class="hero-sub">An intimate three-residence estate among the olive groves of northwest Crete — for families, friends, remote workers, retreats, and the occasional wedding under the stars.</p>
+      <p class="hero-sub">An intimate three-residence estate — for families, friends, remote professionals, retreats, and destination celebrations among the olive groves of western Crete.</p>
 
       <!-- Quick booking strip -->
       <form class="book-strip in-hero" id="heroBookForm" onsubmit="jumpToBooking(event)">
@@ -1055,14 +1180,14 @@ section { padding: 100px 0; }
       <div class="eyebrow">Welcome to Villa K</div>
       <h2>A coastal estate,<br><em>not a hotel.</em></h2>
       <p>Koukouvayia is the Greek word for owl — wise, watchful, and a little bit magical. Our estate carries the same spirit: a home you inhabit rather than a room you occupy.</p>
-      <p>Three private residences share an olive grove, a plunging pool with a toddler's waterfall, a star-gazing roof terrace, and endless Aegean views. Book one house for an intimate escape, or take the entire estate for 24.</p>
+      <p>Three private residences share the farm's olive groves &amp; walking trails, a deep plunging pool with a toddler's waterfall, star-gazing roof terraces, and endless Aegean views. Book one house for an intimate escape, combine two for a vacation with others, or take the entire estate for destination gatherings over 20.</p>
       <div class="intro-stats">
         <div>
           <div class="stat-num">3</div>
           <div class="stat-label">Residences</div>
         </div>
         <div>
-          <div class="stat-num">24</div>
+          <div class="stat-num">28</div>
           <div class="stat-label">Max Guests</div>
         </div>
         <div>
@@ -1085,7 +1210,7 @@ section { padding: 100px 0; }
     <div class="journey-header reveal">
       <div class="eyebrow">Your Stay, Your Way</div>
       <h2>What brings you to Crete?</h2>
-      <p>Choose the shape of your visit. We'll steer you toward the residence that fits best.</p>
+      <p>Choose the heart of your visit &amp; Villa Koukouvayia's lodging options will help that heart beat.</p>
     </div>
     <div class="journey-grid">
       <!-- Holiday -->
@@ -1097,11 +1222,12 @@ section { padding: 100px 0; }
             <path d="M10 20 V14 H14 V20"/>
           </svg>
         </div>
-        <h3>A Holiday</h3>
-        <p>With family or friends. Pool, beaches, tavernas, long lunches and soft evenings.</p>
+        <h3>A Holiday…</h3>
+        <p class="journey-sub">…to recharge your family and friendships?</p>
+        <p>Beaches, long lunches by the pool, taverna nights and soft, social evenings beneath the stars.</p>
         <div class="journey-suggest">Best fit → your group size</div>
       </div>
-      <!-- Workstay -->
+      <!-- Professional Stay -->
       <div class="journey-card reveal" data-intent="work" onclick="selectJourney(this)">
         <div class="journey-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1110,8 +1236,9 @@ section { padding: 100px 0; }
             <path d="M12 18 V21"/>
           </svg>
         </div>
-        <h3>A Work-Stay</h3>
-        <p>Remote work or sabbatical. Fibre internet, a proper office, a horizon that resets you.</p>
+        <h3>A Professional Stay…</h3>
+        <p class="journey-sub">…to maximize your work &amp; reset your soul?</p>
+        <p>High-speed internet, and a proper office with horizon views that remake business into pleasure.</p>
         <div class="journey-suggest">Best fit → Guest House or Main House</div>
       </div>
       <!-- Retreat -->
@@ -1124,11 +1251,12 @@ section { padding: 100px 0; }
             <path d="M12 14 V20"/>
           </svg>
         </div>
-        <h3>A Retreat</h3>
-        <p>Yoga, writing, wellness, team offsites. A private campus for programs of 8 to 24.</p>
+        <h3>A Retreat…</h3>
+        <p class="journey-sub">…to experience &amp; grow, or to share your skills with others?</p>
+        <p>Yoga, wellness, hikes &amp; trekking programs on and beyond Crete. A luxurious, private campus with studio spaces for 7 to 17.</p>
         <div class="journey-suggest">Best fit → Garden Suite or Entire Estate</div>
       </div>
-      <!-- Wedding -->
+      <!-- Celebration -->
       <div class="journey-card reveal" data-intent="event" onclick="selectJourney(this)">
         <div class="journey-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -1137,8 +1265,9 @@ section { padding: 100px 0; }
             <path d="M10 14 Q12 12 14 14"/>
           </svg>
         </div>
-        <h3>A Celebration</h3>
-        <p>Destination weddings, family reunions, milestone birthdays. Under olive trees, under stars.</p>
+        <h3>A Celebration…</h3>
+        <p class="journey-sub">…to make an event itself the destination?</p>
+        <p>A wedding, a milestone birthday, or a family reunion where the rich days before and after can be fully shared among up to 24+ friends &amp; family.</p>
         <div class="journey-suggest">Best fit → Entire Estate</div>
       </div>
     </div>
@@ -1152,9 +1281,9 @@ section { padding: 100px 0; }
   <div class="container">
     <div style="background: var(--bone); border-radius: var(--radius-lg); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
       <div>
-        <div class="eyebrow" style="margin-bottom: 12px;">Sister brand</div>
-        <h3 style="margin-bottom: 12px;">Don't want to plan it all yourself?</h3>
-        <p style="color: var(--ink-soft); max-width: 44ch;">Our partners at Cretan Destination Retreats run four curated programs from the estate each year — photography, alpine trekking, ancient cities, and the olive harvest.</p>
+        <div class="eyebrow" style="margin-bottom: 12px;">Sister brand — Cretan Destination Retreats</div>
+        <h3 style="margin-bottom: 12px;">Want to supercharge your holiday's fun &amp; minimize your planning chores?</h3>
+        <p style="color: var(--ink-soft); max-width: 52ch;">We started Cretan Destination Retreats to offer exciting programs that curate and supercharge the experience of Crete &amp; beyond. Yoga, wellness, coastal hiking, photography, alpine trekking, ancient cities, and the olive harvest that energizes this beautiful region. Or we can help you create bespoke experiences that customize specific days &amp; match your group's best desires.</p>
       </div>
       <a href="/retreats" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Explore CDR Retreats →</a>
     </div>
@@ -1169,60 +1298,19 @@ section { padding: 100px 0; }
         <div class="eyebrow">The Property</div>
         <h2>Three residences.<br>One estate.</h2>
       </div>
-      <p>Each home stands on its own. Combine them as you grow, up to the entire estate for twenty-four.</p>
+      <p>Combine them, or use the entire estate to handle 16 friends or family groups up to 24, even 28.</p>
     </div>
 
-    <!-- GUEST HOUSE -->
-    <article class="residence reveal" id="guest">
+    <!-- MAIN HOUSE — first -->
+    <article class="residence reveal" id="main">
       <div class="residence-media">
-        <div class="residence-badge">Sleeps 4</div>
-        <img data-photo-slot="vkf:gh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912538543-OD3YLBKMIUQNS2PI8BMA/GH2.png" alt="Guest House at Villa Koukouvayia">
-      </div>
-      <div class="residence-text">
-        <div class="eyebrow">The Guest House</div>
-        <h3>Intimate, <em>easy,</em><br>close to the sea.</h3>
-        <p>Two bedrooms, panoramic Aegean views from the master balcony, bunk beds with their own sea-facing windows for the kids. Ideal for couples, small families, and remote work — five minutes from beach and taverna.</p>
-        <div class="residence-specs">
-          <div class="spec">
-            <span class="spec-icon">🛏</span>
-            <div><div class="spec-label">Beds</div><div class="spec-value">2 bedrooms</div></div>
-          </div>
-          <div class="spec">
-            <span class="spec-icon">🛁</span>
-            <div><div class="spec-label">Bath</div><div class="spec-value">1 full + guest WC</div></div>
-          </div>
-          <div class="spec">
-            <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 4 adults</div></div>
-          </div>
-        </div>
-        <ul class="residence-features">
-          <li>Private roof terrace with outdoor shower</li>
-          <li>Fully equipped kitchen &amp; open-plan living</li>
-          <li>4-metre verandas, sun or shade</li>
-          <li>Shared pool, bikes, snorkels, table tennis</li>
-        </ul>
-        <div class="residence-footer">
-          <div class="price-from">
-            <span class="price-from-label">From</span>
-            <span class="price-from-value">€120</span>
-            <span class="price-from-unit">/ night</span>
-          </div>
-          <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
-        </div>
-      </div>
-    </article>
-
-    <!-- MAIN HOUSE -->
-    <article class="residence reverse reveal" id="main">
-      <div class="residence-media">
-        <div class="residence-badge">Sleeps 7</div>
+        <div class="residence-badge">6 included · 9 max</div>
         <img data-photo-slot="vkf:mh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg" alt="Main House at Villa Koukouvayia">
       </div>
       <div class="residence-text">
         <div class="eyebrow">The Main House</div>
-        <h3>Three storeys, a stone fireplace, <em>a spiral to the stars.</em></h3>
-        <p>A sunken living room, a stone fireplace, a private office, three character bedrooms — including the Griffon Nest in a stone turret with 180° views across the island's western edge to its northern Aegean shore.</p>
+        <h3>Three storeys, two stone fireplaces, <em>and a spiral stairway to the stars.</em></h3>
+        <p>The Main House is the estate's master residence, boasting three bespoke bedrooms and spectacular views both south to Crete's mountains and gorges, and north to her dramatic Aegean shoreline.</p>
         <div class="residence-specs">
           <div class="spec">
             <span class="spec-icon">🛏</span>
@@ -1230,18 +1318,22 @@ section { padding: 100px 0; }
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
-            <div><div class="spec-label">Bath</div><div class="spec-value">2 full + guest WC</div></div>
+            <div><div class="spec-label">Bath</div><div class="spec-value">1 en suite + 1 full + guest WC</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 7</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">6 included / 9 max</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Hand-carved king teak bed, master suite</li>
-          <li>Private office with docking &amp; printer</li>
-          <li>Stone fireplace &amp; sunken living room</li>
-          <li>Moonlit mountain chapel views</li>
+          <li>Sweeping verandas for socializing and large-group dining</li>
+          <li>Roof terrace with bar &amp; moonlit chapel views across the Tyflos Valley</li>
+          <li>Sunken living room with stone hearth &amp; hidden entertainment center</li>
+          <li>Open-plan first floor, fully equipped kitchen under stone arch</li>
+          <li>Private office with ethernet docking, printer, monitor &amp; peripherals</li>
+          <li>Koukouvayia Suite: en suite bath, library, fireplace, teak king bed &amp; private balcony</li>
+          <li>Gryphon's Nest loft: stone turret studio overlooking Crete's western edge</li>
+          <li>Falcon's Nest: antique maple bed &amp; wrap-around balcony facing Topolio Gorge</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1254,20 +1346,63 @@ section { padding: 100px 0; }
       </div>
     </article>
 
-    <!-- GARDEN SUITE -->
+    <!-- GUEST HOUSE — second -->
+    <article class="residence reverse reveal" id="guest">
+      <div class="residence-media">
+        <div class="residence-badge">4 included · 6 max</div>
+        <img data-photo-slot="vkf:gh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912538543-OD3YLBKMIUQNS2PI8BMA/GH2.png" alt="Guest House at Villa Koukouvayia">
+      </div>
+      <div class="residence-text">
+        <div class="eyebrow">The Guest House</div>
+        <h3>Intimate, easy &amp; <em>luxuriously simple.</em></h3>
+        <p>The Guest House is the farm's most popular residence, with the same spectacular views as the Main House, but smaller, simpler, and perfect for couples, young families, or professionals working remotely.</p>
+        <div class="residence-specs">
+          <div class="spec">
+            <span class="spec-icon">🛏</span>
+            <div><div class="spec-label">Beds</div><div class="spec-value">2 bedrooms</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">🛁</span>
+            <div><div class="spec-label">Bath</div><div class="spec-value">1 full + guest WC</div></div>
+          </div>
+          <div class="spec">
+            <span class="spec-icon">👥</span>
+            <div><div class="spec-label">Guests</div><div class="spec-value">4 included / 6 max</div></div>
+          </div>
+        </div>
+        <ul class="residence-features">
+          <li>Sweeping verandas &amp; wide southeast patio for dining, socializing &amp; sunrise coffee</li>
+          <li>Roof terrace with 360° views of the surrounding hills &amp; villages; perfect for stargazing</li>
+          <li>Open-plan first floor, fully equipped kitchen &amp; well-furnished living areas</li>
+          <li>The Hawk's Nest master bedroom: queen bed through French doors to the Aegean Sea</li>
+          <li>The Crow's Nest: private balcony, two adult-sized engineered bunkbeds, each sea-facing</li>
+          <li>Quiet private garden; perfect for coffee, reading or simply enjoying each other's company</li>
+        </ul>
+        <div class="residence-footer">
+          <div class="price-from">
+            <span class="price-from-label">From</span>
+            <span class="price-from-value">€120</span>
+            <span class="price-from-unit">/ night</span>
+          </div>
+          <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- GARDEN SUITE — third -->
     <article class="residence reveal" id="garden">
       <div class="residence-media">
-        <div class="residence-badge">Sleeps 13</div>
+        <div class="residence-badge">6 included · 13 max</div>
         <img data-photo-slot="vkf:gs_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265386-JXN9VM21R4GNDPH7I3EP/VKF2.png" alt="Garden Suite at Villa Koukouvayia">
       </div>
       <div class="residence-text">
         <div class="eyebrow">The Garden Suite</div>
-        <h3>Grove-level living for <em>larger groups.</em></h3>
-        <p>Tucked into the olive grove at garden level, this is the estate's largest standalone residence. Built for extended families, retreat cohorts and the kind of long communal dinners where no-one wants to leave the table.</p>
+        <h3>Fully flexible, <em>grove-level living</em> for small or larger groups.</h3>
+        <p>The Garden Suite is the farm's most flexible residence, a beautifully appointed apartment with stone features &amp; ground-level views into the farm's surrounding olive groves. Perfect for small families or couples, but designed to accommodate extended families, retreat cohorts and larger groups. Each bedroom boasts flexible cabinet bedding that can customize your rooms from intimate couple's lodging to albergue-style sleeping of up to four guests per room. With a fireplace, professionally equipped kitchen, large dining area &amp; quiet outdoor garden, this is a home for long communal dinners — inside or under the stars — where no-one wants to leave the table.</p>
         <div class="residence-specs">
           <div class="spec">
             <span class="spec-icon">🛏</span>
-            <div><div class="spec-label">Beds</div><div class="spec-value">3 bedrooms</div></div>
+            <div><div class="spec-label">Beds</div><div class="spec-value">3+ bedrooms (optional 4th)</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
@@ -1275,14 +1410,14 @@ section { padding: 100px 0; }
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 13</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">6 included / 13 max</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Direct access to olive groves &amp; grounds</li>
-          <li>Full kitchen &amp; indoor-outdoor dining</li>
-          <li>Ideal for retreats &amp; multi-generational groups</li>
-          <li>Shared pool &amp; recreation barn</li>
+          <li>Direct access to olive groves &amp; the villa's extensive network of walking trails</li>
+          <li>Large private garden below the villa's pool &amp; waterfall</li>
+          <li>Professionally equipped kitchen, large breakfast area; dedicated dining room</li>
+          <li>Living area with stone hearth &amp; hidden entertainment center</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1295,20 +1430,20 @@ section { padding: 100px 0; }
       </div>
     </article>
 
-    <!-- ENTIRE ESTATE -->
+    <!-- ENTIRE ESTATE — fourth -->
     <article class="residence reverse reveal" id="estate">
       <div class="residence-media">
-        <div class="residence-badge">Sleeps 24</div>
+        <div class="residence-badge">16 included · 28 max</div>
         <img data-photo-slot="vkf:estate_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png" alt="Entire Estate at Villa Koukouvayia">
       </div>
       <div class="residence-text">
         <div class="eyebrow">The Entire Estate</div>
         <h3>All three homes, <em>all yours.</em></h3>
-        <p>Eight bedrooms, twenty beds, six bathrooms. The roof terrace becomes a star-lit dance floor, the groves a ceremony aisle, the pool a gathering point. Built for weddings, reunions, and purpose-driven programs where community and privacy both matter.</p>
+        <p>Eight bedrooms, twenty beds, six bathrooms. The roof terrace becomes a star-lit dance floor, the groves become a ceremony aisle and the pool a gathering point. Built for weddings, reunions, purpose-driven programs where community and privacy are balanced; or simply a holiday to share with a large group of friends.</p>
         <div class="residence-specs">
           <div class="spec">
             <span class="spec-icon">🛏</span>
-            <div><div class="spec-label">Beds</div><div class="spec-value">8 bedrooms / 20 beds</div></div>
+            <div><div class="spec-label">Beds</div><div class="spec-value">8+ bedrooms / 20 beds</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
@@ -1316,14 +1451,14 @@ section { padding: 100px 0; }
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Sleeps</div><div class="spec-value">Up to 24</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">16 included / 28 max</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Star-gazing roof terrace</li>
-          <li>Wedding-ready olive grove ceremony space</li>
-          <li>Professional-grade retreat campus</li>
-          <li>Exercise room &amp; table tennis</li>
+          <li>Roof terraces for entertainment or private stargazing</li>
+          <li>Multiple private areas &amp; social gathering spaces</li>
+          <li>Wedding &amp; sea-view celebration spaces on the grounds and adjacent groves</li>
+          <li>Professional-grade retreat campus with workshop &amp; exercise/recreation studios</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1347,10 +1482,15 @@ section { padding: 100px 0; }
     <div class="location-text reveal">
       <div class="eyebrow">Where you'll be</div>
       <h2>Crete, <em>between the sea &amp; sky</em> of Greece.</h2>
-      <p>You'll find us on the Kourthiana Agricultural Road in Kaloudiana, Kissamos, northwest Crete — among the earliest footprints of man, the birthplace of Zeus, and Minoan tombs beside pristine beaches and towering mountains.</p>
-      <p>Five minutes to local tavernas and beaches. Forty-five to Chania. Everything slower than you expect. Everything further than it looks.</p>
+      <p>You'll find us above the small but busy village of Kaloudiana, above the Gulf of Kissamos, nestled in Crete's western mountains. We are a bike ride from the earliest footprints of man, a car ride from the birthplace of Zeus, and within walking distance of both Minoan foundations &amp; the island's extensive &amp; inexpensive public transportation system.</p>
+      <p>Villa Koukouvayia is surrounded by pristine beaches below and towering mountains behind, yet only 50 minutes from air transport. She invites you to join her for the best of all worlds: everything slower than expected, and everything you could want in a travel experience within a warm embrace &amp; reach.</p>
 
-      <div class="hosts-card">
+      <button class="btn-video" onclick="openVideo()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        Watch: Villa Koukouvayia
+      </button>
+
+      <div class="hosts-card" id="hosts" style="margin-top: 32px;">
         <div style="width: 60px; height: 60px; border-radius: 50%; background: var(--terracotta); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--cream-soft);">
             <circle cx="8" cy="10" r="2.5"/>
@@ -1359,7 +1499,7 @@ section { padding: 100px 0; }
           </svg>
         </div>
         <div class="hosts-text">
-          <h4>Hosted by the Palola-Harriman family</h4>
+          <h4><a href="#hosts" style="color: var(--cream-soft);">Hosted by the Palola-Harriman family</a></h4>
           <p>Heidi, Richard &amp; Logan the dog — on-site, always, and helpful to the degree you'd like.</p>
         </div>
       </div>
@@ -1397,6 +1537,16 @@ section { padding: 100px 0; }
         <div class="review-text">"A wonderful stay with spectacular views. Extremely well-equipped. We would definitely recommend — and we'll definitely be back."</div>
         <div class="review-author">Niels, Satrina &amp; family</div>
         <div class="review-meta">Holiday Stay · May 2025</div>
+      </div>
+    </div>
+
+    <div class="reviews-cta reveal">
+      <p>These are a small sample — we've earned every one. Read them all on the platforms below.</p>
+      <div class="reviews-links">
+        <!-- TODO: Replace href="#" with actual Airbnb listing URL -->
+        <a href="#" class="review-link-btn" target="_blank" rel="noopener">Airbnb Reviews ↗</a>
+        <!-- TODO: Replace href="#" with actual Booking.com or Google listing URL -->
+        <a href="#" class="review-link-btn" target="_blank" rel="noopener">More Reviews ↗</a>
       </div>
     </div>
   </div>
@@ -1444,16 +1594,18 @@ section { padding: 100px 0; }
                 <option value="20">20 guests</option>
                 <option value="22">22 guests</option>
                 <option value="24">24 guests</option>
+                <option value="26">26 guests</option>
+                <option value="28">28 guests</option>
               </select>
             </div>
             <div class="form-field">
               <label for="property">Residence</label>
               <select id="property">
                 <option value="auto" selected>Suggest best fit</option>
-                <option value="guest">Guest House (to 4)</option>
-                <option value="main">Main House (to 7)</option>
+                <option value="guest">Guest House (to 6)</option>
+                <option value="main">Main House (to 9)</option>
                 <option value="garden">Garden Suite (to 13)</option>
-                <option value="estate">Entire Estate (to 24)</option>
+                <option value="estate">Entire Estate (to 28)</option>
               </select>
             </div>
           </div>
@@ -1511,20 +1663,34 @@ section { padding: 100px 0; }
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
+      <!-- VKF Brand -->
       <div class="footer-brand">
         <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms" style="height:60px;width:auto;display:block;margin-bottom:16px;">
         <p>A fully-equipped coastal estate among the olive groves of Crete — hosted with care by the Palola-Harriman family since 2019.</p>
         <p style="font-size: 0.8rem; opacity: 0.5;">Greek RMA Lodging #: 000/023/140/23</p>
       </div>
+      <!-- The Property -->
       <div>
         <h4>The Property</h4>
         <ul>
-          <li><a href="#guest">Guest House</a></li>
           <li><a href="#main">Main House</a></li>
+          <li><a href="#guest">Guest House</a></li>
           <li><a href="#garden">Garden Suite</a></li>
           <li><a href="#estate">Entire Estate</a></li>
         </ul>
       </div>
+      <!-- The Location -->
+      <div>
+        <h4>The Location</h4>
+        <ul>
+          <li>Kourthiana Agricultural Rd</li>
+          <li>Kaloudiana, Kissamos 73400</li>
+          <li>Chania, Crete — Greece</li>
+          <!-- TODO: Replace href="#" with Google Maps route URL or PDF link -->
+          <li><a href="#" style="color: var(--terracotta); opacity: 1;">Driving Directions to VKF →</a></li>
+        </ul>
+      </div>
+      <!-- Your Stay -->
       <div>
         <h4>Your Stay</h4>
         <ul>
@@ -1532,21 +1698,21 @@ section { padding: 100px 0; }
           <li><a href="#journey">Work-stays</a></li>
           <li><a href="#journey">Retreats</a></li>
           <li><a href="#journey">Weddings &amp; Events</a></li>
-          <li><a href="/retreats" style="color: var(--terracotta); opacity: 1;">Curated programs ↗</a></li>
+          <li><a href="#booking" style="color: var(--terracotta); opacity: 1;">Book Direct →</a></li>
         </ul>
       </div>
-      <div>
-        <h4>Find Us</h4>
+      <!-- CDR Section -->
+      <div class="footer-cdr" style="border-left: 1px solid rgba(244,238,226,0.1); padding-left: 32px;">
+        <img src="/logo-cdr.png" alt="Cretan Destination Retreats" style="height:50px;width:auto;display:block;margin-bottom:16px;">
+        <p>Curated holiday experiences to maximize your vacation; logistics, lodging &amp; event support to supercharge your retreat.</p>
         <ul>
-          <li>Kourthiana Agricultural Rd</li>
-          <li>Kaloudiana, Kissamos 73400</li>
-          <li>Chania, Crete — Greece</li>
-          <li><a href="#booking" style="color: var(--terracotta); opacity: 1;">Inquire Now →</a></li>
+          <li><a href="/retreats">Current Retreats</a></li>
+          <li><a href="/retreats#planning">Retreat Planning for Facilitators</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2026 Villa Koukouvayia Farms. All rights reserved. · Sister brand: <a href="/retreats" style="color: var(--terracotta); opacity: 1;">Cretan Destination Retreats</a></div>
+      <div>© 2026 Villa Koukouvayia Farms. All rights reserved.</div>
       <div>Built with care · Booking &amp; Stay Policy · Cookies &amp; Privacy</div>
     </div>
   </div>
@@ -1569,17 +1735,17 @@ const RATES = {
 // Which guests are included in the base rate per property
 const INCLUDED_GUESTS = {
   guest: 4,
-  main: 5,
-  garden: 8,
+  main: 6,
+  garden: 6,
   estate: 16
 };
 
 // Max capacity per property
 const MAX_GUESTS = {
-  guest: 4,
-  main: 7,
+  guest: 6,
+  main: 9,
   garden: 13,
-  estate: 24
+  estate: 28
 };
 
 // Minimum stay (nights)
@@ -1626,8 +1792,8 @@ function getClimateTier(date) {
 
 // Pick a best-fit property from guest count
 function suggestProperty(guests) {
-  if (guests <= 4) return 'guest';
-  if (guests <= 7) return 'main';
+  if (guests <= 6) return 'guest';
+  if (guests <= 9) return 'main';
   if (guests <= 13) return 'garden';
   return 'estate';
 }
@@ -1889,6 +2055,48 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   document.getElementById('checkOut').min = inDays(1);
 })();
 </script>
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal" role="dialog" aria-modal="true" aria-label="Estate video">
+  <button class="video-modal-close" onclick="closeVideo()" aria-label="Close video">&#x2715;</button>
+  <div class="video-modal-inner">
+    <!-- TODO: Replace VIDEO_SRC below with the YouTube embed URL (format: https://www.youtube.com/embed/VIDEO_ID) -->
+    <iframe id="videoIframe" src="" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   VIDEO POPUP
+   Set VIDEO_EMBED_URL to the YouTube embed URL:
+   e.g. https://www.youtube.com/embed/dQw4w9WgXcQ
+   ========================================================= */
+const VIDEO_EMBED_URL = ''; // TODO: paste YouTube embed URL here
+
+function openVideo() {
+  if (!VIDEO_EMBED_URL) {
+    alert('Video coming soon — check back shortly!');
+    return;
+  }
+  const iframe = document.getElementById('videoIframe');
+  iframe.src = VIDEO_EMBED_URL + '?autoplay=1&rel=0';
+  document.getElementById('videoModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVideo() {
+  document.getElementById('videoIframe').src = '';
+  document.getElementById('videoModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('videoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeVideo();
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('videoModal').classList.contains('open')) closeVideo();
+});
+</script>
+
 <script src="/carousel.js"></script>
 <script src="/photo-registry.js"></script>
 </body>

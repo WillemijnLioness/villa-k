@@ -299,11 +299,12 @@
       wrap.appendChild(dotsWrap);
     }
 
-    /* Auto-advance every 5s when multiple images (pauses on hover) */
+    /* Auto-advance — interval in ms, overridable via data-carousel-interval on the original img */
     if (urls.length > 1) {
-      let timer = setInterval(() => goTo(current + 1), 5000);
+      const interval = parseInt(img.dataset.carouselInterval, 10) || 5000;
+      let timer = setInterval(() => goTo(current + 1), interval);
       wrap.addEventListener('mouseenter', () => clearInterval(timer));
-      wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 5000); });
+      wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), interval); });
       wrap.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
     }
 
