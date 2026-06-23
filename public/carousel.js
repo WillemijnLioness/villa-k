@@ -243,7 +243,7 @@
       const s = document.createElement('img');
       s.src   = url;
       s.alt   = img.alt || '';
-      s.className = 'carousel-slide' + (i === 0 ? ' active' : '');
+      s.className = 'carousel-slide';
       s.addEventListener('click', () => window.openLightbox(urls, i));
       slidesWrap.appendChild(s);
       return s;
@@ -311,6 +311,12 @@
     /* Swap img → carousel in DOM */
     img.parentNode.insertBefore(wrap, img);
     img.remove();
+
+    /* Fade in first slide on next paint — prevents flash of the placeholder src */
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      slideEls[0].classList.add('active');
+      if (dotEls.length) dotEls[0].classList.add('active');
+    }));
   };
 
 })();

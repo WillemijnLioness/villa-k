@@ -119,17 +119,17 @@ section { padding: 100px 0; }
   text-decoration: none;
 }
 .nav-brand img {
-  height: 44px;
+  height: 80px;
   width: auto;
   display: block;
   transition: height 0.3s ease;
 }
-.nav.scrolled .nav-brand img { height: 36px; }
+.nav.scrolled .nav-brand img { height: 64px; }
 .nav-links {
   display: flex;
   gap: 36px;
   align-items: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
 }
 .nav-links a { color: var(--ink); opacity: 0.7; transition: opacity 0.2s; }
@@ -181,11 +181,11 @@ section { padding: 100px 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: kenBurns 24s ease-in-out infinite alternate;
+  animation: kenBurns 12s ease-in-out infinite alternate;
 }
 @keyframes kenBurns {
-  from { transform: scale(1.02) translate(0, 0); }
-  to { transform: scale(1.12) translate(-1%, -1%); }
+  from { transform: scale(1.04) translate(0, 0); }
+  to { transform: scale(1.18) translate(-2%, -1.5%); }
 }
 .hero-overlay {
   position: absolute; inset: 0;
@@ -205,6 +205,8 @@ section { padding: 100px 0; }
   color: var(--cream-soft);
   opacity: 0.85;
   margin-bottom: 20px;
+  font-size: 0.92rem;
+  letter-spacing: 0.28em;
   animation: fadeUp 1s ease 0.2s both;
 }
 .hero h1 {
@@ -636,6 +638,20 @@ section { padding: 100px 0; }
    REVIEWS
    ========================================================= */
 .reviews { background: var(--cream-soft); }
+.reviews-banner {
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  margin-bottom: 64px;
+  border-radius: 16px;
+}
+.reviews-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 .reviews-header { text-align: center; margin-bottom: 60px; }
 .reviews-header .eyebrow { margin-bottom: 16px; }
 .reviews-grid {
@@ -922,8 +938,8 @@ section { padding: 100px 0; }
   right: 32px;
   z-index: 3;
   color: var(--cream-soft);
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
+  font-size: 0.84rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   display: flex;
   align-items: center;
@@ -1104,9 +1120,9 @@ section { padding: 100px 0; }
   <div class="nav-links">
     <a href="#journey">Your Stay</a>
     <a href="#residences">The Property</a>
-    <a href="#location">Crete</a>
+    <a href="#location">The Location</a>
     <a href="#reviews">Reviews</a>
-    <a href="#booking" class="nav-cta">Book Direct</a>
+    <a href="#booking" class="nav-cta">Check Dates</a>
   </div>
   <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('mobile-open')" aria-label="Menu">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
@@ -1118,14 +1134,14 @@ section { padding: 100px 0; }
      ========================================================= -->
 <header class="hero" id="top">
   <div class="hero-media">
-    <img data-photo-slot="vkf:hero" data-carousel-interval="7000" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265474-7GSHD4W7HHH1ORTASBW5/VKF1.png" alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
+    <img data-photo-slot="vkf:hero" data-carousel-interval="4000" alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
     <div class="container">
-      <div class="hero-eyebrow eyebrow">Between the Sea &amp; Sky of Greece · Crete</div>
+      <div class="hero-eyebrow eyebrow">On Crete, between the Sea &amp; Sky of Greece.</div>
       <h1>A place to discover,<br>a stay to <em>remember.</em></h1>
-      <p class="hero-sub">An intimate three-residence estate — for families, friends, remote professionals, retreats, and destination celebrations among the olive groves of western Crete.</p>
+      <p class="hero-sub">An intimate three-residence estate among the olive groves of western Crete. Perfect for families, friends, remote professionals, retreat programs and destination celebrations.</p>
 
       <!-- Quick booking strip -->
       <form class="book-strip in-hero" id="heroBookForm" onsubmit="jumpToBooking(event)">
@@ -1157,9 +1173,9 @@ section { padding: 100px 0; }
         <div class="book-field">
           <label for="heroProperty">Residence</label>
           <select id="heroProperty">
-            <option value="auto" selected>Suggest best fit</option>
-            <option value="guest">Guest House</option>
+            <option value="auto" selected>Please suggest a best fit</option>
             <option value="main">Main House</option>
+            <option value="guest">Guest House</option>
             <option value="garden">Garden Suite</option>
             <option value="estate">Entire Estate</option>
           </select>
@@ -1177,18 +1193,22 @@ section { padding: 100px 0; }
 <section class="intro">
   <div class="container intro-grid">
     <div class="intro-side reveal">
-      <div class="eyebrow">Welcome to Villa K</div>
+      <div class="eyebrow">Welcome to Villa Koukouvayia</div>
       <h2>A coastal estate,<br><em>not a hotel.</em></h2>
-      <p>Koukouvayia is the Greek word for owl — wise, watchful, and a little bit magical. Our estate carries the same spirit: a home you inhabit rather than a room you occupy.</p>
+      <p>'Koukouvayia' is the Greek word for 'owl,' and set above the sea, Villa K embodies this spirit. Wise, watchful and a bit magical, the estate shares the same private spirit: a home you inhabit rather than a room you occupy.</p>
       <p>Three private residences share the farm's olive groves &amp; walking trails, a deep plunging pool with a toddler's waterfall, star-gazing roof terraces, and endless Aegean views. Book one house for an intimate escape, combine two for a vacation with others, or take the entire estate for destination gatherings over 20.</p>
-      <div class="intro-stats">
+      <div class="intro-stats" style="grid-template-columns: repeat(4, 1fr);">
         <div>
           <div class="stat-num">3</div>
           <div class="stat-label">Residences</div>
         </div>
         <div>
+          <div class="stat-num">16</div>
+          <div class="stat-label">Guests Included</div>
+        </div>
+        <div>
           <div class="stat-num">28</div>
-          <div class="stat-label">Max Guests</div>
+          <div class="stat-label">Guests Allowed</div>
         </div>
         <div>
           <div class="stat-num">★ 5.0</div>
@@ -1209,8 +1229,8 @@ section { padding: 100px 0; }
   <div class="container">
     <div class="journey-header reveal">
       <div class="eyebrow">Your Stay, Your Way</div>
-      <h2>What brings you to Crete?</h2>
-      <p>Choose the heart of your visit &amp; Villa Koukouvayia's lodging options will help that heart beat.</p>
+      <h2>What brings you to Villa K?</h2>
+      <p>Choose the heart of your visit, and our lodging options will start that heart beating.</p>
     </div>
     <div class="journey-grid">
       <!-- Holiday -->
@@ -1237,8 +1257,8 @@ section { padding: 100px 0; }
           </svg>
         </div>
         <h3>A Professional Stay…</h3>
-        <p class="journey-sub">…to maximize your work &amp; reset your soul?</p>
-        <p>High-speed internet, and a proper office with horizon views that remake business into pleasure.</p>
+        <p class="journey-sub">…to nourish your work and your soul?</p>
+        <p>High-speed internet, inspirational views, and a proper office that will let your business become a pleasure.</p>
         <div class="journey-suggest">Best fit → Guest House or Main House</div>
       </div>
       <!-- Retreat -->
@@ -1253,21 +1273,21 @@ section { padding: 100px 0; }
         </div>
         <h3>A Retreat…</h3>
         <p class="journey-sub">…to experience &amp; grow, or to share your skills with others?</p>
-        <p>Yoga, wellness, hikes &amp; trekking programs on and beyond Crete. A luxurious, private campus with studio spaces for 7 to 17.</p>
+        <p>Yoga, wellness, hikes &amp; trekking programs on, and even beyond, Crete. A luxurious, private campus with studio spaces for 7 to 17.</p>
         <div class="journey-suggest">Best fit → Garden Suite or Entire Estate</div>
       </div>
       <!-- Celebration -->
       <div class="journey-card reveal" data-intent="event" onclick="selectJourney(this)">
         <div class="journey-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-            <path d="M6 20 L6 10 Q6 4 12 4 Q18 4 18 10 L18 20"/>
-            <path d="M4 20 H20"/>
-            <path d="M10 14 Q12 12 14 14"/>
+            <path d="M12 2 L13.5 7H19L14.5 10.5L16 15.5L12 12L8 15.5L9.5 10.5L5 7H10.5Z"/>
+            <path d="M12 17 V22"/>
+            <path d="M8 22 H16"/>
           </svg>
         </div>
         <h3>A Celebration…</h3>
-        <p class="journey-sub">…to make an event itself the destination?</p>
-        <p>A wedding, a milestone birthday, or a family reunion where the rich days before and after can be fully shared among up to 24+ friends &amp; family.</p>
+        <p class="journey-sub">…where the event is the destination?</p>
+        <p>A wedding, milestone birthday or family reunion where multiple friends, families &amp; generations will not merely celebrate, but share the rich days that surround the event.</p>
         <div class="journey-suggest">Best fit → Entire Estate</div>
       </div>
     </div>
@@ -1281,9 +1301,9 @@ section { padding: 100px 0; }
   <div class="container">
     <div style="background: var(--bone); border-radius: var(--radius-lg); padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
       <div>
-        <div class="eyebrow" style="margin-bottom: 12px;">Sister brand — Cretan Destination Retreats</div>
-        <h3 style="margin-bottom: 12px;">Want to supercharge your holiday's fun &amp; minimize your planning chores?</h3>
-        <p style="color: var(--ink-soft); max-width: 52ch;">We started Cretan Destination Retreats to offer exciting programs that curate and supercharge the experience of Crete &amp; beyond. Yoga, wellness, coastal hiking, photography, alpine trekking, ancient cities, and the olive harvest that energizes this beautiful region. Or we can help you create bespoke experiences that customize specific days &amp; match your group's best desires.</p>
+        <div class="eyebrow" style="margin-bottom: 12px;">Cretan Destination Retreats: our strategic partner supporting your stay.</div>
+        <h3 style="margin-bottom: 12px;">Want to supercharge your holiday and minimize the chores?</h3>
+        <p style="color: var(--ink-soft); max-width: 52ch;">We started Cretan Destination Retreats to offer exciting programs that curate and deepen the experience of Crete &amp; beyond. Yoga, wellness, coastal hiking, photography, alpine trekking, ancient cities, and the olive harvest that energizes this beautiful region. But that same local knowledge can also create bespoke experiences for your holiday that match your group's best desires. Dining, recreational or logistics arrangements that allow you to relax, uncross your fingers, and know you're getting the best food and most fun, without the planning work.</p>
       </div>
       <a href="/retreats" class="btn btn-primary" style="white-space: nowrap; flex-shrink: 0;">Explore CDR Retreats →</a>
     </div>
@@ -1298,7 +1318,7 @@ section { padding: 100px 0; }
         <div class="eyebrow">The Property</div>
         <h2>Three residences.<br>One estate.</h2>
       </div>
-      <p>Combine them, or use the entire estate to handle 16 friends or family groups up to 24, even 28.</p>
+      <p>Combine them, or use the entire estate to handle 16 friends, or family groups up to 24, even 28.</p>
     </div>
 
     <!-- MAIN HOUSE — first -->
@@ -1310,30 +1330,30 @@ section { padding: 100px 0; }
       <div class="residence-text">
         <div class="eyebrow">The Main House</div>
         <h3>Three storeys, two stone fireplaces, <em>and a spiral stairway to the stars.</em></h3>
-        <p>The Main House is the estate's master residence, boasting three bespoke bedrooms and spectacular views both south to Crete's mountains and gorges, and north to her dramatic Aegean shoreline.</p>
+        <p>The Main House is the estate's master residence, boasting three bespoke bedrooms and spectacular views south to Crete's mountains &amp; gorges, and north to the island's dramatic Aegean shoreline.</p>
         <div class="residence-specs">
           <div class="spec">
             <span class="spec-icon">🛏</span>
-            <div><div class="spec-label">Beds</div><div class="spec-value">3 bedrooms</div></div>
+            <div><div class="spec-label">Beds</div><div class="spec-value">3 Bedrooms</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
-            <div><div class="spec-label">Bath</div><div class="spec-value">1 en suite + 1 full + guest WC</div></div>
+            <div><div class="spec-label">Bath</div><div class="spec-value">3 Baths (1 En Suite, 1 Full &amp; 1 Guest)</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Guests</div><div class="spec-value">6 included / 9 max</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">6 Included / 9 Allowed</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Sweeping verandas for socializing and large-group dining</li>
-          <li>Roof terrace with bar &amp; moonlit chapel views across the Tyflos Valley</li>
-          <li>Sunken living room with stone hearth &amp; hidden entertainment center</li>
-          <li>Open-plan first floor, fully equipped kitchen under stone arch</li>
-          <li>Private office with ethernet docking, printer, monitor &amp; peripherals</li>
-          <li>Koukouvayia Suite: en suite bath, library, fireplace, teak king bed &amp; private balcony</li>
-          <li>Gryphon's Nest loft: stone turret studio overlooking Crete's western edge</li>
-          <li>Falcon's Nest: antique maple bed &amp; wrap-around balcony facing Topolio Gorge</li>
+          <li>Sweeping verandas for socializing and large-group dining.</li>
+          <li>Roof terrace with bar &amp; moonlit chapel views across the Tyflos Valley.</li>
+          <li>Sunken living room with stone hearth &amp; hidden entertainment center.</li>
+          <li>Open-plan first floor, fully equipped kitchen under stone arch.</li>
+          <li>Private office with ethernet docking, printer, monitor &amp; peripherals.</li>
+          <li>Koukouvayia Suite: En suite bath, library, fireplace, teak king bed &amp; private balcony.</li>
+          <li>Gryphon's Nest: A studio &amp; loft set into a stone turret overlooking Gramvousa Peninsula &amp; the Gulf of Kissamos.</li>
+          <li>Falcon's Nest: Antique maple bed &amp; wrap-around balcony facing Topolio Gorge.</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1363,20 +1383,20 @@ section { padding: 100px 0; }
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
-            <div><div class="spec-label">Bath</div><div class="spec-value">1 full + guest WC</div></div>
+            <div><div class="spec-label">Bath</div><div class="spec-value">2 Baths (1 Master &amp; 1 Guest)</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Guests</div><div class="spec-value">4 included / 6 max</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">4 Included / 6 Allowed</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Sweeping verandas &amp; wide southeast patio for dining, socializing &amp; sunrise coffee</li>
-          <li>Roof terrace with 360° views of the surrounding hills &amp; villages; perfect for stargazing</li>
-          <li>Open-plan first floor, fully equipped kitchen &amp; well-furnished living areas</li>
-          <li>The Hawk's Nest master bedroom: queen bed through French doors to the Aegean Sea</li>
-          <li>The Crow's Nest: private balcony, two adult-sized engineered bunkbeds, each sea-facing</li>
-          <li>Quiet private garden; perfect for coffee, reading or simply enjoying each other's company</li>
+          <li>Sweeping verandas &amp; wide southeast patio for dining, socializing &amp; sunrise coffee.</li>
+          <li>Roof terrace with 360° views of the surrounding hills &amp; villages; perfect for stargazing.</li>
+          <li>Open-plan first floor, well equipped kitchen &amp; fully furnished living areas.</li>
+          <li>The Hawk's Nest master bedroom: Queen bed that looks out through French doors to the room's huge private balcony and the Aegean Sea.</li>
+          <li>The Crows' Nest: Two adult-sized and engineered bunks built into sea-facing windows, and a private balcony overlooking the southern Cretan gorges.</li>
+          <li>Quiet private garden; perfect for coffee, reading or simply enjoying each other's company.</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1397,27 +1417,27 @@ section { padding: 100px 0; }
       </div>
       <div class="residence-text">
         <div class="eyebrow">The Garden Suite</div>
-        <h3>Fully flexible, <em>grove-level living</em> for small or larger groups.</h3>
-        <p>The Garden Suite is the farm's most flexible residence, a beautifully appointed apartment with stone features &amp; ground-level views into the farm's surrounding olive groves. Perfect for small families or couples, but designed to accommodate extended families, retreat cohorts and larger groups. Each bedroom boasts flexible cabinet bedding that can customize your rooms from intimate couple's lodging to albergue-style sleeping of up to four guests per room. With a fireplace, professionally equipped kitchen, large dining area &amp; quiet outdoor garden, this is a home for long communal dinners — inside or under the stars — where no-one wants to leave the table.</p>
+        <h3>Luxurious grove-level accommodations, <em>fully flexible for smaller or larger groups.</em></h3>
+        <p>The Garden Suite is the farm's most flexible residence, a beautifully appointed apartment with stone features &amp; ground-level views into the farm's surrounding olive groves. Perfect for small families or couples, but designed to accommodate extended families, retreat cohorts and larger groups. Each bedroom boasts flexible cabinet bedding that can customize your rooms from intimate couple's lodging to albergue-style sleeping of up to four guests per room. With a fireplace, professionally equipped kitchen, large dining area &amp; quiet outdoor garden, this is a home for long communal dinners, inside or under the stars, where no-one wants to leave the table.</p>
         <div class="residence-specs">
           <div class="spec">
             <span class="spec-icon">🛏</span>
-            <div><div class="spec-label">Beds</div><div class="spec-value">3+ bedrooms (optional 4th)</div></div>
+            <div><div class="spec-label">Beds</div><div class="spec-value">3+ Bedrooms</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
-            <div><div class="spec-label">Bath</div><div class="spec-value">2 bathrooms</div></div>
+            <div><div class="spec-label">Bath</div><div class="spec-value">2 Full Baths</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Guests</div><div class="spec-value">6 included / 13 max</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">6 Included / 13 Allowed</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Direct access to olive groves &amp; the villa's extensive network of walking trails</li>
-          <li>Large private garden below the villa's pool &amp; waterfall</li>
-          <li>Professionally equipped kitchen, large breakfast area; dedicated dining room</li>
-          <li>Living area with stone hearth &amp; hidden entertainment center</li>
+          <li>Direct access to olive groves &amp; the villa's extensive network of walking trails.</li>
+          <li>Large private garden below the villa's pool &amp; waterfall.</li>
+          <li>Professionally equipped kitchen, large breakfast area, dedicated dining room.</li>
+          <li>Living area with stone hearth &amp; hidden entertainment center.</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1439,26 +1459,26 @@ section { padding: 100px 0; }
       <div class="residence-text">
         <div class="eyebrow">The Entire Estate</div>
         <h3>All three homes, <em>all yours.</em></h3>
-        <p>Eight bedrooms, twenty beds, six bathrooms. The roof terrace becomes a star-lit dance floor, the groves become a ceremony aisle and the pool a gathering point. Built for weddings, reunions, purpose-driven programs where community and privacy are balanced; or simply a holiday to share with a large group of friends.</p>
+        <p>Eight-plus bedrooms, twenty-plus beds accommodating 23-plus guests. Seven bathrooms. The roof terrace becomes a star-lit dance floor, the groves become a ceremony aisle and the pool a gathering point. Built for weddings, reunions and purpose-driven programs where community and privacy are balanced. Or simply bring a large group of friends with no purpose greater than to share a dynamic, memorable holiday.</p>
         <div class="residence-specs">
           <div class="spec">
             <span class="spec-icon">🛏</span>
-            <div><div class="spec-label">Beds</div><div class="spec-value">8+ bedrooms / 20 beds</div></div>
+            <div><div class="spec-label">Beds</div><div class="spec-value">8+ Bedrooms, 20+ Beds, 23+ Accommodations</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">🛁</span>
-            <div><div class="spec-label">Bath</div><div class="spec-value">6 bathrooms</div></div>
+            <div><div class="spec-label">Bath</div><div class="spec-value">7 Baths (2 En Suite, 3 Full &amp; 2 Guest)</div></div>
           </div>
           <div class="spec">
             <span class="spec-icon">👥</span>
-            <div><div class="spec-label">Guests</div><div class="spec-value">16 included / 28 max</div></div>
+            <div><div class="spec-label">Guests</div><div class="spec-value">16 Included / 28 Allowed</div></div>
           </div>
         </div>
         <ul class="residence-features">
-          <li>Roof terraces for entertainment or private stargazing</li>
-          <li>Multiple private areas &amp; social gathering spaces</li>
-          <li>Wedding &amp; sea-view celebration spaces on the grounds and adjacent groves</li>
-          <li>Professional-grade retreat campus with workshop &amp; exercise/recreation studios</li>
+          <li>Roof terraces for entertainment or private stargazing.</li>
+          <li>Multiple private areas &amp; social gathering spaces.</li>
+          <li>Wedding &amp; sea-view celebration spaces on the grounds and adjacent groves.</li>
+          <li>Professional-grade retreat campus with workshop, exercise spaces and recreational gear.</li>
         </ul>
         <div class="residence-footer">
           <div class="price-from">
@@ -1481,13 +1501,13 @@ section { padding: 100px 0; }
   <div class="container location-grid">
     <div class="location-text reveal">
       <div class="eyebrow">Where you'll be</div>
-      <h2>Crete, <em>between the sea &amp; sky</em> of Greece.</h2>
-      <p>You'll find us above the small but busy village of Kaloudiana, above the Gulf of Kissamos, nestled in Crete's western mountains. We are a bike ride from the earliest footprints of man, a car ride from the birthplace of Zeus, and within walking distance of both Minoan foundations &amp; the island's extensive &amp; inexpensive public transportation system.</p>
-      <p>Villa Koukouvayia is surrounded by pristine beaches below and towering mountains behind, yet only 50 minutes from air transport. She invites you to join her for the best of all worlds: everything slower than expected, and everything you could want in a travel experience within a warm embrace &amp; reach.</p>
+      <h2>On Crete, <em>between the sea &amp; sky</em> of Greece.</h2>
+      <p>You'll find Villa Koukouvayia nestled neatly into Crete's western foothills, looking down to the small but busy village of Kaloudiana &amp; the Aegean's Gulf of Kissamos. Come, and you'll be a bike ride from the earliest footprints of man, a car ride from the birthplace of Zeus, and within walking distance of both Minoan foundations &amp; the island's extensive &amp; inexpensive public transportation system.</p>
+      <p>With pristine beaches just below the farm, towering mountains just behind, and major transportation hubs only 50 minutes away, Villa K invites you to join her in the best of all worlds: with everything a bit slower, a bit more beautiful, and all within an easy and warm embrace.</p>
 
       <button class="btn-video" onclick="openVideo()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        Watch: Villa Koukouvayia
+        Video: Arriving at Villa K.
       </button>
 
       <div class="hosts-card" id="hosts" style="margin-top: 32px;">
@@ -1500,7 +1520,7 @@ section { padding: 100px 0; }
         </div>
         <div class="hosts-text">
           <h4><a href="/about" style="color: var(--cream-soft);">Hosted by the Palola-Harriman family</a></h4>
-          <p>Heidi, Richard &amp; Logan the dog — on-site, always, and helpful to the degree you'd like.</p>
+          <p>Heidi, Richard, Logan the dog &amp; Oliver, the farm's cat. Heidi &amp; Richard are always available, helpful, and yet discreetly out of your way.</p>
         </div>
       </div>
     </div>
@@ -1515,11 +1535,14 @@ section { padding: 100px 0; }
      ========================================================= -->
 <section class="reviews" id="reviews">
   <div class="container">
+    <div class="reviews-banner reveal">
+      <img data-photo-slot="vkf:reviews_banner" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png" alt="Villa Koukouvayia Farms — estate and olive groves">
+    </div>
     <div class="reviews-header reveal">
-      <div class="eyebrow">Guest Reviews · All 5-star</div>
+      <div class="eyebrow">Guest Reviews: All 5-star, no ifs, ands or bots!</div>
       <h2>In their own words.</h2>
     </div>
-    <div class="reviews-grid">
+    <div class="reviews-grid" style="grid-template-columns: repeat(4,1fr);">
       <div class="review reveal">
         <div class="review-stars">★★★★★</div>
         <div class="review-text">"Every inch of the house is totally thought-out. Heidi, Richard and Logan (the best dog on Crete) are the best hosts. This is truly a magical place."</div>
@@ -1528,28 +1551,60 @@ section { padding: 100px 0; }
       </div>
       <div class="review reveal">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"I fully recommend this place — to digital nomads especially. The internet connection is flawless, and the house is equipped with everything you can imagine."</div>
+        <div class="review-text">"I fully recommend this place to digital nomads especially. The internet connection is flawless, and the house is equipped with everything you can imagine."</div>
         <div class="review-author">Sonia &amp; Wojciech</div>
         <div class="review-meta">Work-Stay · March 2025</div>
       </div>
       <div class="review reveal">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"A wonderful stay with spectacular views. Extremely well-equipped. We would definitely recommend — and we'll definitely be back."</div>
+        <div class="review-text">"A wonderful stay with spectacular views. Extremely well-equipped. We would definitely recommend and we'll definitely be back."</div>
         <div class="review-author">Niels, Satrina &amp; family</div>
         <div class="review-meta">Holiday Stay · May 2025</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"The retreat space was extraordinary. Every detail considered, every need anticipated. VKF is the rare venue that makes a program better simply by existing."</div>
+        <div class="review-author">Laura C.</div>
+        <div class="review-meta">Retreat Program · October 2024</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"We hosted our wedding here and it exceeded every expectation. The olive groves as ceremony aisle, the roof terrace as dance floor. Unforgettable in every sense."</div>
+        <div class="review-author">Rudi &amp; Ana de Oliveira</div>
+        <div class="review-meta">Wedding Celebration · September 2024</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"The pool, the views, the quiet. We were a family of eight and each of us found our corner of paradise. An estate that actually deserves the word."</div>
+        <div class="review-author">The Andersen family</div>
+        <div class="review-meta">Holiday Stay · August 2024</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Heidi and Richard are hosts in the truest sense: present when you need them, invisible when you don't. The Guest House is small in footprint and enormous in soul."</div>
+        <div class="review-author">Mark &amp; Jess</div>
+        <div class="review-meta">Work-Stay · February 2025</div>
+      </div>
+      <div class="review reveal">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"I came for a week of writing and stayed for three. The Garden Suite feeds the mind like nothing I've experienced. The kitchen alone is worth the trip."</div>
+        <div class="review-author">Francesca M.</div>
+        <div class="review-meta">Sabbatical Stay · November 2024</div>
       </div>
     </div>
 
     <div class="reviews-cta reveal">
-      <p>These are a small sample — we've earned every one. Read them all on the platforms below.</p>
+      <p>Our guests arrive from many platforms, and we share every review. Feel free to explore beyond the small sample above, and to discover what made VKF a great experience for everyone!</p>
       <div class="reviews-links">
         <a href="https://www.google.com/maps/place/Villa+Koukouvayia+Farms+Retreat+Center+%26+Rural+Inn/@35.4773452,23.6871269,17z/data=!4m18!1m9!3m8!1s0x149cf38ff0f73323:0xc8110956f20ba249!2sVilla+Koukouvayia+Farms+Retreat+Center+%26+Rural+Inn!8m2!3d35.4773409!4d23.6897018!9m1!1b1!16s%2Fg%2F11h99wkcbv!3m7!1s0x149cf38ff0f73323:0xc8110956f20ba249!8m2!3d35.4773409!4d23.6897018!9m1!1b1!16s%2Fg%2F11h99wkcbv?entry=ttu&g_ep=EgoyMDI2MDUxMy4wIKXMDSoASAFQAw%3D%3D" class="review-link-btn" target="_blank" rel="noopener">Google Reviews ↗</a>
-        <a href="https://www.airbnb.com/rooms/756217828154195750" class="review-link-btn" target="_blank" rel="noopener">Airbnb — Entire Estate ↗</a>
+        <a href="https://www.vrbo.com/1883709" class="review-link-btn" target="_blank" rel="noopener">VRBO — Main House ↗</a>
+        <a href="https://www.vrbo.com/858887" class="review-link-btn" target="_blank" rel="noopener">VRBO — Guest House ↗</a>
+        <a href="https://www.vrbo.com/3096792" class="review-link-btn" target="_blank" rel="noopener">VRBO — Garden Suite ↗</a>
+        <a href="https://www.vrbo.com/3087102" class="review-link-btn" target="_blank" rel="noopener">VRBO — Entire Estate ↗</a>
         <a href="https://www.airbnb.com/rooms/51834542" class="review-link-btn" target="_blank" rel="noopener">Airbnb — Main House ↗</a>
         <a href="https://www.airbnb.com/rooms/10459622" class="review-link-btn" target="_blank" rel="noopener">Airbnb — Guest House ↗</a>
         <a href="https://www.airbnb.com/rooms/755484438431691642" class="review-link-btn" target="_blank" rel="noopener">Airbnb — Garden Suite ↗</a>
-        <a href="https://www.vrbo.com/1883709" class="review-link-btn" target="_blank" rel="noopener">VRBO — Main House ↗</a>
-        <a href="https://www.vrbo.com/858887" class="review-link-btn" target="_blank" rel="noopener">VRBO — Guest House ↗</a>
+        <a href="https://www.airbnb.com/rooms/756217828154195750" class="review-link-btn" target="_blank" rel="noopener">Airbnb — Entire Estate ↗</a>
       </div>
     </div>
   </div>
@@ -1562,9 +1617,9 @@ section { padding: 100px 0; }
   <div class="container">
     <div class="booking-wrap reveal">
       <div class="booking-side">
-        <div class="eyebrow">Book Direct · No Platform Fees</div>
+        <div class="eyebrow">Reserve Your Stay</div>
         <h2>Your stay, <em>your price.</em></h2>
-        <p>Pick dates, a group size and a residence. We'll calculate an indicative quote, then confirm final pricing within 24 hours — with a direct-booking saving over Airbnb and VRBO.</p>
+        <p>Pick dates, a group size and a residence. We'll calculate an initial quote and confirm final pricing within 24 hours. Prefer a third-party platform? Links to our VRBO and Airbnb listings are below the form.</p>
 
         <form class="booking-form" id="bookingForm" onsubmit="submitBooking(event)">
           <div class="booking-row">
@@ -1604,11 +1659,11 @@ section { padding: 100px 0; }
             <div class="form-field">
               <label for="property">Residence</label>
               <select id="property">
-                <option value="auto" selected>Suggest best fit</option>
-                <option value="guest">Guest House (to 6)</option>
-                <option value="main">Main House (to 9)</option>
-                <option value="garden">Garden Suite (to 13)</option>
-                <option value="estate">Entire Estate (to 28)</option>
+                <option value="auto" selected>Please suggest a best fit</option>
+                <option value="main">Main House (6 incl., 9 max)</option>
+                <option value="guest">Guest House (4 incl., 6 max)</option>
+                <option value="garden">Garden Suite (6 incl., 13 max)</option>
+                <option value="estate">Entire Estate (16 incl., 28 max)</option>
               </select>
             </div>
           </div>
@@ -1623,37 +1678,76 @@ section { padding: 100px 0; }
             </div>
           </div>
           <div class="form-field">
-            <label for="intent">What's the occasion? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
-            <select id="intent">
+            <label for="intent">What's the occasion?</label>
+            <select id="intent" required onchange="handleIntentChange(this.value)">
               <option value="">Choose…</option>
-              <option value="holiday">Holiday with family or friends</option>
-              <option value="work">Remote work-stay / sabbatical</option>
-              <option value="retreat">Retreat or program</option>
-              <option value="event">Wedding, celebration or reunion</option>
+              <option value="holiday">Holiday with Family or Friends</option>
+              <option value="work">Remote Work-Stay / Sabbatical</option>
+              <option value="retreat">Retreat or Experiential Program</option>
+              <option value="event">Wedding, Celebration or Reunion</option>
             </select>
           </div>
-          <div class="form-field">
-            <label for="notes">Anything else? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
-            <textarea id="notes" placeholder="Children's ages, dietary needs, flight timing, flexibility on dates…"></textarea>
+
+          <!-- Ceremony sub-field — shown only when Wedding/Celebration is selected -->
+          <div class="form-field" id="ceremonyField" style="display:none;">
+            <label for="ceremonyType">Celebration Options</label>
+            <select id="ceremonyType">
+              <option value="lodging">Lodging the celebrants. The ceremony will be held elsewhere.</option>
+              <option value="ceremony">Hosting the ceremony. Celebrants will be lodged elsewhere.</option>
+              <option value="both">Lodging the celebrants and hosting the ceremony during our stay.</option>
+            </select>
           </div>
 
-          <button type="submit" class="btn btn-primary submit-full">Request to Book →</button>
+          <div class="form-field">
+            <label for="notes">Anything else? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <textarea id="notes" placeholder="Children's ages, dietary needs, flight timing, flexibility on dates, anything unique to your stay that you'd like us to know about and/or respond to."></textarea>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:4px;">
+            <button type="submit" class="btn btn-primary submit-full" style="margin-top:0; flex:1; min-width:200px;">Request to Book →</button>
+            <a id="policyLink" href="/policy" target="_blank" class="btn btn-outline" style="flex-shrink:0; white-space:nowrap; display:none;">Rates &amp; Policies ↗</a>
+          </div>
+
+          <div style="margin-top: 18px; padding: 16px; background: var(--bone); border-radius: var(--radius); font-size: 0.85rem; color: var(--ink-soft);">
+            <strong style="display:block; margin-bottom:8px; color: var(--ink);">Prefer a third-party platform?</strong>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;">
+              <a href="https://www.vrbo.com/3087102" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Entire Estate ↗</a>
+              <span style="color:var(--muted);">·</span>
+              <a href="https://www.vrbo.com/1883709" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Main House ↗</a>
+              <span style="color:var(--muted);">·</span>
+              <a href="https://www.vrbo.com/858887" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Guest House ↗</a>
+              <span style="color:var(--muted);">·</span>
+              <a href="https://www.vrbo.com/3096792" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Garden Suite ↗</a>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;">
+              <a href="https://www.airbnb.com/rooms/756217828154195750" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Entire Estate ↗</a>
+              <span style="color:var(--muted);">·</span>
+              <a href="https://www.airbnb.com/rooms/51834542" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Main House ↗</a>
+              <span style="color:var(--muted);">·</span>
+              <a href="https://www.airbnb.com/rooms/10459622" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Guest House ↗</a>
+              <span style="color:var(--muted);">·</span>
+              <a href="https://www.airbnb.com/rooms/755484438431691642" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Garden Suite ↗</a>
+            </div>
+          </div>
         </form>
 
         <div class="confirmation" id="confirmation">
           <strong>Thank you.</strong> Your request is in. Heidi or Richard will write back within 24 hours with a confirmed offer and payment options.
+          <div style="margin-top:14px;">
+            <a id="confirmationPolicyLink" href="/policy" target="_blank" style="display:inline-block; padding:10px 20px; background:rgba(244,238,226,0.2); border:1px solid rgba(244,238,226,0.4); border-radius:999px; font-size:0.82rem; font-weight:600; color:var(--cream-soft); letter-spacing:0.06em;">View Rates &amp; Policies ↗</a>
+          </div>
         </div>
       </div>
 
       <!-- Live Quote -->
       <aside class="quote-card">
-        <h3 id="quoteTitle">Your Indicative Quote</h3>
+        <h3 id="quoteTitle">Your Initial Quote</h3>
         <p class="quote-sub" id="quoteSubtitle">Pick dates to see pricing</p>
         <div id="quoteBody">
           <div class="quote-empty">Select check-in &amp; check-out dates →</div>
         </div>
         <div class="quote-note">
-          Quote includes 18% Greek VAT and the Climate Resilience surtax. Final pricing confirmed by your hosts within 24 hours. Direct bookings save ~10–15% vs Airbnb &amp; VRBO. Security deposit held separately, returned on checkout.
+          Your quote includes the 18% Greek lodging tax and all other taxes &amp; fees. Final pricing confirmed by your hosts within 24 hours. Security deposit held separately, returned on checkout.
         </div>
       </aside>
     </div>
@@ -1668,7 +1762,7 @@ section { padding: 100px 0; }
     <div class="footer-grid">
       <!-- VKF Brand -->
       <div class="footer-brand">
-        <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms" style="height:60px;width:auto;display:block;margin-bottom:16px;">
+        <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms" style="height:80px;width:auto;display:block;margin-bottom:16px;">
         <p>A fully-equipped coastal estate among the olive groves of Crete — hosted with care by the Palola-Harriman family since 2019.</p>
         <p style="font-size: 0.8rem; opacity: 0.5;">Greek RMA Lodging #: 000/023/140/23</p>
       </div>
@@ -1686,10 +1780,11 @@ section { padding: 100px 0; }
       <div>
         <h4>The Location</h4>
         <ul>
-          <li>Kourthiana Agricultural Rd</li>
-          <li>Kaloudiana, Kissamos 73400</li>
-          <li>Chania, Crete — Greece</li>
-          <li><a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Driving Directions to VKF →</a></li>
+          <li>Agricultural Road #1</li>
+          <li>Kourthiana/Kissamos 73400</li>
+          <li>Crete, Greece</li>
+          <li><a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Map &amp; Location →</a></li>
+          <li><a href="/directions" style="color: var(--terracotta); opacity: 1;">Driving Directions →</a></li>
         </ul>
       </div>
       <!-- Your Stay -->
@@ -1700,7 +1795,7 @@ section { padding: 100px 0; }
           <li><a href="#journey">Work-stays</a></li>
           <li><a href="#journey">Retreats</a></li>
           <li><a href="#journey">Weddings &amp; Events</a></li>
-          <li><a href="#booking" style="color: var(--terracotta); opacity: 1;">Book Direct →</a></li>
+          <li><a href="#booking" style="color: var(--terracotta); opacity: 1;">Enquire Direct →</a></li>
         </ul>
       </div>
       <!-- CDR Section -->
@@ -1715,258 +1810,311 @@ section { padding: 100px 0; }
     </div>
     <div class="footer-bottom">
       <div>© 2026 Villa Koukouvayia Farms. All rights reserved.</div>
-      <div>Built with care · Booking &amp; Stay Policy · Cookies &amp; Privacy</div>
+      <div>Built with care · <a href="/policy" style="color:inherit;">Rates, Policies &amp; FAQs</a> · <a href="/privacy" style="color:inherit;">Cookies &amp; Privacy</a></div>
     </div>
   </div>
 </footer>
 
 <script>
 /* =========================================================
-   BOOKING ENGINE — easy to edit
-   Replace these base rates with your real seasonal numbers.
+   BOOKING ENGINE
+   Rates sourced from VKF 4C1a HolidayRental policy (2026-01-21)
    ========================================================= */
 
-// Base rates per night, by property and season
-const RATES = {
-  guest:  { low: 120, shoulder: 160, high: 220 },
-  main:   { low: 180, shoulder: 240, high: 340 },
-  garden: { low: 200, shoulder: 280, high: 380 },
-  estate: { low: 480, shoulder: 650, high: 880 }
+// Monthly rates per night indexed Jan(0)–Dec(11)
+const MONTHLY_RATES = {
+  guest:  [35, 35, 45, 55,  75, 100, 130, 130, 100,  75, 55,  45],
+  main:   [75, 75, 95,115, 145, 190, 250, 250, 190, 145,115,  95],
+  garden: [30, 30, 40, 50,  70,  95, 125, 125,  95,  70, 50,  40],
+  estate: [190,190,235,280,360, 465, 595, 595, 465, 360,280, 235]
 };
 
-// Which guests are included in the base rate per property
-const INCLUDED_GUESTS = {
-  guest: 4,
-  main: 6,
-  garden: 6,
-  estate: 16
-};
+const INCLUDED_GUESTS = { guest: 4, main: 6, garden: 6, estate: 16 };
+const MAX_GUESTS      = { guest: 6, main: 9, garden: 13, estate: 28 };
+const MIN_STAY        = { guest: 5, main: 7, garden: 7, estate: 7 };
 
-// Max capacity per property
-const MAX_GUESTS = {
-  guest: 6,
-  main: 9,
-  garden: 13,
-  estate: 28
-};
-
-// Minimum stay (nights)
-const MIN_STAY = {
-  guest: 2,
-  main: 3,
-  garden: 3,
-  estate: 4
-};
-
-// Climate Resilience tax per night (low / high period)
-// (Low = Nov–Mar, High = Apr–Oct — mirrors the hosts' published policy)
+// Climate Resilience tax: Nov–Mar low / Apr–Oct high
 const CLIMATE_TAX = {
-  guest: { low: 2, high: 8 },
-  main: { low: 4, high: 15 },
+  guest:  { low: 2, high: 8  },
+  main:   { low: 4, high: 15 },
   garden: { low: 4, high: 15 },
-  estate: { low: 4, high: 15 } // Note: estate tax is likely higher; confirm with hosts
+  estate: { low: 4, high: 15 }
 };
 
-const EXTRA_GUEST_FEE = 10; // €/extra guest/night
-const VAT_RATE = 0.18;
+const EXTRA_GUEST_FEE  = 10;   // €/extra guest/night
+const LODGING_TAX_RATE = 0.18; // Greek rental tax
 
-// Extended-stay discounts (applied before taxes)
+// Extended-stay discounts (before tax)
 const DISCOUNTS = [
-  { nights: 30, pct: 0.20 },
+  { nights: 56, pct: 0.20 },
+  { nights: 28, pct: 0.15 },
   { nights: 14, pct: 0.10 }
 ];
 
-// Season lookup by month (1–12)
-// High: Jun 15 – Sep 15; Shoulder: Apr–May, Sep 16–Oct; Low: Nov–Mar
-function getSeason(date) {
-  const m = date.getMonth() + 1;
-  const d = date.getDate();
-  if ((m === 6 && d >= 15) || m === 7 || m === 8 || (m === 9 && d <= 15)) return 'high';
-  if (m === 4 || m === 5 || (m === 9 && d > 15) || m === 10) return 'shoulder';
-  return 'low';
+// Wedding ceremony surcharge = 3× one day-rate of the chosen property
+const CEREMONY_SURCHARGE_DAYS = 3;
+
+function getNightRate(prop, date) {
+  return MONTHLY_RATES[prop][date.getMonth()];
 }
 
-// Climate-tax season: Apr–Oct high, Nov–Mar low
 function getClimateTier(date) {
   const m = date.getMonth() + 1;
   return (m >= 4 && m <= 10) ? 'high' : 'low';
 }
 
-// Pick a best-fit property from guest count
+// Returns best-fit property based on included-guest thresholds.
+// Progression: GH (≤4) → MH (5–6) → GS (7–13) → Estate (14+)
 function suggestProperty(guests) {
-  if (guests <= 6) return 'guest';
-  if (guests <= 9) return 'main';
-  if (guests <= 13) return 'garden';
+  if (guests <= INCLUDED_GUESTS.guest)  return 'guest';
+  if (guests <= INCLUDED_GUESTS.main)   return 'main';
+  if (guests <= MAX_GUESTS.garden)      return 'garden';
   return 'estate';
 }
 
+// Suggestion hint text for combos shown alongside the quote
+function comboHint(guests) {
+  if (guests >= 7  && guests <= 15) return 'Or consider Main House + Guest House (up to 15 guests combined).';
+  if (guests >= 10 && guests <= 19) return 'Or consider Garden Suite + Guest House (up to 19 guests combined).';
+  if (guests >= 14 && guests <= 22) return 'Or consider Main House + Garden Suite (up to 22 guests combined).';
+  return null;
+}
+
 function propertyLabel(p) {
-  return {guest:'Guest House', main:'Main House', garden:'Garden Suite', estate:'Entire Estate'}[p];
+  return { guest:'Guest House', main:'Main House', garden:'Garden Suite', estate:'Entire Estate' }[p];
 }
 
-function fmt(n) {
-  return '€' + Math.round(n).toLocaleString('en-US');
-}
+function fmt(n) { return '€' + Math.round(n).toLocaleString('en-US'); }
 
-// Core calculator — produces a line-item quote
-function calculateQuote(checkIn, checkOut, guests, propertyKey) {
+// Core calculator
+function calculateQuote(checkIn, checkOut, guests, propertyKey, ceremonyType) {
   if (!checkIn || !checkOut || checkOut <= checkIn) return null;
 
   let chosen = propertyKey;
   if (chosen === 'auto') chosen = suggestProperty(guests);
 
-  // Capacity check
   if (guests > MAX_GUESTS[chosen]) {
-    return { error: `${propertyLabel(chosen)} sleeps up to ${MAX_GUESTS[chosen]}. Try ${propertyLabel(suggestProperty(guests))} instead.` };
+    const better = suggestProperty(guests);
+    return { error: `${propertyLabel(chosen)} holds up to ${MAX_GUESTS[chosen]} guests. Try ${propertyLabel(better)} instead.` };
   }
 
   const msPerDay = 24 * 60 * 60 * 1000;
-  const nights = Math.round((checkOut - checkIn) / msPerDay);
-  if (nights < MIN_STAY[chosen]) {
-    return { error: `${propertyLabel(chosen)} has a ${MIN_STAY[chosen]}-night minimum. You've selected ${nights} night${nights===1?'':'s'}.` };
-  }
+  const nights   = Math.round((checkOut - checkIn) / msPerDay);
+  const minNights = MIN_STAY[chosen];
 
-  // Walk each night, apply seasonal rate & climate tax
-  const rates = RATES[chosen];
+  // Walk each night for lodging + climate tax
   const climate = CLIMATE_TAX[chosen];
   const included = INCLUDED_GUESTS[chosen];
   const extraGuests = Math.max(0, guests - included);
 
-  let lodging = 0;
+  let lodging      = 0;
   let climateTotal = 0;
-  const seasonBreakdown = { low: 0, shoulder: 0, high: 0 };
+  const seasonBreakdown = {};
 
-  for (let i = 0; i < nights; i++) {
-    const day = new Date(checkIn.getTime() + i * msPerDay);
-    const season = getSeason(day);
-    const tier = getClimateTier(day);
-    lodging += rates[season];
-    seasonBreakdown[season]++;
+  for (let i = 0; i < Math.max(nights, minNights); i++) {
+    // If nights < minNights we charge at min-stay rate, so walk minNights days
+    const day    = new Date(checkIn.getTime() + i * msPerDay);
+    const rate   = getNightRate(chosen, day);
+    const tier   = getClimateTier(day);
+    lodging     += rate;
     climateTotal += climate[tier];
+    const monthName = day.toLocaleString('en-US', { month: 'short' });
+    seasonBreakdown[monthName] = (seasonBreakdown[monthName] || 0) + 1;
   }
+
+  const billedNights = Math.max(nights, minNights);
+  const minStayWarning = nights < minNights
+    ? `Note: ${propertyLabel(chosen)} has a ${minNights}-night minimum. Your price reflects the minimum-stay cost.`
+    : null;
 
   // Extended-stay discount
   let discountPct = 0;
   for (const d of DISCOUNTS) {
-    if (nights >= d.nights) { discountPct = d.pct; break; }
+    if (billedNights >= d.nights) { discountPct = d.pct; break; }
   }
-  const discount = lodging * discountPct;
-  const lodgingAfterDiscount = lodging - discount;
+  const discount           = lodging * discountPct;
+  const lodgingAfterDisc   = lodging - discount;
+  const extraGuestsCharge  = extraGuests * EXTRA_GUEST_FEE * billedNights;
 
-  // Extra guests charge
-  const extraGuestsCharge = extraGuests * EXTRA_GUEST_FEE * nights;
+  // Wedding ceremony surcharge (applies when ceremony is onsite)
+  let ceremonyCharge = 0;
+  let ceremonyLabel  = null;
+  if (ceremonyType === 'ceremony' || ceremonyType === 'both') {
+    const dayRate     = getNightRate(chosen, checkIn);
+    ceremonyCharge    = dayRate * CEREMONY_SURCHARGE_DAYS;
+    ceremonyLabel     = `Onsite ceremony supplement (${CEREMONY_SURCHARGE_DAYS}× day rate)`;
+  }
 
-  // Subtotal before VAT
-  const subtotal = lodgingAfterDiscount + extraGuestsCharge;
-
-  // VAT
-  const vat = subtotal * VAT_RATE;
-
-  // Final total
-  const total = subtotal + vat + climateTotal;
+  const subtotal = lodgingAfterDisc + extraGuestsCharge + ceremonyCharge;
+  const tax      = subtotal * LODGING_TAX_RATE;
+  const total    = subtotal + tax + climateTotal;
 
   return {
-    property: chosen,
-    propertyName: propertyLabel(chosen),
-    nights,
-    guests,
-    included,
-    extraGuests,
-    lodging,
-    seasonBreakdown,
-    discountPct,
-    discount,
-    extraGuestsCharge,
-    subtotal,
-    vat,
-    climateTotal,
-    total
+    property: chosen, propertyName: propertyLabel(chosen),
+    nights, billedNights, guests, included, extraGuests,
+    lodging, seasonBreakdown, discountPct, discount,
+    extraGuestsCharge, ceremonyCharge, ceremonyLabel,
+    subtotal, tax, climateTotal, total,
+    minStayWarning, combo: comboHint(guests)
   };
 }
 
 function renderQuote(q) {
-  const body = document.getElementById('quoteBody');
+  const body     = document.getElementById('quoteBody');
   const subtitle = document.getElementById('quoteSubtitle');
-  const title = document.getElementById('quoteTitle');
+  const title    = document.getElementById('quoteTitle');
 
   if (!q) {
-    body.innerHTML = '<div class="quote-empty">Select check-in &amp; check-out dates →</div>';
-    subtitle.textContent = 'Pick dates to see pricing';
-    title.textContent = 'Your Indicative Quote';
+    body.innerHTML        = '<div class="quote-empty">Select check-in &amp; check-out dates →</div>';
+    subtitle.textContent  = 'Pick dates to see pricing';
+    title.textContent     = 'Your Initial Quote';
     return;
   }
 
   if (q.error) {
-    body.innerHTML = `<div class="quote-warn">${q.error}</div>`;
+    body.innerHTML       = `<div class="quote-warn">${q.error}</div>`;
     subtitle.textContent = 'Please adjust your selection';
     return;
   }
 
-  title.textContent = q.propertyName;
-  subtitle.textContent = `${q.nights} night${q.nights===1?'':'s'} · ${q.guests} guest${q.guests===1?'':'s'}`;
-
-  const seasonLabels = [];
-  if (q.seasonBreakdown.high) seasonLabels.push(`${q.seasonBreakdown.high} high`);
-  if (q.seasonBreakdown.shoulder) seasonLabels.push(`${q.seasonBreakdown.shoulder} shoulder`);
-  if (q.seasonBreakdown.low) seasonLabels.push(`${q.seasonBreakdown.low} low`);
+  title.textContent    = q.propertyName;
+  subtitle.textContent = `${q.billedNights} night${q.billedNights===1?'':'s'} · ${q.guests} guest${q.guests===1?'':'s'}`;
 
   let html = '';
-  html += `<div class="quote-line"><span class="label">Lodging (${q.nights} nights)</span><span class="value">${fmt(q.lodging)}</span></div>`;
-  if (seasonLabels.length) {
-    html += `<div class="quote-line sub"><span class="label">${seasonLabels.join(' · ')} season</span><span class="value"></span></div>`;
+
+  if (q.minStayWarning) {
+    html += `<div class="quote-warn" style="margin-bottom:12px;">${q.minStayWarning}</div>`;
   }
+
+  html += `<div class="quote-line"><span class="label">Lodging (${q.billedNights} nights)</span><span class="value">${fmt(q.lodging)}</span></div>`;
+
+  const monthEntries = Object.entries(q.seasonBreakdown);
+  if (monthEntries.length > 1 || (monthEntries.length === 1 && monthEntries[0][1] !== q.billedNights)) {
+    const parts = monthEntries.map(([m, n]) => `${n}n ${m}`).join(' · ');
+    html += `<div class="quote-line sub"><span class="label">${parts}</span><span class="value"></span></div>`;
+  }
+
   if (q.discountPct > 0) {
     html += `<div class="quote-line"><span class="label">Extended-stay discount (${Math.round(q.discountPct*100)}%)</span><span class="value">− ${fmt(q.discount)}</span></div>`;
   }
   if (q.extraGuests > 0) {
-    html += `<div class="quote-line"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.nights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
+    html += `<div class="quote-line"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.billedNights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
   }
-  html += `<div class="quote-line"><span class="label">Greek VAT (18%)</span><span class="value">${fmt(q.vat)}</span></div>`;
-  html += `<div class="quote-line"><span class="label">Climate Resilience tax</span><span class="value">${fmt(q.climateTotal)}</span></div>`;
+  if (q.ceremonyCharge > 0) {
+    html += `<div class="quote-line"><span class="label">${q.ceremonyLabel}</span><span class="value">${fmt(q.ceremonyCharge)}</span></div>`;
+  }
+
+  html += `<div class="quote-line"><span class="label">Greek Rental Taxes (18%)</span><span class="value">${fmt(q.tax)}</span></div>`;
+  html += `<div class="quote-line"><span class="label">Climate Resilience Tax</span><span class="value">${fmt(q.climateTotal)}</span></div>`;
   html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
+
+  if (q.combo) {
+    html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">${q.combo}</div>`;
+  }
 
   body.innerHTML = html;
 }
 
-// Recalculate on form change
 function recalc() {
-  const ci = document.getElementById('checkIn').value;
-  const co = document.getElementById('checkOut').value;
-  const guests = parseInt(document.getElementById('guests').value, 10);
-  const property = document.getElementById('property').value;
+  const ci        = document.getElementById('checkIn').value;
+  const co        = document.getElementById('checkOut').value;
+  const guests    = parseInt(document.getElementById('guests').value, 10);
+  const property  = document.getElementById('property').value;
+  const ceremony  = document.getElementById('ceremonyType')?.value || '';
 
-  const checkIn = ci ? new Date(ci) : null;
-  const checkOut = co ? new Date(co) : null;
+  const checkIn  = ci ? new Date(ci + 'T12:00:00') : null;
+  const checkOut = co ? new Date(co + 'T12:00:00') : null;
 
   if (checkIn && checkOut) {
-    const q = calculateQuote(checkIn, checkOut, guests, property);
-    renderQuote(q);
+    renderQuote(calculateQuote(checkIn, checkOut, guests, property, ceremony));
   } else {
     renderQuote(null);
   }
 }
 
 // Wire up listeners
-['checkIn', 'checkOut', 'guests', 'property'].forEach(id => {
-  document.getElementById(id).addEventListener('change', recalc);
+['checkIn', 'checkOut', 'guests', 'property', 'ceremonyType'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) el.addEventListener('change', recalc);
 });
+
+// Check-in change: advance checkout minimum to avoid back-clicking
+document.getElementById('checkIn').addEventListener('change', function() {
+  const ci = this.value;
+  if (!ci) return;
+  const coEl  = document.getElementById('checkOut');
+  coEl.min    = ci;
+  if (coEl.value && coEl.value <= ci) {
+    const next = new Date(ci + 'T12:00:00');
+    next.setDate(next.getDate() + 1);
+    coEl.value = next.toISOString().split('T')[0];
+  }
+  recalc();
+});
+document.getElementById('heroCheckIn').addEventListener('change', function() {
+  const ci     = this.value;
+  if (!ci) return;
+  const coEl   = document.getElementById('heroCheckOut');
+  coEl.min     = ci;
+  if (coEl.value && coEl.value <= ci) {
+    const next = new Date(ci + 'T12:00:00');
+    next.setDate(next.getDate() + 1);
+    coEl.value = next.toISOString().split('T')[0];
+  }
+});
+
+// Intent/occasion change: show ceremony dropdown for events,
+// filter residence options for retreats, update policy link
+function handleIntentChange(intent) {
+  const ceremonyField = document.getElementById('ceremonyField');
+  const propSel       = document.getElementById('property');
+  const policyLink    = document.getElementById('policyLink');
+  const confLink      = document.getElementById('confirmationPolicyLink');
+
+  // Ceremony dropdown
+  ceremonyField.style.display = (intent === 'event') ? '' : 'none';
+
+  // Policy link destination + visibility
+  const policyMap = { holiday: '/policy#holiday', work: '/policy#holiday', retreat: '/policy#program', event: '/policy#event' };
+  if (intent && policyMap[intent]) {
+    policyLink.href    = policyMap[intent];
+    confLink.href      = policyMap[intent];
+    policyLink.style.display = '';
+  } else {
+    policyLink.style.display = 'none';
+  }
+
+  // Retreat: restrict residence to GS or Estate only
+  const opts = propSel.querySelectorAll('option');
+  opts.forEach(opt => {
+    if (intent === 'retreat' && opt.value !== 'auto' && opt.value !== 'garden' && opt.value !== 'estate') {
+      opt.style.display = 'none';
+    } else {
+      opt.style.display = '';
+    }
+  });
+  if (intent === 'retreat' && propSel.value !== 'garden' && propSel.value !== 'estate') {
+    propSel.value = 'garden';
+  }
+
+  recalc();
+}
 
 // Sync hero form → booking form, then scroll & recalc
 function jumpToBooking(e) {
   e.preventDefault();
   const ci = document.getElementById('heroCheckIn').value;
   const co = document.getElementById('heroCheckOut').value;
-  const g = document.getElementById('heroGuests').value;
-  const p = document.getElementById('heroProperty').value;
+  const g  = document.getElementById('heroGuests').value;
+  const p  = document.getElementById('heroProperty').value;
   if (ci) document.getElementById('checkIn').value = ci;
   if (co) document.getElementById('checkOut').value = co;
-  if (g) document.getElementById('guests').value = g;
-  if (p) document.getElementById('property').value = p;
+  if (g)  document.getElementById('guests').value  = g;
+  if (p)  document.getElementById('property').value = p;
   recalc();
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Residence "Check Dates" buttons preselect property
 function preselectProperty(key) {
   document.getElementById('property').value = key;
   recalc();
@@ -1976,24 +2124,25 @@ function preselectProperty(key) {
 async function submitBooking(e) {
   e.preventDefault();
   const btn = document.querySelector('#bookingForm [type="submit"]');
-  btn.disabled = true;
+  btn.disabled    = true;
   btn.textContent = 'Sending…';
   const payload = {
-    site: 'vkf',
-    checkIn: document.getElementById('checkIn').value,
-    checkOut: document.getElementById('checkOut').value,
-    guests: document.getElementById('guests').value,
-    property: document.getElementById('property').value,
-    name: document.getElementById('fullName').value,
-    email: document.getElementById('email').value,
-    intent: document.getElementById('intent').value,
-    notes: document.getElementById('notes').value
+    site:         'vkf',
+    checkIn:      document.getElementById('checkIn').value,
+    checkOut:     document.getElementById('checkOut').value,
+    guests:       document.getElementById('guests').value,
+    property:     document.getElementById('property').value,
+    name:         document.getElementById('fullName').value,
+    email:        document.getElementById('email').value,
+    intent:       document.getElementById('intent').value,
+    ceremonyType: document.getElementById('ceremonyType')?.value || '',
+    notes:        document.getElementById('notes').value
   };
   try {
     const res = await fetch('/api/contact', {
-      method: 'POST',
+      method:  'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body:    JSON.stringify(payload)
     });
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
@@ -2003,29 +2152,27 @@ async function submitBooking(e) {
     document.getElementById('confirmation').classList.add('visible');
     document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth', block: 'center' });
   } catch (err) {
-    btn.disabled = false;
+    btn.disabled    = false;
     btn.textContent = 'Request to Book →';
     alert('Something went wrong: ' + err.message + '\n\nPlease email us directly at info@koukouvayia.com');
   }
 }
 
-// Journey card selection → preselect intent + suggest property
+// Journey card → preselect intent + property
 function selectJourney(card) {
   document.querySelectorAll('.journey-card').forEach(c => c.classList.remove('selected'));
   card.classList.add('selected');
   const intent = card.dataset.intent;
   document.getElementById('intent').value = intent;
-  // Nudge property selection
+  handleIntentChange(intent);
   const propMap = { holiday: 'auto', work: 'guest', retreat: 'garden', event: 'estate' };
   document.getElementById('property').value = propMap[intent] || 'auto';
   recalc();
-  setTimeout(() => {
-    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
-  }, 300);
+  setTimeout(() => document.getElementById('booking').scrollIntoView({ behavior: 'smooth' }), 300);
 }
 
 /* =========================================================
-   UX polish: nav scroll state, reveal-on-scroll
+   UX: nav scroll state, reveal-on-scroll
    ========================================================= */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -2038,23 +2185,20 @@ nav.querySelectorAll('.nav-links a').forEach(a => {
 
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('in-view');
-      io.unobserve(e.target);
-    }
+    if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
   });
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Sensible default dates: today + 7, today + 14
+// Default dates: today + 7 / today + 14
 (() => {
-  const d = new Date();
-  const toISO = (dt) => dt.toISOString().split('T')[0];
-  const inDays = (n) => { const x = new Date(d); x.setDate(x.getDate() + n); return toISO(x); };
-  document.getElementById('heroCheckIn').min = toISO(d);
+  const d      = new Date();
+  const toISO  = (dt) => dt.toISOString().split('T')[0];
+  const inDays = (n)  => { const x = new Date(d); x.setDate(x.getDate() + n); return toISO(x); };
+  document.getElementById('heroCheckIn').min  = toISO(d);
   document.getElementById('heroCheckOut').min = inDays(1);
-  document.getElementById('checkIn').min = toISO(d);
-  document.getElementById('checkOut').min = inDays(1);
+  document.getElementById('checkIn').min      = toISO(d);
+  document.getElementById('checkOut').min     = inDays(1);
 })();
 </script>
 <!-- Video Modal -->

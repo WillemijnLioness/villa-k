@@ -35,7 +35,7 @@ const PHOTO_REGISTRY = {
     },
     gs_main: {
       label: 'Garden Suite — slideshow',
-      hint: 'Upload in order: exterior garden view, grove access, interior living room, kitchen/dining, bedrooms, bathrooms, outdoor garden. 4:3 landscape.',
+      hint: 'Upload in order: (1) living room configured as living area, (2) living room configured as bedroom, (3) exterior garden view, (4) grove access, (5) kitchen/dining, (6) bedrooms, (7) bathrooms, (8) outdoor garden. Omit Tea Terrace downshot. For pool: use poolside lounge angle, not aerial downshot. 4:3 landscape.',
       multiple: true,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265386-JXN9VM21R4GNDPH7I3EP/VKF2.png']
     },
@@ -92,6 +92,12 @@ const PHOTO_REGISTRY = {
       hint: 'Warm, candid photo of the hosts at the property. 4:5 portrait works best. Can also be a lifestyle shot of the estate.',
       multiple: false,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg']
+    },
+    reviews_banner: {
+      label: 'Reviews section — banner photo',
+      hint: 'Full-width landscape photo shown above the guest reviews. Best: pool terrace, olive grove canopy, or estate overview at golden hour. Wide 16:9 or 3:1 crop. Candidate shots: 2021-0909 (114), 2017-1004 (101), 2021-0925 (100).',
+      multiple: false,
+      defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png']
     }
   },
 

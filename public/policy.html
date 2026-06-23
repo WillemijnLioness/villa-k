@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rates, Policies &amp; FAQs — Villa Koukouvayia Farms</title>
+<meta name="description" content="Rates, policies and FAQs for holiday stays, event rentals and retreat programs at Villa Koukouvayia Farms, Crete.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cream: #F4EEE2; --cream-soft: #FAF6EE; --bone: #EDE4D2;
+  --olive-deep: #3F4A2E; --olive: #5C6B45; --olive-soft: #8A9675;
+  --terracotta: #B4633F; --terracotta-deep: #8E4A2C;
+  --ink: #1F1D18; --ink-soft: #4A463C; --muted: #8B8577;
+  --line: rgba(31,29,24,0.12);
+  --font-display: 'Fraunces','Georgia',serif;
+  --font-body: 'Manrope',-apple-system,sans-serif;
+  --radius: 8px; --radius-lg: 16px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--cream); color: var(--ink); line-height: 1.65; font-weight: 400; -webkit-font-smoothing: antialiased; }
+a { color: var(--terracotta); text-decoration: none; }
+a:hover { text-decoration: underline; }
+h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; }
+h1 { font-size: clamp(2rem,5vw,3.5rem); font-weight: 300; line-height: 1.1; }
+h2 { font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 300; margin-bottom: 20px; }
+h3 { font-size: 1.25rem; margin-bottom: 14px; }
+p  { color: var(--ink-soft); margin-bottom: 14px; }
+ul { padding-left: 20px; color: var(--ink-soft); margin-bottom: 14px; }
+li { margin-bottom: 6px; }
+strong { color: var(--ink); }
+
+/* NAV */
+.nav { background: var(--ink); padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+.nav-brand { font-family: var(--font-display); font-size: 1.1rem; font-weight: 300; color: var(--cream-soft); }
+.nav-back { font-size: 0.85rem; color: var(--bone); opacity: 0.7; transition: opacity 0.2s; }
+.nav-back:hover { opacity: 1; color: var(--bone); text-decoration: none; }
+
+/* HERO */
+.page-hero { background: var(--olive-deep); color: var(--cream-soft); padding: 64px 32px 48px; text-align: center; }
+.page-hero h1 { color: var(--cream-soft); margin-bottom: 12px; }
+.page-hero p { color: var(--bone); opacity: 0.85; max-width: 54ch; margin: 0 auto; }
+
+/* TABS */
+.tabs-wrap { background: var(--cream-soft); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.tabs { display: flex; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.tab-btn {
+  padding: 18px 28px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: none;
+  border: none; border-bottom: 3px solid transparent; cursor: pointer; transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--terracotta); border-bottom-color: var(--terracotta); }
+
+/* CONTENT */
+.content { max-width: 960px; margin: 0 auto; padding: 56px 32px 80px; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* RATE TABLE */
+.rate-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 0.92rem; }
+.rate-table th { background: var(--olive-deep); color: var(--cream-soft); padding: 12px 14px; text-align: left; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.08em; }
+.rate-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
+.rate-table tr:nth-child(even) td { background: var(--bone); }
+.rate-table tr:last-child td { border-bottom: none; }
+.rate-table td:first-child { color: var(--ink); font-weight: 500; }
+
+/* CAPACITY TABLE */
+.cap-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 0.88rem; }
+.cap-table th { background: var(--olive-deep); color: var(--cream-soft); padding: 10px 12px; text-align: center; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.07em; }
+.cap-table th:first-child { text-align: left; }
+.cap-table td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: center; color: var(--ink-soft); }
+.cap-table td:first-child { text-align: left; color: var(--ink); font-weight: 500; }
+.cap-table tr:nth-child(even) td { background: var(--bone); }
+
+/* SECTION DIVIDER */
+.section-block { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
+.section-block:last-child { border-bottom: none; }
+.eyebrow { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; font-weight: 600; color: var(--olive); margin-bottom: 10px; }
+
+/* NOTE BOX */
+.note { background: var(--bone); border-left: 3px solid var(--olive-soft); padding: 14px 18px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0 20px; font-size: 0.9rem; color: var(--ink-soft); }
+
+/* BACK CTA */
+.back-cta { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); text-align: center; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 26px; border-radius: 999px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; font-family: var(--font-body); transition: transform 0.2s, background 0.2s; text-decoration: none; }
+.btn-primary { background: var(--terracotta); color: var(--cream-soft); }
+.btn-primary:hover { background: var(--terracotta-deep); transform: translateY(-1px); text-decoration: none; }
+
+/* FOOTER */
+footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-align: center; font-size: 0.82rem; opacity: 0.7; }
+
+@media (max-width: 640px) {
+  .content { padding: 36px 20px 56px; }
+  .tab-btn { padding: 14px 16px; font-size: 0.78rem; }
+  .page-hero { padding: 40px 20px 32px; }
+  .nav { padding: 14px 20px; }
+  .rate-table, .cap-table { font-size: 0.8rem; }
+  .rate-table th, .rate-table td, .cap-table th, .cap-table td { padding: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-brand">Villa Koukouvayia Farms</span>
+  <a href="/" class="nav-back">← Back to site</a>
+</nav>
+
+<div class="page-hero">
+  <div class="eyebrow" style="color:var(--bone); opacity:0.75;">Villa Koukouvayia Farms</div>
+  <h1>Rates, Policies &amp; FAQs</h1>
+  <p>Everything you need to know before you book. Select your stay type below.</p>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('holiday', this)">Holiday &amp; Work-Stays</button>
+    <button class="tab-btn" onclick="switchTab('event', this)">Celebrations &amp; Events</button>
+    <button class="tab-btn" onclick="switchTab('program', this)">Retreat Programs</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ============================================================
+       HOLIDAY TAB
+       ============================================================ -->
+  <div class="tab-panel active" id="tab-holiday">
+
+    <div class="section-block">
+      <div class="eyebrow">Occupancy</div>
+      <h2>Lodging Capacities</h2>
+      <p>Villa Koukouvayia is not a hotel with identical rooms, but a home to share. The table below describes sleeping capacities from a variety of perspectives.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th>Capacity</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Private Bedrooms</td><td>3</td><td>2</td><td>3</td><td>8</td></tr>
+          <tr><td>Single Beds</td><td>1</td><td>2</td><td>11</td><td>14</td></tr>
+          <tr><td>Couple's Bedding</td><td>2</td><td>1</td><td>3</td><td>6</td></tr>
+          <tr><td>Full Baths</td><td>2</td><td>1</td><td>2</td><td>5</td></tr>
+          <tr><td>Half-Baths</td><td>1</td><td>1</td><td>0</td><td>2</td></tr>
+          <tr><td>Nominal Sleeping Capacity</td><td>5</td><td>4</td><td>6–11</td><td>15–20</td></tr>
+          <tr><td>Additional Sleeping Capacity</td><td>4</td><td>2</td><td>2</td><td>8</td></tr>
+          <tr><td><strong>Guests Included in Base Rate</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>6</strong></td><td><strong>16</strong></td></tr>
+          <tr><td><strong>Max Guests Allowed</strong></td><td><strong>9</strong></td><td><strong>6</strong></td><td><strong>13</strong></td><td><strong>28</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="note">For groups needing capacity beyond our estate, we have relationships with nearby homes and can often secure them at discounted rates, integrated within your invoice.</div>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Pricing</div>
+      <h2>Base Lodging Rates</h2>
+      <p>Rates below are per night per residence. Reservations bridging multiple rate seasons are calculated day by day and subtotalled.</p>
+      <table class="rate-table">
+        <thead>
+          <tr><th>Months</th><th>Season</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jan &amp; Feb</td><td>Winter</td><td>€75</td><td>€35</td><td>€30</td><td>€190</td></tr>
+          <tr><td>March</td><td>Early Spring</td><td>€95</td><td>€45</td><td>€40</td><td>€235</td></tr>
+          <tr><td>April</td><td>Spring</td><td>€115</td><td>€55</td><td>€50</td><td>€280</td></tr>
+          <tr><td>May</td><td>Late Spring</td><td>€145</td><td>€75</td><td>€70</td><td>€360</td></tr>
+          <tr><td>June</td><td>Early Summer</td><td>€190</td><td>€100</td><td>€95</td><td>€465</td></tr>
+          <tr><td>Jul &amp; Aug</td><td>Summer</td><td>€250</td><td>€130</td><td>€125</td><td>€595</td></tr>
+          <tr><td>September</td><td>Late Summer</td><td>€190</td><td>€100</td><td>€95</td><td>€465</td></tr>
+          <tr><td>October</td><td>Early Autumn</td><td>€145</td><td>€75</td><td>€70</td><td>€360</td></tr>
+          <tr><td>November</td><td>Autumn/Harvest</td><td>€115</td><td>€55</td><td>€50</td><td>€280</td></tr>
+          <tr><td>December</td><td>Winter Holidays</td><td>€95</td><td>€45</td><td>€40</td><td>€235</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Guest Count</div>
+      <h2>Extra Guest Supplement</h2>
+      <p>Base rates are set for the included guest counts below. Additional guests are welcomed at a simple supplement of <strong>€10 per extra guest per night</strong>.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Guests Included</td><td>6</td><td>4</td><td>6</td><td>16</td></tr>
+          <tr><td>Extra Guests Allowed</td><td>3</td><td>2</td><td>7</td><td>12</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Stay Length</div>
+      <h2>Minimum Stays</h2>
+      <p>Most of the labour in creating your comfortable stay occurs in the fixed costs of preparing the property. Minimum stays allow us to spread those expenses across lower nightly rates.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Minimum Stay (nights)</td><td>7</td><td>5</td><td>7</td><td>7</td></tr>
+          <tr><td>Security Deposit</td><td>€500</td><td>€200</td><td>€300</td><td>€1,000</td></tr>
+        </tbody>
+      </table>
+      <div class="note">If your itinerary requires fewer nights than our minimum, we can happily accept a shorter booking at the minimum-stay cost.</div>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Long Stays</div>
+      <h2>Extended-Stay Discounts</h2>
+      <p>We offer generous season-based discounts for stays longer than two weeks, applied before taxes and extra-guest charges.</p>
+      <table class="rate-table">
+        <thead>
+          <tr><th>Months</th><th>Season</th><th>14 Days</th><th>28 Days</th><th>56 Days</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jan &amp; Feb</td><td>Winter</td><td>10%</td><td>15%</td><td>25%</td></tr>
+          <tr><td>March</td><td>Early Spring</td><td>7%</td><td>10%</td><td>20%</td></tr>
+          <tr><td>April</td><td>Spring</td><td>5%</td><td>7%</td><td>15%</td></tr>
+          <tr><td>May</td><td>Late Spring</td><td>3%</td><td>5%</td><td>10%</td></tr>
+          <tr><td>June</td><td>Early Summer</td><td>0%</td><td>3%</td><td>7%</td></tr>
+          <tr><td>Jul &amp; Aug</td><td>Summer</td><td>0%</td><td>3%</td><td>5%</td></tr>
+          <tr><td>September</td><td>Late Summer</td><td>0%</td><td>3%</td><td>7%</td></tr>
+          <tr><td>October</td><td>Early Autumn</td><td>3%</td><td>5%</td><td>10%</td></tr>
+          <tr><td>November</td><td>Autumn/Harvest</td><td>5%</td><td>7%</td><td>15%</td></tr>
+          <tr><td>December</td><td>Winter Holidays</td><td>7%</td><td>10%</td><td>20%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Taxes &amp; Fees</div>
+      <h2>Government Taxes</h2>
+      <p>Your reservation is subject to an <strong>18% Greek lodging tax</strong> on the total reservation value, and a mandatory <strong>Climate Resilience Tax</strong> that varies by season.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th>Period</th><th>Guest House</th><th>Other Residences</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>November through March</td><td>€2/night</td><td>€4/night</td></tr>
+          <tr><td>April through October</td><td>€8/night</td><td>€15/night</td></tr>
+        </tbody>
+      </table>
+      <p>All offers we send you will include every tax and fee, so your quoted price is final.</p>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Other Policies</div>
+      <h2>FAQs</h2>
+
+      <h3>Currency &amp; Payment</h3>
+      <p>All charges are in Euros. USD payment is accepted at the IMF rate on the day we make your offer, with no surcharges or fees. Credit card payments are available; a 3–5% processing fee is itemised separately so you can choose the best method for you.</p>
+
+      <h3>Payment Plans</h3>
+      <p>Reservations are typically paid in full. Plans of up to 4 payments are available for larger reservations (over €3,000, €4,000 and €5,000, booked 6, 4 and 3 months ahead respectively). Details are included in your offer automatically.</p>
+
+      <h3>Security Deposits</h3>
+      <p>A security deposit is included in your payment to hold your booking and to serve as a damage deposit during your stay. Deposits are always returned via bank transfer upon departure, assuming no major issues. A pet damage supplement of €200 per pet applies.</p>
+      <div class="note">We never confuse 'damage' with 'use.' We expect you to enjoy the home you've rented, and we understand that any gathering of happy people will occasionally drop a glass or two.</div>
+
+      <h3>Cancellations</h3>
+      <p>We will always work to refund cancelled stays and never charge a fee for this service. We can only do so to the degree we are able to re-book your time. Some third-party platforms guarantee refunds regardless of timing; make sure you are comfortable with the policy of whichever platform you use to book.</p>
+
+      <h3>Check-In &amp; Check-Out</h3>
+      <p>We guarantee check-in from 16:00 and check-out by 10:00. We almost always happily advance or extend those times for you. We'll always offer an early luggage-drop and/or late luggage-hold so you can enjoy yourself while waiting.</p>
+
+      <h3>Smoking</h3>
+      <p>We are surrounded by olive groves, beautiful but susceptible to fire. Smoking is severely restricted, especially during the three fire seasons. Wet ashtrays only, outside, on verandas, on windless days.</p>
+
+      <h3>Also Available via Third-Party Platforms</h3>
+      <ul>
+        <li><a href="https://www.vrbo.com/1883709" target="_blank" rel="noopener">VRBO — Main House (#1883709)</a></li>
+        <li><a href="https://www.vrbo.com/858887" target="_blank" rel="noopener">VRBO — Guest House (#858887)</a></li>
+        <li><a href="https://www.vrbo.com/3096792" target="_blank" rel="noopener">VRBO — Garden Suite (#3096792)</a></li>
+        <li><a href="https://www.vrbo.com/3087102" target="_blank" rel="noopener">VRBO — Entire Estate (#3087102)</a></li>
+        <li><a href="https://www.airbnb.com/rooms/51834542" target="_blank" rel="noopener">Airbnb — Main House (#51834542)</a></li>
+        <li><a href="https://www.airbnb.com/rooms/10459622" target="_blank" rel="noopener">Airbnb — Guest House (#10459622)</a></li>
+        <li><a href="https://www.airbnb.com/rooms/755484438431691642" target="_blank" rel="noopener">Airbnb — Garden Suite</a></li>
+        <li><a href="https://www.airbnb.com/rooms/756217828154195750" target="_blank" rel="noopener">Airbnb — Entire Estate</a></li>
+      </ul>
+    </div>
+
+    <div class="back-cta">
+      <a href="/#booking" class="btn btn-primary">Enquire or Reserve a Stay →</a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       EVENT TAB
+       ============================================================ -->
+  <div class="tab-panel" id="tab-event">
+
+    <div class="section-block">
+      <div class="eyebrow">Occupancy</div>
+      <h2>Lodging Capacities</h2>
+      <p>The same flexible capacities apply for celebrations and events as for holiday stays. Review the table to ensure your guest group is comfortably accommodated.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th>Capacity</th><th>VKF Estate</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Private Bedrooms</td><td>8</td><td>3</td><td>2</td><td>3</td></tr>
+          <tr><td>Nominal Sleeping Capacity</td><td>15–20</td><td>5</td><td>4</td><td>6–11</td></tr>
+          <tr><td>Additional Sleeping Capacity</td><td>8</td><td>4</td><td>2</td><td>2</td></tr>
+          <tr><td><strong>Guests Included in Base Rate</strong></td><td><strong>16</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>6</strong></td></tr>
+          <tr><td><strong>Max Guests Allowed</strong></td><td><strong>28</strong></td><td><strong>9</strong></td><td><strong>6</strong></td><td><strong>13</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="note">For events needing additional lodging, or who wish to house a bridal party nearby, we have relationships with several nearby homes and can integrate the cost within your invoice.</div>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Pricing</div>
+      <h2>Facility Lodging Rates</h2>
+      <p>Lodging rates are per night for the residence(s) chosen. A separate onsite ceremony supplement applies where applicable (see below).</p>
+      <table class="rate-table">
+        <thead>
+          <tr><th>Months</th><th>Season</th><th>VKF Estate</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jan &amp; Feb</td><td>Winter</td><td>€190</td><td>€75</td><td>€35</td><td>€30</td></tr>
+          <tr><td>March</td><td>Early Spring</td><td>€235</td><td>€95</td><td>€45</td><td>€40</td></tr>
+          <tr><td>April</td><td>Spring</td><td>€280</td><td>€115</td><td>€55</td><td>€50</td></tr>
+          <tr><td>May</td><td>Late Spring</td><td>€360</td><td>€145</td><td>€75</td><td>€70</td></tr>
+          <tr><td>June</td><td>Early Summer</td><td>€465</td><td>€190</td><td>€100</td><td>€95</td></tr>
+          <tr><td>Jul &amp; Aug</td><td>Summer</td><td>€595</td><td>€250</td><td>€130</td><td>€125</td></tr>
+          <tr><td>September</td><td>Late Summer</td><td>€465</td><td>€190</td><td>€100</td><td>€95</td></tr>
+          <tr><td>October</td><td>Early Autumn</td><td>€360</td><td>€145</td><td>€75</td><td>€70</td></tr>
+          <tr><td>November</td><td>Autumn/Harvest</td><td>€280</td><td>€115</td><td>€55</td><td>€50</td></tr>
+          <tr><td>December</td><td>Winter Holidays</td><td>€235</td><td>€95</td><td>€45</td><td>€40</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Onsite Ceremony</div>
+      <h2>Event Supplement</h2>
+      <p>Large events burden our facilities beyond nominal lodging use, with deeper facility preparation, greater parking needs, and third-party organisations operating onsite. To keep this charge clear and transparent, we invoice a separate supplement of <strong>three times the applicable day-rate</strong> for any onsite ceremony or celebration with more than 30 invitees.</p>
+      <div class="note">If you arrange third-party event support (catering, music, etc.) yourself rather than through us, a second refundable damage deposit will apply to ensure those providers leave their areas clean and undamaged.</div>
+      <p>If you lodge your party at VKF but hold the ceremony elsewhere, no event supplement applies.</p>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Stay Length</div>
+      <h2>Minimum Rental</h2>
+      <p>We have a 7-night minimum stay. If your event requires fewer nights, we will happily accept a shorter booking at the minimum-stay cost.</p>
+      <div class="note">Staying five or fewer days and paying the minimum-stay cost will waive the event supplement described above.</div>
+      <table class="cap-table">
+        <thead>
+          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Minimum Stay (nights)</td><td>7</td><td>5</td><td>7</td><td>7</td></tr>
+          <tr><td>Security Deposit</td><td>€500</td><td>€200</td><td>€300</td><td>€1,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Services</div>
+      <h2>Bare Facility or Full Support?</h2>
+      <p>You are welcome to book the bare facility. Please note that Greek law limits us to handing you keys and walking away under this arrangement. Our bare-facility care does include an arrival orientation, daily pool and plant maintenance, and a departure inspection.</p>
+      <p>If your event would benefit from additional support, our sister company <strong>Cretan Destination Retreats</strong> can provide:</p>
+      <ul>
+        <li>Arrival support and individual guest services</li>
+        <li>Airport transfers and off-campus transportation</li>
+        <li>Catered meals, restaurant arrangements and pantry stocking</li>
+        <li>Cleaning and laundry services at various frequencies</li>
+        <li>Activity guides: hikes, sailing, excursions and bespoke experiences</li>
+      </ul>
+      <p>Service charges: third-party arrangements at cost plus 15%; general staffing at €20/hour or €100/full day plus expenses.</p>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Taxes, Payment &amp; Other Policies</div>
+      <h2>FAQs</h2>
+      <h3>Taxes</h3>
+      <p>An <strong>18% Greek lodging tax</strong> applies to the total reservation value. The <strong>Climate Resilience Tax</strong> applies per night: €4/night (Nov–Mar) or €15/night (Apr–Oct) for all residences except the Guest House (€2/€8). All taxes are included in your offer.</p>
+      <h3>Currency &amp; Payment Plans</h3>
+      <p>All charges are in Euros. USD accepted at the IMF rate. Payment plans available for larger reservations booked well in advance. Credit card payments carry a 3–5% processing fee itemised separately.</p>
+      <h3>Cancellations</h3>
+      <p>We will always work to refund cancelled stays and charge no fee for this. Refunds depend on our ability to re-book your time.</p>
+      <h3>Check-In &amp; Check-Out</h3>
+      <p>Check-in from 16:00; check-out by 10:00. Early luggage-drop and late hold are always available.</p>
+    </div>
+
+    <div class="back-cta">
+      <a href="/#booking" class="btn btn-primary">Enquire About Your Celebration →</a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PROGRAM TAB
+       ============================================================ -->
+  <div class="tab-panel" id="tab-program">
+
+    <div class="section-block">
+      <div class="eyebrow">Occupancy</div>
+      <h2>Lodging Capacities</h2>
+      <p>Villa Koukouvayia is a coherent, private campus ideal for retreat programs. Capacity can flex to house facilitators alongside participants.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th>Capacity</th><th>VKF Estate</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Private Bedrooms</td><td>8</td><td>3</td><td>2</td><td>3</td></tr>
+          <tr><td>Nominal Sleeping Capacity</td><td>15–20</td><td>5</td><td>4</td><td>6–11</td></tr>
+          <tr><td>Additional Sleeping Capacity</td><td>8</td><td>4</td><td>2</td><td>2</td></tr>
+          <tr><td><strong>Guests Included in Base Rate</strong></td><td><strong>16</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>6</strong></td></tr>
+          <tr><td><strong>Max Guests Allowed</strong></td><td><strong>28</strong></td><td><strong>9</strong></td><td><strong>6</strong></td><td><strong>13</strong></td></tr>
+        </tbody>
+      </table>
+      <div class="note">For programs needing lodging capacity beyond the estate, or who wish to house facilitators in a nearby property, we have relationships with neighbouring homes and can integrate the cost within your invoice.</div>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Pricing</div>
+      <h2>Facility Lodging Rates</h2>
+      <table class="rate-table">
+        <thead>
+          <tr><th>Months</th><th>Season</th><th>VKF Estate</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Jan &amp; Feb</td><td>Winter</td><td>€190</td><td>€75</td><td>€35</td><td>€30</td></tr>
+          <tr><td>March</td><td>Early Spring</td><td>€235</td><td>€95</td><td>€45</td><td>€40</td></tr>
+          <tr><td>April</td><td>Spring</td><td>€280</td><td>€115</td><td>€55</td><td>€50</td></tr>
+          <tr><td>May</td><td>Late Spring</td><td>€360</td><td>€145</td><td>€75</td><td>€70</td></tr>
+          <tr><td>June</td><td>Early Summer</td><td>€465</td><td>€190</td><td>€100</td><td>€95</td></tr>
+          <tr><td>Jul &amp; Aug</td><td>Summer</td><td>€595</td><td>€250</td><td>€130</td><td>€125</td></tr>
+          <tr><td>September</td><td>Late Summer</td><td>€465</td><td>€190</td><td>€100</td><td>€95</td></tr>
+          <tr><td>October</td><td>Early Autumn</td><td>€360</td><td>€145</td><td>€75</td><td>€70</td></tr>
+          <tr><td>November</td><td>Autumn/Harvest</td><td>€280</td><td>€115</td><td>€55</td><td>€50</td></tr>
+          <tr><td>December</td><td>Winter Holidays</td><td>€235</td><td>€95</td><td>€45</td><td>€40</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Program Supplement</div>
+      <h2>Prep Day &amp; Program Supplement</h2>
+      <p>Large programs burden facilities beyond nominal lodging use. Rather than raise daily rates, we invoice a separate supplement equal to <strong>one additional day-rate</strong> for any program. This allows facilitators to arrive a day early for rest and planning at no extra charge.</p>
+      <div class="note">Programs of five or fewer days paying the minimum-stay cost will have the prep-day supplement waived.</div>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Stay Length</div>
+      <h2>Minimum Rental &amp; Deposits</h2>
+      <p>Minimum stay is 7 nights. Shorter programs are accepted at the minimum-stay cost.</p>
+      <table class="cap-table">
+        <thead>
+          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Minimum Stay (nights)</td><td>7</td><td>5</td><td>7</td><td>7</td></tr>
+          <tr><td>Security Deposit</td><td>€500</td><td>€200</td><td>€300</td><td>€1,000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Services</div>
+      <h2>Bare Facility or Full Support?</h2>
+      <p>Programs rarely thrive without carefully crafted logistics. You are welcome to book the bare facility at the costs above. Our bare-facility care includes an arrival orientation, daily maintenance, and a departure inspection.</p>
+      <p>If your program would benefit from additional support, <strong>Cretan Destination Retreats</strong> can provide:</p>
+      <ul>
+        <li>Participant enrollment, communications and financial services — at 5% of program value</li>
+        <li>Airport transfers and all transportation — at cost plus 15%</li>
+        <li>Catered meals, restaurant arrangements, pantry stocking — at cost plus 15%</li>
+        <li>Cleaning and laundry at various frequencies — at cost plus 15%</li>
+        <li>Activity guides and excursion leadership — at €20/hour or €100/day plus expenses</li>
+        <li>Program design services for educational and experiential programs</li>
+      </ul>
+      <div class="note">With our local contacts, we often secure arrangements at discounts greater than our 15% markup, meaning you may pay less than you would self-arranging.</div>
+    </div>
+
+    <div class="section-block">
+      <div class="eyebrow">Taxes, Payment &amp; Other Policies</div>
+      <h2>FAQs</h2>
+      <h3>Taxes</h3>
+      <p>An <strong>18% Greek lodging tax</strong> applies to the total reservation value. The <strong>Climate Resilience Tax</strong> applies per night: €4/night (Nov–Mar) or €15/night (Apr–Oct). All taxes are included in your offer.</p>
+      <h3>Extended-Stay Discounts</h3>
+      <p>Season-based discounts apply for programs staying 14, 28 or 56 nights (5–25% depending on season). Discounts are calculated per day and applied before taxes.</p>
+      <h3>Currency &amp; Payment</h3>
+      <p>All charges in Euros. USD accepted at the IMF rate on the offer date. Payment plans available for qualifying reservations booked well ahead. Credit card processing fees (3–5%) are itemised separately.</p>
+      <h3>Cancellations</h3>
+      <p>We will always work to refund cancelled bookings and charge no fee for this. Refunds depend on our ability to re-book your time.</p>
+      <h3>Check-In &amp; Check-Out</h3>
+      <p>Check-in from 16:00; check-out by 10:00. Early luggage-drop and late hold always available.</p>
+    </div>
+
+    <div class="back-cta">
+      <a href="/#booking" class="btn btn-primary">Enquire About Your Program →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Villa Koukouvayia Farms. All rights reserved. &nbsp;·&nbsp;
+  <a href="/privacy" style="color:inherit; opacity:0.8;">Cookies &amp; Privacy</a>
+</footer>
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+  // Honour anchor hash so policy links like /policy#event work on load
+  history.replaceState(null, '', '/policy#' + name);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// On load: honour #hash in URL
+(function() {
+  const hash = window.location.hash.replace('#', '');
+  const valid = ['holiday', 'event', 'program'];
+  if (valid.includes(hash)) {
+    const btn = document.querySelector(`.tab-btn:nth-child(${valid.indexOf(hash)+1})`);
+    if (btn) switchTab(hash, btn);
+  }
+})();
+</script>
+</body>
+</html>
