@@ -473,9 +473,25 @@ section { padding: 100px 0; }
   color: var(--olive-deep);
 }
 
-.residence-text .eyebrow { margin-bottom: 12px; }
-.residence-text h3 { margin-bottom: 16px; }
-.residence-text h3 em { font-style: italic; font-weight: 300; color: var(--olive); }
+.residence-name {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 6px;
+  line-height: 1.15;
+}
+.residence-tagline {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+  font-weight: 300;
+  color: var(--olive);
+  margin-bottom: 22px;
+  line-height: 1.45;
+}
+.residence-tagline em { font-style: normal; }
 .residence-text > p { color: var(--ink-soft); margin-bottom: 24px; }
 
 .residence-specs {
@@ -1318,8 +1334,8 @@ section { padding: 100px 0; }
         <img data-photo-slot="vkf:mh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg" alt="Main House at Villa Koukouvayia">
       </div>
       <div class="residence-text">
-        <div class="eyebrow">The Main House</div>
-        <h3>Three storeys, two stone fireplaces, <em>and a spiral stairway to the stars.</em></h3>
+        <h3 class="residence-name">The Main House</h3>
+        <p class="residence-tagline">Three storeys, two stone fireplaces, <em>and a spiral stairway to the stars.</em></p>
         <p>The Main House is the estate's master residence, boasting three bespoke bedrooms and spectacular views south to Crete's mountains &amp; gorges, and north to the island's dramatic Aegean shoreline.</p>
         <div class="residence-specs">
           <div class="spec">
@@ -1363,8 +1379,8 @@ section { padding: 100px 0; }
         <img data-photo-slot="vkf:gh_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912538543-OD3YLBKMIUQNS2PI8BMA/GH2.png" alt="Guest House at Villa Koukouvayia">
       </div>
       <div class="residence-text">
-        <div class="eyebrow">The Guest House</div>
-        <h3>Intimate, easy &amp; <em>luxuriously simple.</em></h3>
+        <h3 class="residence-name">The Guest House</h3>
+        <p class="residence-tagline">Intimate, easy &amp; <em>luxuriously simple.</em></p>
         <p>The Guest House is the farm's most popular residence, with the same spectacular views as the Main House, but smaller, simpler, and perfect for couples, young families, or professionals working remotely.</p>
         <div class="residence-specs">
           <div class="spec">
@@ -1406,8 +1422,8 @@ section { padding: 100px 0; }
         <img data-photo-slot="vkf:gs_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913265386-JXN9VM21R4GNDPH7I3EP/VKF2.png" alt="Garden Suite at Villa Koukouvayia">
       </div>
       <div class="residence-text">
-        <div class="eyebrow">The Garden Suite</div>
-        <h3>Luxurious grove-level accommodations, <em>fully flexible for smaller or larger groups.</em></h3>
+        <h3 class="residence-name">The Garden Suite</h3>
+        <p class="residence-tagline">Luxurious grove-level accommodations, <em>fully flexible for smaller or larger groups.</em></p>
         <p>The Garden Suite is the farm's most flexible residence, a beautifully appointed apartment with stone features &amp; ground-level views into the farm's surrounding olive groves. Perfect for small families or couples, but designed to accommodate extended families, retreat cohorts and larger groups. Each bedroom boasts flexible cabinet bedding that can customize your rooms from intimate couple's lodging to albergue-style sleeping of up to four guests per room. With a fireplace, professionally equipped kitchen, large dining area &amp; quiet outdoor garden, this is a home for long communal dinners, inside or under the stars, where no-one wants to leave the table.</p>
         <div class="residence-specs">
           <div class="spec">
@@ -1447,8 +1463,8 @@ section { padding: 100px 0; }
         <img data-photo-slot="vkf:estate_main" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png" alt="Entire Estate at Villa Koukouvayia">
       </div>
       <div class="residence-text">
-        <div class="eyebrow">The Entire Estate</div>
-        <h3>All three homes, <em>all yours.</em></h3>
+        <h3 class="residence-name">The Entire Estate</h3>
+        <p class="residence-tagline">All three homes, <em>all yours.</em></p>
         <p>Eight-plus bedrooms, twenty-plus beds accommodating 23-plus guests. Seven bathrooms. The roof terrace becomes a star-lit dance floor, the groves become a ceremony aisle and the pool a gathering point. Built for weddings, reunions and purpose-driven programs where community and privacy are balanced. Or simply bring a large group of friends with no purpose greater than to share a dynamic, memorable holiday.</p>
         <div class="residence-specs">
           <div class="spec">
