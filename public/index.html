@@ -843,6 +843,48 @@ section { padding: 100px 0; }
   opacity: 0.7;
   line-height: 1.5;
 }
+.platform-links {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(244,238,226,0.12);
+}
+.platform-links-label {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 600;
+  color: var(--bone);
+  opacity: 0.55;
+  margin-bottom: 12px;
+}
+.platform-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.platform-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 999px;
+  background: rgba(244,238,226,0.07);
+  border: 1px solid rgba(244,238,226,0.16);
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.platform-pill:hover {
+  background: rgba(244,238,226,0.15);
+  border-color: rgba(244,238,226,0.32);
+  color: var(--cream-soft);
+  text-decoration: none;
+}
 .quote-warn {
   background: rgba(180, 99, 63, 0.15);
   border: 1px solid rgba(180, 99, 63, 0.35);
@@ -980,6 +1022,12 @@ section { padding: 100px 0; }
 /* =========================================================
    RESPONSIVE TWEAKS
    ========================================================= */
+@media (max-width: 900px) {
+  .nav-brand img { height: 60px; }
+  .nav.scrolled .nav-brand img { height: 48px; }
+  .reviews-banner { height: 260px; }
+  .location-grid { grid-template-columns: 1fr; gap: 40px; }
+}
 @media (max-width: 640px) {
   .hero-content { padding: 120px 20px 40px; }
   .hero-sub { font-size: 1rem; margin-bottom: 32px; }
@@ -987,16 +1035,23 @@ section { padding: 100px 0; }
   .stat-num { font-size: 1.8rem; }
   .price-from-value { font-size: 1.5rem; }
   .review { padding: 24px 20px; }
-  .booking-wrap { padding: 28px 20px; }
+  .booking-wrap { padding: 24px 16px; }
   .booking-row { grid-template-columns: 1fr; }
   .residence-footer { flex-direction: column; align-items: flex-start; }
   .residence-features { grid-template-columns: 1fr; }
+  .quote-card { padding: 22px 18px; }
+  .reviews-banner { height: 200px; border-radius: 10px; }
+  .platform-pills { gap: 6px; }
+  .platform-pill { font-size: 0.74rem; padding: 6px 12px; }
+  .nav-brand img { height: 52px; }
+  .nav.scrolled .nav-brand img { height: 42px; }
 }
 @media (max-width: 480px) {
   .hero-content { padding: 90px 16px 32px; }
   .book-strip { grid-template-columns: 1fr; }
   .book-submit { grid-column: auto; width: 100%; }
   .hero-sub { max-width: 100%; }
+  .intro-stats { grid-template-columns: repeat(2, 1fr); gap: 16px; }
 }
 
 /* =========================================================
@@ -1017,7 +1072,7 @@ section { padding: 100px 0; }
 .hero-media .carousel-btn { display: none; }
 .hero-media .carousel-dots { display: none; }
 .hero-media .carousel-slide {
-  animation: kenBurns 22s ease-in-out infinite alternate;
+  animation: kenBurns 12s ease-in-out infinite alternate;
 }
 
 /* =========================================================
@@ -1625,7 +1680,7 @@ section { padding: 100px 0; }
       <div class="booking-side">
         <div class="eyebrow">Reserve Your Stay</div>
         <h2>Your stay, <em>your price.</em></h2>
-        <p>Pick dates, a group size and a residence. We'll calculate an initial quote and confirm final pricing within 24 hours. Prefer a third-party platform? Links to our VRBO and Airbnb listings are below the form.</p>
+        <p>Pick dates and a group size. We'll suggest the right residence and calculate an initial quote — final pricing confirmed within 24 hours.</p>
 
         <form class="booking-form" id="bookingForm" onsubmit="submitBooking(event)">
           <div class="booking-row">
@@ -1713,27 +1768,6 @@ section { padding: 100px 0; }
             <a id="policyLink" href="/policy" target="_blank" class="btn btn-outline" style="flex-shrink:0; white-space:nowrap; display:none;">Rates &amp; Policies ↗</a>
           </div>
 
-          <div style="margin-top: 18px; padding: 16px; background: var(--bone); border-radius: var(--radius); font-size: 0.85rem; color: var(--ink-soft);">
-            <strong style="display:block; margin-bottom:8px; color: var(--ink);">Prefer a third-party platform?</strong>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;">
-              <a href="https://www.vrbo.com/3087102" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Entire Estate ↗</a>
-              <span style="color:var(--muted);">·</span>
-              <a href="https://www.vrbo.com/1883709" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Main House ↗</a>
-              <span style="color:var(--muted);">·</span>
-              <a href="https://www.vrbo.com/858887" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Guest House ↗</a>
-              <span style="color:var(--muted);">·</span>
-              <a href="https://www.vrbo.com/3096792" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">VRBO — Garden Suite ↗</a>
-            </div>
-            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;">
-              <a href="https://www.airbnb.com/rooms/756217828154195750" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Entire Estate ↗</a>
-              <span style="color:var(--muted);">·</span>
-              <a href="https://www.airbnb.com/rooms/51834542" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Main House ↗</a>
-              <span style="color:var(--muted);">·</span>
-              <a href="https://www.airbnb.com/rooms/10459622" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Guest House ↗</a>
-              <span style="color:var(--muted);">·</span>
-              <a href="https://www.airbnb.com/rooms/755484438431691642" target="_blank" rel="noopener" style="color: var(--olive-deep); font-weight:600;">Airbnb — Garden Suite ↗</a>
-            </div>
-          </div>
         </form>
 
         <div class="confirmation" id="confirmation">
@@ -1753,6 +1787,19 @@ section { padding: 100px 0; }
         </div>
         <div class="quote-note">
           Your quote includes the 18% Greek lodging tax and all other taxes &amp; fees. Final pricing confirmed by your hosts within 24 hours. Security deposit held separately, returned on checkout.
+        </div>
+        <div class="platform-links">
+          <div class="platform-links-label">Also available on</div>
+          <div class="platform-pills">
+            <a href="https://www.vrbo.com/3087102" class="platform-pill" target="_blank" rel="noopener">VRBO · Estate ↗</a>
+            <a href="https://www.vrbo.com/1883709" class="platform-pill" target="_blank" rel="noopener">VRBO · Main House ↗</a>
+            <a href="https://www.vrbo.com/858887" class="platform-pill" target="_blank" rel="noopener">VRBO · Guest House ↗</a>
+            <a href="https://www.vrbo.com/3096792" class="platform-pill" target="_blank" rel="noopener">VRBO · Garden Suite ↗</a>
+            <a href="https://www.airbnb.com/rooms/756217828154195750" class="platform-pill" target="_blank" rel="noopener">Airbnb · Estate ↗</a>
+            <a href="https://www.airbnb.com/rooms/51834542" class="platform-pill" target="_blank" rel="noopener">Airbnb · Main House ↗</a>
+            <a href="https://www.airbnb.com/rooms/10459622" class="platform-pill" target="_blank" rel="noopener">Airbnb · Guest House ↗</a>
+            <a href="https://www.airbnb.com/rooms/755484438431691642" class="platform-pill" target="_blank" rel="noopener">Airbnb · Garden Suite ↗</a>
+          </div>
         </div>
       </aside>
     </div>
