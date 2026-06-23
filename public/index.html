@@ -241,7 +241,7 @@ section { padding: 100px 0; }
   padding: 18px;
   box-shadow: var(--shadow-lift);
   display: grid;
-  grid-template-columns: 1.2fr 1.2fr 1fr 1fr auto;
+  grid-template-columns: 1.2fr 1.2fr 1fr auto;
   gap: 14px;
   align-items: end;
   animation: fadeUp 1.4s ease 0.8s both;
@@ -1170,16 +1170,6 @@ section { padding: 100px 0; }
             <option value="24">24 guests</option>
           </select>
         </div>
-        <div class="book-field">
-          <label for="heroProperty">Residence</label>
-          <select id="heroProperty">
-            <option value="auto" selected>Please suggest a best fit</option>
-            <option value="main">Main House</option>
-            <option value="guest">Guest House</option>
-            <option value="garden">Garden Suite</option>
-            <option value="estate">Entire Estate</option>
-          </select>
-        </div>
         <button type="submit" class="book-submit">See Price →</button>
       </form>
     </div>
@@ -1657,11 +1647,10 @@ section { padding: 100px 0; }
               </select>
             </div>
             <div class="form-field">
-              <label for="property">Residence</label>
+              <label for="property">Suggested residence</label>
               <select id="property">
-                <option value="auto" selected>Please suggest a best fit</option>
-                <option value="main">Main House (6 incl., 9 max)</option>
                 <option value="guest">Guest House (4 incl., 6 max)</option>
+                <option value="main">Main House (6 incl., 9 max)</option>
                 <option value="garden">Garden Suite (6 incl., 13 max)</option>
                 <option value="estate">Entire Estate (16 incl., 28 max)</option>
               </select>
@@ -2038,6 +2027,17 @@ function recalc() {
   if (el) el.addEventListener('change', recalc);
 });
 
+// Auto-suggest best-fit residence whenever guest count changes
+document.getElementById('guests').addEventListener('change', function () {
+  document.getElementById('property').value = suggestProperty(parseInt(this.value, 10));
+});
+
+// Pre-select on page load based on default guest count
+(function () {
+  const g = parseInt(document.getElementById('guests').value, 10);
+  if (g) document.getElementById('property').value = suggestProperty(g);
+}());
+
 // Check-in change: advance checkout minimum to avoid back-clicking
 document.getElementById('checkIn').addEventListener('change', function() {
   const ci = this.value;
@@ -2087,7 +2087,7 @@ function handleIntentChange(intent) {
   // Retreat: restrict residence to GS or Estate only
   const opts = propSel.querySelectorAll('option');
   opts.forEach(opt => {
-    if (intent === 'retreat' && opt.value !== 'auto' && opt.value !== 'garden' && opt.value !== 'estate') {
+    if (intent === 'retreat' && opt.value !== 'garden' && opt.value !== 'estate') {
       opt.style.display = 'none';
     } else {
       opt.style.display = '';
@@ -2106,11 +2106,12 @@ function jumpToBooking(e) {
   const ci = document.getElementById('heroCheckIn').value;
   const co = document.getElementById('heroCheckOut').value;
   const g  = document.getElementById('heroGuests').value;
-  const p  = document.getElementById('heroProperty').value;
   if (ci) document.getElementById('checkIn').value = ci;
   if (co) document.getElementById('checkOut').value = co;
-  if (g)  document.getElementById('guests').value  = g;
-  if (p)  document.getElementById('property').value = p;
+  if (g) {
+    document.getElementById('guests').value   = g;
+    document.getElementById('property').value = suggestProperty(parseInt(g, 10));
+  }
   recalc();
   document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
 }
