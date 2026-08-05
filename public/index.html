@@ -719,7 +719,7 @@ section { padding: 100px 0; }
 }
 .booking-wrap {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1.1fr 1fr;
   gap: 60px;
   align-items: flex-start;
   background: var(--cream-soft);
@@ -800,6 +800,17 @@ section { padding: 100px 0; }
   opacity: 0.85;
   margin-bottom: 24px;
 }
+.quote-third-party {
+  color: var(--bone);
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+.quote-third-party a {
+  color: var(--terracotta);
+  opacity: 1;
+  font-weight: 600;
+}
 
 .quote-empty {
   padding: 32px 0;
@@ -842,48 +853,6 @@ section { padding: 100px 0; }
   color: var(--bone);
   opacity: 0.7;
   line-height: 1.5;
-}
-.platform-links {
-  margin-top: 28px;
-  padding-top: 22px;
-  border-top: 1px solid rgba(244,238,226,0.12);
-}
-.platform-links-label {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 600;
-  color: var(--bone);
-  opacity: 0.55;
-  margin-bottom: 12px;
-}
-.platform-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.platform-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 7px 14px;
-  border-radius: 999px;
-  background: rgba(244,238,226,0.07);
-  border: 1px solid rgba(244,238,226,0.16);
-  color: var(--bone);
-  font-family: var(--font-body);
-  font-size: 0.78rem;
-  font-weight: 500;
-  text-decoration: none;
-  white-space: nowrap;
-  letter-spacing: 0.01em;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-.platform-pill:hover {
-  background: rgba(244,238,226,0.15);
-  border-color: rgba(244,238,226,0.32);
-  color: var(--cream-soft);
-  text-decoration: none;
 }
 .quote-warn {
   background: rgba(180, 99, 63, 0.15);
@@ -1041,8 +1010,6 @@ section { padding: 100px 0; }
   .residence-features { grid-template-columns: 1fr; }
   .quote-card { padding: 22px 18px; }
   .reviews-banner { height: 200px; border-radius: 10px; }
-  .platform-pills { gap: 6px; }
-  .platform-pill { font-size: 0.74rem; padding: 6px 12px; }
   .nav-brand img { height: 52px; }
   .nav.scrolled .nav-brand img { height: 42px; }
 }
@@ -1626,6 +1593,19 @@ section { padding: 100px 0; }
 <section class="booking" id="booking">
   <div class="container">
     <div class="booking-wrap reveal">
+      <!-- Live Quote -->
+      <aside class="quote-card">
+        <h3 id="quoteTitle">Your Initial Quote</h3>
+        <p class="quote-third-party">Also available via <a href="/policy#platforms-vrbo" target="_blank" rel="noopener">VRBO</a> or <a href="/policy#platforms-airbnb" target="_blank" rel="noopener">AirBnB</a>.</p>
+        <p class="quote-sub" id="quoteSubtitle">To see your direct-booking price, share the details of your stay →</p>
+        <div id="quoteBody">
+          <div class="quote-empty">Select check-in &amp; check-out dates →</div>
+        </div>
+        <div class="quote-note">
+          Your quote includes all taxes and fees, with the security deposit held separately &amp; refundable at departure. Final pricing confirmed within 24 hours.
+        </div>
+      </aside>
+
       <div class="booking-side">
         <div class="eyebrow">Reserve Your Stay</div>
         <h2>Your stay, <em>your price.</em></h2>
@@ -1644,37 +1624,22 @@ section { padding: 100px 0; }
           </div>
           <div class="booking-row">
             <div class="form-field">
-              <label for="guests">Guests</label>
-              <select id="guests">
-                <option value="1">1 guest</option>
-                <option value="2">2 guests</option>
-                <option value="3">3 guests</option>
-                <option value="4" selected>4 guests</option>
-                <option value="5">5 guests</option>
-                <option value="6">6 guests</option>
-                <option value="7">7 guests</option>
-                <option value="8">8 guests</option>
-                <option value="10">10 guests</option>
-                <option value="12">12 guests</option>
-                <option value="14">14 guests</option>
-                <option value="16">16 guests</option>
-                <option value="18">18 guests</option>
-                <option value="20">20 guests</option>
-                <option value="22">22 guests</option>
-                <option value="24">24 guests</option>
-                <option value="26">26 guests</option>
-                <option value="28">28 guests</option>
-              </select>
+              <label for="adultGuests">Adult Guests</label>
+              <input type="number" id="adultGuests" min="1" max="28" value="4" required>
             </div>
             <div class="form-field">
-              <label for="property">Suggested residence</label>
-              <select id="property">
-                <option value="guest">Guest House (4 incl., 6 max)</option>
-                <option value="main">Main House (6 incl., 9 max)</option>
-                <option value="garden">Garden Suite (6 incl., 13 max)</option>
-                <option value="estate">Entire Estate (16 incl., 28 max)</option>
-              </select>
+              <label for="childGuests">Children under 17</label>
+              <input type="number" id="childGuests" min="0" max="24" value="0">
             </div>
+          </div>
+          <div class="form-field">
+            <label for="property">Suggested residence</label>
+            <select id="property">
+              <option value="guest">Guest House (4 incl., 6 max)</option>
+              <option value="main">Main House (6 incl., 9 max)</option>
+              <option value="garden">Garden Suite (6 incl., 13 max)</option>
+              <option value="estate">Entire Estate (16 incl., 28 max)</option>
+            </select>
           </div>
           <div class="booking-row">
             <div class="form-field">
@@ -1713,7 +1678,7 @@ section { padding: 100px 0; }
           </div>
 
           <div style="display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-top:4px;">
-            <button type="submit" class="btn btn-primary submit-full" style="margin-top:0; flex:1; min-width:200px;">Request to Book →</button>
+            <button type="submit" class="btn btn-primary submit-full" style="margin-top:0; flex:1; min-width:200px;">Request to Book Directly →</button>
             <a id="policyLink" href="/policy" target="_blank" class="btn btn-outline" style="flex-shrink:0; white-space:nowrap; display:none;">Rates &amp; Policies ↗</a>
           </div>
 
@@ -1726,25 +1691,6 @@ section { padding: 100px 0; }
           </div>
         </div>
       </div>
-
-      <!-- Live Quote -->
-      <aside class="quote-card">
-        <h3 id="quoteTitle">Your Initial Quote</h3>
-        <p class="quote-sub" id="quoteSubtitle">Pick dates to see pricing</p>
-        <div id="quoteBody">
-          <div class="quote-empty">Select check-in &amp; check-out dates →</div>
-        </div>
-        <div class="quote-note">
-          Your quote includes all taxes and fees, with the security deposit held separately &amp; refundable at departure. Final pricing confirmed within 24 hours.
-        </div>
-        <div class="platform-links">
-          <div class="platform-links-label">Also available on</div>
-          <div class="platform-pills">
-            <a href="/policy#platforms-vrbo" class="platform-pill" target="_blank" rel="noopener">Book via VRBO ↗</a>
-            <a href="/policy#platforms-airbnb" class="platform-pill" target="_blank" rel="noopener">Book via Airbnb ↗</a>
-          </div>
-        </div>
-      </aside>
     </div>
   </div>
 </section>
@@ -1778,8 +1724,8 @@ section { padding: 100px 0; }
           <li>Agricultural Road #1</li>
           <li>Kourthiana/Kissamos 73400</li>
           <li>Crete, Greece</li>
-          <li><a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Map &amp; Location →</a></li>
-          <li><a href="/directions" style="color: var(--terracotta); opacity: 1;">Driving Directions →</a></li>
+          <li><a href="/directions" style="color: var(--terracotta); opacity: 1;">Our Location &amp; Driving Directions →</a></li>
+          <li><a href="/42-island-faqs.pdf" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Coming to Crete? Island-travel FAQs →</a></li>
         </ul>
       </div>
       <!-- Your Stay -->
@@ -1961,7 +1907,7 @@ function renderQuote(q) {
 
   if (!q) {
     body.innerHTML        = '<div class="quote-empty">Select check-in &amp; check-out dates →</div>';
-    subtitle.textContent  = 'Pick dates to see pricing';
+    subtitle.textContent  = 'To see your direct-booking price, share the details of your stay →';
     title.textContent     = 'Your Initial Quote';
     return;
   }
@@ -2010,10 +1956,16 @@ function renderQuote(q) {
   body.innerHTML = html;
 }
 
+function totalGuests() {
+  const adults   = parseInt(document.getElementById('adultGuests').value, 10) || 0;
+  const children = parseInt(document.getElementById('childGuests').value, 10) || 0;
+  return adults + children;
+}
+
 function recalc() {
   const ci        = document.getElementById('checkIn').value;
   const co        = document.getElementById('checkOut').value;
-  const guests    = parseInt(document.getElementById('guests').value, 10);
+  const guests    = totalGuests();
   const property  = document.getElementById('property').value;
   const ceremony  = document.getElementById('ceremonyType')?.value || '';
 
@@ -2028,19 +1980,21 @@ function recalc() {
 }
 
 // Wire up listeners
-['checkIn', 'checkOut', 'guests', 'property', 'ceremonyType'].forEach(id => {
+['checkIn', 'checkOut', 'adultGuests', 'childGuests', 'property', 'ceremonyType'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('change', recalc);
 });
 
 // Auto-suggest best-fit residence whenever guest count changes
-document.getElementById('guests').addEventListener('change', function () {
-  document.getElementById('property').value = suggestProperty(parseInt(this.value, 10));
+['adultGuests', 'childGuests'].forEach(id => {
+  document.getElementById(id).addEventListener('change', function () {
+    document.getElementById('property').value = suggestProperty(totalGuests());
+  });
 });
 
 // Pre-select on page load based on default guest count
 (function () {
-  const g = parseInt(document.getElementById('guests').value, 10);
+  const g = totalGuests();
   if (g) document.getElementById('property').value = suggestProperty(g);
 }());
 
@@ -2115,7 +2069,8 @@ function jumpToBooking(e) {
   if (ci) document.getElementById('checkIn').value = ci;
   if (co) document.getElementById('checkOut').value = co;
   if (g) {
-    document.getElementById('guests').value   = g;
+    document.getElementById('adultGuests').value = g;
+    document.getElementById('childGuests').value = 0;
     document.getElementById('property').value = suggestProperty(parseInt(g, 10));
   }
   recalc();
@@ -2137,7 +2092,9 @@ async function submitBooking(e) {
     site:         'vkf',
     checkIn:      document.getElementById('checkIn').value,
     checkOut:     document.getElementById('checkOut').value,
-    guests:       document.getElementById('guests').value,
+    guests:       totalGuests(),
+    adultGuests:  document.getElementById('adultGuests').value,
+    childGuests:  document.getElementById('childGuests').value,
     property:     document.getElementById('property').value,
     name:         document.getElementById('fullName').value,
     email:        document.getElementById('email').value,
@@ -2160,7 +2117,7 @@ async function submitBooking(e) {
     document.getElementById('confirmation').scrollIntoView({ behavior: 'smooth', block: 'center' });
   } catch (err) {
     btn.disabled    = false;
-    btn.textContent = 'Request to Book →';
+    btn.textContent = 'Request to Book Directly →';
     alert('Something went wrong: ' + err.message + '\n\nPlease email us directly at info@koukouvayia.com');
   }
 }

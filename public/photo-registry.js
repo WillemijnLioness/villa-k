@@ -21,6 +21,12 @@ const PHOTO_REGISTRY = {
       multiple: false,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg']
     },
+    directions_arrival: {
+      label: 'Directions page — arrival photo',
+      hint: 'Placeholder is the estate aerial shot. H&R suggested something thematically connected to "arriving" — e.g. the drone footage of the coast road, a shot of the Sfakia road, or a slideshow from the "Roads & Byways" folder in the Visual Media Catalog. Landscape, wide crop.',
+      multiple: false,
+      defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png']
+    },
     mh_main: {
       label: 'Main House — slideshow',
       hint: 'Upload in order: exterior verandas, interior living spaces, kitchen, bedrooms (Koukouvayia Suite, Gryphon\'s Nest, Falcon\'s Nest), bathrooms, roof terrace. 4:3 landscape.',

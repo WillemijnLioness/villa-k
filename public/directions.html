@@ -102,6 +102,9 @@ li { margin-bottom: 7px; line-height: 1.6; }
 .pdf-link:hover { border-color: var(--olive); background: var(--bone); text-decoration: none; color: var(--ink); }
 .pdf-icon { font-size: 1.2rem; flex-shrink: 0; }
 
+.arrival-photo { max-width: 840px; margin: 0 auto; padding: 0 32px; }
+.arrival-photo img { width: 100%; height: 320px; object-fit: cover; border-radius: var(--radius-lg); display: block; margin-top: 32px; }
+
 footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-align: center; font-size: 0.82rem; opacity: 0.7; }
 
 @media (max-width: 660px) {
@@ -124,6 +127,10 @@ footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-al
   <div class="eyebrow">Villa Koukouvayia Farms</div>
   <h1>Getting Here</h1>
   <p>We are in western Crete, between the olive groves of Kourthiana and the sea at Kissamos — about 50 minutes from Chania.</p>
+</div>
+
+<div class="arrival-photo">
+  <img data-photo-slot="vkf:directions_arrival" src="https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png" alt="Arriving at Villa Koukouvayia Farms">
 </div>
 
 <div class="content">
@@ -158,7 +165,7 @@ footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-al
         <li>Pass through Kissamos town and continue west on the coastal road.</li>
         <li>Turn right toward <strong>Kourthiana</strong> (sign at the junction) and follow the agricultural road uphill. We are at the top on the left.</li>
       </ol>
-      <a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" class="route-cta">Navigate →</a>
+      <a href="https://www.google.com/maps/dir/?api=1&origin=Heraklion+International+Airport+Nikos+Kazantzakis,+Greece&destination=35.4773409,23.6897018&travelmode=driving" target="_blank" rel="noopener" class="route-cta">Get Driving Directions →</a>
     </div>
 
     <div class="route-card">
@@ -176,7 +183,7 @@ footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-al
         <li>Enter Kissamos town and continue west on the coastal road.</li>
         <li>Turn right toward <strong>Kourthiana</strong> and follow the agricultural road uphill. We are at the top on the left.</li>
       </ol>
-      <a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" class="route-cta">Navigate →</a>
+      <a href="https://www.google.com/maps/dir/?api=1&origin=Chania+International+Airport+Ioannis+Daskalogiannis,+Greece&destination=35.4773409,23.6897018&travelmode=driving" target="_blank" rel="noopener" class="route-cta">Get Driving Directions →</a>
     </div>
 
     <div class="route-card">
@@ -194,7 +201,7 @@ footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-al
         <li>Pass through Kissamos town and continue west on the coastal road.</li>
         <li>Turn right toward <strong>Kourthiana</strong> and follow the agricultural road uphill. We are at the top on the left.</li>
       </ol>
-      <a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" class="route-cta">Navigate →</a>
+      <a href="https://www.google.com/maps/dir/?api=1&origin=Souda+Port,+Chania,+Greece&destination=35.4773409,23.6897018&travelmode=driving" target="_blank" rel="noopener" class="route-cta">Get Driving Directions →</a>
     </div>
 
     <div class="route-card">
@@ -211,13 +218,13 @@ footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-al
         <li>Take the agricultural road uphill through the olive groves for about 2 km.</li>
         <li>Villa Koukouvayia Farms is at the <strong>top of the road on the left</strong>. The gate is olive green.</li>
       </ol>
-      <a href="https://maps.app.goo.gl/r2bus14LgBZGo2og9" target="_blank" rel="noopener" class="route-cta">Navigate →</a>
+      <a href="https://www.google.com/maps/dir/?api=1&origin=Kissamos,+Crete,+Greece&destination=35.4773409,23.6897018&travelmode=driving" target="_blank" rel="noopener" class="route-cta">Get Driving Directions →</a>
     </div>
 
   </div>
 
   <div class="tips">
-    <h2>A Few Things Worth Knowing</h2>
+    <h2>Important Arrival Notes</h2>
     <ul>
       <li>GPS works well in this area, but we recommend saving our Google Maps link before you lose signal on the agricultural road.</li>
       <li>The road from Kissamos is unpaved for the last stretch — entirely manageable in a standard hire car, even at night.</li>
@@ -254,5 +261,6 @@ footer { background: var(--ink); color: var(--bone); padding: 24px 32px; text-al
   <a href="/privacy" style="color:inherit; opacity:0.8;">Cookies &amp; Privacy</a>
 </footer>
 
+<script src="/photo-registry.js"></script>
 </body>
 </html>
