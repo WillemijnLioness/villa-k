@@ -548,8 +548,8 @@ section { padding: 100px 0; }
 }
 .price-from {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  flex-direction: column;
+  gap: 2px;
 }
 .price-from-label {
   font-size: 0.78rem;
@@ -559,7 +559,7 @@ section { padding: 100px 0; }
 }
 .price-from-value {
   font-family: var(--font-display);
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 300;
   color: var(--ink);
 }
@@ -1385,9 +1385,8 @@ section { padding: 100px 0; }
         </ul>
         <div class="residence-footer">
           <div class="price-from">
-            <span class="price-from-label">From</span>
-            <span class="price-from-value">€180</span>
-            <span class="price-from-unit">/ night</span>
+            <span class="price-from-label">Winter to Summer nightly rates of</span>
+            <span class="price-from-value">€121 to €351</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('main')">Check Dates →</a>
         </div>
@@ -1428,9 +1427,8 @@ section { padding: 100px 0; }
         </ul>
         <div class="residence-footer">
           <div class="price-from">
-            <span class="price-from-label">From</span>
-            <span class="price-from-value">€120</span>
-            <span class="price-from-unit">/ night</span>
+            <span class="price-from-label">Winter to Summer nightly rates of</span>
+            <span class="price-from-value">€67 to €189</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
         </div>
@@ -1469,9 +1467,8 @@ section { padding: 100px 0; }
         </ul>
         <div class="residence-footer">
           <div class="price-from">
-            <span class="price-from-label">From</span>
-            <span class="price-from-value">€200</span>
-            <span class="price-from-unit">/ night</span>
+            <span class="price-from-label">Winter to Summer nightly rates of</span>
+            <span class="price-from-value">€63 to €190</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('garden')">Check Dates →</a>
         </div>
@@ -1510,9 +1507,8 @@ section { padding: 100px 0; }
         </ul>
         <div class="residence-footer">
           <div class="price-from">
-            <span class="price-from-label">From</span>
-            <span class="price-from-value">€480</span>
-            <span class="price-from-unit">/ night</span>
+            <span class="price-from-label">Winter to Summer nightly rates of</span>
+            <span class="price-from-value">€308 to €822</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('estate')">Check Dates →</a>
         </div>
@@ -1602,7 +1598,9 @@ section { padding: 100px 0; }
           <div class="quote-empty">Select check-in &amp; check-out dates →</div>
         </div>
         <div class="quote-note">
-          Your quote includes all taxes and fees, with the security deposit held separately &amp; refundable at departure. Final pricing confirmed within 24 hours.
+          Please note: For your convenience, our prices include all Greek rental taxes, climate resilience taxes and other mandatory fees. Before committing to another venue be sure that their initially displayed prices also reflect your final costs.
+          <br><br>
+          Final pricing confirmed within 24 hours.
         </div>
       </aside>
 
@@ -1763,16 +1761,18 @@ section { padding: 100px 0; }
    ========================================================= */
 
 // Monthly rates per night indexed Jan(0)–Dec(11)
+// Source: H&R "Updated Rates-plan by season" (2026-08-05)
 const MONTHLY_RATES = {
-  guest:  [35, 35, 45, 55,  75, 100, 130, 130, 100,  75, 55,  45],
-  main:   [75, 75, 95,115, 145, 190, 250, 250, 190, 145,115,  95],
-  garden: [30, 30, 40, 50,  70,  95, 125, 125,  95,  70, 50,  40],
-  estate: [190,190,235,280,360, 465, 595, 595, 465, 360,280, 235]
+  guest:  [50, 50, 60, 65,  85, 110, 140, 140, 110,  85, 65,  60],
+  main:   [90, 90,115,125, 155, 200, 260, 260, 200, 155,125, 115],
+  garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
+  estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
 };
 
 const INCLUDED_GUESTS = { guest: 4, main: 6, garden: 6, estate: 16 };
 const MAX_GUESTS      = { guest: 6, main: 9, garden: 13, estate: 28 };
 const MIN_STAY        = { guest: 5, main: 7, garden: 7, estate: 7 };
+const DEPOSITS        = { guest: 200, main: 500, garden: 300, estate: 1000 };
 
 // Climate Resilience tax: Nov–Mar low / Apr–Oct high
 const CLIMATE_TAX = {
@@ -1783,14 +1783,32 @@ const CLIMATE_TAX = {
 };
 
 const EXTRA_GUEST_FEE  = 10;   // €/extra guest/night
-const LODGING_TAX_RATE = 0.18; // Greek rental tax
+const LODGING_TAX_RATE = 0.29; // Greek rental-value tax, capped
 
-// Extended-stay discounts (before tax)
-const DISCOUNTS = [
-  { nights: 56, pct: 0.20 },
-  { nights: 28, pct: 0.15 },
-  { nights: 14, pct: 0.10 }
+// Extended-stay discounts: season-based, indexed Jan(0)–Dec(11).
+// Applied per-night at whichever tier (14/28/56) the total stay qualifies for,
+// then subtotaled — mirrors the site's own "calculated per day, then subtotaled" policy language.
+const SEASON_DISCOUNTS = [
+  { 14: 0.10, 28: 0.15, 56: 0.25 }, // Jan
+  { 14: 0.10, 28: 0.15, 56: 0.25 }, // Feb
+  { 14: 0.07, 28: 0.10, 56: 0.20 }, // Mar
+  { 14: 0.05, 28: 0.07, 56: 0.15 }, // Apr
+  { 14: 0.03, 28: 0.05, 56: 0.10 }, // May
+  { 14: 0.00, 28: 0.03, 56: 0.07 }, // Jun
+  { 14: 0.00, 28: 0.03, 56: 0.05 }, // Jul
+  { 14: 0.00, 28: 0.03, 56: 0.05 }, // Aug
+  { 14: 0.00, 28: 0.03, 56: 0.07 }, // Sep
+  { 14: 0.03, 28: 0.05, 56: 0.10 }, // Oct
+  { 14: 0.05, 28: 0.07, 56: 0.15 }, // Nov
+  { 14: 0.07, 28: 0.10, 56: 0.20 }  // Dec
 ];
+
+function discountTierFor(billedNights) {
+  if (billedNights >= 56) return 56;
+  if (billedNights >= 28) return 28;
+  if (billedNights >= 14) return 14;
+  return null;
+}
 
 // Wedding ceremony surcharge = 3× one day-rate of the chosen property
 const CEREMONY_SURCHARGE_DAYS = 3;
@@ -1848,32 +1866,32 @@ function calculateQuote(checkIn, checkOut, guests, propertyKey, ceremonyType) {
   const included = INCLUDED_GUESTS[chosen];
   const extraGuests = Math.max(0, guests - included);
 
+  const billedNightsForTier = Math.max(nights, minNights);
+  const discountTier = discountTierFor(billedNightsForTier);
+
   let lodging      = 0;
   let climateTotal = 0;
+  let discount     = 0;
   const seasonBreakdown = {};
 
-  for (let i = 0; i < Math.max(nights, minNights); i++) {
+  for (let i = 0; i < billedNightsForTier; i++) {
     // If nights < minNights we charge at min-stay rate, so walk minNights days
     const day    = new Date(checkIn.getTime() + i * msPerDay);
     const rate   = getNightRate(chosen, day);
     const tier   = getClimateTier(day);
     lodging     += rate;
     climateTotal += climate[tier];
+    if (discountTier) discount += rate * SEASON_DISCOUNTS[day.getMonth()][discountTier];
     const monthName = day.toLocaleString('en-US', { month: 'short' });
     seasonBreakdown[monthName] = (seasonBreakdown[monthName] || 0) + 1;
   }
 
-  const billedNights = Math.max(nights, minNights);
+  const billedNights = billedNightsForTier;
   const minStayWarning = nights < minNights
     ? `Note: ${propertyLabel(chosen)} has a ${minNights}-night minimum. Your price reflects the minimum-stay cost.`
     : null;
 
-  // Extended-stay discount
-  let discountPct = 0;
-  for (const d of DISCOUNTS) {
-    if (billedNights >= d.nights) { discountPct = d.pct; break; }
-  }
-  const discount           = lodging * discountPct;
+  const discountPct        = discount > 0 ? discount / lodging : 0;
   const lodgingAfterDisc   = lodging - discount;
   const extraGuestsCharge  = extraGuests * EXTRA_GUEST_FEE * billedNights;
 
@@ -1889,13 +1907,17 @@ function calculateQuote(checkIn, checkOut, guests, propertyKey, ceremonyType) {
   const subtotal = lodgingAfterDisc + extraGuestsCharge + ceremonyCharge;
   const tax      = subtotal * LODGING_TAX_RATE;
   const total    = subtotal + tax + climateTotal;
+  const preDiscountTotal = total + discount;
+  const deposit  = DEPOSITS[chosen];
 
   return {
     property: chosen, propertyName: propertyLabel(chosen),
     nights, billedNights, guests, included, extraGuests,
-    lodging, seasonBreakdown, discountPct, discount,
+    lodging, seasonBreakdown, discountPct, discount, preDiscountTotal,
     extraGuestsCharge, ceremonyCharge, ceremonyLabel,
-    subtotal, tax, climateTotal, total,
+    subtotal, tax, climateTotal, total, deposit,
+    costPerNight: total / billedNights,
+    costPerGuestNight: total / billedNights / guests,
     minStayWarning, combo: comboHint(guests)
   };
 }
@@ -1927,27 +1949,21 @@ function renderQuote(q) {
     html += `<div class="quote-warn" style="margin-bottom:12px;">${q.minStayWarning}</div>`;
   }
 
-  html += `<div class="quote-line"><span class="label">Lodging (${q.billedNights} nights)</span><span class="value">${fmt(q.lodging)}</span></div>`;
-
-  const monthEntries = Object.entries(q.seasonBreakdown);
-  if (monthEntries.length > 1 || (monthEntries.length === 1 && monthEntries[0][1] !== q.billedNights)) {
-    const parts = monthEntries.map(([m, n]) => `${n}n ${m}`).join(' · ');
-    html += `<div class="quote-line sub"><span class="label">${parts}</span><span class="value"></span></div>`;
-  }
-
   if (q.discountPct > 0) {
-    html += `<div class="quote-line"><span class="label">Extended-stay discount (${Math.round(q.discountPct*100)}%)</span><span class="value">− ${fmt(q.discount)}</span></div>`;
+    html += `<div class="quote-line sub"><span class="label">Extended-stay discount (${Math.round(q.discountPct*100)}%)</span><span class="value">was ${fmt(q.preDiscountTotal)}</span></div>`;
   }
   if (q.extraGuests > 0) {
-    html += `<div class="quote-line"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.billedNights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
+    html += `<div class="quote-line sub"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.billedNights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
   }
   if (q.ceremonyCharge > 0) {
-    html += `<div class="quote-line"><span class="label">${q.ceremonyLabel}</span><span class="value">${fmt(q.ceremonyCharge)}</span></div>`;
+    html += `<div class="quote-line sub"><span class="label">${q.ceremonyLabel}</span><span class="value">${fmt(q.ceremonyCharge)}</span></div>`;
   }
 
-  html += `<div class="quote-line"><span class="label">Greek Rental Taxes (18%)</span><span class="value">${fmt(q.tax)}</span></div>`;
-  html += `<div class="quote-line"><span class="label">Climate Resilience Tax</span><span class="value">${fmt(q.climateTotal)}</span></div>`;
   html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
+
+  html += `<div class="quote-line sub"><span class="label">Fully Refundable Security Deposit</span><span class="value">${fmt(q.deposit)}</span></div>`;
+  html += `<div class="quote-line sub"><span class="label">Cost per night</span><span class="value">${fmt(q.costPerNight)}</span></div>`;
+  html += `<div class="quote-line sub"><span class="label">Cost per guest/night</span><span class="value">${fmt(q.costPerGuestNight)}</span></div>`;
 
   if (q.combo) {
     html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">${q.combo}</div>`;
