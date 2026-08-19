@@ -1508,7 +1508,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€308 to €822</span>
+            <span class="price-from-value">€358 to €912</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('estate')">Check Dates →</a>
         </div>
@@ -1750,23 +1750,46 @@ section { padding: 100px 0; }
 /* =========================================================
    BOOKING ENGINE
    Rates sourced from VKF 4C1a HolidayRental policy (2026-01-21)
+   Rate figures + Event Fee formula: H&R "RatesWorkbook 2026-0815a.xlsx"
+   (DB2 RatesPlan + WorkSheet tabs), Review 10.0 feedback (2026-08-19)
    ========================================================= */
 
-// Monthly rates per night indexed Jan(0)–Dec(11)
-// Source: H&R "Updated Rates-plan by season" (2026-08-05)
-const MONTHLY_RATES = {
-  guest:  [50, 50, 60, 65,  85, 110, 140, 140, 110,  85, 65,  60],
-  main:   [90, 90,115,125, 155, 200, 260, 260, 200, 155,125, 115],
-  garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
-  estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
+// Two rate profiles per H&R's RatesWorkbook:
+// - y2026: the 2026 launch/transition year (Jan–Jun rates + 18% tax phase-in) — already past.
+// - standard: 2027 rates, held flat through 2040 per H&R's current plan.
+//   (2026's own Jun–Dec season already matched "standard" exactly.)
+const RATE_PROFILES = {
+  y2026: {
+    rates: {
+      guest:  [35, 35, 45, 55,  75, 110, 140, 140, 110,  85, 65,  60],
+      main:   [75, 75, 95, 115, 145, 200, 260, 260, 200, 155,125, 115],
+      garden: [30, 30, 40, 50,  70, 105, 135, 135, 105,  80, 60,  55],
+      estate: [190,190,235,280,360, 495, 625, 625, 495, 390,310, 285]
+    },
+    // Greek short-term-rental tax phase-in: 18% Jan–Jun, 29% Jul–Dec (2026 only)
+    taxRate: [0.18,0.18,0.18,0.18,0.18,0.18,0.29,0.29,0.29,0.29,0.29,0.29]
+  },
+  standard: {
+    rates: {
+      guest:  [50, 50, 60, 65,  85, 110, 140, 140, 110,  85, 65,  60],
+      main:   [90, 90,115,125, 155, 200, 260, 260, 200, 155,125, 115],
+      garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
+      estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
+    },
+    taxRate: 0.29 // flat, 2027 onward through 2040 per current H&R plan
+  }
 };
+
+function ratesForYear(year) {
+  return year <= 2026 ? RATE_PROFILES.y2026 : RATE_PROFILES.standard;
+}
 
 const INCLUDED_GUESTS = { guest: 4, main: 6, garden: 6, estate: 16 };
 const MAX_GUESTS      = { guest: 6, main: 9, garden: 13, estate: 28 };
 const MIN_STAY        = { guest: 5, main: 7, garden: 7, estate: 7 };
 const DEPOSITS        = { guest: 200, main: 500, garden: 300, estate: 1000 };
 
-// Climate Resilience tax: Nov–Mar low / Apr–Oct high
+// Climate Resilience tax: Nov–Mar low / Apr–Oct high (flat across all years)
 const CLIMATE_TAX = {
   guest:  { low: 2, high: 8  },
   main:   { low: 4, high: 15 },
@@ -1774,44 +1797,51 @@ const CLIMATE_TAX = {
   estate: { low: 4, high: 15 }
 };
 
+// Estate-only nightly "recapture" surcharge baked into its direct rate — previously missing from this calculator.
+const RH_RECAPTURE = [50, 50, 55, 60, 70, 80, 90, 90, 80, 70, 60, 55];
+
 const EXTRA_GUEST_FEE  = 10;   // €/extra guest/night
-const LODGING_TAX_RATE = 0.29; // Greek rental-value tax, capped
 
 // Extended-stay discounts: season-based, indexed Jan(0)–Dec(11).
-// Applied per-night at whichever tier (14/28/56) the total stay qualifies for,
-// then subtotaled — mirrors the site's own "calculated per day, then subtotaled" policy language.
+// Tier day-thresholds per Review 10.0 (was 14/28/56 — now 14/30/60; percentages unchanged).
+// Applied to the already tax/climate-loaded nightly rate, matching the workbook's own Lodging Total formula.
 const SEASON_DISCOUNTS = [
-  { 14: 0.10, 28: 0.15, 56: 0.25 }, // Jan
-  { 14: 0.10, 28: 0.15, 56: 0.25 }, // Feb
-  { 14: 0.07, 28: 0.10, 56: 0.20 }, // Mar
-  { 14: 0.05, 28: 0.07, 56: 0.15 }, // Apr
-  { 14: 0.03, 28: 0.05, 56: 0.10 }, // May
-  { 14: 0.00, 28: 0.03, 56: 0.07 }, // Jun
-  { 14: 0.00, 28: 0.03, 56: 0.05 }, // Jul
-  { 14: 0.00, 28: 0.03, 56: 0.05 }, // Aug
-  { 14: 0.00, 28: 0.03, 56: 0.07 }, // Sep
-  { 14: 0.03, 28: 0.05, 56: 0.10 }, // Oct
-  { 14: 0.05, 28: 0.07, 56: 0.15 }, // Nov
-  { 14: 0.07, 28: 0.10, 56: 0.20 }  // Dec
+  { 14: 0.10, 30: 0.15, 60: 0.25 }, // Jan
+  { 14: 0.10, 30: 0.15, 60: 0.25 }, // Feb
+  { 14: 0.07, 30: 0.10, 60: 0.20 }, // Mar
+  { 14: 0.05, 30: 0.07, 60: 0.15 }, // Apr
+  { 14: 0.03, 30: 0.05, 60: 0.10 }, // May
+  { 14: 0.00, 30: 0.03, 60: 0.07 }, // Jun
+  { 14: 0.00, 30: 0.03, 60: 0.05 }, // Jul
+  { 14: 0.00, 30: 0.03, 60: 0.05 }, // Aug
+  { 14: 0.00, 30: 0.03, 60: 0.07 }, // Sep
+  { 14: 0.03, 30: 0.05, 60: 0.10 }, // Oct
+  { 14: 0.05, 30: 0.07, 60: 0.15 }, // Nov
+  { 14: 0.07, 30: 0.10, 60: 0.20 }  // Dec
 ];
 
 function discountTierFor(billedNights) {
-  if (billedNights >= 56) return 56;
-  if (billedNights >= 28) return 28;
+  if (billedNights >= 60) return 60;
+  if (billedNights >= 30) return 30;
   if (billedNights >= 14) return 14;
   return null;
-}
-
-// Wedding ceremony surcharge = 3× one day-rate of the chosen property
-const CEREMONY_SURCHARGE_DAYS = 3;
-
-function getNightRate(prop, date) {
-  return MONTHLY_RATES[prop][date.getMonth()];
 }
 
 function getClimateTier(date) {
   const m = date.getMonth() + 1;
   return (m >= 4 && m <= 10) ? 'high' : 'low';
+}
+
+// Fully-loaded per-night direct rate: base × (1 + tax) [roundup] + climate [+ Estate recapture].
+// Mirrors DB2 RatesPlan columns 32–35 ("DirectRates — Bking Mood & VKF Site") exactly.
+function getDirectNightRate(prop, date) {
+  const profile = ratesForYear(date.getFullYear());
+  const base    = profile.rates[prop][date.getMonth()];
+  const taxRate = typeof profile.taxRate === 'number' ? profile.taxRate : profile.taxRate[date.getMonth()];
+  const climate = CLIMATE_TAX[prop][getClimateTier(date)];
+  let rate = Math.ceil(base * (1 + taxRate)) + climate;
+  if (prop === 'estate') rate += RH_RECAPTURE[date.getMonth()];
+  return rate;
 }
 
 // Returns best-fit property based on included-guest thresholds.
@@ -1852,53 +1882,61 @@ function calculateQuote(checkIn, checkOut, guests, propertyKey, ceremonyType) {
   const msPerDay = 24 * 60 * 60 * 1000;
   const nights   = Math.round((checkOut - checkIn) / msPerDay);
   const minNights = MIN_STAY[chosen];
-
-  // Walk each night for lodging + climate tax
-  const climate = CLIMATE_TAX[chosen];
   const included = INCLUDED_GUESTS[chosen];
   const extraGuests = Math.max(0, guests - included);
 
-  const billedNightsForTier = Math.max(nights, minNights);
+  // On-site Facility Event (30+ people) — Estate only. Lets a booking go below the
+  // property's normal minimum-stay, down to 0 lodging nights, without over/undercharging:
+  // the Event Fee multiplier scales up as lodging nights drop. Per H&R's WorkSheet formula
+  // (Review 10.0, 2026-08-19).
+  const eventRequested = (ceremonyType === 'ceremony' || ceremonyType === 'both');
+  const eventValid      = eventRequested && chosen === 'estate';
+  const eventWarning    = eventRequested && chosen !== 'estate'
+    ? 'On-site events (30+ guests) are only available when booking the Entire Estate.'
+    : null;
+
+  // "Hosting the ceremony, celebrants lodged elsewhere" = 0 lodging nights at Villa K.
+  // Otherwise: actual nights, with no minimum-stay floor when an event is being hosted —
+  // the Event Fee multiplier (below) is what protects minimum-stay revenue instead.
+  const billedNightsForTier = eventValid
+    ? (ceremonyType === 'ceremony' ? 0 : nights)
+    : Math.max(nights, minNights);
   const discountTier = discountTierFor(billedNightsForTier);
 
-  let lodging      = 0;
-  let climateTotal = 0;
-  let discount     = 0;
+  // Walk each lodging night for its fully-loaded (tax + climate [+ Estate recapture]) rate
+  let lodging  = 0;
+  let discount = 0;
   const seasonBreakdown = {};
 
   for (let i = 0; i < billedNightsForTier; i++) {
-    // If nights < minNights we charge at min-stay rate, so walk minNights days
-    const day    = new Date(checkIn.getTime() + i * msPerDay);
-    const rate   = getNightRate(chosen, day);
-    const tier   = getClimateTier(day);
-    lodging     += rate;
-    climateTotal += climate[tier];
+    const day  = new Date(checkIn.getTime() + i * msPerDay);
+    const rate = getDirectNightRate(chosen, day);
+    lodging   += rate;
     if (discountTier) discount += rate * SEASON_DISCOUNTS[day.getMonth()][discountTier];
     const monthName = day.toLocaleString('en-US', { month: 'short' });
     seasonBreakdown[monthName] = (seasonBreakdown[monthName] || 0) + 1;
   }
 
   const billedNights = billedNightsForTier;
-  const minStayWarning = nights < minNights
+  const minStayWarning = (!eventValid && nights < minNights)
     ? `Note: ${propertyLabel(chosen)} has a ${minNights}-night minimum. Your price reflects the minimum-stay cost.`
     : null;
 
-  const discountPct        = discount > 0 ? discount / lodging : 0;
-  const lodgingAfterDisc   = lodging - discount;
-  const extraGuestsCharge  = extraGuests * EXTRA_GUEST_FEE * billedNights;
+  const discountPct       = discount > 0 ? discount / lodging : 0;
+  const lodgingAfterDisc  = lodging - discount;
+  const extraGuestsCharge = extraGuests * EXTRA_GUEST_FEE * billedNights;
 
-  // Wedding ceremony surcharge (applies when ceremony is onsite)
-  let ceremonyCharge = 0;
-  let ceremonyLabel  = null;
-  if (ceremonyType === 'ceremony' || ceremonyType === 'both') {
-    const dayRate     = getNightRate(chosen, checkIn);
-    ceremonyCharge    = dayRate * CEREMONY_SURCHARGE_DAYS;
-    ceremonyLabel     = `Onsite ceremony supplement (${CEREMONY_SURCHARGE_DAYS}× day rate)`;
+  // On-site Facility Event supplement: EventDateRate × 2 (5+ lodging nights) / ×3 (4 nights) / ×4 (0–3 nights)
+  let eventCharge = 0;
+  let eventLabel  = null;
+  if (eventValid) {
+    const eventDateRate = getDirectNightRate('estate', checkIn);
+    const multiplier     = billedNights >= 5 ? 2 : billedNights === 4 ? 3 : 4;
+    eventCharge = eventDateRate * multiplier;
+    eventLabel  = `On-site Facility Event supplement (${multiplier}× event-day rate)`;
   }
 
-  const subtotal = lodgingAfterDisc + extraGuestsCharge + ceremonyCharge;
-  const tax      = subtotal * LODGING_TAX_RATE;
-  const total    = subtotal + tax + climateTotal;
+  const total    = lodgingAfterDisc + extraGuestsCharge + eventCharge;
   const preDiscountTotal = total + discount;
   const deposit  = DEPOSITS[chosen];
 
@@ -1906,10 +1944,10 @@ function calculateQuote(checkIn, checkOut, guests, propertyKey, ceremonyType) {
     property: chosen, propertyName: propertyLabel(chosen),
     nights, billedNights, guests, included, extraGuests,
     lodging, seasonBreakdown, discountPct, discount, preDiscountTotal,
-    extraGuestsCharge, ceremonyCharge, ceremonyLabel,
-    subtotal, tax, climateTotal, total, deposit,
-    costPerNight: total / billedNights,
-    costPerGuestNight: total / billedNights / guests,
+    extraGuestsCharge, eventCharge, eventLabel, eventWarning,
+    total, deposit,
+    costPerNight: billedNights > 0 ? total / billedNights : null,
+    costPerGuestNight: billedNights > 0 ? total / billedNights / guests : null,
     minStayWarning, combo: comboHint(guests)
   };
 }
@@ -1937,6 +1975,9 @@ function renderQuote(q) {
 
   let html = '';
 
+  if (q.eventWarning) {
+    html += `<div class="quote-warn" style="margin-bottom:12px;">${q.eventWarning}</div>`;
+  }
   if (q.minStayWarning) {
     html += `<div class="quote-warn" style="margin-bottom:12px;">${q.minStayWarning}</div>`;
   }
@@ -1947,15 +1988,17 @@ function renderQuote(q) {
   if (q.extraGuests > 0) {
     html += `<div class="quote-line sub"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.billedNights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
   }
-  if (q.ceremonyCharge > 0) {
-    html += `<div class="quote-line sub"><span class="label">${q.ceremonyLabel}</span><span class="value">${fmt(q.ceremonyCharge)}</span></div>`;
+  if (q.eventCharge > 0) {
+    html += `<div class="quote-line sub"><span class="label">${q.eventLabel}</span><span class="value">${fmt(q.eventCharge)}</span></div>`;
   }
 
   html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
 
   html += `<div class="quote-line sub"><span class="label">Fully Refundable Security Deposit</span><span class="value">${fmt(q.deposit)}</span></div>`;
-  html += `<div class="quote-line sub"><span class="label">Cost per night</span><span class="value">${fmt(q.costPerNight)}</span></div>`;
-  html += `<div class="quote-line sub"><span class="label">Cost per guest/night</span><span class="value">${fmt(q.costPerGuestNight)}</span></div>`;
+  if (q.billedNights > 0) {
+    html += `<div class="quote-line sub"><span class="label">Cost per night</span><span class="value">${fmt(q.costPerNight)}</span></div>`;
+    html += `<div class="quote-line sub"><span class="label">Cost per guest/night</span><span class="value">${fmt(q.costPerGuestNight)}</span></div>`;
+  }
 
   if (q.combo) {
     html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">${q.combo}</div>`;
