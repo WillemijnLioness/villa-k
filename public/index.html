@@ -1386,7 +1386,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€121 to €351</span>
+            <span class="price-from-value">€108 to €314</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('main')">Check Dates →</a>
         </div>
@@ -1428,7 +1428,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€67 to €189</span>
+            <span class="price-from-value">€60 to €169</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
         </div>
@@ -1468,7 +1468,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€63 to €190</span>
+            <span class="price-from-value">€56 to €171</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('garden')">Check Dates →</a>
         </div>
@@ -1508,7 +1508,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€358 to €912</span>
+            <span class="price-from-value">€325 to €824</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('estate')">Check Dates →</a>
         </div>
@@ -1715,7 +1715,7 @@ section { padding: 100px 0; }
           <li>Kourthiana/Kissamos 73400</li>
           <li>Crete, Greece</li>
           <li><a href="/directions" style="color: var(--terracotta); opacity: 1;">Our Location &amp; Driving Directions →</a></li>
-          <li><a href="/42-island-faqs.pdf" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Coming to Crete? Island-travel FAQs →</a></li>
+          <li><a href="/42-crete-travel-faqs.pdf" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Coming to Crete? Island-travel FAQs →</a></li>
         </ul>
       </div>
       <!-- Your Stay -->
@@ -1753,10 +1753,12 @@ section { padding: 100px 0; }
    Rates sourced from VKF 4C1a HolidayRental policy (2026-01-21)
    Rate figures + Event Fee formula: H&R "RatesWorkbook 2026-0815a.xlsx"
    (DB2 RatesPlan + WorkSheet tabs), Review 10.0 feedback (2026-08-19)
+   Direct-booking tax: H&R "RatesWorkbook 2026-0930.xlsx" (2026-10-01) — direct
+   bookings now carry a flat 15% effective tax; 3rd-party platforms carry 35%.
    ========================================================= */
 
 // Two rate profiles per H&R's RatesWorkbook:
-// - y2026: the 2026 launch/transition year (Jan–Jun rates + 18% tax phase-in) — already past.
+// - y2026: the 2026 launch/transition year (Jan–Jun rates) — already past.
 // - standard: 2027 rates, held flat through 2040 per H&R's current plan.
 //   (2026's own Jun–Dec season already matched "standard" exactly.)
 const RATE_PROFILES = {
@@ -1767,8 +1769,8 @@ const RATE_PROFILES = {
       garden: [30, 30, 40, 50,  70, 105, 135, 135, 105,  80, 60,  55],
       estate: [190,190,235,280,360, 495, 625, 625, 495, 390,310, 285]
     },
-    // Greek short-term-rental tax phase-in: 18% Jan–Jun, 29% Jul–Dec (2026 only)
-    taxRate: [0.18,0.18,0.18,0.18,0.18,0.18,0.29,0.29,0.29,0.29,0.29,0.29]
+    // Direct-booking effective tax: flat 15% (RatesWorkbook 2026-0930, was 18%/29% phase-in)
+    taxRate: 0.15
   },
   standard: {
     rates: {
@@ -1777,7 +1779,7 @@ const RATE_PROFILES = {
       garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
       estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
     },
-    taxRate: 0.29 // flat, 2027 onward through 2040 per current H&R plan
+    taxRate: 0.15 // direct-booking effective tax, flat 2027–2040 (RatesWorkbook 2026-0930, was 29%)
   }
 };
 

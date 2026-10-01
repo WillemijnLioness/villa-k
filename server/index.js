@@ -54,6 +54,9 @@ app.get('/privacy',    (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'privac
 app.get('/directions', (_req, res) => res.sendFile(path.join(PUBLIC_DIR, 'directions.html')));
 app.get('/admin',      adminAuth, (_req, res) => res.sendFile(path.join(__dirname, '../admin.html')));
 
+/* --- Superseded documents → current editions --- */
+app.get('/42-island-faqs.pdf', (_req, res) => res.redirect(301, '/42-crete-travel-faqs.pdf'));
+
 /* --- Static assets (js, fonts, uploads fallback) --- */
 app.use(express.static(PUBLIC_DIR));
 
