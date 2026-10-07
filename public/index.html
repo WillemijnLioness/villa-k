@@ -5,6 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Villa Koukouvayia Farms — A Coastal Estate on Crete</title>
 <meta name="description" content="A three-residence coastal estate on Crete. Holidays, retreats, remote work-stays and destination weddings, hosted by the Palola-Harriman family.">
+<link rel="canonical" href="https://koukouvayia.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Villa Koukouvayia Farms">
+<meta property="og:title" content="Villa Koukouvayia Farms — A Coastal Estate on Crete">
+<meta property="og:description" content="A three-residence coastal estate on Crete. Holidays, retreats, remote work-stays and destination weddings, hosted by the Palola-Harriman family.">
+<meta property="og:url" content="https://koukouvayia.com/">
+<meta property="og:image" content="https://koukouvayia.com/og-vkf.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Fonts: Fraunces (serif display) + Manrope (humanist body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1145,6 +1156,81 @@ section { padding: 100px 0; }
   line-height: 1.55;
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://koukouvayia.com/#website",
+      "url": "https://koukouvayia.com/",
+      "name": "Villa Koukouvayia Farms",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "LodgingBusiness",
+      "@id": "https://koukouvayia.com/#vkf",
+      "name": "Villa Koukouvayia Farms",
+      "alternateName": "Villa Koukouvayia Farms Retreat Center & Rural Inn",
+      "description": "A three-residence coastal estate on Crete. Holidays, retreats, remote work-stays and destination weddings, hosted by the Palola-Harriman family.",
+      "url": "https://koukouvayia.com/",
+      "image": "https://koukouvayia.com/og-vkf.jpg",
+      "logo": "https://koukouvayia.com/logo-vkf.png",
+      "email": "info@koukouvayia.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Agricultural Road #1",
+        "addressLocality": "Kourthiana, Kissamos",
+        "postalCode": "73400",
+        "addressRegion": "Crete",
+        "addressCountry": "GR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 35.4773409,
+        "longitude": 23.6897018
+      },
+      "hasMap": "https://maps.app.goo.gl/r2bus14LgBZGo2og9",
+      "checkinTime": "16:00",
+      "checkoutTime": "10:00",
+      "currenciesAccepted": "EUR, USD",
+      "sameAs": [
+        "https://www.airbnb.com/rooms/10459622",
+        "https://www.airbnb.com/rooms/755484438431691642",
+        "https://www.vrbo.com/3096792",
+        "https://www.vrbo.com/858887"
+      ],
+      "containsPlace": [
+        {
+          "@type": "Accommodation",
+          "name": "The Main House",
+          "numberOfBedrooms": 3,
+          "occupancy": {
+            "@type": "QuantitativeValue",
+            "maxValue": 9
+          }
+        },
+        {
+          "@type": "Accommodation",
+          "name": "The Guest House",
+          "occupancy": {
+            "@type": "QuantitativeValue",
+            "maxValue": 6
+          }
+        },
+        {
+          "@type": "Accommodation",
+          "name": "The Garden Suite",
+          "occupancy": {
+            "@type": "QuantitativeValue",
+            "maxValue": 13
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -1663,6 +1749,20 @@ section { padding: 100px 0; }
           </div>
 
           <div class="form-field">
+            <label for="foundUs">How did you find us? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <select id="foundUs">
+              <option value="">Choose…</option>
+              <option value="google">Google or another search engine</option>
+              <option value="ai-assistant">An AI assistant (ChatGPT, Claude, Gemini…)</option>
+              <option value="airbnb-vrbo">Airbnb or VRBO</option>
+              <option value="instagram-facebook">Instagram or Facebook</option>
+              <option value="friend">A friend or past guest</option>
+              <option value="cdr">Cretan Destination Retreats</option>
+              <option value="other">Somewhere else</option>
+            </select>
+          </div>
+
+          <div class="form-field">
             <label for="notes">Anything else? <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
             <textarea id="notes" placeholder="Children's ages, dietary needs, flight timing, flexibility on dates, anything unique to your stay that you'd like us to know about and/or respond to."></textarea>
           </div>
@@ -2154,6 +2254,7 @@ async function submitBooking(e) {
     email:        document.getElementById('email').value,
     intent:       document.getElementById('intent').value,
     ceremonyType: document.getElementById('ceremonyType')?.value || '',
+    foundUs:      document.getElementById('foundUs').value,
     notes:        document.getElementById('notes').value
   };
   try {

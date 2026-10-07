@@ -42,6 +42,11 @@ const adminAuth = basicAuth({
 });
 
 /* --- Middleware --- */
+/* One canonical host for search engines: www → apex */
+app.use((req, res, next) => {
+  if (req.hostname === 'www.koukouvayia.com') return res.redirect(301, `https://koukouvayia.com${req.originalUrl}`);
+  next();
+});
 app.use(express.json());
 app.use('/uploads', express.static(UPLOADS_DIR));
 
