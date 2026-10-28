@@ -206,12 +206,11 @@ app.post('/api/contact', async (req, res) => {
 
   const subject = site === 'rpl'
     ? `New CDR Enquiry — ${fields.retreat || 'General'}`
-    : `New VKF Booking Request — ${fields.property || 'General'} (${fields.checkIn || '?'} → ${fields.checkOut || '?'})`;
+    : `New VKF Booking Request — ${fields.property || 'General'} (${formatDate(fields.checkIn) || '?'}${fields.checkOut ? ` → ${formatDate(fields.checkOut)}` : ''})`;
 
-  const textBody = Object.entries(fields)
-    .filter(([, v]) => v)
-    .map(([k, v]) => `${k}: ${v}`)
-    .join('\n');
+  const rows = enquiryRows(site === 'rpl' ? RPL_FIELDS : VKF_FIELDS, fields);
+  const textBody = rows.map(([label, value]) => `${label}: ${value}`).join('\n');
+  const htmlBody = enquiryHtml(subject, rows);
 
   if (!process.env.RESEND_API_KEY) {
     console.log(`[contact] Would send to ${toEmail}:\n${subject}\n${textBody}`);
@@ -226,7 +225,8 @@ app.post('/api/contact', async (req, res) => {
       to: toEmail,
       replyTo: fields.email,
       subject,
-      text: textBody
+      text: textBody,
+      html: htmlBody
     });
     res.json({ ok: true });
   } catch (err) {
@@ -234,6 +234,76 @@ app.post('/api/contact', async (req, res) => {
     res.status(500).json({ error: 'Email delivery failed. Please try again or contact us directly.' });
   }
 });
+
+/* ================================================================
+   Enquiry email formatting
+   Labels match what the guest sees on the form; dates are spelled out
+   (2028-May-14 (Sun)) so day and month can't be confused.
+================================================================ */
+
+const VKF_FIELDS = [
+  ['checkIn',            'Check-In',             'date'],
+  ['checkOut',           'Check-Out',            'date'],
+  ['nights',             'Nights'],
+  ['adultGuests',        'Adult Guests'],
+  ['childGuests',        'Children (2–16)'],
+  ['infantGuests',       'Infants (under 2)'],
+  ['property',           'Residence'],
+  ['occasion',           "What's the Occasion?"],
+  ['celebrationOptions', 'Celebration Options'],
+  ['celebrationDate',    'Celebration Date',     'date'],
+  ['celebrationGuests',  'Celebration Guests Onsite'],
+  ['name',               'Name'],
+  ['email',              'Email'],
+  ['phone',              'Phone'],
+  ['foundUs',            'Found Us Via'],
+  ['quotedTotal',        'Website Quote (total)'],
+  ['quotedDeposit',      'Refundable Security Deposit'],
+  ['notes',              'Notes']
+];
+
+const RPL_FIELDS = [
+  ['retreat', 'Retreat'],
+  ['group',   'Group Size'],
+  ['dates',   'Preferred Dates'],
+  ['name',    'Name'],
+  ['email',   'Email'],
+  ['foundUs', 'Found Us Via'],
+  ['message', 'Message']
+];
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+function formatDate(iso) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso ?? ''));
+  if (!m) return iso ? String(iso) : '';
+  const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+  return `${m[1]}-${MONTHS[+m[2] - 1]}-${m[3]} (${WEEKDAYS[d.getUTCDay()]})`;
+}
+
+/* Known fields in form order; anything unexpected is appended so nothing is lost */
+function enquiryRows(schema, fields) {
+  const known = new Set(schema.map(([key]) => key));
+  const rows = schema
+    .filter(([key]) => fields[key] !== undefined && String(fields[key]).trim() !== '')
+    .map(([key, label, type]) => [label, type === 'date' ? formatDate(fields[key]) : String(fields[key]).trim()]);
+  for (const [key, value] of Object.entries(fields)) {
+    if (!known.has(key) && value !== undefined && String(value).trim() !== '') rows.push([key, String(value).trim()]);
+  }
+  return rows;
+}
+
+const escapeHtml = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+function enquiryHtml(title, rows) {
+  const tr = rows.map(([label, value]) =>
+    `<tr><th style="text-align:left;vertical-align:top;padding:6px 16px 6px 0;white-space:nowrap;color:#555;">${escapeHtml(label)}</th>` +
+    `<td style="padding:6px 0;white-space:pre-wrap;">${escapeHtml(value)}</td></tr>`).join('');
+  return `<div style="font-family:Arial,sans-serif;font-size:14px;color:#222;">` +
+    `<h2 style="font-size:16px;margin:0 0 12px;">${escapeHtml(title)}</h2>` +
+    `<table style="border-collapse:collapse;">${tr}</table></div>`;
+}
 
 /* ================================================================
    Helpers

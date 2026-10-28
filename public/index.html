@@ -6,6 +6,10 @@
 <title>Villa Koukouvayia Farms — A Coastal Estate on Crete</title>
 <meta name="description" content="A three-residence coastal estate on Crete. Holidays, retreats, remote work-stays and destination weddings, hosted by the Palola-Harriman family.">
 <link rel="canonical" href="https://koukouvayia.com/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-vkf-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-vkf-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-vkf.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Villa Koukouvayia Farms">
 <meta property="og:title" content="Villa Koukouvayia Farms — A Coastal Estate on Crete">
@@ -753,6 +757,8 @@ section { padding: 100px 0; }
   grid-template-columns: 1fr 1fr;
   gap: 14px;
 }
+.booking-row.three { grid-template-columns: 1fr 1fr 1fr; align-items: end; }
+.field-hint { font-size: 0.8rem; color: var(--muted); margin: -8px 0 0; line-height: 1.5; }
 .form-field { display: flex; flex-direction: column; }
 .form-field label {
   font-size: 0.72rem;
@@ -1017,6 +1023,7 @@ section { padding: 100px 0; }
   .review { padding: 24px 20px; }
   .booking-wrap { padding: 24px 16px; }
   .booking-row { grid-template-columns: 1fr; }
+  .booking-row.three { grid-template-columns: 1fr; }
   .residence-footer { flex-direction: column; align-items: flex-start; }
   .residence-features { grid-template-columns: 1fr; }
   .quote-card { padding: 22px 18px; }
@@ -1472,7 +1479,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€108 to €314</span>
+            <span class="price-from-value">€116 to €337</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('main')">Check Dates →</a>
         </div>
@@ -1514,7 +1521,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€60 to €169</span>
+            <span class="price-from-value">€64 to €182</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
         </div>
@@ -1554,7 +1561,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€56 to €171</span>
+            <span class="price-from-value">€60 to €182</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('garden')">Check Dates →</a>
         </div>
@@ -1594,7 +1601,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€325 to €824</span>
+            <span class="price-from-value">€295 to €790</span>
           </div>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('estate')">Check Dates →</a>
         </div>
@@ -1690,24 +1697,29 @@ section { padding: 100px 0; }
         <form class="booking-form" id="bookingForm" onsubmit="submitBooking(event)">
           <div class="booking-row">
             <div class="form-field">
-              <label for="checkIn">Check in</label>
+              <label for="checkIn" id="checkInLabel">Check in</label>
               <input type="date" id="checkIn" required>
             </div>
-            <div class="form-field">
+            <div class="form-field" id="checkOutField">
               <label for="checkOut">Check out</label>
               <input type="date" id="checkOut" required>
             </div>
           </div>
-          <div class="booking-row">
+          <div class="booking-row three">
             <div class="form-field">
               <label for="adultGuests">Adult Guests</label>
               <input type="number" id="adultGuests" min="1" max="28" value="4" required>
             </div>
             <div class="form-field">
-              <label for="childGuests">Children under 17</label>
+              <label for="childGuests">Children (2–16)</label>
               <input type="number" id="childGuests" min="0" max="24" value="0">
             </div>
+            <div class="form-field">
+              <label for="infantGuests">Infants (under 2)</label>
+              <input type="number" id="infantGuests" min="0" max="10" value="0">
+            </div>
           </div>
+          <p class="field-hint">Infants under 2 at arrival aren't counted in occupancy limits or pricing.</p>
           <div class="form-field">
             <label for="property">Suggested residence</label>
             <select id="property">
@@ -1728,6 +1740,10 @@ section { padding: 100px 0; }
             </div>
           </div>
           <div class="form-field">
+            <label for="phone">Phone <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional, with country code)</span></label>
+            <input type="tel" id="phone" placeholder="+30 694 123 4567" autocomplete="tel">
+          </div>
+          <div class="form-field">
             <label for="intent">What's the occasion?</label>
             <select id="intent" required onchange="handleIntentChange(this.value)">
               <option value="">Choose…</option>
@@ -1741,11 +1757,23 @@ section { padding: 100px 0; }
           <!-- Ceremony sub-field — shown only when Wedding/Celebration is selected -->
           <div class="form-field" id="ceremonyField" style="display:none;">
             <label for="ceremonyType">Celebration Options</label>
-            <select id="ceremonyType">
-              <option value="lodging">Lodging the celebrants. The ceremony will be held elsewhere.</option>
-              <option value="ceremony">Hosting the ceremony. Celebrants will be lodged elsewhere.</option>
-              <option value="both">Lodging the celebrants and hosting the ceremony during our stay.</option>
+            <select id="ceremonyType" onchange="handleCeremonyChange()">
+              <option value="both">Lodging Celebrants &amp; Hosting Celebration</option>
+              <option value="ceremony">Celebration Day Only (celebrants' lodging not needed)</option>
+              <option value="lodging">Celebrant Lodging Only (celebration venue not needed)</option>
             </select>
+          </div>
+
+          <!-- Celebration details — shown when the celebration is hosted onsite -->
+          <div class="booking-row" id="celebrationFields" style="display:none;">
+            <div class="form-field">
+              <label for="eventGuests">Celebration guests onsite</label>
+              <input type="number" id="eventGuests" min="1" max="100" placeholder="incl. non-lodging guests">
+            </div>
+            <div class="form-field" id="eventDateField">
+              <label for="eventDate">Celebration date</label>
+              <input type="date" id="eventDate">
+            </div>
           </div>
 
           <div class="form-field">
@@ -1850,49 +1878,34 @@ section { padding: 100px 0; }
 <script>
 /* =========================================================
    BOOKING ENGINE
-   Rates sourced from VKF 4C1a HolidayRental policy (2026-01-21)
-   Rate figures + Event Fee formula: H&R "RatesWorkbook 2026-0815a.xlsx"
-   (DB2 RatesPlan + WorkSheet tabs), Review 10.0 feedback (2026-08-19)
-   Direct-booking tax: H&R "RatesWorkbook 2026-0930.xlsx" (2026-10-01) — direct
-   bookings now carry a flat 15% effective tax; 3rd-party platforms carry 35%.
+   Mirrors H&R's booking database "3 RatesWorkbook Version 28th Oct" (2026-10-28),
+   sheet "1 ResData", direct-booking columns AX → CE. Column letters are noted inline
+   so the two can be compared side by side.
+     Lodging     ROUNDUP(avg nightly base, 2) × nights charged (minimum-stay floor)
+                 + extra guests × €10 × nights actually stayed − long-stay discount
+     Rental tax  24% of that pre-tax lodging total
+     Climate tax per night actually stayed (never on minimum-stay "charge nights")
+     Celebration (Entire Estate only) event-date base rate × 2.5 alongside lodging
+                 (30–100 people onsite only) or × 4.5 for a celebration day only, + 24% tax
    ========================================================= */
 
-// Two rate profiles per H&R's RatesWorkbook:
-// - y2026: the 2026 launch/transition year (Jan–Jun rates) — already past.
-// - standard: 2027 rates, held flat through 2040 per H&R's current plan.
-//   (2026's own Jun–Dec season already matched "standard" exactly.)
-const RATE_PROFILES = {
-  y2026: {
-    rates: {
-      guest:  [35, 35, 45, 55,  75, 110, 140, 140, 110,  85, 65,  60],
-      main:   [75, 75, 95, 115, 145, 200, 260, 260, 200, 155,125, 115],
-      garden: [30, 30, 40, 50,  70, 105, 135, 135, 105,  80, 60,  55],
-      estate: [190,190,235,280,360, 495, 625, 625, 495, 390,310, 285]
-    },
-    // Direct-booking effective tax: flat 15% (RatesWorkbook 2026-0930, was 18%/29% phase-in)
-    taxRate: 0.15
-  },
-  standard: {
-    rates: {
-      guest:  [50, 50, 60, 65,  85, 110, 140, 140, 110,  85, 65,  60],
-      main:   [90, 90,115,125, 155, 200, 260, 260, 200, 155,125, 115],
-      garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
-      estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
-    },
-    taxRate: 0.15 // direct-booking effective tax, flat 2027–2040 (RatesWorkbook 2026-0930, was 29%)
-  }
+// Pre-tax base rates, Jan(0)–Dec(11). Held flat 2027–2040 in the workbook (DB2 RatesPlan);
+// 2026's remaining months already carry the same figures.
+const BASE_RATES = {
+  guest:  [50, 50, 60, 65,  85, 110, 140, 140, 110,  85, 65,  60],
+  main:   [90, 90,115,125, 155, 200, 260, 260, 200, 155,125, 115],
+  garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
+  estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
 };
 
-function ratesForYear(year) {
-  return year <= 2026 ? RATE_PROFILES.y2026 : RATE_PROFILES.standard;
-}
+const RENTAL_TAX = 0.24; // direct-booking rental-value tax, capped at the VAT rate (was 15%)
 
 const INCLUDED_GUESTS = { guest: 4, main: 6, garden: 6, estate: 16 };
 const MAX_GUESTS      = { guest: 6, main: 9, garden: 13, estate: 28 };
 const MIN_STAY        = { guest: 5, main: 7, garden: 7, estate: 7 };
 const DEPOSITS        = { guest: 200, main: 500, garden: 300, estate: 1000 };
 
-// Climate Resilience tax: Nov–Mar low / Apr–Oct high (flat across all years)
+// Climate Resilience tax per night: Nov–Mar low / Apr–Oct high
 const CLIMATE_TAX = {
   guest:  { low: 2, high: 8  },
   main:   { low: 4, high: 15 },
@@ -1900,14 +1913,16 @@ const CLIMATE_TAX = {
   estate: { low: 4, high: 15 }
 };
 
-// Estate-only nightly "recapture" surcharge baked into its direct rate — previously missing from this calculator.
-const RH_RECAPTURE = [50, 50, 55, 60, 70, 80, 90, 90, 80, 70, 60, 55];
+const EXTRA_GUEST_FEE = 10; // €/extra guest/night, pre-tax (≈ €13 with tax)
 
-const EXTRA_GUEST_FEE  = 10;   // €/extra guest/night
+// Celebrations (Entire Estate only)
+const EVENT_LODGING_FACTOR = 2.5; // × event-date base rate, alongside lodging
+const EVENT_ONLY_FACTOR    = 4.5; // × event-date base rate, celebration day only
+const EVENT_MIN_GUESTS     = 30;  // smaller celebrations carry no supplement
+const EVENT_MAX_GUESTS     = 100;
 
-// Extended-stay discounts: season-based, indexed Jan(0)–Dec(11).
-// Tier day-thresholds per Review 10.0 (was 14/28/56 — now 14/30/60; percentages unchanged).
-// Applied to the already tax/climate-loaded nightly rate, matching the workbook's own Lodging Total formula.
+// Extended-stay discounts: season-based, indexed Jan(0)–Dec(11), tiers by nights stayed.
+// Applied to the pre-tax lodging total (before extra-guest charges and taxes).
 const SEASON_DISCOUNTS = [
   { 14: 0.10, 30: 0.15, 60: 0.25 }, // Jan
   { 14: 0.10, 30: 0.15, 60: 0.25 }, // Feb
@@ -1923,10 +1938,10 @@ const SEASON_DISCOUNTS = [
   { 14: 0.07, 30: 0.10, 60: 0.20 }  // Dec
 ];
 
-function discountTierFor(billedNights) {
-  if (billedNights >= 60) return 60;
-  if (billedNights >= 30) return 30;
-  if (billedNights >= 14) return 14;
+function discountTierFor(nights) {
+  if (nights >= 60) return 60;
+  if (nights >= 30) return 30;
+  if (nights >= 14) return 14;
   return null;
 }
 
@@ -1935,17 +1950,9 @@ function getClimateTier(date) {
   return (m >= 4 && m <= 10) ? 'high' : 'low';
 }
 
-// Fully-loaded per-night direct rate: base × (1 + tax) [roundup] + climate [+ Estate recapture].
-// Mirrors DB2 RatesPlan columns 32–35 ("DirectRates — Bking Mood & VKF Site") exactly.
-function getDirectNightRate(prop, date) {
-  const profile = ratesForYear(date.getFullYear());
-  const base    = profile.rates[prop][date.getMonth()];
-  const taxRate = typeof profile.taxRate === 'number' ? profile.taxRate : profile.taxRate[date.getMonth()];
-  const climate = CLIMATE_TAX[prop][getClimateTier(date)];
-  let rate = Math.ceil(base * (1 + taxRate)) + climate;
-  if (prop === 'estate') rate += RH_RECAPTURE[date.getMonth()];
-  return rate;
-}
+// Excel ROUNDUP / ROUND (half away from zero) for positive amounts, tolerant of float noise
+function roundUp(x, d = 0)   { const f = 10 ** d; return Math.ceil(x * f - 1e-7) / f; }
+function roundHalf(x, d = 0) { const f = 10 ** d; return Math.round(x * f + 1e-7) / f; }
 
 // Returns best-fit property based on included-guest thresholds.
 // Progression: GH (≤4) → MH (5–6) → GS (7–13) → Estate (14+)
@@ -1970,88 +1977,91 @@ function propertyLabel(p) {
 
 function fmt(n) { return '€' + Math.round(n).toLocaleString('en-US'); }
 
-// Core calculator
-function calculateQuote(checkIn, checkOut, guests, propertyKey, ceremonyType) {
-  if (!checkIn || !checkOut || checkOut <= checkIn) return null;
+// Celebration supplement on the Estate (BZ–CB): event-date base rate × factor, then rental tax
+function eventSupplement(eventDate, factor) {
+  const preTax = roundUp(BASE_RATES.estate[eventDate.getMonth()] * factor); // BZ
+  const tax    = roundUp(preTax * RENTAL_TAX);                              // CA
+  return { factor, preTax, tax, total: preTax + tax };                      // CB
+}
 
-  let chosen = propertyKey;
-  if (chosen === 'auto') chosen = suggestProperty(guests);
+// Core calculator.
+// o: { checkIn, checkOut, guests (adults + children; infants excluded), property,
+//      eventMode: 'none' | 'both' | 'dayOnly', eventGuests, eventDate, waiveMinimum }
+function calculateQuote(o) {
+  const chosen = o.property === 'auto' ? suggestProperty(o.guests) : o.property;
+  const eventRequested = o.eventMode === 'both' || o.eventMode === 'dayOnly';
 
-  if (guests > MAX_GUESTS[chosen]) {
-    const better = suggestProperty(guests);
+  if (eventRequested && chosen !== 'estate') {
+    return { error: 'Onsite celebrations are only available when booking the Entire Estate.' };
+  }
+  if (eventRequested && o.eventGuests > EVENT_MAX_GUESTS) {
+    return { error: `The estate can host celebrations of up to ${EVENT_MAX_GUESTS} people. For larger events we can recommend nearby venues.` };
+  }
+
+  // Celebration day only: no lodging, departure = arrival (Booking Type "Event/Only")
+  if (o.eventMode === 'dayOnly') {
+    if (!o.checkIn) return null;
+    const event = eventSupplement(o.checkIn, EVENT_ONLY_FACTOR);
+    return {
+      kind: 'dayOnly', property: 'estate', propertyName: propertyLabel('estate'),
+      eventDate: o.checkIn, eventGuests: o.eventGuests || null, event,
+      total: event.total, deposit: DEPOSITS.estate
+    };
+  }
+
+  if (!o.checkIn || !o.checkOut || o.checkOut <= o.checkIn) return null;
+
+  if (o.guests > MAX_GUESTS[chosen]) {
+    const better = suggestProperty(o.guests);
     return { error: `${propertyLabel(chosen)} holds up to ${MAX_GUESTS[chosen]} guests. Try ${propertyLabel(better)} instead.` };
   }
 
-  const msPerDay = 24 * 60 * 60 * 1000;
-  const nights   = Math.round((checkOut - checkIn) / msPerDay);
-  const minNights = MIN_STAY[chosen];
-  const included = INCLUDED_GUESTS[chosen];
-  const extraGuests = Math.max(0, guests - included);
+  const msPerDay      = 24 * 60 * 60 * 1000;
+  const nights        = Math.round((o.checkOut - o.checkIn) / msPerDay);            // AX
+  const minNights     = MIN_STAY[chosen];
+  const chargedNights = (o.waiveMinimum || nights > minNights) ? nights : minNights; // AY
+  const tier          = discountTierFor(nights);
 
-  // On-site Facility Event (30+ people) — Estate only. Lets a booking go below the
-  // property's normal minimum-stay, down to 0 lodging nights, without over/undercharging:
-  // the Event Fee multiplier scales up as lodging nights drop. Per H&R's WorkSheet formula
-  // (Review 10.0, 2026-08-19).
-  const eventRequested = (ceremonyType === 'ceremony' || ceremonyType === 'both');
-  const eventValid      = eventRequested && chosen === 'estate';
-  const eventWarning    = eventRequested && chosen !== 'estate'
-    ? 'On-site events (30+ guests) are only available when booking the Entire Estate.'
-    : null;
-
-  // "Hosting the ceremony, celebrants lodged elsewhere" = 0 lodging nights at Villa K.
-  // Otherwise: actual nights, with no minimum-stay floor when an event is being hosted —
-  // the Event Fee multiplier (below) is what protects minimum-stay revenue instead.
-  const billedNightsForTier = eventValid
-    ? (ceremonyType === 'ceremony' ? 0 : nights)
-    : Math.max(nights, minNights);
-  const discountTier = discountTierFor(billedNightsForTier);
-
-  // Walk each lodging night for its fully-loaded (tax + climate [+ Estate recapture]) rate
-  let lodging  = 0;
-  let discount = 0;
-  const seasonBreakdown = {};
-
-  for (let i = 0; i < billedNightsForTier; i++) {
-    const day  = new Date(checkIn.getTime() + i * msPerDay);
-    const rate = getDirectNightRate(chosen, day);
-    lodging   += rate;
-    if (discountTier) discount += rate * SEASON_DISCOUNTS[day.getMonth()][discountTier];
-    const monthName = day.toLocaleString('en-US', { month: 'short' });
-    seasonBreakdown[monthName] = (seasonBreakdown[monthName] || 0) + 1;
+  let baseSum = 0, climateSum = 0, discountSum = 0;
+  for (let i = 0; i < nights; i++) {
+    const day = new Date(o.checkIn.getTime() + i * msPerDay);
+    baseSum    += BASE_RATES[chosen][day.getMonth()];
+    climateSum += CLIMATE_TAX[chosen][getClimateTier(day)];
+    if (tier) discountSum += SEASON_DISCOUNTS[day.getMonth()][tier];
   }
 
-  const billedNights = billedNightsForTier;
-  const minStayWarning = (!eventValid && nights < minNights)
-    ? `Note: ${propertyLabel(chosen)} has a ${minNights}-night minimum. Your price reflects the minimum-stay cost.`
-    : null;
+  const nightlyBasis = roundUp(baseSum / nights, 2);                                 // BK
+  const lodgingBase  = roundUp(nightlyBasis * chargedNights);                        // BL
+  const included     = INCLUDED_GUESTS[chosen];                                      // BE
+  const extraGuests  = Math.max(0, o.guests - included);                             // BF
+  const extraCharge  = extraGuests * EXTRA_GUEST_FEE * nights;                       // BN
+  const discountPct  = tier ? roundHalf(discountSum / nights, 3) : 0;                // BO
+  const discount     = discountPct ? roundHalf(lodgingBase * discountPct) : 0;       // BP
+  const preTax       = lodgingBase + extraCharge - discount;                         // BQ
+  const rentalTax    = roundHalf(preTax * RENTAL_TAX);                               // BS
+  const climateTax   = roundUp(roundHalf(climateSum / nights, 2) * nights);          // BU
+  const lodgingTotal = preTax + rentalTax + climateTax;                              // BW
 
-  const discountPct       = discount > 0 ? discount / lodging : 0;
-  const lodgingAfterDisc  = lodging - discount;
-  const extraGuestsCharge = extraGuests * EXTRA_GUEST_FEE * billedNights;
-
-  // On-site Facility Event supplement: EventDateRate × 2 (5+ lodging nights) / ×3 (4 nights) / ×4 (0–3 nights)
-  let eventCharge = 0;
-  let eventLabel  = null;
-  if (eventValid) {
-    const eventDateRate = getDirectNightRate('estate', checkIn);
-    const multiplier     = billedNights >= 5 ? 2 : billedNights === 4 ? 3 : 4;
-    eventCharge = eventDateRate * multiplier;
-    eventLabel  = `On-site Facility Event supplement (${multiplier}× event-day rate)`;
+  // Celebration alongside lodging: only for 30–100 people onsite. Rate of the event date
+  // (must fall within the stay; defaults to arrival).
+  let event = null;
+  if (o.eventMode === 'both' && o.eventGuests >= EVENT_MIN_GUESTS) {
+    const inStay = o.eventDate && o.eventDate >= o.checkIn && o.eventDate <= o.checkOut;
+    event = eventSupplement(inStay ? o.eventDate : o.checkIn, EVENT_LODGING_FACTOR);
   }
 
-  const total    = lodgingAfterDisc + extraGuestsCharge + eventCharge;
-  const preDiscountTotal = total + discount;
-  const deposit  = DEPOSITS[chosen];
+  const total = lodgingTotal + (event ? event.total : 0);                            // CC
 
   return {
-    property: chosen, propertyName: propertyLabel(chosen),
-    nights, billedNights, guests, included, extraGuests,
-    lodging, seasonBreakdown, discountPct, discount, preDiscountTotal,
-    extraGuestsCharge, eventCharge, eventLabel, eventWarning,
-    total, deposit,
-    costPerNight: billedNights > 0 ? total / billedNights : null,
-    costPerGuestNight: billedNights > 0 ? total / billedNights / guests : null,
-    minStayWarning, combo: comboHint(guests)
+    kind: 'lodging', property: chosen, propertyName: propertyLabel(chosen),
+    nights, chargedNights, minNights, guests: o.guests, included, extraGuests,
+    nightlyBasis, lodgingBase, extraCharge, discountPct, discount, preTax,
+    rentalTax, climateTax, lodgingTotal, event,
+    smallEvent: o.eventMode === 'both' && o.eventGuests > 0 && o.eventGuests < EVENT_MIN_GUESTS,
+    total, deposit: DEPOSITS[chosen],
+    costPerNight: total / nights,
+    costPerGuestNight: total / nights / o.guests,
+    combo: comboHint(o.guests)
   };
 }
 
@@ -2073,36 +2083,47 @@ function renderQuote(q) {
     return;
   }
 
-  title.textContent    = q.propertyName;
-  subtitle.textContent = `${q.billedNights} night${q.billedNights===1?'':'s'} · ${q.guests} guest${q.guests===1?'':'s'}`;
-
+  const line = (label, value) =>
+    `<div class="quote-line sub"><span class="label">${label}</span><span class="value">${value}</span></div>`;
+  const withTax = (n) => n * (1 + RENTAL_TAX);
   let html = '';
 
-  if (q.eventWarning) {
-    html += `<div class="quote-warn" style="margin-bottom:12px;">${q.eventWarning}</div>`;
+  if (q.kind === 'dayOnly') {
+    title.textContent    = `${q.propertyName} — Celebration Day`;
+    subtitle.textContent = `Celebration day only${q.eventGuests ? ` · ${q.eventGuests} guests` : ''} · no lodging`;
+    html += line(`Celebration-day fee (${q.event.factor}× the day's rate)`, fmt(q.event.total));
+    html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
+    html += line('Fully Refundable Security Deposit', fmt(q.deposit));
+    body.innerHTML = html;
+    return;
   }
-  if (q.minStayWarning) {
-    html += `<div class="quote-warn" style="margin-bottom:12px;">${q.minStayWarning}</div>`;
+
+  title.textContent    = q.propertyName;
+  subtitle.textContent = `${q.nights} night${q.nights === 1 ? '' : 's'} · ${q.guests} guest${q.guests === 1 ? '' : 's'}`;
+
+  if (q.chargedNights > q.nights) {
+    html += `<div class="quote-warn" style="margin-bottom:12px;">Note: ${q.propertyName} has a ${q.minNights}-night minimum charge. Your price reflects it (climate tax is only charged for the nights you stay).</div>`;
   }
 
   if (q.discountPct > 0) {
-    html += `<div class="quote-line sub"><span class="label">Extended-stay discount (${Math.round(q.discountPct*100)}%)</span><span class="value">was ${fmt(q.preDiscountTotal)}</span></div>`;
+    html += line(`Extended-stay discount (${+(q.discountPct * 100).toFixed(1)}%)`, `was ${fmt(q.total + withTax(q.discount))}`);
   }
   if (q.extraGuests > 0) {
-    html += `<div class="quote-line sub"><span class="label">Extra guests (${q.extraGuests} × €${EXTRA_GUEST_FEE} × ${q.billedNights} nts)</span><span class="value">${fmt(q.extraGuestsCharge)}</span></div>`;
+    html += line(`Extra guests (${q.extraGuests} × ${q.nights} nts, incl. tax)`, fmt(withTax(q.extraCharge)));
   }
-  if (q.eventCharge > 0) {
-    html += `<div class="quote-line sub"><span class="label">${q.eventLabel}</span><span class="value">${fmt(q.eventCharge)}</span></div>`;
+  if (q.event) {
+    html += line(`Celebration supplement (${q.event.factor}× event-day rate)`, fmt(q.event.total));
   }
 
   html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
 
-  html += `<div class="quote-line sub"><span class="label">Fully Refundable Security Deposit</span><span class="value">${fmt(q.deposit)}</span></div>`;
-  if (q.billedNights > 0) {
-    html += `<div class="quote-line sub"><span class="label">Cost per night</span><span class="value">${fmt(q.costPerNight)}</span></div>`;
-    html += `<div class="quote-line sub"><span class="label">Cost per guest/night</span><span class="value">${fmt(q.costPerGuestNight)}</span></div>`;
-  }
+  html += line('Fully Refundable Security Deposit', fmt(q.deposit));
+  html += line('Cost per night', fmt(q.costPerNight));
+  html += line('Cost per guest/night', fmt(q.costPerGuestNight));
 
+  if (q.smallEvent) {
+    html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">Celebrations under ${EVENT_MIN_GUESTS} people onsite carry no event supplement.</div>`;
+  }
   if (q.combo) {
     html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">${q.combo}</div>`;
   }
@@ -2110,39 +2131,51 @@ function renderQuote(q) {
   body.innerHTML = html;
 }
 
+const intVal = (id) => parseInt(document.getElementById(id)?.value, 10) || 0;
+
+// Guests counted for occupancy & pricing — infants under 2 are excluded
 function totalGuests() {
-  const adults   = parseInt(document.getElementById('adultGuests').value, 10) || 0;
-  const children = parseInt(document.getElementById('childGuests').value, 10) || 0;
-  return adults + children;
+  return intVal('adultGuests') + intVal('childGuests');
 }
 
+// 'none' | 'both' | 'dayOnly' — from the occasion + celebration options
+function currentEventMode() {
+  if (document.getElementById('intent').value !== 'event') return 'none';
+  const c = document.getElementById('ceremonyType').value;
+  return c === 'both' ? 'both' : c === 'ceremony' ? 'dayOnly' : 'none';
+}
+
+const dateVal = (id) => {
+  const v = document.getElementById(id)?.value;
+  return v ? new Date(v + 'T12:00:00') : null;
+};
+
+let lastQuote = null;
+
 function recalc() {
-  const ci        = document.getElementById('checkIn').value;
-  const co        = document.getElementById('checkOut').value;
-  const guests    = totalGuests();
-  const property  = document.getElementById('property').value;
-  const ceremony  = document.getElementById('ceremonyType')?.value || '';
-
-  const checkIn  = ci ? new Date(ci + 'T12:00:00') : null;
-  const checkOut = co ? new Date(co + 'T12:00:00') : null;
-
-  if (checkIn && checkOut) {
-    renderQuote(calculateQuote(checkIn, checkOut, guests, property, ceremony));
-  } else {
-    renderQuote(null);
-  }
+  lastQuote = calculateQuote({
+    checkIn:     dateVal('checkIn'),
+    checkOut:    dateVal('checkOut'),
+    guests:      totalGuests(),
+    property:    document.getElementById('property').value,
+    eventMode:   currentEventMode(),
+    eventGuests: intVal('eventGuests'),
+    eventDate:   dateVal('eventDate')
+  });
+  renderQuote(lastQuote);
 }
 
 // Wire up listeners
-['checkIn', 'checkOut', 'adultGuests', 'childGuests', 'property', 'ceremonyType'].forEach(id => {
+['checkIn', 'checkOut', 'adultGuests', 'childGuests', 'infantGuests', 'property', 'eventGuests', 'eventDate'].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.addEventListener('change', recalc);
 });
 
-// Auto-suggest best-fit residence whenever guest count changes
+// Auto-suggest best-fit residence whenever guest count changes (celebrations stay on the Estate)
 ['adultGuests', 'childGuests'].forEach(id => {
   document.getElementById(id).addEventListener('change', function () {
-    document.getElementById('property').value = suggestProperty(totalGuests());
+    if (currentEventMode() === 'none') document.getElementById('property').value = suggestProperty(totalGuests());
+    recalc(); // the generic listener above already ran with the previous residence
   });
 });
 
@@ -2187,6 +2220,7 @@ function handleIntentChange(intent) {
 
   // Ceremony dropdown
   ceremonyField.style.display = (intent === 'event') ? '' : 'none';
+  applyCelebrationLayout();
 
   // Policy link destination + visibility
   const policyMap = { holiday: '/policy#holiday', work: '/policy#holiday', retreat: '/policy#program', event: '/policy#event' };
@@ -2213,6 +2247,33 @@ function handleIntentChange(intent) {
 
   recalc();
 }
+
+// Show the celebration fields that apply, and adapt the date fields:
+// "Celebration Day Only" has no lodging, so check-out isn't needed and check-in is the celebration date.
+function applyCelebrationLayout() {
+  const mode    = currentEventMode();
+  const hosting = mode === 'both' || mode === 'dayOnly';
+  document.getElementById('celebrationFields').style.display = hosting ? '' : 'none';
+  document.getElementById('eventDateField').style.display    = mode === 'both' ? '' : 'none';
+  document.getElementById('checkOutField').style.display     = mode === 'dayOnly' ? 'none' : '';
+  document.getElementById('checkOut').required               = mode !== 'dayOnly';
+  document.getElementById('checkInLabel').textContent        = mode === 'dayOnly' ? 'Celebration date' : 'Check in';
+  if (hosting) document.getElementById('property').value = 'estate';
+}
+
+function handleCeremonyChange() {
+  applyCelebrationLayout();
+  recalc();
+}
+
+// Keep the celebration date inside the stay
+['checkIn', 'checkOut'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => {
+    const ev = document.getElementById('eventDate');
+    ev.min = document.getElementById('checkIn').value;
+    ev.max = document.getElementById('checkOut').value;
+  });
+});
 
 // Sync hero form → booking form, then scroll & recalc
 function jumpToBooking(e) {
@@ -2242,20 +2303,31 @@ async function submitBooking(e) {
   const btn = document.querySelector('#bookingForm [type="submit"]');
   btn.disabled    = true;
   btn.textContent = 'Sending…';
+  // Send what the guest saw (option text, not internal codes) so the email reads like the form
+  const val    = (id) => document.getElementById(id).value.trim();
+  const shown  = (id) => { const el = document.getElementById(id); return el.value ? el.selectedOptions[0].text : ''; };
+  const mode   = currentEventMode();
+  const q      = lastQuote && !lastQuote.error ? lastQuote : null;
   const payload = {
-    site:         'vkf',
-    checkIn:      document.getElementById('checkIn').value,
-    checkOut:     document.getElementById('checkOut').value,
-    guests:       totalGuests(),
-    adultGuests:  document.getElementById('adultGuests').value,
-    childGuests:  document.getElementById('childGuests').value,
-    property:     document.getElementById('property').value,
-    name:         document.getElementById('fullName').value,
-    email:        document.getElementById('email').value,
-    intent:       document.getElementById('intent').value,
-    ceremonyType: document.getElementById('ceremonyType')?.value || '',
-    foundUs:      document.getElementById('foundUs').value,
-    notes:        document.getElementById('notes').value
+    site:               'vkf',
+    checkIn:            val('checkIn'),
+    checkOut:           mode === 'dayOnly' ? '' : val('checkOut'),
+    nights:             q && q.kind === 'lodging' ? q.nights : '',
+    adultGuests:        val('adultGuests'),
+    childGuests:        val('childGuests'),
+    infantGuests:       val('infantGuests'),
+    property:           propertyLabel(document.getElementById('property').value),
+    occasion:           shown('intent'),
+    celebrationOptions: mode !== 'none' || val('intent') === 'event' ? shown('ceremonyType') : '',
+    celebrationGuests:  mode !== 'none' ? val('eventGuests') : '',
+    celebrationDate:    mode === 'both' ? val('eventDate') : mode === 'dayOnly' ? val('checkIn') : '',
+    name:               val('fullName'),
+    email:              val('email'),
+    phone:              val('phone'),
+    foundUs:            shown('foundUs'),
+    quotedTotal:        q ? fmt(q.total) : '',
+    quotedDeposit:      q ? fmt(q.deposit) : '',
+    notes:              document.getElementById('notes').value
   };
   try {
     const res = await fetch('/api/contact', {

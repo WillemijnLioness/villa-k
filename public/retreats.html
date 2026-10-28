@@ -6,6 +6,10 @@
 <title>Cretan Destination Retreats — Retreat, Play, Love.</title>
 <meta name="description" content="Four hand-crafted retreats on Crete in 2026 — photography, alpine trekking, ancient cities, and the olive harvest. Hosted by Heidi & Richard.">
 <link rel="canonical" href="https://koukouvayia.com/retreats">
+<link rel="icon" href="/favicon-cdr.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-cdr-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-cdr-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-cdr.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Cretan Destination Retreats">
 <meta property="og:title" content="Cretan Destination Retreats — Retreat, Play, Love.">
@@ -1542,14 +1546,16 @@ async function submitContact(e) {
   const btn = document.querySelector('#contactForm .contact-submit');
   btn.disabled = true;
   btn.textContent = 'Sending…';
+  // Option text, not internal codes, so the email reads like the form
+  const shown = (id) => { const el = document.getElementById(id); return el.value ? el.selectedOptions[0].text : ''; };
   const payload = {
     site: 'rpl',
     name: document.getElementById('cName').value,
     email: document.getElementById('cEmail').value,
-    retreat: document.getElementById('cRetreat').value,
+    retreat: shown('cRetreat'),
     group: document.getElementById('cGroup').value,
     dates: document.getElementById('cDates').value,
-    foundUs: document.getElementById('cFoundUs').value,
+    foundUs: shown('cFoundUs'),
     message: document.getElementById('cMessage').value
   };
   try {
