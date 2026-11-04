@@ -1771,8 +1771,10 @@ section { padding: 100px 0; }
               <input type="number" id="eventGuests" min="1" max="100" placeholder="incl. non-lodging guests">
             </div>
             <div class="form-field" id="eventDateField">
-              <label for="eventDate">Celebration date</label>
-              <input type="date" id="eventDate">
+              <label for="eventDate">Celebration date(s)</label>
+              <input type="date" id="eventDate" class="event-date">
+              <div id="extraEventDates"></div>
+              <button type="button" id="addEventDate" onclick="addEventDate()" style="display:none; margin-top:8px; background:none; border:none; padding:4px 0; color:var(--terracotta); font-size:0.85rem; cursor:pointer; text-align:left;">+ Add another celebration day</button>
             </div>
           </div>
 
@@ -1885,8 +1887,9 @@ section { padding: 100px 0; }
                  + extra guests × €10 × nights actually stayed − long-stay discount
      Rental tax  24% of that pre-tax lodging total
      Climate tax per night actually stayed (never on minimum-stay "charge nights")
-     Celebration (Entire Estate only) event-date base rate × 2.5 alongside lodging
-                 (30–100 people onsite only) or × 4.5 for a celebration day only, + 24% tax
+     Celebration (Entire Estate only) event-date base rate × 2.5 per celebration day alongside
+                 lodging (30–100 people onsite only; any day except arrival and departure, so up to
+                 nights − 1 days) or × 4.5 for a celebration day only, + 24% tax
    ========================================================= */
 
 // Pre-tax base rates, Jan(0)–Dec(11). Held flat 2027–2040 in the workbook (DB2 RatesPlan);
@@ -1986,7 +1989,7 @@ function eventSupplement(eventDate, factor) {
 
 // Core calculator.
 // o: { checkIn, checkOut, guests (adults + children; infants excluded), property,
-//      eventMode: 'none' | 'both' | 'dayOnly', eventGuests, eventDate, waiveMinimum }
+//      eventMode: 'none' | 'both' | 'dayOnly', eventGuests, eventDates[], waiveMinimum }
 function calculateQuote(o) {
   const chosen = o.property === 'auto' ? suggestProperty(o.guests) : o.property;
   const eventRequested = o.eventMode === 'both' || o.eventMode === 'dayOnly';
@@ -2042,12 +2045,28 @@ function calculateQuote(o) {
   const climateTax   = roundUp(roundHalf(climateSum / nights, 2) * nights);          // BU
   const lodgingTotal = preTax + rentalTax + climateTax;                              // BW
 
-  // Celebration alongside lodging: only for 30–100 people onsite. Rate of the event date
-  // (must fall within the stay; defaults to arrival).
-  let event = null;
+  // Celebrations alongside lodging: only for 30–100 people onsite. H&R (2026-11-04): any day of
+  // the stay except arrival and departure, one supplement per celebration day at that day's rate,
+  // charged even when the stay is below the minimum (the minimum charge covers set-up/breakdown).
+  // No date picked yet: estimate on the day after arrival.
+  let event = null, eventDayWarning = null;
   if (o.eventMode === 'both' && o.eventGuests >= EVENT_MIN_GUESTS) {
-    const inStay = o.eventDate && o.eventDate >= o.checkIn && o.eventDate <= o.checkOut;
-    event = eventSupplement(inStay ? o.eventDate : o.checkIn, EVENT_LODGING_FACTOR);
+    if (nights < 2) {
+      return { error: 'Celebrations can’t be held on arrival or departure days, so hosting one alongside lodging needs a stay of at least 2 nights.' };
+    }
+    const picked = [...new Set((o.eventDates || []).filter(Boolean).map(d => d.getTime()))];
+    const valid  = picked.filter(t => t > o.checkIn.getTime() && t < o.checkOut.getTime()).sort((a, b) => a - b);
+    if (valid.length < picked.length) {
+      eventDayWarning = 'Celebration days must fall between your arrival and departure days. Dates outside that range aren’t included in this quote.';
+    }
+    const days = (valid.length ? valid : [o.checkIn.getTime() + msPerDay])
+      .map(t => ({ date: new Date(t), ...eventSupplement(new Date(t), EVENT_LODGING_FACTOR) }));
+    event = {
+      factor: EVENT_LODGING_FACTOR, days, count: days.length, estimated: !valid.length,
+      preTax: days.reduce((a, d) => a + d.preTax, 0),
+      tax:    days.reduce((a, d) => a + d.tax, 0),
+      total:  days.reduce((a, d) => a + d.total, 0)
+    };
   }
 
   const total = lodgingTotal + (event ? event.total : 0);                            // CC
@@ -2056,7 +2075,7 @@ function calculateQuote(o) {
     kind: 'lodging', property: chosen, propertyName: propertyLabel(chosen),
     nights, chargedNights, minNights, guests: o.guests, included, extraGuests,
     nightlyBasis, lodgingBase, extraCharge, discountPct, discount, preTax,
-    rentalTax, climateTax, lodgingTotal, event,
+    rentalTax, climateTax, lodgingTotal, event, eventDayWarning,
     smallEvent: o.eventMode === 'both' && o.eventGuests > 0 && o.eventGuests < EVENT_MIN_GUESTS,
     total, deposit: DEPOSITS[chosen],
     costPerNight: total / nights,
@@ -2112,7 +2131,8 @@ function renderQuote(q) {
     html += line(`Extra guests (${q.extraGuests} × ${q.nights} nts, incl. tax)`, fmt(withTax(q.extraCharge)));
   }
   if (q.event) {
-    html += line(`Celebration supplement (${q.event.factor}× event-day rate)`, fmt(q.event.total));
+    const days = q.event.count === 1 ? '' : `${q.event.count} days, `;
+    html += line(`Celebration supplement (${days}${q.event.factor}× event-day rate)`, fmt(q.event.total));
   }
 
   html += `<div class="quote-total"><span class="label">Total</span><span class="value">${fmt(q.total)}</span></div>`;
@@ -2121,6 +2141,12 @@ function renderQuote(q) {
   html += line('Cost per night', fmt(q.costPerNight));
   html += line('Cost per guest/night', fmt(q.costPerGuestNight));
 
+  if (q.event && q.event.estimated) {
+    html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">Celebration supplement estimated for the day after arrival. Pick your celebration date(s) for an exact figure.</div>`;
+  }
+  if (q.eventDayWarning) {
+    html += `<div class="quote-warn" style="margin-top:14px;">${q.eventDayWarning}</div>`;
+  }
   if (q.smallEvent) {
     html += `<div class="quote-warn" style="margin-top:14px; background:rgba(92,107,69,0.12); border-color:rgba(92,107,69,0.3); color:#c9d4b8;">Celebrations under ${EVENT_MIN_GUESTS} people onsite carry no event supplement.</div>`;
   }
@@ -2150,6 +2176,10 @@ const dateVal = (id) => {
   return v ? new Date(v + 'T12:00:00') : null;
 };
 
+// Every celebration-day input (the first one plus any added with "Add another celebration day")
+const eventDateInputs = () => [...document.querySelectorAll('#eventDateField input.event-date')];
+const eventDateVals   = () => eventDateInputs().map(el => el.value ? new Date(el.value + 'T12:00:00') : null);
+
 let lastQuote = null;
 
 function recalc() {
@@ -2160,7 +2190,7 @@ function recalc() {
     property:    document.getElementById('property').value,
     eventMode:   currentEventMode(),
     eventGuests: intVal('eventGuests'),
-    eventDate:   dateVal('eventDate')
+    eventDates:  eventDateVals()
   });
   renderQuote(lastQuote);
 }
@@ -2266,13 +2296,37 @@ function handleCeremonyChange() {
   recalc();
 }
 
-// Keep the celebration date inside the stay
+// Celebration days: between arrival and departure (exclusive), at most nights − 1 of them
+function shiftDay(iso, n) {
+  if (!iso) return '';
+  const d = new Date(iso + 'T12:00:00');
+  d.setDate(d.getDate() + n);
+  return d.toISOString().split('T')[0];
+}
+
+function syncEventDateLimits() {
+  const ci = document.getElementById('checkIn').value;
+  const co = document.getElementById('checkOut').value;
+  eventDateInputs().forEach(el => { el.min = shiftDay(ci, 1); el.max = shiftDay(co, -1); });
+  const nights = ci && co ? Math.round((new Date(co) - new Date(ci)) / 864e5) : 0;
+  document.getElementById('addEventDate').style.display =
+    nights - 1 > eventDateInputs().length ? '' : 'none';
+}
+
+function addEventDate() {
+  const wrap = document.createElement('div');
+  wrap.className = 'event-date-extra';
+  wrap.style.cssText = 'display:flex; gap:8px; align-items:center; margin-top:8px;';
+  wrap.innerHTML = '<input type="date" class="event-date" aria-label="Another celebration date" style="flex:1;">' +
+    '<button type="button" aria-label="Remove this celebration day" style="background:none; border:none; color:var(--muted); font-size:1.2rem; cursor:pointer; padding:4px 8px;">×</button>';
+  wrap.querySelector('input').addEventListener('change', recalc);
+  wrap.querySelector('button').addEventListener('click', () => { wrap.remove(); syncEventDateLimits(); recalc(); });
+  document.getElementById('extraEventDates').appendChild(wrap);
+  syncEventDateLimits();
+}
+
 ['checkIn', 'checkOut'].forEach(id => {
-  document.getElementById(id).addEventListener('change', () => {
-    const ev = document.getElementById('eventDate');
-    ev.min = document.getElementById('checkIn').value;
-    ev.max = document.getElementById('checkOut').value;
-  });
+  document.getElementById(id).addEventListener('change', syncEventDateLimits);
 });
 
 // Sync hero form → booking form, then scroll & recalc
@@ -2320,7 +2374,8 @@ async function submitBooking(e) {
     occasion:           shown('intent'),
     celebrationOptions: mode !== 'none' || val('intent') === 'event' ? shown('ceremonyType') : '',
     celebrationGuests:  mode !== 'none' ? val('eventGuests') : '',
-    celebrationDate:    mode === 'both' ? val('eventDate') : mode === 'dayOnly' ? val('checkIn') : '',
+    celebrationDate:    mode === 'both' ? eventDateInputs().map(el => el.value).filter(Boolean).sort().join(', ')
+                      : mode === 'dayOnly' ? val('checkIn') : '',
     name:               val('fullName'),
     email:              val('email'),
     phone:              val('phone'),

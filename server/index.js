@@ -251,7 +251,7 @@ const VKF_FIELDS = [
   ['property',           'Residence'],
   ['occasion',           "What's the Occasion?"],
   ['celebrationOptions', 'Celebration Options'],
-  ['celebrationDate',    'Celebration Date',     'date'],
+  ['celebrationDate',    'Celebration Date(s)',  'date'],
   ['celebrationGuests',  'Celebration Guests Onsite'],
   ['name',               'Name'],
   ['email',              'Email'],
@@ -282,12 +282,15 @@ function formatDate(iso) {
   return `${m[1]}-${MONTHS[+m[2] - 1]}-${m[3]} (${WEEKDAYS[d.getUTCDay()]})`;
 }
 
+// A celebration can span several days, sent as "2027-05-15, 2027-05-17"
+const formatDates = (v) => String(v ?? '').split(',').map(x => formatDate(x.trim())).join(', ');
+
 /* Known fields in form order; anything unexpected is appended so nothing is lost */
 function enquiryRows(schema, fields) {
   const known = new Set(schema.map(([key]) => key));
   const rows = schema
     .filter(([key]) => fields[key] !== undefined && String(fields[key]).trim() !== '')
-    .map(([key, label, type]) => [label, type === 'date' ? formatDate(fields[key]) : String(fields[key]).trim()]);
+    .map(([key, label, type]) => [label, type === 'date' ? formatDates(fields[key]) : String(fields[key]).trim()]);
   for (const [key, value] of Object.entries(fields)) {
     if (!known.has(key) && value !== undefined && String(value).trim() !== '') rows.push([key, String(value).trim()]);
   }
