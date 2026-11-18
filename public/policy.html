@@ -30,6 +30,11 @@
   --terracotta: #B4633F; --terracotta-deep: #8E4A2C;
   --ink: #1F1D18; --ink-soft: #4A463C; --muted: #8B8577;
   --line: rgba(31,29,24,0.12);
+  /* PDF palette (H&R's rates PDFs) */
+  --pdf-band: #3B5323; --pdf-band-sub: #56803A; --pdf-frame: #2E6B2A;
+  --pdf-teal-deep: #124A44; --pdf-teal: #1E8778; --pdf-teal-dark: #155C54; --pdf-teal-bright: #34D1C2;
+  --pdf-gold: #E6D7A6;
+  --s-jf: #BDD7EE; --s-md: #00B050; --s-an: #6CCB45; --s-mo: #FCE4D6; --s-js: #F4B183; --s-ja: #ED7D31;
   --font-display: 'Fraunces','Georgia',serif;
   --font-body: 'Manrope',-apple-system,sans-serif;
   --radius: 8px; --radius-lg: 16px;
@@ -41,11 +46,7 @@ a { color: var(--terracotta); text-decoration: none; }
 a:hover { text-decoration: underline; }
 h1,h2,h3,h4 { font-family: var(--font-display); font-weight: 400; }
 h1 { font-size: clamp(2rem,5vw,3.5rem); font-weight: 300; line-height: 1.1; }
-h2 { font-size: clamp(1.5rem,3vw,2.2rem); font-weight: 300; margin-bottom: 20px; }
-h3 { font-size: 1.25rem; margin-bottom: 14px; }
 p  { color: var(--ink-soft); margin-bottom: 14px; }
-ul { padding-left: 20px; color: var(--ink-soft); margin-bottom: 14px; }
-li { margin-bottom: 6px; }
 strong { color: var(--ink); }
 
 /* NAV */
@@ -58,10 +59,11 @@ strong { color: var(--ink); }
 .page-hero { background: var(--olive-deep); color: var(--cream-soft); padding: 64px 32px 48px; text-align: center; }
 .page-hero h1 { color: var(--cream-soft); margin-bottom: 12px; }
 .page-hero p { color: var(--bone); opacity: 0.85; max-width: 54ch; margin: 0 auto; }
+.eyebrow { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; font-weight: 600; color: var(--olive); margin-bottom: 10px; }
 
 /* TABS */
 .tabs-wrap { background: var(--cream-soft); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
-.tabs { display: flex; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.tabs { display: flex; max-width: 960px; margin: 0 auto; padding: 0 24px; overflow-x: auto; }
 .tab-btn {
   padding: 18px 28px; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
   letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: none;
@@ -71,44 +73,82 @@ strong { color: var(--ink); }
 .tab-btn:hover { color: var(--ink); }
 .tab-btn.active { color: var(--terracotta); border-bottom-color: var(--terracotta); }
 
-/* CONTENT */
-.content { max-width: 960px; margin: 0 auto; padding: 56px 32px 80px; }
+/* CONTENT: a page set like the PDF (one column, PDF-width) */
+.content { max-width: 880px; margin: 0 auto; padding: 40px 32px 80px; }
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
+.tab-panel p, .tab-panel li { text-align: justify; }
 
-.pdf-link { font-size: 0.85rem; margin: 0 0 24px; text-align: right; }
+.pdf-link { font-size: 0.85rem; margin: 0 0 24px; text-align: right !important; }
 .pdf-link a { color: var(--terracotta); font-weight: 600; }
 
-/* RATE TABLE */
-.rate-table .th-sub { font-weight: 400; font-size: 0.78em; opacity: 0.8; text-transform: none; letter-spacing: 0; }
-.rate-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 0.92rem; }
-.rate-table th { background: var(--olive-deep); color: var(--cream-soft); padding: 12px 14px; text-align: left; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.08em; }
-.rate-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); color: var(--ink-soft); }
-.rate-table tr:nth-child(even) td { background: var(--bone); }
-.rate-table tr:last-child td { border-bottom: none; }
-.rate-table td:first-child { color: var(--ink); font-weight: 500; }
-.rate-table th:nth-child(n+3), .rate-table td:nth-child(n+3) { text-align: right; }
-.rate-table.money th:nth-child(n+2), .rate-table.money td:nth-child(n+2) { text-align: right; }
+/* Heading bands, as in the PDFs: dark green chapter bars, lighter green section bars */
+.band { color: #fff; font-family: 'Times New Roman', Georgia, serif; font-weight: 400; line-height: 1.2; border: 1px solid #1f2d12; }
+.band-title { background: var(--pdf-band); text-align: center; font-size: clamp(1.6rem, 4vw, 2.3rem); padding: 14px 18px 12px; }
+.band-subtitle { display: block; font-size: 0.72em; margin-top: 4px; }
+.band-main { background: var(--pdf-band); text-align: center; font-size: clamp(1.45rem, 3.4vw, 2rem); padding: 6px 16px; margin: 0 0 18px; }
+.band-sub { background: var(--pdf-band-sub); text-align: left; font-size: clamp(1.2rem, 2.8vw, 1.55rem); padding: 3px 10px; margin: 0 0 14px; }
+.pdf-chapter { margin: 0 0 44px; scroll-margin-top: 70px; }
+.pdf-section { margin: 30px 0 0; scroll-margin-top: 70px; }
+.plain-h3 { font-size: 1.2rem; color: var(--ink); margin: 22px 0 10px; }
 
-/* CAPACITY TABLE */
-.cap-table { width: 100%; border-collapse: collapse; margin: 24px 0 32px; font-size: 0.88rem; }
-.cap-table th { background: var(--olive-deep); color: var(--cream-soft); padding: 10px 12px; text-align: center; font-weight: 600; font-size: 0.78rem; letter-spacing: 0.07em; }
-.cap-table th:first-child { text-align: left; }
-.cap-table td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: center; color: var(--ink-soft); }
-.cap-table td:first-child { text-align: left; color: var(--ink); font-weight: 500; }
-.cap-table tr:nth-child(even) td { background: var(--bone); }
+/* Cover block: title bar + logo + photo */
+.pdf-cover { margin: 0 0 40px; }
+.cover-images { display: grid; gap: 16px; margin-top: 22px; align-items: stretch; }
+.cover-images.side { grid-template-columns: minmax(120px, 0.38fr) 1fr; }
+.cover-images.stacked { grid-template-columns: 1fr; justify-items: center; }
+.cover-images img, .cover-logo.solo { border: 2px solid var(--pdf-frame); background: #fff; display: block; width: 100%; height: 100%; object-fit: cover; }
+.cover-images .cover-logo { object-fit: contain; padding: 8px; }
+.cover-logo.solo { width: 180px; height: auto; padding: 8px; margin: 0 auto 22px; object-fit: contain; }
+.cover-images.stacked .cover-photo { max-width: 680px; height: auto; }
 
-/* PLATFORM GROUPS */
+/* Notes under tables, small type as in the PDFs */
+.pdf-note { font-size: 0.85rem; color: var(--ink-soft); margin: 6px 0 10px 14px; }
+.pdf-list { padding-left: 22px; color: var(--ink-soft); margin: 0 0 14px; }
+.pdf-list li { margin-bottom: 8px; }
+.pdf-list .pdf-note { margin: 6px 0 0; }
+.signoff { text-align: center !important; margin-top: 8px; }
+
+/* Site-only facts, kept inside the section they belong to */
+.good-to-know { background: var(--bone); border-left: 3px solid var(--olive-soft); padding: 12px 16px; border-radius: 0 var(--radius) var(--radius) 0; margin: 14px 0 16px; font-size: 0.9rem; color: var(--ink-soft); }
+.good-to-know strong { color: var(--olive-deep); }
+
+/* Tables in the PDFs' teal style */
+.table-scroll { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 18px 0 8px; }
+.pdf-table { border-collapse: collapse; margin: 0 auto; font-family: 'Times New Roman', Georgia, serif; font-size: 1rem; min-width: 100%; }
+.pdf-table.narrow { min-width: 0; width: auto; }
+.pdf-table caption { background: var(--pdf-teal-deep); color: var(--pdf-gold); font-size: 1.35rem; padding: 4px 8px; border: 1px solid #0b2e2a; border-bottom: none; }
+.pdf-table th, .pdf-table td { border: 1px solid #0b2e2a; padding: 4px 12px; }
+.pdf-table thead th { background: var(--pdf-teal-deep); color: var(--pdf-gold); font-weight: 400; text-align: center; line-height: 1.25; font-size: 1.02rem; }
+.pdf-table thead th.corner { font-size: 1.3rem; text-align: left; }
+.pdf-table .th-sub { display: block; font-size: 0.7rem; }
+
+.pdf-table.cap tbody th { background: var(--pdf-teal); color: #fff; text-align: right; font-weight: 400; white-space: nowrap; }
+.pdf-table.cap tbody td { background: var(--pdf-teal); color: #fff; text-align: center; min-width: 4.2em; }
+.pdf-table.cap tr.sum th, .pdf-table.cap tr.sum td { background: var(--pdf-teal-dark); color: var(--pdf-gold); font-size: 1.08rem; }
+.pdf-table.cap tr.max th, .pdf-table.cap tr.max td { background: var(--pdf-teal-bright); color: #000; font-size: 1.22rem; }
+.pdf-table.deposits tbody td { min-width: 6em; }
+
+.pdf-table.season tbody th { text-align: right; font-weight: 400; color: #000; white-space: nowrap; }
+.pdf-table.season tbody td { text-align: right; color: #000; white-space: nowrap; }
+.pdf-table.season.wide { font-size: 0.95rem; }
+.pdf-table.season.wide th, .pdf-table.season.wide td { padding: 3px 8px; }
+tr.s-jf th, tr.s-jf td { background: var(--s-jf); }
+tr.s-md th, tr.s-md td { background: var(--s-md); }
+tr.s-an th, tr.s-an td { background: var(--s-an); }
+tr.s-mo th, tr.s-mo td { background: var(--s-mo); }
+tr.s-js th, tr.s-js td { background: var(--s-js); }
+tr.s-ja th, tr.s-ja td { background: var(--s-ja); }
+
+.mini-table { border-collapse: collapse; font-size: 0.88rem; margin-top: 4px; }
+.mini-table th, .mini-table td { padding: 5px 12px; border-bottom: 1px solid var(--line); text-align: left; }
+.mini-table thead th { color: var(--olive-deep); font-weight: 600; }
+.mini-table tbody th { font-weight: 500; color: var(--ink); }
+
+/* Platform links (holiday tab, last section) */
 .platform-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 14px; }
 .platform-groups > div { scroll-margin-top: 80px; }
-
-/* SECTION DIVIDER */
-.section-block { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid var(--line); }
-.section-block:last-child { border-bottom: none; }
-.eyebrow { font-family: var(--font-body); text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.7rem; font-weight: 600; color: var(--olive); margin-bottom: 10px; }
-
-/* NOTE BOX */
-.note { background: var(--bone); border-left: 3px solid var(--olive-soft); padding: 14px 18px; border-radius: 0 var(--radius) var(--radius) 0; margin: 16px 0 20px; font-size: 0.9rem; color: var(--ink-soft); }
+.platform-name { font-weight: 600; color: var(--ink) !important; margin-bottom: 8px; }
 
 /* BACK CTA */
 .back-cta { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--line); text-align: center; }
@@ -120,12 +160,18 @@ strong { color: var(--ink); }
 footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-align: center; font-size: 0.82rem; opacity: 0.7; }
 
 @media (max-width: 640px) {
-  .content { padding: 36px 20px 56px; }
+  .content { padding: 28px 16px 56px; }
   .tab-btn { padding: 14px 16px; font-size: 0.78rem; }
-  .page-hero { padding: 40px 20px 32px; }
-  .nav { padding: 14px 20px; }
-  .rate-table, .cap-table { font-size: 0.8rem; }
-  .rate-table th, .rate-table td, .cap-table th, .cap-table td { padding: 8px; }
+  .page-hero { padding: 40px 16px 32px; }
+  .nav { padding: 14px 16px; }
+  .tab-panel p, .tab-panel li { text-align: left; }
+  .cover-images.side { grid-template-columns: 1fr; }
+  .cover-images.side .cover-logo { width: 150px; height: auto; margin: 0 auto; }
+  .pdf-table { font-size: 0.85rem; }
+  .pdf-table thead th.corner { font-size: 1.05rem; }
+  .pdf-table th, .pdf-table td { padding: 4px 7px; }
+  .pdf-table.cap tbody th { white-space: normal; min-width: 9em; }
+  .pdf-table.cap tr.max th, .pdf-table.cap tr.max td { font-size: 1rem; }
   .platform-groups { grid-template-columns: 1fr; gap: 16px; }
 }
 </style>
@@ -136,10 +182,18 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What currency do you charge in, and how can I pay?",
+      "name": "What currency do you charge in?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "All quoted prices and—unless requested—all charges will be quoted in Euros. USD payments can be accepted at the IMF rate on the day we make your offer, with no surcharges or fees. We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We can accept payments through credit/payment cards and are happy to do so, but unlike larger third-party sites who spread the inevitable payment-processing fees across all customers, we only apply those fees (3.5% for USD or 5% for other currencies) to the specific card use."
+        "text": "As our location demands, we charge in Euros. We accept USD if needed, and unlike banks, card-processors & 3rd-party platforms, we use the simple IMF exchange rate without surcharges or fees."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We can accept payments through credit cards, but unlike larger third-party sites, we do not hide the inevitable payment-processing fees across all our rates and in doing so charge all customers the 3.5% to 5% fee from which only a few customers benefit. Card options and the processing details will be itemized in any offer we send, so you can choose a payment method that works best for you."
       }
     },
     {
@@ -147,7 +201,7 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
       "name": "Do you offer payment plans?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Reservations are typically paid in full. Larger reservations can be split into up to 4 payments: 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments). Options & details will be automatically included in any offer we send you."
+        "text": "Smaller reservations are typically booked via full payment of the reservation's cost & security deposit. Larger reservations over €3,000 can qualify for 2, 3 or 4 payments depending on the reservation's value and the length of time between booking and your arrival: 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. When you submit your inquiry, we will automatically calculate those options & share the details in our offer."
       }
     },
     {
@@ -155,7 +209,7 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
       "name": "Is there a security deposit?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "A security deposit is included in your payment to hold your booking and to serve as a damage deposit during your stay. Deposits are always returned via bank transfer upon departure, assuming no major issues. A pet damage supplement of €100 per pet (maximum 2 pets) applies."
+        "text": "Your initial payment will include a minimum security-deposit to hold that time against other requests and then later to serve as a damage-deposit during your stay: €1,000 for the estate, with a pet damage deposit supplement of €100/pet (max 2). Assuming no major issues, deposits are always returned via bank transfer at departure."
       }
     },
     {
@@ -163,7 +217,7 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
       "name": "What is your cancellation policy?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We will always work to refund cancelled stays and never charge a fee for this service. We can only do so to the degree we are able to re-book your time."
+        "text": "We always work to rebook cancelled stays, refund all payments to the degree we have rebooked that time, and never charge a fee for this service. While this is often easily done, especially with an early warning of your need to cancel, it cannot be guaranteed."
       }
     },
     {
@@ -171,7 +225,7 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
       "name": "What are the check-in and check-out times?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We guarantee check-in from 16:00 and check-out by 10:00. We almost always happily advance or extend those times for you, and we'll always offer an early luggage-drop and/or late luggage-hold so you can enjoy yourself while waiting."
+        "text": "While we guarantee arrival check-ins of 16:00 & departure check-outs of 10:00, we can often advance or extend those. When your flights are at odds with such check-in & check-out times, we'll always offer early luggage-drop or late luggage-hold so you can do something enjoyable while waiting."
       }
     },
     {
@@ -179,7 +233,7 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
       "name": "Is smoking allowed?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We are surrounded by olive groves, and—while beautiful—they are susceptible to fire. Smoking, especially from the April to November fire season, is severely restricted to outside verandas on windless days, and the use of wet ash trays."
+        "text": "We are set among groves of olive trees, all beautiful, but all susceptible to tragic fires. Smoking is therefore severely restricted, especially during the 3 fire seasons. Wet ashtrays always, always outside, only on verandas, and only on windless days."
       }
     },
     {
@@ -187,12 +241,13 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
       "name": "Is it cheaper to book directly than on Airbnb or VRBO?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We use the same base prices for all platforms (including our own) but add a surcharge on 3rd-platforms to recover fees & extra taxes we must pay when you book via a 3rd party site. For AirBnb this is 20% and VRBO 19%."
+        "text": "We use the same base prices for all platforms (including our own) but add a surcharge on 3rd-party platforms to recover fees & extra taxes we must pay when you book via a 3rd-party site. For Airbnb this is 20% and VRBO 19%."
       }
     }
   ]
 }
 </script>
+
 </head>
 <body>
 
@@ -204,7 +259,7 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
 <div class="page-hero">
   <div class="eyebrow" style="color:var(--bone); opacity:0.75;">Villa Koukouvayia Farms</div>
   <h1>Rates, Policies &amp; FAQs</h1>
-  <p>Everything you need to know before you book. Select your stay type below.</p>
+  <p>Everything you need to know before you book. Select your stay type below. Each page matches its downloadable PDF.</p>
 </div>
 
 <div class="tabs-wrap">
@@ -217,506 +272,479 @@ footer { background: var(--ink); color: var(--bone); padding: 28px 32px; text-al
 
 <div class="content">
 
-  <!-- ============================================================
-       HOLIDAY TAB
-       ============================================================ -->
+  <!-- Each tab mirrors its PDF: same headings, order and text (H&R, 18 Nov 2026: "The PDFs are the fully vetted final word").
+       "Good to know" boxes and the last section of each tab are site-only facts not in the PDFs. -->
+
   <div class="tab-panel active" id="tab-holiday">
+<p class="pdf-link"><a href="/vkf-rates-policies-faqs-holiday.pdf" target="_blank" rel="noopener">Download as PDF: Holiday Stays, Rates, Policies &amp; FAQs ↓</a></p>
+<div class="pdf-cover">
+<h2 class="band band-title">Holiday Stays at Villa Koukouvayia Farms:<span class="band-subtitle">Answers to some FAQs</span></h2>
+<div class="cover-images side"><img class="cover-logo" src="/policy/vkf-owl-logo.jpg" width="426" height="452" alt="Villa Koukouvayia Farms owl logo: A Place to Discover. A Stay to Remember."><img class="cover-photo" src="/policy/holiday-pool.jpg" width="1400" height="1054" alt="A young guest in armbands jumping into the pool in front of the arched veranda" loading="eager"></div>
+</div>
+<section class="pdf-chapter "><h2 class="band band-main">Finding a Best Fit for Your Holiday Home</h2>
+<p>Villa Koukouvayia Farms will serve as the perfect holiday home for yourself, your friends &amp; your family during your stay in Western Crete. With three separate residential homes, the estate offers privacy and flexibility for a wide variety of travelers: from couples to young families to groups of friends or families up to 28. Whether you’ve come to for the island’s beaches &amp; mountains, its history, food &amp; wines, or simply to relax among a landscape of green olives &amp; blue sky with those you love, Villa Koukouvayia is ideally designed, built &amp; located to put all of those in your hand.</p>
+<p>So, as you consider your stay on the island, let’s talk about how Villa Koukouvayia Farms can serve as the home base and the heart of a great holiday.</p>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Lodging at Villa Koukouvayia Farms</h2>
+<p>Villa Koukouvayia Farms is a unique property, with four unique residential choices: the Main House, Guest House, Garden Suite and (by combining all three) the entire Estate itself. By design, these are not banks of identical hotel rooms, but each is a private home for those seeking such ambience and they allow you to customize your lodging whether you’re a young couple, small family, or larger friendship &amp; family groups seeking a warm place to gather and share. And while her lodging capacities are unique, their flexibility is the farm’s greatest asset, with strategically placed cabinet bedding easily configured to meet multiple bedding needs.</p>
+<p>To see how your group’s lodging needs can be comfortably met, review the table below. The numbers describe each of the residence’s sleeping capacities as well as the entire estate’s if rented as a whole. They include both typical numbers we host &amp; the maximum possible chosen by some groups.</p>
+<div class="table-scroll"><table class="pdf-table cap">
+<thead><tr><th scope="col" class="corner">Villa Koukouvayia<br>Lodging Capacities</th><th scope="col">VKF<br>Estate</th><th scope="col">Main<br>House</th><th scope="col">Guest<br>House</th><th scope="col">Garden<br>Suite</th></tr></thead>
+<tbody>
+<tr class=""><th scope="row">Private Bedrooms:</th><td>8</td><td>3</td><td>2</td><td>3</td></tr>
+<tr class=""><th scope="row">Single Beds:</th><td>14</td><td>1</td><td>2</td><td>11</td></tr>
+<tr class=""><th scope="row">Couple’s Bedding:</th><td>6</td><td>2</td><td>1</td><td>3</td></tr>
+<tr class=""><th scope="row">Full Baths:</th><td>5</td><td>2</td><td>1</td><td>2</td></tr>
+<tr class=""><th scope="row">Half-Baths:</th><td>2</td><td>1</td><td>1</td><td>0</td></tr>
+<tr class="sum"><th scope="row">Typical Sleeping Capacity:</th><td>15—20</td><td>5</td><td>4</td><td>6—11</td></tr>
+<tr class=""><th scope="row">Additional Sleep Areas:</th><td>6</td><td>3</td><td>2</td><td>1</td></tr>
+<tr class=""><th scope="row">Additional Single Bedding Available:</th><td>6</td><td>4</td><td>2</td><td>0</td></tr>
+<tr class=""><th scope="row">Additional Couple’s Bedding Available:</th><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr class="sum"><th scope="row">Additional Sleeping Capacity:</th><td>8</td><td>4</td><td>2</td><td>2</td></tr>
+<tr class="max"><th scope="row">Max Capacity Recommended:</th><td>24</td><td>7</td><td>4</td><td>13</td></tr>
+<tr class="max"><th scope="row">Max Capacity Allowed:</th><td>28</td><td>9</td><td>6</td><td>13</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note: For programs needing capacities beyond Villa Koukouvayia, or with a desire to house facilitators nearby vs. onsite, we have relationships with several nearby homes—one of which is a charming private cottage only a few steps through the olive groves from VKF’s estate. We can often secure these homes at discounted rates and easily integrate the cost within your invoice.</p>
+<div class="pdf-section"><h3 class="band band-sub">Occupancies Included &amp; Available</h3>
+<p>To fairly price a variety of group sizes, we set base rates to allow inexpensive stays for smaller groups, then use a supplement (€13/extra-guest/night) to let larger groups match costs to their lodging needs &amp; value. The next table specifies guests included in the rates that follow, &amp; those allowed at extra charge.</p>
+<div class="table-scroll"><table class="pdf-table cap narrow">
+<thead><tr><th scope="col" class="corner">Guest Capacities</th><th scope="col">VKF<br>Estate</th><th scope="col">Main<br>House</th><th scope="col">Guest<br>House</th><th scope="col">Garden<br>Suite</th></tr></thead>
+<tbody>
+<tr><th scope="row">Guests Included in Base Rate:</th><td>16</td><td>6</td><td>4</td><td>6</td></tr>
+<tr><th scope="row">Extra Guests Allowed w/Supplement:</th><td>12</td><td>3</td><td>2</td><td>7</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note: Infants under 2 years at the time of arrival are not counted in these limits or pricing.</p>
+</div>
 
-    <p class="pdf-link"><a href="/vkf-rates-policies-faqs-holiday.pdf" target="_blank" rel="noopener">Download as PDF: Holiday Stays — Rates, Policies &amp; FAQs ↓</a></p>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Calculating Costs</h2>
+<p>For all whom we host, our goal is to be fair &amp; transparent in our charges, and to avoid surprises once guests decide to stay with us. For instance, Greek taxes paid on your behalf are progressive, confusing and high, including both a daily Climate Resilience Tax &amp; a tax on the value of the rental as high as 45%(!) To keep your costs low we cap the rental tax @ the VAT rate of 24%; and to ensure you don’t worry about <em><u>any</u></em> of it, we include every tax in the worksheets below and in any offer we send you.</p>
+<p>Simply put, we want you to know all costs before deciding to stay with us.</p>
+<p>(And if comparing Villa Koukouvayia’s to others’, make sure they too are fully inclusive!)</p>
+<div class="good-to-know"><strong>Good to know:</strong> The daily Climate Resilience Tax depends on the size of the rental space and the time of year. It is already included in every rate below, and if needed, we can itemize all taxes and fees on any bill or invoice.
+<div class="table-scroll"><table class="mini-table">
+<thead><tr><th scope="col">Climate Resilience Tax</th><th scope="col">Guest House</th><th scope="col">Other Residences</th></tr></thead>
+<tbody>
+<tr><th scope="row">November through March</th><td>€2/night</td><td>€4/night</td></tr>
+<tr><th scope="row">April through October</th><td>€8/night</td><td>€15/night</td></tr>
+</tbody></table></div></div><div class="pdf-section"><h3 class="band band-sub">Lodging Rates</h3>
+<p>The table below lists Villa Koukouvayia’s lodging rates by season for each residential option. Each rate, multiplied by the nights you will stay, includes all lodging amenities from the afternoon of your arrival until the morning of your departure and all taxes.</p>
+<p>As you can imagine, the majority of labor that creates your comfortable stay occurs in the fixed costs of preparing the property for your arrival. So that we can spread those expenses across lower rates and still welcome shorter stays, we do have a minimum charge, but it can be easily calculated based on your nominal reservation rate x5 for the Guest House and x7 for the other three properties. Should you prefer a shorter stay, examples at typical occupancy are shown in the table.</p>
+<div class="table-scroll"><table class="pdf-table season wide">
+<thead><tr><th scope="col" rowspan="2" class="corner">Season/<br>Month</th><th scope="colgroup" colspan="4">Daily Rates</th><th scope="colgroup" colspan="4">Minimum Reservation</th></tr>
+<tr><th scope="col">Main<br>House<span class="th-sub">(w/6 guests)</span></th><th scope="col">Guest<br>House<span class="th-sub">(w/4 guests)</span></th><th scope="col">Garden<br>Suite<span class="th-sub">(w/6 guests)</span></th><th scope="col">Entire<br>Estate<span class="th-sub">(w/16 guests)</span></th><th scope="col">Main<br>House<span class="th-sub">(w/6 guests)</span></th><th scope="col">Guest<br>House<span class="th-sub">(w/4 guests)</span></th><th scope="col">Garden<br>Suite<span class="th-sub">(w/6 guests)</span></th><th scope="col">Entire<br>Estate<span class="th-sub">(w/16 guests)</span></th></tr></thead>
+<tbody>
+<tr class="s-jf"><th scope="row">Jan &amp; Feb</th><td>€ 116</td><td>€ 64</td><td>€ 60</td><td>€ 295</td><td>€ 785</td><td>€ 312</td><td>€ 395</td><td>€ 2,044</td></tr>
+<tr class="s-md"><th scope="row">Mar &amp; Dec</th><td>€ 147</td><td>€ 76</td><td>€ 72</td><td>€ 357</td><td>€ 1,002</td><td>€ 374</td><td>€ 481</td><td>€ 2,478</td></tr>
+<tr class="s-an"><th scope="row">Apr &amp; Nov</th><td>€ 170</td><td>€ 89</td><td>€ 89</td><td>€ 399</td><td>€ 1,100</td><td>€ 411</td><td>€ 536</td><td>€ 2,706</td></tr>
+<tr class="s-mo"><th scope="row">May &amp; Oct</th><td>€ 207</td><td>€ 113</td><td>€ 114</td><td>€ 499</td><td>€ 1,360</td><td>€ 535</td><td>€ 709</td><td>€ 3,400</td></tr>
+<tr class="s-js"><th scope="row">Jun &amp; Sep</th><td>€ 263</td><td>€ 144</td><td>€ 145</td><td>€ 629</td><td>€ 1,751</td><td>€ 690</td><td>€ 926</td><td>€ 4,312</td></tr>
+<tr class="s-ja"><th scope="row">Jul &amp; Aug</th><td>€ 337</td><td>€ 182</td><td>€ 182</td><td>€ 790</td><td>€ 2,272</td><td>€ 876</td><td>€ 1,187</td><td>€ 5,440</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note1: Rates include all taxes &amp; fees, but as noted above, are priced to protect groups not bringing the maximum number of guests from being overcharged. For larger groups, add €13/night for each extra guest.</p>
+<p class="pdf-note">Note2: To ensure your arrival’s timing doesn’t affect costs, reservations bridging multiple rate-seasons are calculated by each day within a seasonal rate, and the two subtotals are simply added.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Supplemental &amp; Concierge Services</h3>
+<p>When not welcoming holiday travelers to Western Crete, we organize retreats that capitalize on the historic, culinary, topographic &amp; recreational landscapes on the island, and we can do the same for you, supercharging your Cretan experience and bearing the stress of such arrangements. Trustworthy car rentals? Great vegetarian tavernas near Elafonisi? Unknown beaches? Best safe spots for 12-year olds to jump in the sea? Traversing Samaria Gorge without the crowds? We can provide you the same local knowledge (and savings) we apply to our programs, saving you the angst of ensuring your family’s great time in a new &amp; foreign place, so you can enjoy the same. Transportation, food &amp; activity services are available either holistically or a la carte, and because we know the island, we can integrate each into the holiday you want. If interested, just let us know after booking, and we’ll schedule a chat!</p>
+</div>
 
-    <div class="section-block">
-      <p>Our goal is to be fair and transparent in all aspects of your reservation, and to avoid surprises once you decide to stay with us. The tables below list the farm's various lodging capacities, and all charges that might apply to your unique reservation, including mandatory taxes we must collect on behalf of the Greek authorities, and—if you are not booking with us directly—the surcharge we must add to recover fees AirBnB or VRBO will charge us. We insert no hidden fees, and any offer we send you will be inclusive, with only a fully refundable reservation &amp; damage deposit to be added to your initial payment.</p>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Other Cost Considerations</h2>
+<p>The following details may not affect costs but bear on how we coordinate financial aspects of your stay.</p>
+<div class="pdf-section"><h3 class="band band-sub">Extended-Stay Discounts</h3>
+<p>We provide season-based discounts for programs lodging guests longer than two weeks.</p>
+<div class="table-scroll"><table class="pdf-table season narrow">
+<thead><tr><th scope="col" class="corner">Season/Month</th><th scope="col">14 Days</th><th scope="col">30 Days</th><th scope="col">60 Days</th></tr></thead>
+<tbody>
+<tr class="s-jf"><th scope="row">January &amp; February</th><td>10%</td><td>15%</td><td>25%</td></tr>
+<tr class="s-md"><th scope="row">March &amp; December</th><td>7%</td><td>10%</td><td>20%</td></tr>
+<tr class="s-an"><th scope="row">April &amp; November</th><td>5%</td><td>7%</td><td>15%</td></tr>
+<tr class="s-mo"><th scope="row">May &amp; October</th><td>3%</td><td>5%</td><td>10%</td></tr>
+<tr class="s-js"><th scope="row">June &amp; September</th><td>0%</td><td>3%</td><td>7%</td></tr>
+<tr class="s-ja"><th scope="row">July &amp; August</th><td>0%</td><td>3%</td><td>5%</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note1: These discounts apply to base reservation costs before taxes or extra occupancy charges.</p>
+<p class="pdf-note">Note2: As with rates, discounts across “seasons,” are calculated per-day, then subtotaled to ensure full deduction.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Reserving Your Time &amp; Payment Plans</h3>
+<p>Smaller reservations are typically booked via full payment of the reservation’s cost &amp; security deposit. Larger reservations over €3,000 can qualify for 2, 3 or 4 payments depending on the reservation’s value and the length of time between booking and your arrival. When you submit your inquiry, we will automatically calculate those options &amp; share the details in our offer.</p>
+<div class="good-to-know"><strong>Good to know:</strong> 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments).</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Damage/Security Deposits</h3>
+<p>While not affecting your net expense, once you decide to book with us, your initial payment will include a minimum security-deposit to hold that time against other requests and then later to serve as a damage-deposit during your stay. We set these amounts low to reflect typical guests but will increase them for groups that present a higher likelihood of damage, such as those bringing pets, youth groups, etc.</p>
+<p>Of course, assuming no major issues, deposits are always returned via bank transfer at departure.</p>
+<div class="table-scroll"><table class="pdf-table cap narrow deposits">
+<thead><tr><th scope="col" class="corner">Security/Reservation Deposits</th><th scope="col">Estate</th><th scope="col">Youth Groups</th></tr></thead>
+<tbody>
+<tr><th scope="row">Security/Damage Deposits:</th><td>€1,000</td><td>€1,000</td></tr>
+<tr><th scope="row">Pet Damage Deposit Supplement <small>(Max 2)</small>:</th><td colspan="2">€100/pet</td></tr>
+</tbody></table></div><p class="pdf-note">Note: We never confuse ‘damage’ with ‘use.’ Yes, we assume you will ensure your group respects Villa Koukouvayia, but we also expect you to use the facility and enjoy yourself during your stay. And we’ve been hosting groups long enough to understand that any gathering of happy people—particularly if happy children are part of the mix—will drop a glass or two. And while we don’t like broken glass, we do like it when you’re happy!</p><div class="good-to-know"><strong>Good to know:</strong> When you book a single residence rather than the whole estate, the security deposit is €500 for the Main House, €200 for the Guest House and €300 for the Garden Suite. Up to 2 well behaved pets that are chipped and vaccinated can stay for free, with the pet supplement above added to the refundable deposit. There are other considerations important to the safety of your pet in this rural environment, so if you do plan to bring a special pet, contact us first.</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Currency</h3>
+<p>As our location demands, we charge in Euros. We accept USD if needed, and unlike banks, card-processors &amp; 3rd-party platforms, we use the simple IMF exchange rate without surcharges or fees.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Cancellation Policy</h3>
+<p>We always work to rebook cancelled stays, refund all payments to the degree we have rebooked that time, and never charge a fee for this service. While this is often easily done, especially with an early warning of your need to cancel, it cannot be guaranteed.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Payment Methods</h3>
+<p>We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We <em><u>can</u></em> accept payments through credit cards, but unlike larger third-party sites, we do not hide the inevitable payment-processing fees across all our rates and in doing so charge <u>all</u> customers the 3.5% to 5% fee from which only a few customers benefit. Card options and the processing details will be itemized in any offer we send, so you can choose a payment method that works best for you.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Individual Bargaining vs. Standard Price</h3>
+<p>Although we understand a guest’s desire either to get a better deal than others or simply meet a limited budget, we feel honor-bound in our interactions with <em><u>each</u></em> guest to consider <em><u>all</u></em> guests. So we simply don’t make individual deals that favor a guest who requests special prices, because that effectively overcharge guests who quietly trust us to publish prices that reflect our honest rates. Instead, we focus on setting sincerely low rates that allow us to sustain the home and hospitality we offer. And for anyone wondering about our value, we recommend they look at comparable lodgings and read what other customers have said about their experience with us. We post every review written by guests, and we are proud of the consistency with which they agree about the value of staying with us.</p>
+</div>
 
-    <div class="section-block">
-      <div class="eyebrow">Occupancy</div>
-      <h2>Lodging Capacities</h2>
-      <p>Villa Koukouvayia is not a hotel with identical rooms, but a home with unique &amp; charming sleeping areas. The table below describes sleeping capacities for a variety of guest configurations.</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th>Capacity</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Private Bedrooms</td><td>3</td><td>2</td><td>3</td><td>8</td></tr>
-          <tr><td>Single Beds</td><td>1</td><td>2</td><td>11</td><td>14</td></tr>
-          <tr><td>Couple's Bedding</td><td>2</td><td>1</td><td>3</td><td>6</td></tr>
-          <tr><td>Full Baths</td><td>2</td><td>1</td><td>2</td><td>5</td></tr>
-          <tr><td>Half-Baths</td><td>1</td><td>1</td><td>0</td><td>2</td></tr>
-          <tr><td>Typical Sleeping Capacity</td><td>5</td><td>4</td><td>6–11</td><td>15–20</td></tr>
-          <tr><td>Additional Sleeping Capacity</td><td>4</td><td>2</td><td>2</td><td>8</td></tr>
-          <tr><td><strong>Guests Included in Base Rate</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>6</strong></td><td><strong>16</strong></td></tr>
-          <tr><td><strong>Max Guests Allowed</strong></td><td><strong>9</strong></td><td><strong>6</strong></td><td><strong>13</strong></td><td><strong>28</strong></td></tr>
-        </tbody>
-      </table>
-      <div class="note">For groups needing capacity beyond our estate, we have relationships with nearby homes and can often secure them at discounted rates, easily integrated within your invoice.</div>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Some Final FAQs</h2>
+<div class="pdf-section"><h3 class="band band-sub">Check-In &amp; Check-Out Times</h3>
+<p>Check-In &amp; Check-Out Times: As always, our goal is to make your stay <em><u>and</u></em> your arrival and departure stress-free. While we guarantee arrival check-ins of 16:00 &amp; departure check-outs of 10:00, we can often advance or extend those. There are times, however, when guests depart/arrive close to you, and we must follow those times strictly, so be prepared. Of course, when your flights are at odds with such check-in &amp; check-out times, we’ll always offer early luggage-drop or late luggage-hold so you can do something enjoyable while waiting—either for us to ready your home, or the airline to ready your flight.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Smoking</h3>
+<p>Smoking: We are set among groves of olive trees, all beautiful, but all susceptible to tragic fires. Smoking is therefore severely restricted, especially during the 3 fire seasons. Wet ashtrays always, always outside, only on verandas, and only on windless days.</p>
+</div>
 
-    <div class="section-block">
-      <div class="eyebrow">Pricing</div>
-      <h2>Lodging Rates</h2>
-      <p>The tables below list Villa Koukouvayia's lodging rates by season for each residential option. Each rate, multiplied by the nights you will stay, includes all lodging amenities from the afternoon of your arrival until the morning of your departure, and all taxes. As you can imagine, the majority of labor that creates your comfortable stay occurs in the fixed costs of preparing the property for your arrival. So that we can spread those expenses across lower rates and still welcome shorter stays, we do have a minimum charge, easily calculated as your nominal reservation rate ×5 for the Guest House and ×7 for the other three options. Should you prefer a shorter stay, examples at typical occupancy are shown in the second table.</p>
-      <h3>Daily Rates</h3>
-      <table class="rate-table money">
-        <thead>
-          <tr><th>Season</th><th>Main House<br><span class="th-sub">(w/ 6 guests)</span></th><th>Guest House<br><span class="th-sub">(w/ 4 guests)</span></th><th>Garden Suite<br><span class="th-sub">(w/ 6 guests)</span></th><th>VKF Estate<br><span class="th-sub">(w/ 16 guests)</span></th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jan &amp; Feb</td><td>€116</td><td>€64</td><td>€60</td><td>€295</td></tr>
-          <tr><td>Mar &amp; Dec</td><td>€147</td><td>€76</td><td>€72</td><td>€357</td></tr>
-          <tr><td>Apr &amp; Nov</td><td>€170</td><td>€89</td><td>€89</td><td>€399</td></tr>
-          <tr><td>May &amp; Oct</td><td>€207</td><td>€113</td><td>€114</td><td>€499</td></tr>
-          <tr><td>Jun &amp; Sep</td><td>€263</td><td>€144</td><td>€145</td><td>€629</td></tr>
-          <tr><td>Jul &amp; Aug</td><td>€337</td><td>€182</td><td>€182</td><td>€790</td></tr>
-        </tbody>
-      </table>
-      <h3>Minimum Reservation</h3>
-      <table class="rate-table money">
-        <thead>
-          <tr><th>Season</th><th>Main House<br><span class="th-sub">(w/ 6 guests)</span></th><th>Guest House<br><span class="th-sub">(w/ 4 guests)</span></th><th>Garden Suite<br><span class="th-sub">(w/ 6 guests)</span></th><th>VKF Estate<br><span class="th-sub">(w/ 16 guests)</span></th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jan &amp; Feb</td><td>€785</td><td>€312</td><td>€395</td><td>€2,044</td></tr>
-          <tr><td>Mar &amp; Dec</td><td>€1,002</td><td>€374</td><td>€481</td><td>€2,478</td></tr>
-          <tr><td>Apr &amp; Nov</td><td>€1,100</td><td>€411</td><td>€536</td><td>€2,706</td></tr>
-          <tr><td>May &amp; Oct</td><td>€1,360</td><td>€535</td><td>€709</td><td>€3,400</td></tr>
-          <tr><td>Jun &amp; Sep</td><td>€1,751</td><td>€690</td><td>€926</td><td>€4,312</td></tr>
-          <tr><td>Jul &amp; Aug</td><td>€2,272</td><td>€876</td><td>€1,187</td><td>€5,440</td></tr>
-        </tbody>
-      </table>
-      <div class="note"><strong>Extra Guest Supplement:</strong> Rates include all taxes &amp; fees, but are priced to protect groups not bringing the maximum number of guests from being overcharged. For larger groups, add €13/night for each extra guest beyond those included (see the capacity table above).</div>
-      <div class="note">To ensure your arrival's timing doesn't affect costs, reservations bridging multiple rate-seasons are calculated by each day within a seasonal rate, and the subtotals are simply added.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Stay Length</div>
-      <h2>Minimum Stays &amp; Deposits</h2>
-      <p>We collect a fully refundable security deposit at the time of reservation, and we hold that deposit throughout your stay to cover any nominal damages that might occur. Also of note, we keep our prices low by spreading the inevitable costs of prepping for your arrival across minimum stays. Both of those parameters are listed below.</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Minimum Stay (nights)</td><td>7</td><td>5</td><td>7</td><td>7</td></tr>
-          <tr><td>Security Deposit</td><td>€500</td><td>€200</td><td>€300</td><td>€1,000</td></tr>
-        </tbody>
-      </table>
-      <div class="note">Up to 2 well behaved pets that are chipped and vaccinated can stay for free, but will increase the refundable deposit by €100 each. There are other considerations important to the safety of your pet in this rural environment, so if you do plan to bring a special pet, contact us first.</div>
-      <div class="note">If your fixed itinerary demands a shorter stay, we can easily accept a shorter booking at the minimum-stay cost.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Long Stays</div>
-      <h2>Extended-Stay Discounts</h2>
-      <p>We offer generous season-based discounts for stays longer than two weeks, applied before taxes and extra-guest charges.</p>
-      <table class="rate-table">
-        <thead>
-          <tr><th>Months</th><th>Season</th><th>14 Days</th><th>30 Days</th><th>60 Days</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jan &amp; Feb</td><td>Winter</td><td>10%</td><td>15%</td><td>25%</td></tr>
-          <tr><td>March</td><td>Early Spring</td><td>7%</td><td>10%</td><td>20%</td></tr>
-          <tr><td>April</td><td>Spring</td><td>5%</td><td>7%</td><td>15%</td></tr>
-          <tr><td>May</td><td>Late Spring</td><td>3%</td><td>5%</td><td>10%</td></tr>
-          <tr><td>June</td><td>Early Summer</td><td>0%</td><td>3%</td><td>7%</td></tr>
-          <tr><td>Jul &amp; Aug</td><td>Summer</td><td>0%</td><td>3%</td><td>5%</td></tr>
-          <tr><td>September</td><td>Late Summer</td><td>0%</td><td>3%</td><td>7%</td></tr>
-          <tr><td>October</td><td>Early Autumn</td><td>3%</td><td>5%</td><td>10%</td></tr>
-          <tr><td>November</td><td>Autumn/Harvest</td><td>5%</td><td>7%</td><td>15%</td></tr>
-          <tr><td>December</td><td>Winter Holidays</td><td>7%</td><td>10%</td><td>20%</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Taxes &amp; Fees</div>
-      <h2>Government Taxes</h2>
-      <p>The Greek taxes we pay on your behalf can be both confusing and high. They include a daily Climate Resilience Tax (described below) that varies depending on the size of the rental space and the time of year, and a rental-value tax ranging up to 45%. To keep your costs down we cap the rental-value tax at the VAT rate of 24% on direct bookings (bookings via third-party platforms carry 35%); and to ensure you don't have to worry about any of it, we include every cost into the rate/s we share with you. Simply put, we want you to know all your costs before you decide to stay with us, and will face no surprises after making that choice.</p>
-      <p>Be sure when comparing Villa Koukouvayia's costs to other options, that they, too, are fully inclusive.</p>
-      <p>(And of course, if needed, we can itemize all taxes and fees on any bill or invoice.)</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th>Period</th><th>Guest House</th><th>Other Residences</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>November through March</td><td>€2/night</td><td>€4/night</td></tr>
-          <tr><td>April through October</td><td>€8/night</td><td>€15/night</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Other Policies</div>
-      <h2>Payment, Platform &amp; Other Policies</h2>
-
-      <h3>Currency &amp; Payment</h3>
-      <p>All quoted prices and—unless requested—all charges will be quoted in Euros. USD payments can be accepted at the IMF rate on the day we make your offer, with no surcharges or fees. We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We can accept payments through credit/payment cards and are happy to do so, but unlike larger third-party sites who spread the inevitable payment-processing fees across all customers, we only apply those fees (3.5% for USD or 5% for other currencies) to the specific card use. Card options and the processing details will be itemized in any offer we send, so that you can be sure to choose a payment method that works best for you.</p>
-
-      <h3>Payment Plans</h3>
-      <p>Reservations are typically paid in full. Larger reservations can be split into up to 4 payments: 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments). Options &amp; details will be automatically included in any offer we send you.</p>
-
-      <h3>Security Deposits</h3>
-      <p>A security deposit is included in your payment to hold your booking and to serve as a damage deposit during your stay. Deposits are always returned via bank transfer upon departure, assuming no major issues. A pet damage supplement of €100 per pet (maximum 2 pets) applies.</p>
-      <div class="note">We never confuse 'damage' with 'use.' We expect you to enjoy the home you've rented, and we understand that any gathering of happy people will occasionally drop a glass or two.</div>
-
-      <h3>Cancellations</h3>
-      <p>We will always work to refund cancelled stays and never charge a fee for this service. We can only do so to the degree we are able to re-book your time.</p>
-
-      <h3>Check-In &amp; Check-Out</h3>
-      <p>We guarantee check-in from 16:00 and check-out by 10:00. We almost always happily advance or extend those times for you, and we'll always offer an early luggage-drop and/or late luggage-hold so you can enjoy yourself while waiting.</p>
-
-      <h3>Smoking</h3>
-      <p>We are surrounded by olive groves, and—while beautiful—they are susceptible to fire. Smoking, especially from the April to November fire season, is severely restricted to outside verandas on windless days, and the use of wet ash trays.</p>
-
-      <h3>Individual Bargaining over Standard Price</h3>
-      <p>Although we understand your individual desire to get a "better" deal than others, please understand that our interactions with each guest must consider all guests. So, we simply do not make individual deals that favor a guest who requests special prices. If we did, we would effectively overcharge guests who correctly trust us to set &amp; publish prices that provide good value and reflect our honest rates. For anyone wondering about our value, we recommend they look at comparable lodgings and read what other customers have said about their experience with us. We post every review written by guests, and we are proud of the consistency with which they agree about the value of staying with us.</p>
-
-      <h3>Savings over AirBnB, VRBO, and other 3rd-Party Sites</h3>
-      <p>We use the same base prices for all platforms (including our own) but add a surcharge on 3rd-platforms to recover fees &amp; extra taxes we must pay when you book via a 3rd party site. For AirBnb this is 20% and VRBO 19%.</p>
-
-      <h3>Policy Variations among 3rd-Party Sites and Koukouvayia.com</h3>
-      <p>We strive to make all our policies, fees, discounts, etc. parallel across all platforms, including our own. If you see a difference between platforms, the difference results from 3rd-Party platforms limiting our options within their site listings.</p>
-
-      <h3>Other Direct 3rd-Party Booking Differences</h3>
-      <p>While booking with us directly will yield considerable savings, there are some features available from 3rd-Party platforms that we cannot provide.</p>
-      <ul>
-        <li>Third-Party platforms often put only a 'hold' on your credit-card to cover potential future damages, but we need to have actual funds under our protection once you reserve and until your departure. On the flip side, third-party platforms almost always charge the full reservation value immediately, but as noted above, we can sometimes allow multiple-payment plans. If eligible for partial payments, those amounts and expected dates will be noted on the offer we send you. If not eligible, payment is expected similarly to the third-party sites: in full at time of booking.</li>
-        <li>While, as mentioned above, we will always work to refund cancelled stays and never charge a fee for this service, we can only do so to the degree we are able re-book your time. And while some 3rd-Party sites do charge fees for cancellation, some also guarantee those refunds regardless of whether and when you cancel. Make sure you are comfortable with the policy of whichever platform (including ours) that you will use to book us.</li>
-      </ul>
-      <p>Of course, if you prefer to book using a 3rd Party Platform, please do so! The links to each of our listings on both AirBnB &amp; VRBO are below:</p>
-
-      <div class="platform-groups">
-        <div id="platforms-vrbo">
-          <p style="font-weight:600; color:var(--ink); margin-bottom:8px;">VRBO</p>
-          <ul>
-            <li><a href="https://www.vrbo.com/858887" target="_blank" rel="noopener">Guest House (#858887)</a></li>
-            <li><a href="https://www.vrbo.com/3096792" target="_blank" rel="noopener">Garden Suite (#3096792)</a></li>
-          </ul>
-        </div>
-        <div id="platforms-airbnb">
-          <p style="font-weight:600; color:var(--ink); margin-bottom:8px;">Airbnb</p>
-          <ul>
-            <li><a href="https://www.airbnb.com/rooms/10459622" target="_blank" rel="noopener">Guest House (#10459622)</a></li>
-            <li><a href="https://www.airbnb.com/rooms/755484438431691642" target="_blank" rel="noopener">Garden Suite</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="back-cta">
-      <a href="/#booking" class="btn btn-primary">Enquire or Reserve a Stay →</a>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Any Other Questions?</h2>
+<p>Your holidays, like you, should be special. So if you have any questions, just let us know. Share your goals and hopes for your time on Crete, and we make sure the home you choose is perfect!</p>
+<p class="signoff">Richard &amp; Heidi: <a href="mailto:info@koukouvayia.com">info@koukouvayia.com</a></p>
+</section>
+<section class="pdf-chapter extra"><h2 class="band band-main">Booking via Airbnb or VRBO</h2>
+<!-- Site-only section, kept at the end (Willemijn, 18 Nov 2026). Not in the holiday PDF. -->
+<h3 class="plain-h3">Savings over Airbnb, VRBO, and other 3rd-Party Sites</h3>
+<p>We use the same base prices for all platforms (including our own) but add a surcharge on 3rd-party platforms to recover fees &amp; extra taxes we must pay when you book via a 3rd-party site. For Airbnb this is 20% and VRBO 19%. On direct bookings we cap the rental-value tax at 24%; bookings via third-party platforms carry 35%.</p>
+<h3 class="plain-h3">Policy Variations among 3rd-Party Sites and Koukouvayia.com</h3>
+<p>We strive to make all our policies, fees, discounts, etc. parallel across all platforms, including our own. If you see a difference between platforms, the difference results from 3rd-Party platforms limiting our options within their site listings.</p>
+<h3 class="plain-h3">Other Direct 3rd-Party Booking Differences</h3>
+<p>While booking with us directly will yield considerable savings, there are some features available from 3rd-Party platforms that we cannot provide.</p>
+<ul class="pdf-list">
+<li>Third-Party platforms often put only a ‘hold’ on your credit-card to cover potential future damages, but we need to have actual funds under our protection once you reserve and until your departure. On the flip side, third-party platforms almost always charge the full reservation value immediately, but as noted above, we can sometimes allow multiple-payment plans. If eligible for partial payments, those amounts and expected dates will be noted on the offer we send you. If not eligible, payment is expected similarly to the third-party sites: in full at time of booking.</li>
+<li>While, as mentioned above, we will always work to refund cancelled stays and never charge a fee for this service, we can only do so to the degree we are able re-book your time. And while some 3rd-Party sites do charge fees for cancellation, some also guarantee those refunds regardless of whether and when you cancel. Make sure you are comfortable with the policy of whichever platform (including ours) that you will use to book us.</li>
+</ul>
+<p>Of course, if you prefer to book using a 3rd Party Platform, please do so! The links to each of our listings on both Airbnb &amp; VRBO are below:</p>
+<div class="platform-groups">
+  <div id="platforms-vrbo">
+    <p class="platform-name">VRBO</p>
+    <ul class="pdf-list">
+      <li><a href="https://www.vrbo.com/858887" target="_blank" rel="noopener">Guest House (#858887)</a></li>
+      <li><a href="https://www.vrbo.com/3096792" target="_blank" rel="noopener">Garden Suite (#3096792)</a></li>
+    </ul>
+  </div>
+  <div id="platforms-airbnb">
+    <p class="platform-name">Airbnb</p>
+    <ul class="pdf-list">
+      <li><a href="https://www.airbnb.com/rooms/10459622" target="_blank" rel="noopener">Guest House (#10459622)</a></li>
+      <li><a href="https://www.airbnb.com/rooms/755484438431691642" target="_blank" rel="noopener">Garden Suite</a></li>
+    </ul>
+  </div>
+</div>
+</section>
+<div class="back-cta"><a href="/#booking" class="btn btn-primary">Enquire or Reserve a Stay →</a></div>
   </div>
 
-  <!-- ============================================================
-       EVENT TAB
-       ============================================================ -->
   <div class="tab-panel" id="tab-event">
+<p class="pdf-link"><a href="/vkf-rates-policies-faqs-events.pdf" target="_blank" rel="noopener">Download as PDF: Event Lodging &amp; Hosting, Rates, Policies &amp; FAQs ↓</a></p>
+<div class="pdf-cover">
+<h2 class="band band-title">Event Lodging &amp; Hosting<br>at Villa Koukouvayia:<span class="band-subtitle">Answers to some FAQs</span></h2>
+<div class="cover-images side"><img class="cover-logo" src="/policy/vkf-owl-logo.jpg" width="426" height="452" alt="Villa Koukouvayia Farms owl logo: A Place to Discover. A Stay to Remember."><img class="cover-photo" src="/policy/events-olive-grove.jpg" width="1051" height="425" alt="A bride and groom among the old olive trees" loading="eager"></div>
+</div>
+<section class="pdf-chapter "><h2 class="band band-main">Finding a Best Fit for Your Stay…and Celebration</h2>
+<p>Villa Koukouvayia Farms will serve as the perfect place to lodge friends and family during a destination celebration in Western Crete—and its location and grounds offer beautiful spaces to site a truly memorable ceremony with up to 100 guests. As a dedicated lodging platform vs. celebration venue, the estate offers both advantages (far more intimate, far less expensive) and disadvantages (smaller celebration capacities for larger &amp; logistically complex events). And while it’s easy to integrate your event here—where your friends, family &amp; loved ones are actually staying—it’s equally easy to take advantage of Villa Koukouvayia Farms intimate lodgings for your group but host the event itself at one of the many equally beautiful celebration venues nearby.</p>
+<p>Your decision about whether to include the celebration here at the farm will emerge as you balance the event’s complexity and size against the intimacy you desire and the budget you hope to achieve, but we can help you think through those dynamics and find the best fit. We’ve been enjoying the island and helping others do the same for more than twenty years, and we would love to have you (and your group!) join us in that experience.</p>
+<p>Of course, while the event itself might easily highlight your planning attention, let’s talk first about how Villa Koukouvayia Farms can serve to lodge your family, friends &amp; loved ones for the days surrounding your celebration.</p>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Lodging at Villa Koukouvayia Farms</h2>
+<p>Villa Koukouvayia Farms is a unique property, with unique residences, rooms and capacities. By design, she is not a hotel filled with a bank of identical rooms, but a home to share with those who want such ambience. And while her lodging capacities are unique, their flexibility is her greatest asset, whether for a strategic program needing a coherent campus for multiple private individuals, or a large, loving family or friendship group seeking a unified estate for gathering or event celebration.</p>
+<p>To ensure that your group’s lodging needs are comfortably met, review the table below. The numbers describe, from a variety of perspectives, the estate’s sleeping capacities. They include what is possible and what we might suggest based on your group’s needs.</p>
+<div class="table-scroll"><table class="pdf-table cap">
+<thead><tr><th scope="col" class="corner">Villa Koukouvayia<br>Lodging Capacities</th><th scope="col">VKF<br>Estate</th><th scope="col">Main<br>House</th><th scope="col">Guest<br>House</th><th scope="col">Garden<br>Suite</th></tr></thead>
+<tbody>
+<tr class=""><th scope="row">Private Bedrooms:</th><td>8</td><td>3</td><td>2</td><td>3</td></tr>
+<tr class=""><th scope="row">Single Beds:</th><td>14</td><td>1</td><td>2</td><td>11</td></tr>
+<tr class=""><th scope="row">Couple’s Bedding:</th><td>6</td><td>2</td><td>1</td><td>3</td></tr>
+<tr class=""><th scope="row">Full Baths:</th><td>5</td><td>2</td><td>1</td><td>2</td></tr>
+<tr class=""><th scope="row">Half-Baths:</th><td>2</td><td>1</td><td>1</td><td>0</td></tr>
+<tr class="sum"><th scope="row">Nominal Sleeping Capacity:</th><td>15—20</td><td>5</td><td>4</td><td>6—11</td></tr>
+<tr class=""><th scope="row">Additional Sleep Areas:</th><td>6</td><td>3</td><td>2</td><td>1</td></tr>
+<tr class=""><th scope="row">Additional Single Bedding Available:</th><td>6</td><td>4</td><td>2</td><td>0</td></tr>
+<tr class=""><th scope="row">Additional Couple’s Bedding Available:</th><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr class="sum"><th scope="row">Additional Sleeping Capacity:</th><td>8</td><td>4</td><td>2</td><td>2</td></tr>
+<tr class="max"><th scope="row">Max Capacity Recommended:</th><td>24</td><td>7</td><td>4</td><td>13</td></tr>
+<tr class="max"><th scope="row">Max Capacity Allowed:</th><td>28</td><td>9</td><td>6</td><td>13</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note: For events needing capacities beyond Villa Koukouvayia, or with a desire to house celebrants (like a bridal party) nearby vs. onsite, we have relationships with several nearby homes—one of which is a charming private cottage only a few steps through the olive groves from VKF’s estate. We can often secure these homes at discounted rates and easily integrate the cost within your invoice.</p>
+<div class="pdf-section"><h3 class="band band-sub">Occupancies Included &amp; Available</h3>
+<p>To fairly price a variety of group sizes, we set base rates to allow inexpensive stays for smaller groups, then use a supplement (€13/extra-guest/night) to let larger groups match costs to their lodging needs &amp; value. The next table specifies guests included in the rates that follow, &amp; those allowed at extra charge.</p>
+<div class="table-scroll"><table class="pdf-table cap narrow">
+<thead><tr><th scope="col" class="corner">Guest Capacities</th><th scope="col">VKF<br>Estate</th><th scope="col">Main<br>House</th><th scope="col">Guest<br>House</th><th scope="col">Garden<br>Suite</th></tr></thead>
+<tbody>
+<tr><th scope="row">Guests Included in Base Rate:</th><td>16</td><td>6</td><td>4</td><td>6</td></tr>
+<tr><th scope="row">Extra Guests Allowed w/Supplement:</th><td>12</td><td>3</td><td>2</td><td>7</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note: Infants under 2 years at the time of arrival are not counted in these limits or pricing.</p>
+</div>
 
-    <p class="pdf-link"><a href="/vkf-rates-policies-faqs-events.pdf" target="_blank" rel="noopener">Download as PDF: Event Lodging &amp; Hosting — Rates, Policies &amp; FAQs ↓</a></p>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Calculating Costs</h2>
+<p>Your costs will include three elements: lodging your group, hosting your event, and arranging the services that make both your event and destination experience memorable. In whatever capacity we might participate, our goal is to be fair &amp; transparent in our charges, and to avoid surprises once you decide to stay with us. For instance, Greek taxes paid on your behalf are progressive, confusing and high. To keep your costs low we cap the rental tax @ the VAT rate of 24%. To ensure you don’t worry about <em><u>any</u></em> of it, we include every tax in the worksheets below and will do the same in any offer we share with you. Simply put, we want you to know all costs before deciding to stay with us. (And if comparing Villa Koukouvayia’s to others’, make sure they too are fully inclusive!)</p>
+<div class="good-to-know"><strong>Good to know:</strong> The daily Climate Resilience Tax depends on the size of the rental space and the time of year. It is already included in every rate below, and if needed, we can itemize all taxes and fees on any bill or invoice.
+<div class="table-scroll"><table class="mini-table">
+<thead><tr><th scope="col">Climate Resilience Tax</th><th scope="col">Guest House</th><th scope="col">Other Residences</th></tr></thead>
+<tbody>
+<tr><th scope="row">November through March</th><td>€2/night</td><td>€4/night</td></tr>
+<tr><th scope="row">April through October</th><td>€8/night</td><td>€15/night</td></tr>
+</tbody></table></div></div><div class="pdf-section"><h3 class="band band-sub">1. Lodging Rates</h3>
+<p>Costs for many celebration elements will vary, but as the most stable &amp; predictable expense, your group’s lodging costs are a good place to start building your budget. The table below lists Villa Koukouvayia’s base lodging rates by season. Each rate, multiplied by the days you will lodge your group, will include all lodging amenities from the afternoon of your arrival until the morning of your departure. As you can imagine, the majority of labor that creates your group’s comfortable stay occurs in the fixed costs of preparing the estate. So that we can spread those expenses across lower rates and welcome shorter stays, we do have a minimum charge, easily calculated at 7x your nominal reservation rate. Should you prefer a shorter stay, an example at typical occupancy is shown in the table.</p>
+<div class="good-to-know"><strong>Good to know:</strong> Rates for lodging only part of your group in an individual residence are listed on the <a href="/policy#holiday" onclick="switchTab('holiday', document.querySelector('.tab-btn')); return false;">Holiday &amp; Work-Stays</a> tab.</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">2. Event Hosting Rates</h3>
+<p>You may choose to lodge with us &amp; hold your event offsite, or to integrate the celebration onsite. Because large events burden facilities well beyond nominal lodging use, with deeper facility prep, greater parking needs, and catering &amp; other third-party organizations operating onsite, most platforms cover these costs by raising daily rates across all guests, even for those guests only lodging on site. To avoid such surcharging and keep prices transparent, we simply invoice large (see Note-1 below) onsite celebrations at a fee equal to 2.5 x the date’s nominal reservation rate. That event supplement is also listed in the table below.</p>
+<p class="pdf-note">Note 1: The above fee only applies to larger celebrations of 30 to 100 guests onsite. For smaller events—even special events like weddings—we don’t apply this charge.</p>
+<p class="pdf-note">Note 2: Our low event rates assume you will also lodge your group here. For those who want to use the estate’s grounds only for the event, we have a minimal event-only charge equal to 4.5 x the date’s nominal rate.</p>
+<div class="good-to-know"><strong>Good to know:</strong> When you lodge onsite, you can hold a celebration on any day of your stay except your arrival and departure days, and you can host more than one. Each celebration day is charged at 2.5× that day’s nominal rate, even if your stay is shorter than the minimum stay (the minimum-stay charge still applies to the lodging).</div>
+<div class="table-scroll"><table class="pdf-table season">
+<caption>Lodging &amp; Event Costs</caption>
+<thead><tr><th scope="col" class="corner">Season/Month</th><th scope="col">Lodging Daily<br>Rate (16 guests)</th><th scope="col">Lodging<br>Minimum</th><th scope="col">Lodging + Event<br>Supplement</th><th scope="col">Event Only</th></tr></thead>
+<tbody>
+<tr class="s-jf"><th scope="row">January &amp; February</th><td>€ 295</td><td>€ 2,044</td><td>€ 730</td><td>€ 1,312</td></tr>
+<tr class="s-md"><th scope="row">March &amp; December</th><td>€ 357</td><td>€ 2,478</td><td>€ 885</td><td>€ 1,591</td></tr>
+<tr class="s-an"><th scope="row">April &amp; November</th><td>€ 399</td><td>€ 2,706</td><td>€ 961</td><td>€ 1,730</td></tr>
+<tr class="s-mo"><th scope="row">May &amp; October</th><td>€ 499</td><td>€ 3,400</td><td>€ 1,209</td><td>€ 2,177</td></tr>
+<tr class="s-js"><th scope="row">June &amp; September</th><td>€ 629</td><td>€ 4,312</td><td>€ 1,536</td><td>€ 2,763</td></tr>
+<tr class="s-ja"><th scope="row">July &amp; August</th><td>€ 790</td><td>€ 5,440</td><td>€ 1,939</td><td>€ 3,489</td></tr>
+</tbody></table></div><p class="pdf-note">Note1: Rates include all taxes &amp; fees, but as noted above, are priced to protect groups not bringing the maximum number of guests from being overcharged. For larger groups, add €13/night for each extra guest.</p>
+<p class="pdf-note">Note: To ensure your arrival’s timing doesn’t affect costs, reservations bridging multiple rate-seasons are calculated by each day within a seasonal rate, and the two subtotals are simply added.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">3. Supplemental Services &amp; Other Event Costs</h3>
+<p>Celebrations &amp; events rarely thrive without support services provided on the celebration day itself. More importantly, <em><u>destination</u></em> events—where guests arrive at considerable costs and with higher expectations—rarely thrive without providing those guests activities &amp; services during the days surrounding the event that not only reinforce the joys and community at the heart of such an important gathering but avoid increasing your (or your coordinator’s) logistical burden.</p>
+<p>As professional retreat and program planners, we specialize in using this beautiful region of Crete—with its historic, culinary, topographic and recreational landscapes—to supercharge the joys at the heart of such gatherings. And while our skills and connections can serve to help you create a dynamic experience for your guests during the entire stay and for everyone at the event itself, for some events—particularly larger-scale weddings—we will recommend you use us only for lodging and non-event logistics, and pay the extra costs to coordinate the event itself with a dedicated wedding-planner—several of whom we can recommend based on our knowledge of their work.</p>
+<p>For those hoping for a smaller, more intimate event on a tighter budget—especially if you’re looking to integrate holistic experiences for your group that includes both the event day <em><u>and</u></em> the days before &amp; beyond, we’re great partners. We have a lot of experience providing transportation, food, activity &amp;/or reservation services, either holistic or a la carte, and—most importantly—a lot of experience bringing people together to celebrate and have fun. These services include:</p>
+<ul class="pdf-list">
+<li>Arrival Support &amp; Coordination for each guest, including communications, special requests &amp; other individual guest services.</li>
+<li>Group transportation, including but not limited to vehicle arrangements and acquisition prior to arrivals; airport transfers at arrivals &amp; departures, and off-campus activity, meal &amp; miscellaneous transportation.</li>
+<li>Food &amp; Beverage Support, including but not limited to catered meals and snack provisions, pantry stocking for internally prepared food provision, and arrangements with restaurants &amp; tavernas for off-campus meals.</li>
+<li>Cleaning &amp; Laundry Support ranging from simple daily or bi-weekly bathroom and towel service to full bedroom services at various frequencies.</li>
+<li>Activity Guide &amp;/or Leadership, including but not limited to hikes, outings, Samaria Gorge traverses, historical tours, excursion expertise and guidance, and other customized experiences that fit your attendees’ interests &amp; abilities.</li>
+</ul>
+<p>Such services are easily invoiced and at the following general rates:</p>
+<ul class="pdf-list">
+<li>Third-party arrangements at 15% above their invoice.
+<p class="pdf-note">Note: With our local contacts, we often garner arrangements discounted more than this % charge, resulting in you paying the same or less for the service than if self-arranged.)</p></li>
+<li>General staffing (driving, guided excursions, etc.) at expenses (e.g., gas &amp;/or food) plus €25/hour or €150/full-day.</li>
+</ul><div class="good-to-know"><strong>Good to know:</strong> You are welcome to book the bare facility. Please note that Greek law limits us to handing you keys and walking away under this arrangement. Our bare-facility care does include an arrival orientation, daily pool and plant maintenance, and a departure inspection.</div>
+</div>
 
-    <div class="section-block">
-      <p>Our goal is to be fair and transparent in all aspects of your reservation, and to avoid surprises once you decide to stay with us. The tables below list the farm's various lodging capacities, and all charges that might apply to your unique reservation, including mandatory taxes we must collect on behalf of the Greek authorities. We insert no hidden fees, and any offer we send you will be inclusive, with only a fully refundable reservation &amp; damage deposit to be added to your initial payment.</p>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Other Cost Considerations</h2>
+<p>The following details may not affect your costs but bear on your payments and how we coordinate the financial aspects of your stay.</p>
+<div class="pdf-section"><h3 class="band band-sub">Extended-Stay Discounts</h3>
+<p>We provide season-based discounts for events lodging guests longer than two weeks.</p>
+<div class="table-scroll"><table class="pdf-table season narrow">
+<thead><tr><th scope="col" class="corner">Season/Month</th><th scope="col">14 Days</th><th scope="col">30 Days</th><th scope="col">60 Days</th></tr></thead>
+<tbody>
+<tr class="s-jf"><th scope="row">January &amp; February</th><td>10%</td><td>15%</td><td>25%</td></tr>
+<tr class="s-md"><th scope="row">March &amp; December</th><td>7%</td><td>10%</td><td>20%</td></tr>
+<tr class="s-an"><th scope="row">April &amp; November</th><td>5%</td><td>7%</td><td>15%</td></tr>
+<tr class="s-mo"><th scope="row">May &amp; October</th><td>3%</td><td>5%</td><td>10%</td></tr>
+<tr class="s-js"><th scope="row">June &amp; September</th><td>0%</td><td>3%</td><td>7%</td></tr>
+<tr class="s-ja"><th scope="row">July &amp; August</th><td>0%</td><td>3%</td><td>5%</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note1: These discounts apply to base reservation costs before taxes or extra occupancy charges.</p>
+<p class="pdf-note">Note2: As with rates, discounts across “seasons,” are calculated per-day, then subtotaled to ensure full deduction.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Damage/Security Deposits</h3>
+<p>While not affecting your net costs, once you decide to book with us, your initial payment will include a minimum security-deposit to hold that time against other requests and then later to serve as a damage-deposit during your stay. We set these amounts low to reflect typical guests but will increase them for groups that present a higher likelihood of damage, such as those bringing pets, or events with onsite third-party service providers that you (not us) arrange to cover possible damage such providers might cause.</p>
+<p>Of course, assuming no major issues, deposits are always returned via bank transfer at departure.</p>
+<div class="table-scroll"><table class="pdf-table cap narrow deposits">
+<thead><tr><th scope="col" class="corner">Security/Reservation Deposits</th><th scope="col">Estate</th><th scope="col">3<sup>rd</sup>-Party<br>Event Contractors</th></tr></thead>
+<tbody>
+<tr><th scope="row">Security/Damage Deposits:</th><td>€1,000</td><td>€1,000</td></tr>
+<tr><th scope="row">Pet Damage Deposit Supplement <small>(Max 2)</small>:</th><td colspan="2">€100/pet</td></tr>
+</tbody></table></div><p class="pdf-note">Note: We never confuse ‘damage’ with ‘use.’ Yes, we assume you will ensure your group respects Villa Koukouvayia, but we also expect you to use the facility and enjoy yourself during your stay. And we’ve been hosting groups long enough to understand that any gathering of happy people—particularly if happy children are part of the mix—will drop a glass or two. And while we don’t like broken glass, we do like it when you’re happy!</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Reserving Your Time &amp; Payment Plans</h3>
+<p>Smaller reservations are typically booked via full payment of the reservation’s cost &amp; security deposit. Larger reservations over €3,000 can qualify for 2, 3 or 4 payments depending on the reservation’s value and the length of time between booking and your arrival. When you submit your inquiry, we will automatically calculate those options &amp; share the details in our offer.</p>
+<div class="good-to-know"><strong>Good to know:</strong> 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments).</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Cancellation Policy</h3>
+<p>We will always work to rebook cancelled stays, will refund all payments to the degree we have rebooked that time, and we will never charge a fee for this service. While this is often easily done, especially with an early warning of your need to cancel, it cannot be guaranteed</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Currency</h3>
+<p>As our location demands, we charge in Euros. We can accept USD payment if you wish, and unlike all other banks, card-processors and third-party platforms, our offer will reflect the simple IMF exchange rate on the day we make that offer, and held for 7 days beyond, with no surcharges or extra fees.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Payment Methods</h3>
+<p>We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We <em><u>can</u></em> accept payments through credit cards and are happy to do so, but unlike larger third-party sites, we do not hide the inevitable payment-processing fees across all our rates and in doing so charge <u>all</u> customers the 3.5% to 5% fee from which only a few customers benefit. Card options and the processing details will be itemized in any offer we send, so you can choose a payment method that works best for you.</p>
+</div>
 
-    <div class="section-block">
-      <div class="eyebrow">Occupancy</div>
-      <h2>Lodging Capacities</h2>
-      <p>The table below will help you ensure that your unique group is uniquely comfortable.</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th>Capacity</th><th>VKF Estate</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Private Bedrooms</td><td>8</td><td>3</td><td>2</td><td>3</td></tr>
-          <tr><td>Typical Sleeping Capacity</td><td>15–20</td><td>5</td><td>4</td><td>6–11</td></tr>
-          <tr><td>Additional Sleeping Capacity</td><td>8</td><td>4</td><td>2</td><td>2</td></tr>
-          <tr><td><strong>Guests Included in Base Rate</strong></td><td><strong>16</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>6</strong></td></tr>
-          <tr><td><strong>Max Guests Allowed</strong></td><td><strong>28</strong></td><td><strong>9</strong></td><td><strong>6</strong></td><td><strong>13</strong></td></tr>
-        </tbody>
-      </table>
-      <div class="note">For events needing additional lodging, or who wish to house a bridal party nearby, we have relationships with several nearby homes and can easily integrate any costs within your invoice.</div>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Any Other Questions?</h2>
+<p>Your ceremony, like you, should be special. So call us. Let’s set up a video-chat where you can share your hopes for the event, and we’ll be honored to help!</p>
+<p class="signoff">Richard &amp; Heidi: <a href="mailto:info@koukouvayia.com">info@koukouvayia.com</a></p>
+</section>
+<section class="pdf-chapter extra"><h2 class="band band-main">More Policies</h2>
+<div class="pdf-section"><h3 class="band band-sub">Check-In &amp; Check-Out Times</h3>
+<p>Check-In &amp; Check-Out Times: As always, our goal is to make your stay <em><u>and</u></em> your arrival and departure stress-free. While we guarantee arrival check-ins of 16:00 &amp; departure check-outs of 10:00, we can often advance or extend those. There are times, however, when guests depart/arrive close to you, and we must follow those times strictly, so be prepared. Of course, when your flights are at odds with such check-in &amp; check-out times, we’ll always offer early luggage-drop or late luggage-hold so you can do something enjoyable while waiting—either for us to ready your home, or the airline to ready your flight.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Smoking</h3>
+<p>Smoking: We are set among groves of olive trees, all beautiful, but all susceptible to tragic fires. Smoking is therefore severely restricted, especially during the 3 fire seasons. Wet ashtrays always, always outside, only on verandas, and only on windless days.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Individual Bargaining vs. Standard Price</h3>
+<p>Although we understand a guest’s desire either to get a better deal than others or simply meet a limited budget, we feel honor-bound in our interactions with <em><u>each</u></em> guest to consider <em><u>all</u></em> guests. So we simply don’t make individual deals that favor a guest who requests special prices, because that effectively overcharge guests who quietly trust us to publish prices that reflect our honest rates. Instead, we focus on setting sincerely low rates that allow us to sustain the home and hospitality we offer. And for anyone wondering about our value, we recommend they look at comparable lodgings and read what other customers have said about their experience with us. We post every review written by guests, and we are proud of the consistency with which they agree about the value of staying with us.</p>
+</div>
 
-    <div class="section-block">
-      <div class="eyebrow">Pricing</div>
-      <h2>1. Lodging Rates</h2>
-      <p>Costs for many celebration elements will vary, but as the most stable &amp; predictable expense, your group's lodging costs are a good place to start building your budget. The table below lists Villa Koukouvayia's lodging rates by season, including all taxes. Each rate, multiplied by the days you will lodge your group, will include all lodging amenities from the afternoon of your arrival until the morning of your departure. As you can imagine, the majority of labor that creates your group's comfortable stay occurs in the fixed costs of preparing the estate. So that we can spread those expenses across lower rates and welcome shorter stays, we do have a minimum charge, easily calculated at ×7 your nominal reservation rate. Should you prefer a shorter stay, an example at typical occupancy is shown in the table below.</p>
-      <p>Rates for lodging only part of your group in an individual residence are listed on the <a href="#holiday" onclick="switchTab('holiday', document.querySelector('.tab-btn')); return false;">Holiday &amp; Work-Stays</a> tab.</p>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Stay Length</div>
-      <h2>Minimum Stays &amp; Deposits</h2>
-      <p>We collect a fully refundable security deposit at the time of reservation, and we hold that deposit throughout your stay to cover any nominal damages that might occur. Also of note, we keep our prices low by spreading the inevitable costs of prepping for your arrival across minimum stays. Both of those parameters are listed below.</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Minimum Stay (nights)</td><td>7</td><td>5</td><td>7</td><td>7</td></tr>
-          <tr><td>Security Deposit</td><td>€500</td><td>€200</td><td>€300</td><td>€1,000</td></tr>
-        </tbody>
-      </table>
-      <div class="note">Up to 2 well behaved pets that are chipped and vaccinated can stay for free, but will increase the refundable deposit by €100 each. There are other considerations important to the safety of your pet in this rural environment, so if you do plan to bring a special pet, contact us first.</div>
-      <div class="note">If your fixed itinerary demands a shorter stay, we can easily accept a shorter booking at the minimum-stay cost.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Onsite Celebrations</div>
-      <h2>2. Event Hosting Rates</h2>
-      <p>You may choose to lodge with us &amp; hold your event offsite, or to integrate the celebration onsite. Because large events burden facilities well beyond nominal lodging use, with deeper facility prep, greater parking needs, and catering &amp; other third-party organizations operating onsite, most platforms cover these costs by raising daily rates across all guests, even for those guests only lodging on site. To avoid such surcharging and keep prices transparent, we simply invoice large (see Note 1 below) onsite celebrations at a fee equal to 2.5× the date's nominal reservation rate. That event supplement is also listed in the table below.</p>
-      <div class="note"><strong>Note 1:</strong> The above fee only applies to larger celebrations of 30 to 100 guests onsite. For smaller events—even special events like weddings 😊—we don't apply this charge.</div>
-      <div class="note"><strong>Note 2:</strong> Our low event rates assume you will also lodge your group here. For those who want to use the estate's grounds only for the event, we have a minimal event-only charge equal to 4.5× the date's nominal rate.</div>
-      <div class="note"><strong>Note 3:</strong> When you lodge onsite, you can hold a celebration on any day of your stay except your arrival and departure days, and you can host more than one. Each celebration day is charged at 2.5× that day's nominal rate, even if your stay is shorter than the minimum stay (the minimum-stay charge still applies to the lodging).</div>
-      <h3>Lodging &amp; Event Costs</h3>
-      <table class="rate-table money">
-        <thead>
-          <tr><th>Season</th><th>Lodging Daily Rate<br><span class="th-sub">(16 guests)</span></th><th>Lodging Minimum</th><th>Lodging + Event Supplement</th><th>Event Only</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jan &amp; Feb</td><td>€295</td><td>€2,044</td><td>€730</td><td>€1,312</td></tr>
-          <tr><td>Mar &amp; Dec</td><td>€357</td><td>€2,478</td><td>€885</td><td>€1,591</td></tr>
-          <tr><td>Apr &amp; Nov</td><td>€399</td><td>€2,706</td><td>€961</td><td>€1,730</td></tr>
-          <tr><td>May &amp; Oct</td><td>€499</td><td>€3,400</td><td>€1,209</td><td>€2,177</td></tr>
-          <tr><td>Jun &amp; Sep</td><td>€629</td><td>€4,312</td><td>€1,536</td><td>€2,763</td></tr>
-          <tr><td>Jul &amp; Aug</td><td>€790</td><td>€5,440</td><td>€1,939</td><td>€3,489</td></tr>
-        </tbody>
-      </table>
-      <div class="note">Rates include all taxes &amp; fees, but as noted above, are priced to protect groups not bringing the maximum number of guests from being overcharged. For larger groups, add €13/night for each extra guest.</div>
-      <div class="note">To ensure your arrival's timing doesn't affect costs, reservations bridging multiple rate-seasons are calculated by each day within a seasonal rate, and the subtotals are simply added.</div>
-      <div class="note">If you/your planner rather than we arrange the event's third-party support (catering, music, etc.) we will add a second (fully refundable) damage deposit to ensure that all providers leave property areas clean and undamaged after the celebration.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Taxes &amp; Fees</div>
-      <h2>Government Taxes</h2>
-      <p>The Greek taxes we pay on your behalf can be both confusing and high. They include a daily Climate Resilience Tax (described below) that varies depending on the size of the rental space and the time of year, and a rental-value tax ranging up to 45%. To keep your costs down we cap the rental-value tax at the VAT rate of 24% on direct bookings (bookings via third-party platforms carry 35%); and to ensure you don't have to worry about any of it, we include every cost into the rate/s we share with you. Simply put, we want you to know all your costs before you decide to stay with us, and will face no surprises after making that choice.</p>
-      <p>Be sure when comparing Villa Koukouvayia's costs to other options, that they, too, are fully inclusive.</p>
-      <p>(And of course, if needed, we can itemize all taxes and fees on any bill or invoice.)</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th>Period</th><th>Guest House</th><th>Other Residences</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>November through March</td><td>€2/night</td><td>€4/night</td></tr>
-          <tr><td>April through October</td><td>€8/night</td><td>€15/night</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Services</div>
-      <h2>Bare Facility or Full Support?</h2>
-      <p>You are welcome to book the bare facility. Please note that Greek law limits us to handing you keys and walking away under this arrangement. Our bare-facility care does include an arrival orientation, daily pool and plant maintenance, and a departure inspection.</p>
-      <p>If your event would benefit from additional support, our sister company <strong>Cretan Destination Retreats</strong> can provide:</p>
-      <ul>
-        <li>Arrival support and individual guest services</li>
-        <li>Airport transfers and off-campus transportation</li>
-        <li>Catered meals, restaurant arrangements and pantry stocking</li>
-        <li>Cleaning and laundry services at various frequencies</li>
-        <li>Activity guides: hikes, sailing, excursions and bespoke experiences</li>
-      </ul>
-      <p><strong>Typical Service Charges:</strong></p>
-      <ul>
-        <li>Third-party arrangements: Invoice +15%.</li>
-        <li>Our own staffing, service or activity guidance: Expenses + €25/hour or €150/day.</li>
-      </ul>
-      <div class="note">With our local contacts, we often secure arrangements at discounts greater than our 15% markup, meaning you may pay less than you would by self-arranging.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Other Policies</div>
-      <h2>Payment, Platform &amp; Other Policies</h2>
-
-      <h3>Currency &amp; Payment</h3>
-      <p>All quoted prices and—unless requested—all charges will be quoted in Euros. USD payments can be accepted at the IMF rate on the day we make your offer, with no surcharges or fees. We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We can accept payments through credit/payment cards and are happy to do so, but unlike larger third-party sites who spread the inevitable payment-processing fees across all customers, we only apply those fees (3.5% for USD or 5% for other currencies) to the specific card use. Card options and the processing details will be itemized in any offer we send, so that you can be sure to choose a payment method that works best for you.</p>
-
-      <h3>Payment Plans</h3>
-      <p>Reservations are typically paid in full. Larger reservations can be split into up to 4 payments: 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments). Options &amp; details will be automatically included in any offer we send you.</p>
-
-      <h3>Security Deposits</h3>
-      <p>A security deposit is included in your payment to hold your booking and to serve as a damage deposit during your stay. Deposits are always returned via bank transfer upon departure, assuming no major issues. A pet damage supplement of €100 per pet (maximum 2 pets) applies.</p>
-      <div class="note">We never confuse 'damage' with 'use.' We expect you to enjoy the home you've rented, and we understand that any gathering of happy people will occasionally drop a glass or two.</div>
-
-      <h3>Cancellations</h3>
-      <p>We will always work to refund cancelled stays and never charge a fee for this service. We can only do so to the degree we are able to re-book your time.</p>
-
-      <h3>Check-In &amp; Check-Out</h3>
-      <p>We guarantee check-in from 16:00 and check-out by 10:00. We almost always happily advance or extend those times for you, and we'll always offer an early luggage-drop and/or late luggage-hold so you can enjoy yourself while waiting.</p>
-
-      <h3>Smoking</h3>
-      <p>We are surrounded by olive groves, and—while beautiful—they are susceptible to fire. Smoking, especially from the April to November fire season, is severely restricted to outside verandas on windless days, and the use of wet ash trays.</p>
-
-      <h3>Individual Bargaining over Standard Price</h3>
-      <p>Although we understand your individual desire to get a "better" deal than others, please understand that our interactions with each guest must consider all guests. So, we simply do not make individual deals that favor a guest who requests special prices. If we did, we would effectively overcharge guests who correctly trust us to set &amp; publish prices that provide good value and reflect our honest rates. For anyone wondering about our value, we recommend they look at comparable lodgings and read what other customers have said about their experience with us. We post every review written by guests, and we are proud of the consistency with which they agree about the value of staying with us.</p>
-
-      <div class="note">Villa Koukouvayia Farms is booked directly for events &amp; celebrations — the estate is no longer listed via AirBnB or VRBO for this use.</div>
-    </div>
-
-    <div class="back-cta">
-      <a href="/#booking" class="btn btn-primary">Enquire About Your Celebration →</a>
-    </div>
+<div class="good-to-know">Villa Koukouvayia Farms is booked directly for events &amp; celebrations. The estate is no longer listed via Airbnb or VRBO for this use.</div>
+</section>
+<div class="back-cta"><a href="/#booking" class="btn btn-primary">Enquire About Your Celebration →</a></div>
   </div>
 
-  <!-- ============================================================
-       PROGRAM TAB
-       ============================================================ -->
   <div class="tab-panel" id="tab-program">
+<p class="pdf-link"><a href="/vkf-rates-policies-faqs-programs.pdf" target="_blank" rel="noopener">Download as PDF: Retreat Hosting, Rates, Policies &amp; FAQs ↓</a></p>
+<div class="pdf-cover program-cover">
+<img class="cover-logo solo" src="/policy/vkf-owl-logo.jpg" width="426" height="452" alt="Villa Koukouvayia Farms owl logo: A Place to Discover. A Stay to Remember.">
+<h2 class="band band-title">Hosting your Retreat<br>at Villa Koukouvayia Farms:<span class="band-subtitle">Answers to some FAQs</span></h2>
+<div class="cover-images stacked"><img class="cover-photo" src="/policy/programs-sea-cliff.jpg" width="1239" height="501" alt="A hiker on a clifftop above the Libyan Sea at sunset" loading="eager"></div>
+</div>
+<section class="pdf-chapter "><h2 class="band band-main">Finding a Best Fit for Your Program…and Participants</h2>
+<p>Villa Koukouvayia Farms will serve as the perfect place to lodge your group and platform your program, whether its focus be recreational, historical, culinary, health &amp; yoga, or creative and practical arts. As a dedicated retreat center, the estate offers both easy integration between your program’s home and its activities.</p>
+<p>Of course, while your program itself might easily highlight your planning attention, let’s talk first about how Villa Koukouvayia Farms can serve to lodge your participants for the days that will platform your program’s experience.</p>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Lodging at Villa Koukouvayia Farms</h2>
+<p>Villa Koukouvayia Farms is a unique property, with unique residences, rooms and capacities. By design, she is not a hotel filled with a bank of identical rooms, but a home to share with those who want such ambience. And while her lodging capacities are unique, their flexibility is her greatest asset, for a large family or friendship group seeking a unified estate for gathering, or a strategic program needing a coherent campus for multiple private individuals to learn and grow as a team.</p>
+<p>To ensure that your group’s lodging needs are comfortably met, review the table below. The numbers describe, from a variety of perspectives, the estate’s sleeping capacities. They include what is possible and what we might suggest based on your group’s needs.</p>
+<div class="table-scroll"><table class="pdf-table cap">
+<thead><tr><th scope="col" class="corner">Villa Koukouvayia<br>Lodging Capacities</th><th scope="col">VKF<br>Estate</th><th scope="col">Main<br>House</th><th scope="col">Guest<br>House</th><th scope="col">Garden<br>Suite</th></tr></thead>
+<tbody>
+<tr class=""><th scope="row">Private Bedrooms:</th><td>8</td><td>3</td><td>2</td><td>3</td></tr>
+<tr class=""><th scope="row">Single Beds:</th><td>14</td><td>1</td><td>2</td><td>11</td></tr>
+<tr class=""><th scope="row">Couple’s Bedding:</th><td>6</td><td>2</td><td>1</td><td>3</td></tr>
+<tr class=""><th scope="row">Full Baths:</th><td>5</td><td>2</td><td>1</td><td>2</td></tr>
+<tr class=""><th scope="row">Half-Baths:</th><td>2</td><td>1</td><td>1</td><td>0</td></tr>
+<tr class="sum"><th scope="row">Nominal Sleeping Capacity:</th><td>15—20</td><td>5</td><td>4</td><td>6—11</td></tr>
+<tr class=""><th scope="row">Additional Sleep Areas:</th><td>6</td><td>3</td><td>2</td><td>1</td></tr>
+<tr class=""><th scope="row">Additional Single Bedding Available:</th><td>6</td><td>4</td><td>2</td><td>0</td></tr>
+<tr class=""><th scope="row">Additional Couple’s Bedding Available:</th><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr class="sum"><th scope="row">Additional Sleeping Capacity:</th><td>8</td><td>4</td><td>2</td><td>2</td></tr>
+<tr class="max"><th scope="row">Max Capacity Recommended:</th><td>24</td><td>7</td><td>4</td><td>13</td></tr>
+<tr class="max"><th scope="row">Max Capacity Allowed:</th><td>28</td><td>9</td><td>6</td><td>13</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note: For programs needing capacities beyond Villa Koukouvayia, or with a desire to house facilitators nearby vs. onsite, we have relationships with several nearby homes—one of which is a charming private cottage only a few steps through the olive groves from VKF’s estate. We can often secure these homes at discounted rates and easily integrate the cost within your invoice.</p>
+<div class="pdf-section"><h3 class="band band-sub">Occupancies Included &amp; Available</h3>
+<p>To fairly price a variety of group sizes, we set base rates to allow inexpensive stays for smaller groups, then use a supplement (€13/extra-guest/night) to let larger groups match costs to their lodging needs &amp; value. The next table specifies guests included in the rates that follow, &amp; those allowed at extra charge.</p>
+<div class="table-scroll"><table class="pdf-table cap narrow">
+<thead><tr><th scope="col" class="corner">Guest Capacities</th><th scope="col">VKF<br>Estate</th><th scope="col">Main<br>House</th><th scope="col">Guest<br>House</th><th scope="col">Garden<br>Suite</th></tr></thead>
+<tbody>
+<tr><th scope="row">Guests Included in Base Rate:</th><td>16</td><td>6</td><td>4</td><td>6</td></tr>
+<tr><th scope="row">Extra Guests Allowed w/Supplement:</th><td>12</td><td>3</td><td>2</td><td>7</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note: Infants under 2 years at the time of arrival are not counted in these limits or pricing.</p>
+</div>
 
-    <p class="pdf-link"><a href="/vkf-rates-policies-faqs-programs.pdf" target="_blank" rel="noopener">Download as PDF: Retreat Hosting — Rates, Policies &amp; FAQs ↓</a></p>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Calculating Costs</h2>
+<p>Your costs will include two elements: lodging your group and arranging the services that integrate your activities with the destination of Crete to ensure that both are effective. In whatever capacity we might participate, our goal is to be fair &amp; transparent in our charges, and to avoid surprises once you decide to stay with us. For instance, Greek taxes paid on your behalf are progressive, confusing and high. To keep your costs low we cap the rental tax @ the VAT rate of 24%. To ensure you don’t worry about <em><u>any</u></em> of it, we include every tax in the worksheets below and will do the same in any offer we share with you. Simply put, we want you to know all costs before deciding to stay with us. (And if comparing Villa Koukouvayia’s to others’, make sure they too are fully inclusive!)</p>
+<div class="good-to-know"><strong>Good to know:</strong> The daily Climate Resilience Tax depends on the size of the rental space and the time of year. It is already included in every rate below, and if needed, we can itemize all taxes and fees on any bill or invoice.
+<div class="table-scroll"><table class="mini-table">
+<thead><tr><th scope="col">Climate Resilience Tax</th><th scope="col">Guest House</th><th scope="col">Other Residences</th></tr></thead>
+<tbody>
+<tr><th scope="row">November through March</th><td>€2/night</td><td>€4/night</td></tr>
+<tr><th scope="row">April through October</th><td>€8/night</td><td>€15/night</td></tr>
+</tbody></table></div></div><div class="pdf-section"><h3 class="band band-sub">1. Lodging Rates</h3>
+<p>Costs for many activities and program elements will vary, but as the most stable &amp; predictable expense, your group’s lodging costs are a good place to start building your budget. The table below lists Villa Koukouvayia’s base lodging rates by season. Each rate, multiplied by the days you will lodge your group, will include all lodging amenities from the afternoon of your arrival until the morning of your departure. As you can imagine, the majority of labor that creates your group’s comfortable stay occurs in the fixed costs of preparing the estate. So that we can spread those expenses across lower rates and welcome shorter stays, we do have a minimum charge, easily calculated at 7x your nominal reservation rate. Should you prefer a shorter stay, an example at typical occupancy is shown in the table.</p>
+<div class="table-scroll"><table class="pdf-table season narrow">
+<thead><tr><th scope="col" class="corner">Season/Month</th><th scope="col">Lodging Daily<br>Rate (16 guests)</th><th scope="col">Lodging<br>Minimum</th></tr></thead>
+<tbody>
+<tr class="s-jf"><th scope="row">January &amp; February</th><td>€ 295</td><td>€ 2,044</td></tr>
+<tr class="s-md"><th scope="row">March &amp; December</th><td>€ 357</td><td>€ 2,478</td></tr>
+<tr class="s-an"><th scope="row">April &amp; November</th><td>€ 399</td><td>€ 2,706</td></tr>
+<tr class="s-mo"><th scope="row">May &amp; October</th><td>€ 499</td><td>€ 3,400</td></tr>
+<tr class="s-js"><th scope="row">June &amp; September</th><td>€ 629</td><td>€ 4,312</td></tr>
+<tr class="s-ja"><th scope="row">July &amp; August</th><td>€ 790</td><td>€ 5,440</td></tr>
+</tbody></table></div><p class="pdf-note">Note1: Rates include all taxes &amp; fees, but as noted above, are priced to protect groups not bringing the maximum number of guests from being overcharged. For larger groups, add €13/night for each extra guest.</p>
+<p class="pdf-note">Note: To ensure your arrival’s timing doesn’t affect costs, reservations bridging multiple rate-seasons are calculated by each day within a seasonal rate, and the two subtotals are simply added.</p>
+<div class="good-to-know"><strong>Good to know: the prep day.</strong> Programs demand deeper facility prep &amp; logistics planning—often with the program’s facilitators—before participants arrive. To keep this cost transparent, we invoice a separate fee of an extra day for any program. This not only provides us an extra facilities-day to prep your program, but allows your facilitators to arrive early for rest, prep &amp; planning with us prior to participant arrivals. Late departures for facilitators who need/want to perform extended wrap-up activities can also be arranged, typically at a discounted rate. Using the site for five or fewer days &amp; paying the minimum-stay charge will waive the prep-day supplement.</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">2. Supplemental Services &amp; Other Program Costs</h3>
+<p>Programs rarely thrive without support services provided during the program itself.</p>
+<p>As professional retreat and program planners, we specialize in using this beautiful region of Crete—with its historic, culinary, topographic and recreational landscapes—to supercharge the experience at the heart of such gatherings. Transportation, food, activity &amp;/or reservation services, either holistic or a la carte, and—most importantly—integrating all of those into experiences support your goals, while bringing people together to celebrate those goals and have fun. These services include:</p>
+<ul class="pdf-list">
+<li>Arrival Support &amp; Coordination for each guest, including communications, special requests &amp; other individual guest services.</li>
+<li>Group transportation, including but not limited to vehicle arrangements and acquisition prior to arrivals; airport transfers at arrivals &amp; departures, and off-campus activity, meal &amp; miscellaneous transportation.</li>
+<li>Food &amp; Beverage Support, including but not limited to catered meals and snack provisions, pantry stocking for internally prepared food provision, and arrangements with restaurants &amp; tavernas for off-campus meals.</li>
+<li>Cleaning &amp; Laundry Support ranging from simple daily or bi-weekly bathroom and towel service to full bedroom services at various frequencies.</li>
+<li>Activity Guide &amp;/or Leadership, including but not limited to hikes, outings, Samaria Gorge traverses, historical tours, excursion expertise and guidance, and other customized experiences that fit your attendees’ interests &amp; abilities.</li>
+</ul>
+<p>Such services are easily invoiced and at the following general rates:</p>
+<ul class="pdf-list">
+<li>Third-party arrangements at 15% above their invoice.
+<p class="pdf-note">Note: With our local contacts, we often garner arrangements discounted more than this % charge, resulting in you paying the same or less for the service than if self-arranged.)</p></li>
+<li>General staffing (driving, guided excursions, etc.) at expenses (e.g., gas &amp;/or food) plus €25/hour or €150/full-day.</li>
+</ul>
+<div class="good-to-know"><strong>Good to know:</strong> You are welcome to book the bare facility at the costs above. Our bare-facility care includes an arrival orientation, daily maintenance, and a departure inspection. Through Cretan Destination Retreats we can also provide participant enrollment, communications and financial services (at 5% of program value) and program design services for educational and experiential programs.</div>
+</div>
 
-    <div class="section-block">
-      <p>Our goal is to be fair and transparent in all aspects of your reservation, and to avoid surprises once you decide to stay with us. The tables below list the farm's various lodging capacities, and all charges that might apply to your unique reservation, including mandatory taxes we must collect on behalf of the Greek authorities. We insert no hidden fees, and any offer we send you will be inclusive, with only a fully refundable reservation &amp; damage deposit to be added to your initial payment.</p>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Other Cost Considerations</h2>
+<p>The following details may not affect your costs but bear on your payments and how we coordinate the financial aspects of your stay.</p>
+<div class="pdf-section"><h3 class="band band-sub">Extended-Stay Discounts</h3>
+<p>We provide season-based discounts for programs lodging guests longer than two weeks.</p>
+<div class="table-scroll"><table class="pdf-table season narrow">
+<thead><tr><th scope="col" class="corner">Season/Month</th><th scope="col">14 Days</th><th scope="col">30 Days</th><th scope="col">60 Days</th></tr></thead>
+<tbody>
+<tr class="s-jf"><th scope="row">January &amp; February</th><td>10%</td><td>15%</td><td>25%</td></tr>
+<tr class="s-md"><th scope="row">March &amp; December</th><td>7%</td><td>10%</td><td>20%</td></tr>
+<tr class="s-an"><th scope="row">April &amp; November</th><td>5%</td><td>7%</td><td>15%</td></tr>
+<tr class="s-mo"><th scope="row">May &amp; October</th><td>3%</td><td>5%</td><td>10%</td></tr>
+<tr class="s-js"><th scope="row">June &amp; September</th><td>0%</td><td>3%</td><td>7%</td></tr>
+<tr class="s-ja"><th scope="row">July &amp; August</th><td>0%</td><td>3%</td><td>5%</td></tr>
+</tbody></table></div>
+<p class="pdf-note">Note1: These discounts apply to base reservation costs before taxes or extra occupancy charges.</p>
+<p class="pdf-note">Note2: As with rates, discounts across “seasons,” are calculated per-day, then subtotaled to ensure full deduction.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Reserving Your Time &amp; Payment Plans</h3>
+<p>Smaller reservations are typically booked via full payment of the reservation’s cost &amp; security deposit. Larger reservations over €3,000 can qualify for 2, 3 or 4 payments depending on the reservation’s value and the length of time between booking and your arrival. When you submit your inquiry, we will automatically calculate those options &amp; share the details in our offer.</p>
+<div class="good-to-know"><strong>Good to know:</strong> 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments).</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Damage/Security Deposits</h3>
+<p>While not affecting your net expense, once you decide to book with us, your initial payment will include a minimum security-deposit to hold that time against other requests and then later to serve as a damage-deposit during your stay. We set these amounts low to reflect typical guests but will increase them for groups that present a higher likelihood of damage, such as those bringing pets, youth groups, etc.</p>
+<p>Of course, assuming no major issues, deposits are always returned via bank transfer at departure.</p>
+<div class="table-scroll"><table class="pdf-table cap narrow deposits">
+<thead><tr><th scope="col" class="corner">Security/Reservation Deposits</th><th scope="col">Estate</th><th scope="col">Youth Groups</th></tr></thead>
+<tbody>
+<tr><th scope="row">Security/Damage Deposits:</th><td>€1,000</td><td>€1,000</td></tr>
+<tr><th scope="row">Pet Damage Deposit Supplement <small>(Max 2)</small>:</th><td colspan="2">€100/pet</td></tr>
+</tbody></table></div><p class="pdf-note">Note: We never confuse ‘damage’ with ‘use.’ Yes, we assume you will ensure your group respects Villa Koukouvayia, but we also expect you to use the facility and enjoy yourself during your stay. And we’ve been hosting groups long enough to understand that any gathering of happy people—particularly if happy children are part of the mix—will drop a glass or two. And while we don’t like broken glass, we do like it when you’re happy!</p><div class="good-to-know"><strong>Good to know:</strong> When you book a single residence rather than the whole estate, the security deposit is €500 for the Main House, €200 for the Guest House and €300 for the Garden Suite. Up to 2 well behaved pets that are chipped and vaccinated can stay for free, with the pet supplement above added to the refundable deposit. There are other considerations important to the safety of your pet in this rural environment, so if you do plan to bring a special pet, contact us first.</div>
+<div class="good-to-know"><strong>Good to know:</strong> For programs with onsite third-party service providers that you (not us) have arranged, we may increase the deposit to ensure any damages a third-party provider causes while under your supervision are covered.</div>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Cancellation Policy</h3>
+<p>We will always work to rebook cancelled stays, will refund all payments to the degree we have rebooked that time, and we will never charge a fee for this service. While this is often easily done, especially with an early warning of your need to cancel, it cannot be guaranteed</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Currency</h3>
+<p>As our location demands, we charge in Euros. We can accept USD payment if you wish, and unlike all other banks, card-processors and third-party platforms, our offer will reflect the simple IMF exchange rate on the day we make that offer, and held for 7 days beyond, with no surcharges or extra fees.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Payment Methods</h3>
+<p>We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We <em><u>can</u></em> accept payments through credit cards and are happy to do so, but unlike larger third-party sites, we do not hide the inevitable payment-processing fees across all our rates and in doing so charge <u>all</u> customers the 3.5% to 5% fee from which only a few customers benefit. Card options and the processing details will be itemized in any offer we send, so you can choose a payment method that works best for you.</p>
+</div>
 
-    <div class="section-block">
-      <div class="eyebrow">Occupancy</div>
-      <h2>Lodging Capacities</h2>
-      <p>Villa Koukouvayia is a coherent, private campus ideal for retreat programs. The facility's capacity can expand to allow larger, shared-room programs; contract to accommodate private, single-room lodgings; or combine to allow a variety of pricing &amp; participant options.</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th>Capacity</th><th>VKF Estate</th><th>Main House</th><th>Guest House</th><th>Garden Suite</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Private Bedrooms</td><td>8</td><td>3</td><td>2</td><td>3</td></tr>
-          <tr><td>Typical Sleeping Capacity</td><td>15–20</td><td>5</td><td>4</td><td>6–11</td></tr>
-          <tr><td>Additional Sleeping Capacity</td><td>8</td><td>4</td><td>2</td><td>2</td></tr>
-          <tr><td><strong>Guests Included in Base Rate</strong></td><td><strong>16</strong></td><td><strong>6</strong></td><td><strong>4</strong></td><td><strong>6</strong></td></tr>
-          <tr><td><strong>Max Guests Allowed</strong></td><td><strong>28</strong></td><td><strong>9</strong></td><td><strong>6</strong></td><td><strong>13</strong></td></tr>
-        </tbody>
-      </table>
-      <div class="note">For programs needing lodging capacity beyond the estate, or who wish to house facilitators in a nearby property, we have relationships with neighbouring homes and can easily integrate any costs within your invoice.</div>
-    </div>
+</section>
+<section class="pdf-chapter "><h2 class="band band-main">Any Other Questions?</h2>
+<p>Your program, like you, should be special. So call us. Let’s set up a video-chat where you can share your goals and hopes for your program, and we’ll be honored to help!</p>
+<p class="signoff">Richard &amp; Heidi: <a href="mailto:info@koukouvayia.com">info@koukouvayia.com</a></p>
+</section>
+<section class="pdf-chapter extra"><h2 class="band band-main">More Policies</h2>
+<div class="pdf-section"><h3 class="band band-sub">Check-In &amp; Check-Out Times</h3>
+<p>Check-In &amp; Check-Out Times: As always, our goal is to make your stay <em><u>and</u></em> your arrival and departure stress-free. While we guarantee arrival check-ins of 16:00 &amp; departure check-outs of 10:00, we can often advance or extend those. There are times, however, when guests depart/arrive close to you, and we must follow those times strictly, so be prepared. Of course, when your flights are at odds with such check-in &amp; check-out times, we’ll always offer early luggage-drop or late luggage-hold so you can do something enjoyable while waiting—either for us to ready your home, or the airline to ready your flight.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Smoking</h3>
+<p>Smoking: We are set among groves of olive trees, all beautiful, but all susceptible to tragic fires. Smoking is therefore severely restricted, especially during the 3 fire seasons. Wet ashtrays always, always outside, only on verandas, and only on windless days.</p>
+</div>
+<div class="pdf-section"><h3 class="band band-sub">Individual Bargaining vs. Standard Price</h3>
+<p>Although we understand a guest’s desire either to get a better deal than others or simply meet a limited budget, we feel honor-bound in our interactions with <em><u>each</u></em> guest to consider <em><u>all</u></em> guests. So we simply don’t make individual deals that favor a guest who requests special prices, because that effectively overcharge guests who quietly trust us to publish prices that reflect our honest rates. Instead, we focus on setting sincerely low rates that allow us to sustain the home and hospitality we offer. And for anyone wondering about our value, we recommend they look at comparable lodgings and read what other customers have said about their experience with us. We post every review written by guests, and we are proud of the consistency with which they agree about the value of staying with us.</p>
+</div>
 
-    <div class="section-block">
-      <div class="eyebrow">Pricing</div>
-      <h2>Lodging Rates</h2>
-      <p>Costs for many activities and program elements will vary, but as the most stable &amp; predictable expense, your group's lodging costs are a good place to start building your budget. The tables below list Villa Koukouvayia's lodging rates by season, including all taxes. Each rate, multiplied by the days you will lodge your group, includes all lodging amenities from the afternoon of your arrival until the morning of your departure. So that we can spread the fixed costs of preparing the estate across lower rates and welcome shorter stays, we do have a minimum charge, easily calculated at ×7 your nominal reservation rate (×5 for the Guest House). Should you prefer a shorter stay, examples at typical occupancy are shown in the second table. If applicable, a separate Prep-Day supplement (see below) may apply.</p>
-      <h3>Daily Rates</h3>
-      <table class="rate-table money">
-        <thead>
-          <tr><th>Season</th><th>VKF Estate<br><span class="th-sub">(w/ 16 guests)</span></th><th>Main House<br><span class="th-sub">(w/ 6 guests)</span></th><th>Guest House<br><span class="th-sub">(w/ 4 guests)</span></th><th>Garden Suite<br><span class="th-sub">(w/ 6 guests)</span></th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jan &amp; Feb</td><td>€295</td><td>€116</td><td>€64</td><td>€60</td></tr>
-          <tr><td>Mar &amp; Dec</td><td>€357</td><td>€147</td><td>€76</td><td>€72</td></tr>
-          <tr><td>Apr &amp; Nov</td><td>€399</td><td>€170</td><td>€89</td><td>€89</td></tr>
-          <tr><td>May &amp; Oct</td><td>€499</td><td>€207</td><td>€113</td><td>€114</td></tr>
-          <tr><td>Jun &amp; Sep</td><td>€629</td><td>€263</td><td>€144</td><td>€145</td></tr>
-          <tr><td>Jul &amp; Aug</td><td>€790</td><td>€337</td><td>€182</td><td>€182</td></tr>
-        </tbody>
-      </table>
-      <h3>Minimum Reservation</h3>
-      <table class="rate-table money">
-        <thead>
-          <tr><th>Season</th><th>VKF Estate<br><span class="th-sub">(w/ 16 guests)</span></th><th>Main House<br><span class="th-sub">(w/ 6 guests)</span></th><th>Guest House<br><span class="th-sub">(w/ 4 guests)</span></th><th>Garden Suite<br><span class="th-sub">(w/ 6 guests)</span></th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Jan &amp; Feb</td><td>€2,044</td><td>€785</td><td>€312</td><td>€395</td></tr>
-          <tr><td>Mar &amp; Dec</td><td>€2,478</td><td>€1,002</td><td>€374</td><td>€481</td></tr>
-          <tr><td>Apr &amp; Nov</td><td>€2,706</td><td>€1,100</td><td>€411</td><td>€536</td></tr>
-          <tr><td>May &amp; Oct</td><td>€3,400</td><td>€1,360</td><td>€535</td><td>€709</td></tr>
-          <tr><td>Jun &amp; Sep</td><td>€4,312</td><td>€1,751</td><td>€690</td><td>€926</td></tr>
-          <tr><td>Jul &amp; Aug</td><td>€5,440</td><td>€2,272</td><td>€876</td><td>€1,187</td></tr>
-        </tbody>
-      </table>
-      <div class="note"><strong>Extra Guest Supplement:</strong> Rates include all taxes &amp; fees, but are priced to protect groups not bringing the maximum number of guests from being overcharged. For larger groups, add €13/night for each extra guest beyond those included (see the capacity table above).</div>
-      <div class="note">To ensure your arrival's timing doesn't affect costs, reservations bridging multiple rate-seasons are calculated by each day within a seasonal rate, and the subtotals are simply added.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Stay Length</div>
-      <h2>Minimum Stays &amp; Deposits</h2>
-      <p>We collect a fully refundable security deposit at the time of reservation, and we hold that deposit throughout your stay to cover any nominal damages that might occur. Also of note, we keep our daily rates low by spreading nominal costs across minimum stays. Both of those parameters are listed below.</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th></th><th>Main House</th><th>Guest House</th><th>Garden Suite</th><th>VKF Estate</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Minimum Stay (nights)</td><td>7</td><td>5</td><td>7</td><td>7</td></tr>
-          <tr><td>Security Deposit</td><td>€500</td><td>€200</td><td>€300</td><td>€1,000</td></tr>
-        </tbody>
-      </table>
-      <div class="note">If your program demands a shorter stay, at your option we can easily accept a shorter booking at the minimum-stay cost.</div>
-      <div class="note">Using the site for five or fewer days &amp; paying the minimum-stay charge will waive the prep-day supplement described below.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Program Supplement</div>
-      <h2>Prep Day &amp; Program Supplement</h2>
-      <p>Programs demand deeper facility prep &amp; logistics planning—often with the program's facilitators—before participants arrive. Most platforms cover these costs by raising daily pricing across non-program guests. To avoid such surcharging and to keep this cost transparent, we simply invoice a separate fee of an extra day for any program. This not only provides us an extra facilities-day to prep your program, but allows your facilitators to arrive early for rest, prep &amp; planning with us prior to participant arrivals. Late departures for facilitators who need/want to perform extended wrap-up activities can also be arranged, typically at a discounted rate.</p>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Taxes &amp; Fees</div>
-      <h2>Government Taxes</h2>
-      <p>The Greek taxes we pay on your behalf can be both confusing and high. They include a daily Climate Resilience Tax (described below) that varies depending on the size of the rental space and the time of year, and a rental-value tax ranging up to 45%. To keep your costs down we cap the rental-value tax at the VAT rate of 24% on direct bookings (bookings via third-party platforms carry 35%); and to ensure you don't have to worry about any of it, we include every cost into the rate/s we share with you. Simply put, we want you to know all your costs before you decide to stay with us, and will face no surprises after making that choice.</p>
-      <p>Be sure when comparing Villa Koukouvayia's costs to other options, that they, too, are fully inclusive.</p>
-      <p>(And of course, if needed, we can itemize all taxes and fees on any bill or invoice.)</p>
-      <table class="cap-table">
-        <thead>
-          <tr><th>Period</th><th>Guest House</th><th>Other Residences</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>November through March</td><td>€2/night</td><td>€4/night</td></tr>
-          <tr><td>April through October</td><td>€8/night</td><td>€15/night</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Services</div>
-      <h2>Bare Facility or Full Support?</h2>
-      <p>Programs rarely thrive without carefully crafted logistics. You are welcome to book the bare facility at the costs above. Our bare-facility care includes an arrival orientation, daily maintenance, and a departure inspection.</p>
-      <p>If your program would benefit from additional support, <strong>Cretan Destination Retreats</strong> can provide:</p>
-      <ul>
-        <li>Participant enrollment, communications and financial services — at 5% of program value</li>
-        <li>Airport transfers and all transportation — at cost plus 15%</li>
-        <li>Catered meals, restaurant arrangements, pantry stocking — at cost plus 15%</li>
-        <li>Cleaning and laundry at various frequencies — at cost plus 15%</li>
-        <li>Activity guides and excursion leadership — at €25/hour or €150/day plus expenses</li>
-        <li>Program design services for educational and experiential programs</li>
-      </ul>
-      <div class="note">With our local contacts, we often secure arrangements at discounts greater than our 15% markup, meaning you may pay less than you would by self-arranging.</div>
-    </div>
-
-    <div class="section-block">
-      <div class="eyebrow">Other Policies</div>
-      <h2>Payment, Platform &amp; Other Policies</h2>
-
-      <h3>Currency &amp; Payment</h3>
-      <p>All quoted prices and—unless requested—all charges will be quoted in Euros. USD payments can be accepted at the IMF rate on the day we make your offer, with no surcharges or fees. We encourage direct (IBAN or, in the USA, intrabank) transfers that are easy, safe and free. We can accept payments through credit/payment cards and are happy to do so, but unlike larger third-party sites who spread the inevitable payment-processing fees across all customers, we only apply those fees (3.5% for USD or 5% for other currencies) to the specific card use. Card options and the processing details will be itemized in any offer we send, so that you can be sure to choose a payment method that works best for you.</p>
-
-      <h3>Payment Plans</h3>
-      <p>Reservations are typically paid in full. Larger reservations can be split into up to 4 payments: 2 payments for €3,000 or more booked over 4 months ahead, 3 for €4,000 or more over 5 months ahead, and 4 for €5,000 or more over 7 months ahead. If a reservation meets only one of the two conditions, the lower number of payments applies (for example, €5,500 booked 4 months ahead allows 2 payments). Options &amp; details will be automatically included in any offer we send you.</p>
-
-      <h3>Security Deposits</h3>
-      <p>A security deposit is included in your payment to hold your booking and to serve as a damage deposit during your stay. Deposits are always returned via bank transfer upon departure, assuming no major issues. A pet damage supplement of €100 per pet (maximum 2 pets) applies.</p>
-      <div class="note">We never confuse 'damage' with 'use.' We expect you to enjoy the home you've rented, and we understand that any gathering of happy people will occasionally drop a glass or two.</div>
-      <div class="note">For programs with onsite third-party service providers that you (not us) have arranged, we may increase the deposit to ensure any damages a third-party provider causes while under your supervision are covered.</div>
-
-      <h3>Cancellations</h3>
-      <p>We will always work to refund cancelled stays and never charge a fee for this service. We can only do so to the degree we are able to re-book your time.</p>
-
-      <h3>Check-In &amp; Check-Out</h3>
-      <p>We guarantee check-in from 16:00 and check-out by 10:00. We almost always happily advance or extend those times for you, and we'll always offer an early luggage-drop and/or late luggage-hold so you can enjoy yourself while waiting.</p>
-
-      <h3>Smoking</h3>
-      <p>We are surrounded by olive groves, and—while beautiful—they are susceptible to fire. Smoking, especially from the April to November fire season, is severely restricted to outside verandas on windless days, and the use of wet ash trays.</p>
-
-      <h3>Individual Bargaining over Standard Price</h3>
-      <p>Although we understand your individual desire to get a "better" deal than others, please understand that our interactions with each guest must consider all guests. So, we simply do not make individual deals that favor a guest who requests special prices. If we did, we would effectively overcharge guests who correctly trust us to set &amp; publish prices that provide good value and reflect our honest rates. For anyone wondering about our value, we recommend they look at comparable lodgings and read what other customers have said about their experience with us. We post every review written by guests, and we are proud of the consistency with which they agree about the value of staying with us.</p>
-
-      <div class="note">Villa Koukouvayia Farms is booked directly for retreat programs — the estate is no longer listed via AirBnB or VRBO for this use.</div>
-    </div>
-
-    <div class="back-cta">
-      <a href="/#booking" class="btn btn-primary">Enquire About Your Program →</a>
-    </div>
+<div class="good-to-know">Villa Koukouvayia Farms is booked directly for retreat programs. The estate is no longer listed via Airbnb or VRBO for this use.</div>
+</section>
+<div class="back-cta"><a href="/#booking" class="btn btn-primary">Enquire About Your Program →</a></div>
   </div>
 
 </div>
-
 <footer>
   © 2026 Villa Koukouvayia Farms. All rights reserved. &nbsp;·&nbsp;
   <a href="/privacy" style="color:inherit; opacity:0.8;">Cookies &amp; Privacy</a>

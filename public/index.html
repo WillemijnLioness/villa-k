@@ -789,6 +789,8 @@ section { padding: 100px 0; }
   box-shadow: 0 0 0 3px rgba(92, 107, 69, 0.12);
 }
 .form-field textarea { resize: vertical; min-height: 100px; font-weight: 400; }
+.phone-row { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr); gap: 10px; }
+.phone-row select { min-width: 0; text-overflow: ellipsis; }
 
 .quote-card {
   background: var(--olive-deep);
@@ -1059,6 +1061,16 @@ section { padding: 100px 0; }
 .hero-media .carousel-slide {
   animation: kenBurns 12s ease-in-out infinite alternate;
 }
+/* Opener photo (estate long shot): the estate sits behind the booking box, so the box
+   steps aside while that slide shows and fades back in on the next (H&R, 18 Nov 2026).
+   visibility, not display, so the headline does not jump down over the buildings. */
+.hero.strip-returned .book-strip.in-hero { animation: fadeUp 0.7s ease both; }
+.hero.opener-slide .book-strip.in-hero {
+  animation: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
 /* =========================================================
    WATCH VIDEO BUTTON (location section)
@@ -1263,9 +1275,9 @@ section { padding: 100px 0; }
 <!-- =========================================================
      HERO
      ========================================================= -->
-<header class="hero" id="top">
+<header class="hero opener-slide" id="top">
   <div class="hero-media">
-    <img data-photo-slot="vkf:hero" data-carousel-interval="4000" alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
+    <img data-photo-slot="vkf:hero" data-carousel-interval="4000" data-carousel-nopause alt="Villa Koukouvayia Farms — olive-grove estate on Crete">
   </div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
@@ -1740,8 +1752,13 @@ section { padding: 100px 0; }
             </div>
           </div>
           <div class="form-field">
-            <label for="phone">Phone <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional, with country code)</span></label>
-            <input type="tel" id="phone" placeholder="+30 694 123 4567" autocomplete="tel">
+            <label for="phone">Phone <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <div class="phone-row">
+              <select id="phoneCountry" aria-label="Country code for your phone number" autocomplete="tel-country-code">
+                <option value="">Country code…</option>
+              </select>
+              <input type="tel" id="phone" placeholder="Phone number" autocomplete="tel-national">
+            </div>
           </div>
           <div class="form-field">
             <label for="intent">What's the occasion?</label>
@@ -2378,7 +2395,7 @@ async function submitBooking(e) {
                       : mode === 'dayOnly' ? val('checkIn') : '',
     name:               val('fullName'),
     email:              val('email'),
-    phone:              val('phone'),
+    phone:              fullPhone(),
     foundUs:            shown('foundUs'),
     quotedTotal:        q ? fmt(q.total) : '',
     quotedDeposit:      q ? fmt(q.deposit) : '',
@@ -2445,6 +2462,100 @@ document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   document.getElementById('heroCheckOut').min = inDays(1);
   document.getElementById('checkIn').min      = toISO(d);
   document.getElementById('checkOut').min     = inDays(1);
+})();
+
+// Phone country codes (H&R, 18 Nov 2026: guests leave the code out, so the number arrives unusable).
+// Likely countries first, then the rest A to Z. The email gets "+44 7700 900123 (United Kingdom)".
+const PHONE_COUNTRIES_TOP = [
+  ['GR','Greece','30'], ['GB','United Kingdom','44'], ['US','United States','1'], ['DE','Germany','49'],
+  ['NL','Netherlands','31'], ['FR','France','33'], ['IE','Ireland','353'], ['CA','Canada','1'],
+  ['AU','Australia','61']
+];
+const PHONE_COUNTRIES = [
+  ['AL','Albania','355'], ['DZ','Algeria','213'], ['AD','Andorra','376'], ['AR','Argentina','54'],
+  ['AM','Armenia','374'], ['AU','Australia','61'], ['AT','Austria','43'], ['AZ','Azerbaijan','994'],
+  ['BH','Bahrain','973'], ['BY','Belarus','375'], ['BE','Belgium','32'], ['BA','Bosnia and Herzegovina','387'],
+  ['BR','Brazil','55'], ['BG','Bulgaria','359'], ['CA','Canada','1'], ['CL','Chile','56'], ['CN','China','86'],
+  ['CO','Colombia','57'], ['CR','Costa Rica','506'], ['HR','Croatia','385'], ['CY','Cyprus','357'],
+  ['CZ','Czech Republic','420'], ['DK','Denmark','45'], ['EG','Egypt','20'], ['EE','Estonia','372'],
+  ['FI','Finland','358'], ['FR','France','33'], ['GE','Georgia','995'], ['DE','Germany','49'],
+  ['GI','Gibraltar','350'], ['GR','Greece','30'], ['HK','Hong Kong','852'], ['HU','Hungary','36'],
+  ['IS','Iceland','354'], ['IN','India','91'], ['ID','Indonesia','62'], ['IE','Ireland','353'],
+  ['IL','Israel','972'], ['IT','Italy','39'], ['JP','Japan','81'], ['JO','Jordan','962'],
+  ['KZ','Kazakhstan','7'], ['KE','Kenya','254'], ['KW','Kuwait','965'], ['LV','Latvia','371'],
+  ['LB','Lebanon','961'], ['LI','Liechtenstein','423'], ['LT','Lithuania','370'], ['LU','Luxembourg','352'],
+  ['MY','Malaysia','60'], ['MT','Malta','356'], ['MX','Mexico','52'], ['MD','Moldova','373'],
+  ['MC','Monaco','377'], ['ME','Montenegro','382'], ['MA','Morocco','212'], ['NL','Netherlands','31'],
+  ['NZ','New Zealand','64'], ['NG','Nigeria','234'], ['MK','North Macedonia','389'], ['NO','Norway','47'],
+  ['OM','Oman','968'], ['PK','Pakistan','92'], ['PE','Peru','51'], ['PH','Philippines','63'],
+  ['PL','Poland','48'], ['PT','Portugal','351'], ['QA','Qatar','974'], ['RO','Romania','40'],
+  ['SA','Saudi Arabia','966'], ['RS','Serbia','381'], ['SG','Singapore','65'], ['SK','Slovakia','421'],
+  ['SI','Slovenia','386'], ['ZA','South Africa','27'], ['KR','South Korea','82'], ['ES','Spain','34'],
+  ['SE','Sweden','46'], ['CH','Switzerland','41'], ['TW','Taiwan','886'], ['TH','Thailand','66'],
+  ['TN','Tunisia','216'], ['TR','Turkey','90'], ['UA','Ukraine','380'], ['AE','United Arab Emirates','971'],
+  ['GB','United Kingdom','44'], ['US','United States','1'], ['UY','Uruguay','598'], ['VN','Vietnam','84']
+];
+(() => {
+  const sel = document.getElementById('phoneCountry');
+  const add = (parent, [iso, name, code], tag) => {
+    const o = document.createElement('option');
+    o.value = tag + iso; o.dataset.code = code; o.dataset.country = name;
+    o.textContent = name + ' (+' + code + ')';
+    parent.appendChild(o);
+  };
+  const g1 = document.createElement('optgroup'); g1.label = 'Most of our guests';
+  PHONE_COUNTRIES_TOP.forEach(c => add(g1, c, 'top-'));
+  const g2 = document.createElement('optgroup'); g2.label = 'All countries';
+  PHONE_COUNTRIES.forEach(c => add(g2, c, ''));
+  const other = document.createElement('option');
+  other.value = 'other'; other.textContent = 'Other: I typed it with + in the number';
+  g2.appendChild(other);
+  sel.append(g1, g2);
+
+  // A number typed without a code needs a country; one typed as +44 or 0044 does not.
+  const phone = document.getElementById('phone');
+  const hasCode = (n) => n.startsWith('+') || n.startsWith('00');
+  const check = () => {
+    const n = phone.value.trim();
+    let msg = '';
+    if (n && !hasCode(n) && !sel.value) msg = 'Please choose the country code for your phone number.';
+    else if (n && !hasCode(n) && sel.value === 'other') msg = 'Please type your number with its country code, starting with +.';
+    sel.setCustomValidity(msg);
+  };
+  phone.addEventListener('input', check);
+  sel.addEventListener('change', check);
+})();
+
+// The phone number as H&R need it: +code number (country). A number already typed with + or 00 is kept.
+function fullPhone() {
+  const n = document.getElementById('phone').value.trim();
+  if (!n) return '';
+  if (n.startsWith('+')) return n;
+  if (n.startsWith('00')) return '+' + n.slice(2);
+  const opt = document.getElementById('phoneCountry').selectedOptions[0];
+  if (!opt || !opt.dataset.code) return n;
+  // Drop the national leading 0 (UK 07700 becomes +44 7700), except Italy, which keeps it.
+  const local = opt.dataset.code === '39' ? n : n.replace(/^0(?=\d)/, '');
+  return '+' + opt.dataset.code + ' ' + local + ' (' + opt.dataset.country + ')';
+}
+
+// Hero opener: hide the booking box while the first slide (estate long shot) shows.
+// Once a visitor has used the box it stays put, so it never vanishes mid-typing on a later loop.
+(() => {
+  const hero  = document.getElementById('top');
+  const strip = document.getElementById('heroBookForm');
+  let used = false, heard = false;
+  // Starts hidden (no flash before the photos load); if no slideshow appears (one photo, or
+  // the photo list fails to load), show the box after 2.5 s.
+  setTimeout(() => { if (!heard) hero.classList.remove('opener-slide'); }, 2500);
+  strip.addEventListener('focusin', () => { used = true; hero.classList.remove('opener-slide'); });
+  hero.addEventListener('carousel:slide', (e) => {
+    if (!e.target.closest('.hero-media')) return;
+    heard = true;
+    const opener = e.detail.index === 0 && e.detail.count > 1 && !used;
+    if (!opener && hero.classList.contains('opener-slide')) hero.classList.add('strip-returned');
+    hero.classList.toggle('opener-slide', opener);
+  });
 })();
 </script>
 <!-- Video Modal -->

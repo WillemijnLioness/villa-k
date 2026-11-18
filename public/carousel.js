@@ -260,6 +260,12 @@
       current = ((idx % urls.length) + urls.length) % urls.length;
       slideEls[current].classList.add('active');
       if (dotEls[current]) dotEls[current].classList.add('active');
+      announce();
+    }
+
+    /* Tell the page which slide is showing (the VKF hero hides its booking box on the opener) */
+    function announce() {
+      wrap.dispatchEvent(new CustomEvent('carousel:slide', { bubbles: true, detail: { index: current, count: urls.length } }));
     }
 
     if (urls.length > 1) {
@@ -303,9 +309,12 @@
     if (urls.length > 1) {
       const interval = parseInt(img.dataset.carouselInterval, 10) || 5000;
       let timer = setInterval(() => goTo(current + 1), interval);
-      wrap.addEventListener('mouseenter', () => clearInterval(timer));
-      wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), interval); });
-      wrap.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
+      /* data-carousel-nopause: keep advancing on hover/touch (hero slideshow has no controls to pause for) */
+      if (!('carouselNopause' in img.dataset)) {
+        wrap.addEventListener('mouseenter', () => clearInterval(timer));
+        wrap.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), interval); });
+        wrap.addEventListener('touchstart', () => clearInterval(timer), { passive: true });
+      }
     }
 
     /* Swap img → carousel in DOM */
@@ -316,6 +325,7 @@
     requestAnimationFrame(() => requestAnimationFrame(() => {
       slideEls[0].classList.add('active');
       if (dotEls.length) dotEls[0].classList.add('active');
+      announce();
     }));
   };
 
