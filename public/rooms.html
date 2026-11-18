@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rooms &amp; Living Spaces — Villa Koukouvayia Farms</title>
+<meta name="description" content="Every bedroom and living space at Villa Koukouvayia Farms, Crete: by house (Main House, Guest House, Garden Suite) and for the Entire Estate by amenity level.">
+<link rel="canonical" href="https://koukouvayia.com/rooms">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-vkf-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-vkf-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon-vkf.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Villa Koukouvayia Farms">
+<meta property="og:title" content="Rooms &amp; Living Spaces — Villa Koukouvayia Farms">
+<meta property="og:description" content="Every bedroom and living space at Villa Koukouvayia Farms, Crete: by house (Main House, Guest House, Garden Suite) and for the Entire Estate by amenity level.">
+<meta property="og:url" content="https://koukouvayia.com/rooms">
+<meta property="og:image" content="https://koukouvayia.com/og-vkf.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =========================================================
+   DESIGN TOKENS (shared with index.html)
+   ========================================================= */
+:root {
+  --cream: #F4EEE2;
+  --cream-soft: #FAF6EE;
+  --bone: #EDE4D2;
+  --olive-deep: #3F4A2E;
+  --olive: #5C6B45;
+  --olive-soft: #8A9675;
+  --terracotta: #B4633F;
+  --terracotta-deep: #8E4A2C;
+  --aegean: #2C5669;
+  --aegean-deep: #1B3A48;
+  --ink: #1F1D18;
+  --ink-soft: #4A463C;
+  --muted: #8B8577;
+  --line: rgba(31, 29, 24, 0.12);
+  --shadow-soft: 0 1px 2px rgba(31, 29, 24, 0.04), 0 8px 24px rgba(31, 29, 24, 0.06);
+  --shadow-lift: 0 4px 12px rgba(31, 29, 24, 0.08), 0 24px 48px rgba(31, 29, 24, 0.10);
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 16px;
+  --font-display: 'Fraunces', 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 300; letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 3rem); font-weight: 300; }
+h3 { font-size: clamp(1.3rem, 2vw, 1.8rem); font-weight: 400; }
+h4 { font-size: 1.1rem; font-weight: 500; }
+
+.eyebrow {
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--olive);
+}
+
+a { color: inherit; text-decoration: none; }
+
+.container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+section { padding: 100px 0; }
+@media (max-width: 768px) { section { padding: 64px 0; } .container { padding: 0 20px; } }
+
+/* =========================================================
+   NAV
+   ========================================================= */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease, padding 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(244, 238, 226, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--line);
+}
+.nav-brand { display: flex; align-items: center; }
+.nav-brand img { height: 36px; width: auto; display: block; }
+.nav-links { display: flex; gap: 36px; align-items: center; font-size: 0.9rem; font-weight: 500; }
+.nav-links a { color: var(--ink); opacity: 0.7; transition: opacity 0.2s; }
+.nav-links a:hover { opacity: 1; }
+.nav-cta {
+  background: var(--terracotta);
+  color: var(--cream-soft) !important;
+  padding: 10px 20px;
+  border-radius: 999px;
+  opacity: 1 !important;
+  transition: background 0.2s, transform 0.2s;
+}
+.nav-cta:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; color: var(--ink); }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .nav.mobile-open .nav-links {
+    display: flex;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    flex-direction: column;
+    background: var(--cream-soft);
+    padding: 24px;
+    gap: 20px;
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* =========================================================
+   PAGE HEADER
+   ========================================================= */
+.page-header {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  padding: 160px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -30%; right: -10%;
+  width: 50%; height: 180%;
+  background: radial-gradient(circle, rgba(180, 99, 63, 0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+.page-header .eyebrow { color: var(--bone); margin-bottom: 20px; }
+.page-header h1 { color: var(--cream-soft); max-width: 18ch; margin-bottom: 16px; }
+.page-header h1 em { font-style: italic; color: var(--bone); }
+.page-header p { color: var(--bone); opacity: 0.85; font-size: 1.1rem; max-width: 40ch; }
+
+/* =========================================================
+   HOSTS BIO
+   ========================================================= */
+.about-section { background: var(--cream); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+.about-portrait {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lift);
+  flex-shrink: 0;
+}
+.about-portrait img { width: 100%; height: 100%; object-fit: cover; }
+
+.about-text .eyebrow { margin-bottom: 16px; }
+.about-text h2 { margin-bottom: 24px; }
+.about-text h2 em { font-style: italic; color: var(--olive); font-weight: 300; }
+.about-text p {
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+.about-text p:last-of-type { margin-bottom: 0; }
+
+/* =========================================================
+   LOGAN CARD
+   ========================================================= */
+.logan-band {
+  background: var(--bone);
+  border-radius: var(--radius-lg);
+  padding: 36px 44px;
+  margin-top: 56px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.logan-icon {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--terracotta);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  color: var(--cream-soft);
+  font-size: 1.6rem;
+}
+.logan-band h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.logan-band p { font-size: 0.95rem; color: var(--ink-soft); margin: 0; }
+@media (max-width: 600px) { .logan-band { flex-direction: column; padding: 28px 24px; text-align: center; } }
+
+/* =========================================================
+   CDR SECTION
+   ========================================================= */
+.cdr-section { background: var(--cream-soft); }
+.cdr-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 900px) { .cdr-grid { grid-template-columns: 1fr; gap: 36px; } }
+.cdr-text .eyebrow { margin-bottom: 16px; }
+.cdr-text h2 { margin-bottom: 20px; }
+.cdr-text h2 em { font-style: italic; color: var(--olive); font-weight: 300; }
+.cdr-text p { color: var(--ink-soft); margin-bottom: 16px; font-size: 1.02rem; line-height: 1.7; }
+.cdr-media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+.cdr-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =========================================================
+   CTA BAND
+   ========================================================= */
+.cta-band {
+  background: var(--olive-deep);
+  color: var(--cream-soft);
+  padding: 80px 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-band::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: 50%;
+  transform: translateX(-50%);
+  width: 600px; height: 400%;
+  background: radial-gradient(circle, rgba(180, 99, 63, 0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.cta-band .eyebrow { color: var(--bone); margin-bottom: 20px; }
+.cta-band h2 { color: var(--cream-soft); margin-bottom: 12px; max-width: 16ch; margin-left: auto; margin-right: auto; }
+.cta-band h2 em { font-style: italic; color: var(--bone); }
+.cta-band p { color: var(--bone); opacity: 0.85; max-width: 40ch; margin: 0 auto 36px; font-size: 1.05rem; }
+.cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 26px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-body);
+  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+.btn-primary { background: var(--terracotta); color: var(--cream-soft); }
+.btn-primary:hover { background: var(--terracotta-deep); transform: translateY(-1px); }
+.btn-outline-light {
+  background: transparent;
+  color: var(--cream-soft);
+  border: 1px solid rgba(244,238,226,0.4);
+}
+.btn-outline-light:hover { background: rgba(244,238,226,0.1); border-color: var(--cream-soft); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer {
+  background: var(--ink);
+  color: var(--bone);
+  padding: 80px 0 32px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr 1.4fr;
+  gap: 40px;
+  margin-bottom: 60px;
+}
+@media (max-width: 1100px) { .footer-grid { grid-template-columns: 1fr 1fr 1fr; gap: 32px; } }
+@media (max-width: 700px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; } }
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+.footer h4 {
+  color: var(--cream-soft);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 18px;
+  font-weight: 600;
+}
+.footer-brand p {
+  color: var(--bone);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+  max-width: 32ch;
+}
+.footer-brand .brand-mark {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--cream-soft);
+  margin-bottom: 16px;
+  display: block;
+}
+.footer ul { list-style: none; }
+.footer ul li { margin-bottom: 10px; }
+.footer ul a { color: var(--bone); opacity: 0.7; font-size: 0.9rem; transition: opacity 0.2s; }
+.footer ul a:hover { opacity: 1; color: var(--terracotta); }
+.footer-cdr p {
+  color: var(--bone);
+  opacity: 0.75;
+  font-size: 0.92rem;
+  margin-bottom: 20px;
+  max-width: 30ch;
+  line-height: 1.55;
+}
+.footer-bottom {
+  border-top: 1px solid rgba(244, 238, 226, 0.1);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* =========================================================
+   REVEAL ANIMATION
+   ========================================================= */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* =========================================================
+   ROOMS PAGE
+   ========================================================= */
+.page-header p { max-width: 62ch; }
+.rooms-subnav { position: sticky; top: 76px; z-index: 50; background: var(--cream-soft); border-bottom: 1px solid var(--line); }
+.rooms-subnav .container { display: flex; gap: 6px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
+.rooms-subnav a { white-space: nowrap; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.04em; padding: 8px 14px; border-radius: 999px; color: var(--ink-soft); }
+.rooms-subnav a:hover { background: var(--bone); }
+.rooms-subnav a.subnav-estate { color: var(--terracotta); }
+.house, .estate { padding: 88px 0 72px; scroll-margin-top: 130px; }
+.house + .house, .estate { border-top: 1px solid var(--line); }
+.house.common { background: var(--cream-soft); }
+.estate { background: var(--bone); }
+.house-head { margin-bottom: 32px; }
+.house-head .eyebrow { margin-bottom: 12px; }
+.house-head h2 em { font-style: italic; color: var(--olive); }
+.house-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: start; }
+.house-photo { position: sticky; top: 150px; aspect-ratio: 4 / 3; border-radius: var(--radius-lg); overflow: hidden; background: var(--bone); box-shadow: var(--shadow-soft); }
+.house-photo img, .room-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.house-text p, .rooms-intro p, .estate-intro p, .room-body p { color: var(--ink-soft); margin-bottom: 14px; }
+.rooms-title { margin: 64px 0 14px; }
+.rooms-intro, .estate-intro { max-width: 78ch; }
+.room-list { display: grid; gap: 28px; margin-top: 28px; }
+.room { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 32px; background: var(--cream-soft); border-radius: var(--radius-lg); padding: 20px; box-shadow: var(--shadow-soft); scroll-margin-top: 140px; }
+.estate .room { background: var(--cream); }
+.room-photo { aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--bone); align-self: start; }
+.room-body h4 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 400; margin: 6px 0 12px; }
+.room-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+.tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--olive); background: var(--bone); padding: 5px 10px; border-radius: 999px; }
+.tag-level { color: var(--terracotta-deep); }
+.level { scroll-margin-top: 140px; }
+.level-jump { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+.level-jump a { font-size: 0.8rem; font-weight: 600; padding: 8px 14px; border-radius: 999px; background: var(--cream-soft); color: var(--ink-soft); }
+.house-cta { margin-top: 40px; display: flex; gap: 12px; flex-wrap: wrap; }
+.photo-carousel { border-radius: inherit; }
+@media (max-width: 900px) {
+  .rooms-subnav { top: 72px; }
+  .house-grid, .room { grid-template-columns: 1fr; gap: 20px; }
+  .house-photo { position: static; }
+  .room { padding: 14px; }
+  .house, .estate { padding: 56px 0 48px; }
+  .rooms-title { margin-top: 44px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="/" class="nav-brand">
+    <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms">
+  </a>
+  <div class="nav-links">
+    <a href="/#journey">Your Stay</a>
+    <a href="/#residences">The Property</a>
+    <a href="/#location">Crete</a>
+    <a href="/#reviews">Reviews</a>
+    <a href="/#booking" class="nav-cta">Book Direct</a>
+  </div>
+  <button class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('mobile-open')" aria-label="Menu">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+  </button>
+</nav>
+
+<!-- PAGE HEADER -->
+<header class="page-header">
+  <div class="container">
+    <div class="eyebrow">Rooms &amp; Living Spaces</div>
+    <h1>One private estate;<br><em>three private homes.</em></h1>
+    <p>Villa Koukouvayia’s three private homes form the heart of her hospitality and flexibility. For individual families, couples or friends seeking a simple vacation rental, each home’s air-conditioned bedrooms, separated entrances, private parking, gardens and spaces create a comfortable quiet residence isolated from the estate’s other homes.</p>
+  </div>
+</header>
+
+<nav class="rooms-subnav" aria-label="Rooms and spaces">
+  <div class="container">
+    <a href="#main-house">Main House</a>
+    <a href="#guest-house">Guest House</a>
+    <a href="#garden-suite">Garden Suite</a>
+    <a href="#common-spaces">Common Spaces</a>
+    <a href="#entire-estate" class="subnav-estate">Entire Estate: Bedrooms by Amenity</a>
+  </div>
+</nav>
+
+<!-- Texts from H&R's pre-Marketing-Lioness site, verbatim (two figures UPDATED, marked in comments).
+     Each bedroom is one module (build_rooms.py) shown in its house and again in the Entire Estate view.
+     Photos: admin slots vkf:rooms_* and vkf:room_*, defaults in /rooms/. -->
+
+<section class="house" id="main-house">
+  <div class="container">
+    <div class="house-head">
+      <div class="eyebrow">The Residences</div>
+      <h2>The Main House</h2>
+    </div>
+    <div class="house-grid">
+      <div class="house-photo"><img data-photo-slot="vkf:rooms_main_house" data-carousel-interval="5000" src="/rooms/225-2022-1003-101.jpg" alt="The Main House, living spaces" loading="lazy"></div>
+      <div class="house-text"><p>Villa Koukouvayia’s Main House is perhaps the most luxurious of the villa’s three homes, with wide terraces and balconies that offer spectacular Aegean &amp; Mountain views at all three of its levels. The ground floor boasts a sunken living room, stone fireplace, large dining area and kitchen, food pantry, and a bathroom convenient to living areas and pool patios. For guests needing to keep in touch with professional tasks during an extended stay, a dedicated private office featuring network docking, monitor, printer and other peripherals provides a simple plug &amp; vacation-to-work connection.</p>
+<p>Upstairs, three bedrooms each access either a spectacular balcony or a roof terrace with wet bar. Bedroom 3, the Falcon Nest, shares its antique maple bed with French doors, large closets and perfect views of the moon or sun cresting the steep eastern slope opposite the Tyflos River Valley. Bedroom 2, the Griffon Nest, is built into a dramatic stone turret with two levels—a studio and upper sleeping loft—connected by spiral stairs that also lead to the Main House’s roof terrace, with a wet-bar. Both the wide desk at studio level and the extra-long single bed in the loft are built into the turret’s wrapping windows to create a romantic 180-degree spanning the the island’s western edge to its northern Aegean shore. The lower studio is perfect for professional work or, with an easily installed 2nd bed, another adult—either friend or sibling—can comfortably double the suite’s capacity. The 2nd full bathroom on this level also hosts the Main House’s convenient laundry facilities, adjacent to a dedicated laundry balcony for fresh-dried linens.</p>
+<p>The the Main House’s 2nd floor accommodations are crowned by the master bedroom or “Koukouvayia Suite.” The suite’s luxuries include built-in closets &amp; hidden hampers; a library, reading area &amp; stone fireplace; and a hand-carved king-sized teak bed set into windows tall enough to display the night’s galaxies and constellations. The Koukouvayia Suite is privately isolated from rest of the 2nd floor by a long entry hallway and en suite bath. The bath is large enough not only for a two-person shower, but a long soaking tub where one can bathe beneath the charming view across the valley of the moon rising, and the spot-lit mountain chapel of Saint John.</p>
+<p>Together the Main House’s accommodations are perfect for larger families or families with mature children who need extra privacy and space.</p>
+</div>
+    </div>
+    <h3 class="rooms-title">Main House Bedrooms</h3>
+    <div class="rooms-intro"><p>Villa Koukouvayia’s Main House has three formal bedrooms, two with multi-person beds, and a third with a single bed and an extra chamber room that can easily hold a temporary bed. Typical sleeping capacity is 5 to 6, with a maximum of 7 by using the large sleeping sofa in the living room, or by adding a child’s bed to the Koukouvayia Suite.</p>
+</div>
+    <div class="room-list">
+<article class="room reveal" id="room-koukouvayia">
+  <div class="room-photo"><img data-photo-slot="vkf:room_koukouvayia" data-carousel-interval="5000" src="/rooms/79-2019-1105-119.jpg" alt="Koukouvayia Suite, Main House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-luxury">Luxury room</a></div>
+    <h4>Koukouvayia Suite</h4>
+    <p>The “Koukouvayia Suite” features a dedicated library and reading area, a hand-carved, Arabian teak king-bed, and in Crete’s colder months can be warmed by the room’s hand-hewn stone fireplace. The bedchambers are quiet and isolated from the other 2nd floor rooms by a long entry hallway. The suite’s exterior walls boast a series of high windows, with sliding French doors that access a wide private balcony that wraps across two sides of the Main House. Both inside and out, the suite affords dramatic 270-degree views of the Gramvousa &amp; Rodopou mountain ranges jutting into the Cretan Sea. The en suite bath continues the motif of simple luxury &amp; integrated natural views. Across from a two-person glass shower, a long soaking tub is set into a wide window whose view encompasses the Tyflos Valley and the mountain opposite, where the charming village of Xarathiana and its night-lit chapel of Saint John frame the moon and sun rising at dusk and dawn. While the Koukouvayia Suite is designed for two, if needed, there is room to add a portable bed for a small child to accompany their parents.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="room-falcon">
+  <div class="room-photo"><img data-photo-slot="vkf:room_falcon" data-carousel-interval="5000" src="/rooms/120-2015-0815-116.jpg" alt="Falcon Nest, Main House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-premium">Premium room</a></div>
+    <h4>Falcon Nest</h4>
+    <p>The Falcon Nest is the Main House’s second bedroom. The smaller footprint is more than balanced by the room’s expansive views up the Tyflos Valley to Crete’s southern mountains, either from the large private balcony embracing the southeast and southwest sides of the Main House, or directly from the room’s antique maple bed through a pair of French balcony doors. With the balcony available for morning coffees or evening glasses of wine, this is a perfect room for an intimate couple or lone traveler who wants to balance time with the larger group against moments where they alone can enjoy the moon or sun rising.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="room-griffon">
+  <div class="room-photo"><img data-photo-slot="vkf:room_griffon" data-carousel-interval="5000" src="/rooms/72-2019-1121-102.jpg" alt="Griffon Nest, Main House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-premium">Premium room</a></div>
+    <h4>Griffon Nest</h4>
+    <p>The Griffon’s Nest rests within the Main House’s dramatic hand-hewn stone turret, looking southwest, across an endless series of olive groves, the raw Gramvousa peninsula, and the Aegean Sea. With chambers at two levels, and with a bespoke single bed built into the upper loft’s circle of windows, the room offers the height, views and seclusion preferred by its cliff-dwelling, namesake bird. The lower studio’s wide writing desk, like the bed in the upper chamber, has been built into the turret’s curve of windows, and provides similarly spectacular scenes of sea and sunsets, but is also a perfect space for a student or professional who needs to balance vacation or program time with tasks and work connections. The Griffon’s Nest also has direct access to the Main House’s roof terrace, a perfect place to go before the rest of the house wakes or after all are abed, when the morning light or stars will sparkle and call. The studio level also provides the space and privacy to add a portable bed and double the room’s occupancy—perfect for a close travelling friend, or family sibling.</p>
+
+  </div>
+</article>
+    </div>
+    <div class="house-cta"><a href="/#booking" class="btn btn-primary" onclick="try{sessionStorage.setItem('vkfProperty','main')}catch(e){}">Check Dates for the Main House →</a></div>
+  </div>
+</section>
+
+<section class="house" id="guest-house">
+  <div class="container">
+    <div class="house-head">
+      <div class="eyebrow">The Residences</div>
+      <h2>The Guest House</h2>
+    </div>
+    <div class="house-grid">
+      <div class="house-photo"><img data-photo-slot="vkf:rooms_guest_house" data-carousel-interval="5000" src="/rooms/185-2019-1019-110-2.jpg" alt="The Guest House, living spaces" loading="lazy"></div>
+      <div class="house-text"><p>Villa Koukouvayia’s Guest House, built in 2012, is the oldest and most economical of the villa’s three homes. Set back at the highest and farthest position from the farm’s entrance, her design echoes the Main House below her and includes the same continuous verandas, large, spectacular balconies, and a private roof terrace where star-gazing feels more like star-touching. The house’s open-design first floor provides space for large living areas, a fully equipped kitchen, and a convenient bath. Upstairs, two bedrooms include a master bedroom (the “Hawk’s Nest”) whose sliding doors open onto a 270° wrapping balcony large enough for entertaining and with spiral-stair access to the roof terrace. The second bedroom (the “Crow’s Nest”) also opens onto a private balcony, gazing south up the Tyflos Valley to Crete’s higher elevations and famous White Mountains. The Crow’s Nest sleeps two adults comfortably, each with a single bed, built bunk-stye into a full-width window that integrates each bed into a soaring view of the sea below. And if needed, families with three small children under 12 can outfit the room for a third child. The 2nd floor’s final feature is a large full bath with a two-person shower, laundry, and a clothes balcony to make the necessity of vacation washing days—quite literally—a fresh breeze.</p>
+<p>Together, the spectacular views and efficient design make the Guest House a perfect choice for a young family, a traveling couple, or a group of four friends wanting to relax, explore and recharge together.</p>
+</div>
+    </div>
+    <h3 class="rooms-title">Guest House Bedrooms</h3>
+    <div class="rooms-intro"><p>Villa Koukouvayia’s Guest House has two formal bedrooms, one in the master bedroom, with queen-sized bedding, and the second with adult-engineered singles built, bunk-style, into the room’s northeast wall. The Guest House’s typical sleeping capacity is 4, but families of 5 with three children under 12 have been more than comfortable adding a portable bed into the second bedroom, and we’ve grown accustomed to allowing this exception to the Guest House’s typical occupancy.</p>
+</div>
+    <div class="room-list">
+<article class="room reveal" id="room-hawk">
+  <div class="room-photo"><img data-photo-slot="vkf:room_hawk" data-carousel-interval="5000" src="/rooms/120-2020-0131-110.jpg" alt="Hawk’s Nest, Guest House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-premium">Premium room</a></div>
+    <h4>Hawk’s Nest</h4>
+    <p>The “Hawk’s Nest” is the Guest House’s master bedroom. Large built-in closets allow guests to settle in quickly and feel immediately at home. The room’s luxurious queen-bed is set among wide windows, and the room’s sliding French doors lead to a large, elevated terrace. Whether you remain in bed reading or sit on the elevated terrace sipping coffee or wine, you’ll enjoy a dramatic, 27o-degree view of the Gramvousa &amp; Rodopou mountain ranges as they frame the Gulf of Kissamos and plunge into the Cretan Sea. The Hawk’s Nest also boasts private access by spiral stairs to a private roof patio, where your 270-degree view will expand to a full 360-degrees. During daylight hours, scan the region’s domain from mountains to sea. Or, after midnight, climb the patio’s spiral stairs to survey the rare spectacle of the sky’s full catalog of constellations and stars.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="room-crow">
+  <div class="room-photo"><img data-photo-slot="vkf:room_crow" data-carousel-interval="5000" src="/rooms/82-2020-0131-101.jpg" alt="Crow’s Nest, Guest House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-standard">Standard room</a></div>
+    <h4>Crow’s Nest</h4>
+    <p>The Guest House’s second bedroom, the “Crow’s Nest,” earns her name from the way her two single beds, engineered into window casements as wide as the beds are long, provide fantastic views from pillows to sea. Like a ship’s quarters, the Crow’s Nest custom cabinetry includes a host of storage options that join the room’s large closets and increase her effective size. Adding to her space, a large French door opens out onto a lovely coffee or reading balcony for two, with a view of the valley and southern mountains. This is a perfect room for two friends joining a program or traveling together, or siblings in a family group.</p>
+
+  </div>
+</article>
+    </div>
+    <div class="house-cta"><a href="/#booking" class="btn btn-primary" onclick="try{sessionStorage.setItem('vkfProperty','guest')}catch(e){}">Check Dates for the Guest House →</a></div>
+  </div>
+</section>
+
+<section class="house" id="garden-suite">
+  <div class="container">
+    <div class="house-head">
+      <div class="eyebrow">The Residences</div>
+      <h2>The Garden Suite</h2>
+    </div>
+    <div class="house-grid">
+      <div class="house-photo"><img data-photo-slot="vkf:rooms_garden_house" data-carousel-interval="5000" src="/rooms/200-2022-1120-284.jpg" alt="The Garden Suite, living spaces" loading="lazy"></div>
+      <div class="house-text"><p>Completed in 2022, Villa Koukouvayia’s Garden Suite is the estate’s most unique and flexible home and—being her newest addition—arguably her most luxuriously appointed. A ground-level residence resting beneath the Main House, the Garden Suite’s private entrance, French doors, wide windows, and her integration into the site’s slope let guests gaze directly into her private gardens and step directly into the extensive olive groves surrounding the estate.</p>
+<p>Entering through French doors from her yard below the pool waterfalls, a hand-hewn stone foyer embraces the chambers, leading in one direction to a spacious living area with winter-stove, stone hearth, large library and entertainment center. In the other direction a professionally outfitted kitchen breakfast and dining area handily serve the largest &amp; hungriest of families &amp; friends. Each of the Garden Suite’s three bedrooms and her living room are outfitted with bespoke closets and bookshelves, antique furniture or other charming features, and each has a series of high-quality, built-in cabinet beds that let you custom configure your space, from luxury queen-bed apartments to albergue style rooms sleeping 3 or 4. Her two largest bedrooms, the “Pheasant Nest” and “Partridge Nest,” look out onto the southeast groves sloping into the Tyflos Valley, and her third bedroom, the Swallow’s Nest, makes up for a lack of view with dramatically lit custom shelving,, charming stone features, and a private office alcove.</p>
+<p>And for larger families and groups, the living room’s beautiful library cabinet pulls down to reveal a fully mattresed bed that converts the area into a semi-private room and increases Garden Suite capacity to 13. To service such larger groups, the Garden Suite has modern, professional-grade appliances, storage pantries, and two full bathrooms. The second bath &amp; laundry are adjacent to the living area, and a luxurious master bath is positioned near the three bedrooms, large enough for a long, deep soaking tub on one side, and on the other a romantic two-person shower surrounded by hand-hewn stone.</p>
+<p><!-- UPDATED 18 Nov 2026: old text said "a supplement of €10 per/person/night" (pre-tax); site rates are tax-inclusive, €13. -->And although the Garden Suite can easily be configured and expanded to comfortably sleep 13 adults, her base price will allow a more typically sized party of 6 to secure her inexpensively, while letting those who need the Garden Suite’s extraordinary capacity, to reserve those extra spaces easily, with a supplement of €13 per/person/night for each guest beyond 6, and up to the Garden Suite’s full capacity of 13.</p>
+</div>
+    </div>
+    <h3 class="rooms-title">Garden Suite Bedrooms</h3>
+    <div class="rooms-intro"><p><!-- UPDATED 18 Nov 2026: old text said "priced assuming 7 occupants"; rates include 6 guests. -->Villa Koukouvayia’s Garden Suite, the newest member of Villa Koukouvayia Farm’s three residences, has three formal bedrooms and a fourth room easily converted into a comfortable sleeping room for two. At ground level, every bedroom in the Garden Suite, and the living room, boasts a series of high-quality cabinet beds that provide an almost infinite array of lodging choices across the residence, whether for a program serving a variety of participant demands, or large families &amp; gatherings who share complicated bed- &amp; room-assignment needs. To protect the budget of smaller parties, the Garden Suite is priced assuming 6 occupants, but with an easy and inexpensive supplement applied, larger groups of up to 13 guests can book and stay within budget.</p>
+</div>
+    <div class="room-list">
+<article class="room reveal" id="room-pheasant">
+  <div class="room-photo"><img data-photo-slot="vkf:room_pheasant" data-carousel-interval="5000" src="/rooms/150-2022-1105-106.jpg" alt="Pheasant Nest, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-standard">Standard room</a></div>
+    <h4>Pheasant Nest</h4>
+    <p>The “Pheasant Nest” is the Garden Suite bedroom with the largest floorplan. Her windows look out into the southeast olive groves, and her built-in cabinet beds can be deployed in a simple queen-bed configuration, or in albergue style with four single-beds, set up as two bunks. In fact the Pheasant Nest size allows for both style beds to be deployed at the same time, allowing a young child traveling for the first time to remain in the same room with his/her parents, or to lodge an extra cousin in the family gathering.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="room-partridge">
+  <div class="room-photo"><img data-photo-slot="vkf:room_partridge" data-carousel-interval="5000" src="/rooms/2023-0619-112.jpg" alt="Partridge Nest, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-standard">Standard room</a></div>
+    <h4>Partridge Nest</h4>
+    <p>The Garden Suite’s second bedroom is the “Partridge Nest.” Adjacent to and similar to the Pheasant Nest, the Partridge Nest also looks into the southeast groves, but adds a wall of high glass-brick and a skylight to keep the room both private and bright. Like all Garden Suite bedrooms, her cabinet beds include a queen that allows the room to serve as private quarters for a couple, or a series of single beds to allow the room to lodge as many as three friends, colleagues or family members. Unlike all other Garden Suite bedrooms, the Partridge Nest’s has 1 instead of 2 double-bed cabinets, but her single-bed cabinet has the neat talent of providing an automatically deployed desk and work area when the bed is closed and hidden. This is a handy feature for those who need to remain in touch with professional responsibilities during their stay.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="room-swallow">
+  <div class="room-photo"><img data-photo-slot="vkf:room_swallow" data-carousel-interval="5000" src="/rooms/230-2023-0618-703.jpg" alt="Swallow’s Nest, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-nonstandard">Non-Standard room</a></div>
+    <h4>Swallow’s Nest</h4>
+    <p>The Garden Suite’s third bedroom, the “Swallow’s Nest” lacks the view of other villa and Garden Suite bedrooms, so it is a perfect bedroom to discount for program participants staying within a strict budget, or to assign to younger members of a gathering who care little for such a feature. The Swallow’s Nest is also an ideal space to devote to a specific program practice like massage or private counselling, or to dedicate as a playroom for smaller children in a larger group. Just close all three of the beds into their cabinets, and the room and its floor space is free. Like the Pheasant Nest, the Swallow’s Nest offers either a queen-bed or singles configuration, switching from an intimate couple’s apartment to a true albergue suite sleeping up to four. The built in closets and stone features give the room warmth and charm, and an office alcove with network connections are handy for those with professional responsibilities during their stay.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="room-chaperone">
+  <div class="room-photo"><img data-photo-slot="vkf:room_chaperone" data-carousel-interval="5000" src="/rooms/120-2022-1120-214.jpg" alt="Chaperone Quarters, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag tag-level" href="#level-nonstandard">Non-Standard room</a></div>
+    <h4>Chaperone Quarters</h4>
+    <p>In addition to the three fully private bedrooms in the Garden Suite, the suite’s living area hides an adult-engineered bed built into the library cabinet of the room. Deploying this bed converts the living area—either each evening or for the duration of your stay—into the “Chaperone’s Quarters.” The Chaperone Quarters has an adjacent bath and is easily separated from the rest of the suite by an available privacy screen. And while this would be a rare choice and unlikely offered to formal program participants, it is a great option for staff, chaperones, or extra family members when needed, increasing the Garden Suite’s capacity from 11 to 13.</p>
+
+  </div>
+</article>
+    </div>
+    <div class="house-cta"><a href="/#booking" class="btn btn-primary" onclick="try{sessionStorage.setItem('vkfProperty','garden')}catch(e){}">Check Dates for the Garden Suite →</a></div>
+  </div>
+</section>
+
+<section class="house common" id="common-spaces">
+  <div class="container">
+    <div class="house-head">
+      <div class="eyebrow">Shared by all</div>
+      <h2>Common Spaces</h2>
+    </div>
+    <div class="house-grid">
+      <div class="house-photo"><img data-photo-slot="vkf:rooms_common" data-carousel-interval="5000" src="/rooms/115-2021-0125-102.jpg" alt="The pool, patio and shared spaces at Villa Koukouvayia" loading="lazy"></div>
+      <div class="house-text"><p>Villa Koukouvayia proudly positions herself not as a hotel to be rented, but a home to be enjoyed. Historically, and as echoed in countless reviews, her guests have easily taken up this characteristic during their stays, enjoying the privacy of their separate home’s gardens, terraces and spaces, but enjoying, too, the sharing of the few resources the estate holds in common. While privacy is always an option, guests often enjoy the luck of meeting other good people, or their child finding a new friend the same age to share the ping-pong table or pool.</p>
+<p>The friendly culture allows easy sharing of the estate’s common resources. The extensive recreational gear of bicycles, kayaks, lawn games, interior board games, hiking, snorkeling &amp; beach gear, the exercise room with a professional table-tennis facility, and the estate’s deep plunging pool and patio have always met everyone’s needs, even when the villa has the privilege to host three families as guests.</p>
+<p>The villa’s isolation among the silent groves affects those staying here, too, creating a common culture of quiet, and a consistent respect among guests for the opportunity to relax.</p>
+<p>The extensive gear allows guests to avoid most vacation-specific expenses, yet still enjoy the toys and equipment that often add fun to time away from home. The pool especially serves a variety of guests, offering the chance to cool off from the Cretan sun, to plunge off the salt from a coastal swim, to safely dive into its depths, or play beneath the waterfalls. And when the patio is quiet, the splash of the waterfall creates the perfect background music to inspire your nap.</p>
+</div>
+    </div>
+  </div>
+</section>
+
+<section class="estate" id="entire-estate">
+  <div class="container">
+    <div class="house-head">
+      <div class="eyebrow">Entire Estate · Events &amp; Programs</div>
+      <h2>Standard, Premium, &amp; Luxury<br><em>Accommodation Options</em></h2>
+    </div>
+    <div class="estate-intro"><p>Villa Koukouvayia Farms was envisioned &amp; designed as home, not a hotel, and the result is that her various bedrooms are as unique as the estate itself. While all rooms have full &amp; luxurious adult bedding, climate controls &amp; A/C, and represent beautiful additions within a beautiful estate, they are not “hotel” rooms with identical size, parallel locations, or common views. Furthermore, almost half of Villa Koukouvayia’s bedrooms are flexibly configured, with high-quality wall-beds needing only the flip of a handle to convert from queen-bed accommodations for a couple or lone participant into single-bedding suites comfortably lodging up to four adults.</p>
+<p>So, as you plan any event involving multiple overnight guests, you can rest assured there will be a range of rooms, luxury, and bedding configurations with which you can ensure the happiness and comfort of those attending your event.</p>
+</div>
+    <div class="level-jump"><a href="#level-luxury">Luxury</a><a href="#level-premium">Premium</a><a href="#level-standard">Standard</a><a href="#level-nonstandard">Non-Standard</a></div>
+
+    <div class="level" id="level-luxury">
+      <h3 class="rooms-title">Luxury Accommodations</h3>
+      <div class="rooms-intro"><p>Finally, Villa Koukouvayia does offer one selection, the Koukouvayia Suite, whose size &amp; luxurious features demand its own category, distinct from even the Premium Rooms cited above.</p></div>
+      <div class="room-list">
+<article class="room reveal" id="estate-room-koukouvayia">
+  <div class="room-photo"><img data-photo-slot="vkf:room_koukouvayia" data-carousel-interval="5000" src="/rooms/79-2019-1105-119.jpg" alt="Koukouvayia Suite, Main House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#main-house">Main House</a></div>
+    <h4>Koukouvayia Suite</h4>
+    <p>The “Koukouvayia Suite” features a dedicated library and reading area, a hand-carved, Arabian teak king-bed, and in Crete’s colder months can be warmed by the room’s hand-hewn stone fireplace. The bedchambers are quiet and isolated from the other 2nd floor rooms by a long entry hallway. The suite’s exterior walls boast a series of high windows, with sliding French doors that access a wide private balcony that wraps across two sides of the Main House. Both inside and out, the suite affords dramatic 270-degree views of the Gramvousa &amp; Rodopou mountain ranges jutting into the Cretan Sea. The en suite bath continues the motif of simple luxury &amp; integrated natural views. Across from a two-person glass shower, a long soaking tub is set into a wide window whose view encompasses the Tyflos Valley and the mountain opposite, where the charming village of Xarathiana and its night-lit chapel of Saint John frame the moon and sun rising at dusk and dawn. While the Koukouvayia Suite is designed for two, if needed, there is room to add a portable bed for a small child to accompany their parents.</p>
+
+  </div>
+</article>
+      </div>
+    </div>
+
+    <div class="level" id="level-premium">
+      <h3 class="rooms-title">Premium Rooms</h3>
+      <div class="rooms-intro"><p>Villa Koukouvayia’s Premium rooms each have features that provide special guests with the amenities they deserve. These features usually include extra size, private exterior balconies or terraces, or extra chambers within a suite. For reasons described below, the Guest House’s Hawk’s Nest, and the Main House’s Falcon’s &amp; Griffon’s Nests are all considered Premium rooms.</p></div>
+      <div class="room-list">
+<article class="room reveal" id="estate-room-falcon">
+  <div class="room-photo"><img data-photo-slot="vkf:room_falcon" data-carousel-interval="5000" src="/rooms/120-2015-0815-116.jpg" alt="Falcon Nest, Main House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#main-house">Main House</a></div>
+    <h4>Falcon Nest</h4>
+    <p>The Falcon Nest is the Main House’s second bedroom. The smaller footprint is more than balanced by the room’s expansive views up the Tyflos Valley to Crete’s southern mountains, either from the large private balcony embracing the southeast and southwest sides of the Main House, or directly from the room’s antique maple bed through a pair of French balcony doors. With the balcony available for morning coffees or evening glasses of wine, this is a perfect room for an intimate couple or lone traveler who wants to balance time with the larger group against moments where they alone can enjoy the moon or sun rising.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="estate-room-griffon">
+  <div class="room-photo"><img data-photo-slot="vkf:room_griffon" data-carousel-interval="5000" src="/rooms/72-2019-1121-102.jpg" alt="Griffon Nest, Main House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#main-house">Main House</a></div>
+    <h4>Griffon Nest</h4>
+    <p>The Griffon’s Nest rests within the Main House’s dramatic hand-hewn stone turret, looking southwest, across an endless series of olive groves, the raw Gramvousa peninsula, and the Aegean Sea. With chambers at two levels, and with a bespoke single bed built into the upper loft’s circle of windows, the room offers the height, views and seclusion preferred by its cliff-dwelling, namesake bird. The lower studio’s wide writing desk, like the bed in the upper chamber, has been built into the turret’s curve of windows, and provides similarly spectacular scenes of sea and sunsets, but is also a perfect space for a student or professional who needs to balance vacation or program time with tasks and work connections. The Griffon’s Nest also has direct access to the Main House’s roof terrace, a perfect place to go before the rest of the house wakes or after all are abed, when the morning light or stars will sparkle and call. The studio level also provides the space and privacy to add a portable bed and double the room’s occupancy—perfect for a close travelling friend, or family sibling.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="estate-room-hawk">
+  <div class="room-photo"><img data-photo-slot="vkf:room_hawk" data-carousel-interval="5000" src="/rooms/120-2020-0131-110.jpg" alt="Hawk’s Nest, Guest House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#guest-house">Guest House</a></div>
+    <h4>Hawk’s Nest</h4>
+    <p>The “Hawk’s Nest” is the Guest House’s master bedroom. Large built-in closets allow guests to settle in quickly and feel immediately at home. The room’s luxurious queen-bed is set among wide windows, and the room’s sliding French doors lead to a large, elevated terrace. Whether you remain in bed reading or sit on the elevated terrace sipping coffee or wine, you’ll enjoy a dramatic, 27o-degree view of the Gramvousa &amp; Rodopou mountain ranges as they frame the Gulf of Kissamos and plunge into the Cretan Sea. The Hawk’s Nest also boasts private access by spiral stairs to a private roof patio, where your 270-degree view will expand to a full 360-degrees. During daylight hours, scan the region’s domain from mountains to sea. Or, after midnight, climb the patio’s spiral stairs to survey the rare spectacle of the sky’s full catalog of constellations and stars.</p>
+
+  </div>
+</article>
+      </div>
+    </div>
+
+    <div class="level" id="level-standard">
+      <h3 class="rooms-title">Standard Rooms</h3>
+      <div class="rooms-intro"><p>Like all Villa Koukouvayia Rooms, Standard rooms are beautifully appointed and comfortable, and only differ from their Premium cousins by lacking some dramatic feature like a balcony, upper view, and/or larger size. The Garden Suite’s Pheasant Nest &amp; Partridge Nest, and the Guest House’s Crow’s Nest (which does have a beautiful balcony &amp; view but offers only single bedding) are all considered Standard rooms.</p></div>
+      <div class="room-list">
+<article class="room reveal" id="estate-room-crow">
+  <div class="room-photo"><img data-photo-slot="vkf:room_crow" data-carousel-interval="5000" src="/rooms/82-2020-0131-101.jpg" alt="Crow’s Nest, Guest House" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#guest-house">Guest House</a></div>
+    <h4>Crow’s Nest</h4>
+    <p>The Guest House’s second bedroom, the “Crow’s Nest,” earns her name from the way her two single beds, engineered into window casements as wide as the beds are long, provide fantastic views from pillows to sea. Like a ship’s quarters, the Crow’s Nest custom cabinetry includes a host of storage options that join the room’s large closets and increase her effective size. Adding to her space, a large French door opens out onto a lovely coffee or reading balcony for two, with a view of the valley and southern mountains. This is a perfect room for two friends joining a program or traveling together, or siblings in a family group.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="estate-room-pheasant">
+  <div class="room-photo"><img data-photo-slot="vkf:room_pheasant" data-carousel-interval="5000" src="/rooms/150-2022-1105-106.jpg" alt="Pheasant Nest, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#garden-suite">Garden Suite</a></div>
+    <h4>Pheasant Nest</h4>
+    <p>The “Pheasant Nest” is the Garden Suite bedroom with the largest floorplan. Her windows look out into the southeast olive groves, and her built-in cabinet beds can be deployed in a simple queen-bed configuration, or in albergue style with four single-beds, set up as two bunks. In fact the Pheasant Nest size allows for both style beds to be deployed at the same time, allowing a young child traveling for the first time to remain in the same room with his/her parents, or to lodge an extra cousin in the family gathering.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="estate-room-partridge">
+  <div class="room-photo"><img data-photo-slot="vkf:room_partridge" data-carousel-interval="5000" src="/rooms/2023-0619-112.jpg" alt="Partridge Nest, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#garden-suite">Garden Suite</a></div>
+    <h4>Partridge Nest</h4>
+    <p>The Garden Suite’s second bedroom is the “Partridge Nest.” Adjacent to and similar to the Pheasant Nest, the Partridge Nest also looks into the southeast groves, but adds a wall of high glass-brick and a skylight to keep the room both private and bright. Like all Garden Suite bedrooms, her cabinet beds include a queen that allows the room to serve as private quarters for a couple, or a series of single beds to allow the room to lodge as many as three friends, colleagues or family members. Unlike all other Garden Suite bedrooms, the Partridge Nest’s has 1 instead of 2 double-bed cabinets, but her single-bed cabinet has the neat talent of providing an automatically deployed desk and work area when the bed is closed and hidden. This is a handy feature for those who need to remain in touch with professional responsibilities during their stay.</p>
+
+  </div>
+</article>
+      </div>
+    </div>
+
+    <div class="level" id="level-nonstandard">
+      <h3 class="rooms-title">Non-Standard Accommodations</h3>
+      <div class="rooms-intro"><p>Villa Koukouvayia’s Garden Suite has two additional accommodations that are perfect for certain guest assignments but lack some feature included in every Standard room. The Swallow’s Nest, while matching its sisters the Pheasant &amp; Partridge Nests in features and bedding options, lacks a view of any kind. And the Auxiliary Accommodation, while spacious, with garden views and an adjacent bath, is semi rather than fully private.</p></div>
+      <div class="room-list">
+<article class="room reveal" id="estate-room-swallow">
+  <div class="room-photo"><img data-photo-slot="vkf:room_swallow" data-carousel-interval="5000" src="/rooms/230-2023-0618-703.jpg" alt="Swallow’s Nest, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#garden-suite">Garden Suite</a></div>
+    <h4>Swallow’s Nest</h4>
+    <p>The Garden Suite’s third bedroom, the “Swallow’s Nest” lacks the view of other villa and Garden Suite bedrooms, so it is a perfect bedroom to discount for program participants staying within a strict budget, or to assign to younger members of a gathering who care little for such a feature. The Swallow’s Nest is also an ideal space to devote to a specific program practice like massage or private counselling, or to dedicate as a playroom for smaller children in a larger group. Just close all three of the beds into their cabinets, and the room and its floor space is free. Like the Pheasant Nest, the Swallow’s Nest offers either a queen-bed or singles configuration, switching from an intimate couple’s apartment to a true albergue suite sleeping up to four. The built in closets and stone features give the room warmth and charm, and an office alcove with network connections are handy for those with professional responsibilities during their stay.</p>
+
+  </div>
+</article>
+<article class="room reveal" id="estate-room-chaperone">
+  <div class="room-photo"><img data-photo-slot="vkf:room_chaperone" data-carousel-interval="5000" src="/rooms/120-2022-1120-214.jpg" alt="Chaperone Quarters, Garden Suite" loading="lazy"></div>
+  <div class="room-body">
+    <div class="room-tags"><a class="tag" href="#garden-suite">Garden Suite</a></div>
+    <h4>Chaperone Quarters</h4>
+    <p>In addition to the three fully private bedrooms in the Garden Suite, the suite’s living area hides an adult-engineered bed built into the library cabinet of the room. Deploying this bed converts the living area—either each evening or for the duration of your stay—into the “Chaperone’s Quarters.” The Chaperone Quarters has an adjacent bath and is easily separated from the rest of the suite by an available privacy screen. And while this would be a rare choice and unlikely offered to formal program participants, it is a great option for staff, chaperones, or extra family members when needed, increasing the Garden Suite’s capacity from 11 to 13.</p>
+
+  </div>
+</article>
+      </div>
+    </div>
+
+    <div class="house-cta"><a href="/policy#event" class="btn btn-outline">Event Rates &amp; Policies</a> <a href="/policy#program" class="btn btn-outline">Retreat Rates &amp; Policies</a> <a href="/#booking" class="btn btn-primary" onclick="try{sessionStorage.setItem('vkfProperty','estate')}catch(e){}">Check Dates for the Entire Estate →</a></div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="eyebrow">Villa Koukouvayia Farms</div>
+    <h2>Ready to stay with <em>us?</em></h2>
+    <p>Three residences, one estate, one family. Come as guests — leave as friends.</p>
+    <div class="cta-btns">
+      <a href="/#residences" class="btn btn-primary">Explore the Property</a>
+      <a href="/#booking" class="btn btn-outline-light">Book Direct</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="/logo-vkf.png" alt="Villa Koukouvayia Farms" style="height:60px;width:auto;display:block;margin-bottom:16px;">
+        <p>A fully-equipped coastal estate among the olive groves of Crete — hosted with care by the Palola-Harriman family since 2019.</p>
+        <p style="font-size: 0.8rem; opacity: 0.5;">Greek RMA Lodging #: 000/023/140/23</p>
+      </div>
+      <div>
+        <h4>The Property</h4>
+        <ul>
+          <li><a href="/#main">Main House</a></li>
+          <li><a href="/#guest">Guest House</a></li>
+          <li><a href="/#garden">Garden Suite</a></li>
+          <li><a href="/#estate">Entire Estate</a></li>
+          <li><a href="/rooms">Rooms &amp; Living Spaces</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>The Location</h4>
+        <ul>
+          <li>Kourthiana Agricultural Rd</li>
+          <li>Kaloudiana, Kissamos 73400</li>
+          <li>Chania, Crete — Greece</li>
+          <li><a href="/directions" style="color: var(--terracotta); opacity: 1;">Our Location &amp; Driving Directions →</a></li>
+          <li><a href="/42-crete-travel-faqs.pdf" target="_blank" rel="noopener" style="color: var(--terracotta); opacity: 1;">Coming to Crete? Island-travel FAQs →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Your Stay</h4>
+        <ul>
+          <li><a href="/#journey">Holidays</a></li>
+          <li><a href="/#journey">Work-stays</a></li>
+          <li><a href="/#journey">Retreats</a></li>
+          <li><a href="/#journey">Weddings &amp; Events</a></li>
+          <li><a href="/#booking" style="color: var(--terracotta); opacity: 1;">Book Direct →</a></li>
+        </ul>
+      </div>
+      <div class="footer-cdr" style="border-left: 1px solid rgba(244,238,226,0.1); padding-left: 32px;">
+        <img src="/logo-cdr.png" alt="Cretan Destination Retreats" style="height:50px;width:auto;display:block;margin-bottom:16px;">
+        <p>Curated holiday experiences to maximize your vacation; logistics, lodging &amp; event support to supercharge your retreat.</p>
+        <ul>
+          <li><a href="/retreats">Current Retreats</a></li>
+          <li><a href="/retreats#planning">Retreat Planning for Facilitators</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 Villa Koukouvayia Farms. All rights reserved.</div>
+      <div>Built with care · Booking &amp; Stay Policy · Cookies &amp; Privacy</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Reveal on scroll */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* Mobile nav close on link click */
+document.getElementById('nav').querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('nav').classList.remove('mobile-open'));
+});
+</script>
+<script src="/carousel.js"></script>
+<script src="/photo-registry.js"></script>
+</body>
+</html>

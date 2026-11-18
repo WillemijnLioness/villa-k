@@ -239,9 +239,12 @@
     const slidesWrap = document.createElement('div');
     slidesWrap.className = 'carousel-slides';
 
+    /* Only the first two slides load straight away; the rest load just before their turn,
+       so a page with many slideshows (e.g. /rooms) stays light. */
     const slideEls = urls.map((url, i) => {
       const s = document.createElement('img');
-      s.src   = url;
+      if (i < 2) s.src = url; else s.dataset.src = url;
+      s.decoding = 'async';
       s.alt   = img.alt || '';
       s.className = 'carousel-slide';
       s.addEventListener('click', () => window.openLightbox(urls, i));
@@ -258,9 +261,15 @@
       slideEls[current].classList.remove('active');
       if (dotEls[current]) dotEls[current].classList.remove('active');
       current = ((idx % urls.length) + urls.length) % urls.length;
+      [current, (current + 1) % urls.length].forEach(load);
       slideEls[current].classList.add('active');
       if (dotEls[current]) dotEls[current].classList.add('active');
       announce();
+    }
+
+    function load(i) {
+      const s = slideEls[i];
+      if (s && !s.getAttribute('src') && s.dataset.src) s.src = s.dataset.src;
     }
 
     /* Tell the page which slide is showing (the VKF hero hides its booking box on the opener) */

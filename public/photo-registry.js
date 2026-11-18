@@ -104,7 +104,88 @@ const PHOTO_REGISTRY = {
       hint: 'Full-width landscape photo shown above the guest reviews. Best: pool terrace, olive grove canopy, or estate overview at golden hour. Wide 16:9 or 3:1 crop. Candidate shots: 2021-0909 (114), 2017-1004 (101), 2021-0925 (100).',
       multiple: false,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765913273406-LERF3E0TYHOX4KIQ1B46/VKF7.png']
+    },
+
+    /* ---- Rooms page (/rooms): living spaces + one slideshow per bedroom. Defaults from the pre-ML site. ---- */
+    rooms_main_house: {
+      label: "Rooms page — Main House living spaces",
+      hint: "Slideshow beside the Main House description on /rooms (living room, kitchen, baths, terraces). 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/225-2022-1003-101.jpg", "/rooms/14-2019-0729-208.jpg", "/rooms/140-2019-0704-174.jpg", "/rooms/110-2018-1003-168.jpg", "/rooms/115-2019-0426-204.jpg", "/rooms/200-2021-0213-101.jpg", "/rooms/180-2019-0704-178.jpg", "/rooms/40-2019-1129-216.jpg", "/rooms/135-2019-1129-211.jpg", "/rooms/140-2019-1129-214.jpg", "/rooms/230-2019-1129-226.jpg", "/rooms/130-2022-1124-100.jpg", "/rooms/30-2021-0120-100.jpg", "/rooms/160-2019-1204-100-scaled.jpg", "/rooms/100-2019-1204-101.jpg", "/rooms/170-2019-1204-106.jpg", "/rooms/175-2019-1204-107.jpg", "/rooms/100-2019-1204-201.jpg", "/rooms/110-2019-1127-100.jpg", "/rooms/105-2019-1120-104.jpg", "/rooms/115-2019-1121-107.jpg", "/rooms/65-2019-1105-106.jpg", "/rooms/140-2019-1106-104.jpg", "/rooms/79-2019-1105-119.jpg", "/rooms/215-2019-1203-302.jpg", "/rooms/220-2022-1003-100.jpg"]
+    },
+    rooms_guest_house: {
+      label: "Rooms page — Guest House living spaces",
+      hint: "Slideshow beside the Guest House description on /rooms (living room, kitchen, baths, terraces). 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/185-2019-1019-110-2.jpg", "/rooms/16-2019-0729-201.jpg", "/rooms/115-2019-0704-179.jpg", "/rooms/31-2019-0728-104.jpg", "/rooms/32-2019-0728-100.jpg", "/rooms/210-2022-0612-202.jpg", "/rooms/83-2018-0922-102.jpg", "/rooms/125-2020-0131-104.jpg", "/rooms/130-2018-1003-164.jpg", "/rooms/135-2019-0728-119.jpg", "/rooms/255-2019-0728-116.jpg", "/rooms/110-2019-1019-122.jpg", "/rooms/150-2019-1019-129.jpg", "/rooms/155-2018-1003-190.jpg", "/rooms/80-2019-0727-106.jpg", "/rooms/130-2019-1019-113.jpg", "/rooms/170-2019-1019-116.jpg", "/rooms/82-2020-0131-101.jpg", "/rooms/78-2019-1019-111.jpg"]
+    },
+    rooms_garden_house: {
+      label: "Rooms page — Garden Suite living spaces",
+      hint: "Slideshow beside the Garden Suite description on /rooms (living room, kitchen, baths, terraces). 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/200-2022-1120-284.jpg", "/rooms/93-2021-0711-114.jpg", "/rooms/155-2021-0609-105.jpg", "/rooms/110-2019-0821-100.jpg", "/rooms/115-2022-0904-218.jpg", "/rooms/120-2022-1120-211.jpg", "/rooms/125-2022-1120-206.jpg", "/rooms/130-2022-0904-219.jpg", "/rooms/105-2019-0418-115.jpg", "/rooms/142-2023-0128-109.jpg", "/rooms/142-2023-0128-117a.jpg", "/rooms/150-2022-1120-235-scaled.jpg", "/rooms/330-2022-1120-236.jpg", "/rooms/335-2022-1120-242.jpg", "/rooms/125-2022-1120-243.jpg", "/rooms/165-2022-1120-249.jpg", "/rooms/170-2022-1120-261.jpg", "/rooms/125-2022-1120-259.jpg", "/rooms/180-2022-1120-267.jpg", "/rooms/185-2022-1120-270.jpg", "/rooms/190-2022-1120-266.jpg", "/rooms/2023-0619-112.jpg", "/rooms/110-2023-0618-221.jpg", "/rooms/115-2023-0618-210.jpg", "/rooms/130-2023-0618-215-1.jpg", "/rooms/145-2023-0618-135.jpg", "/rooms/145-2022-1120-273.jpg"]
+    },
+    rooms_common: {
+      label: "Rooms page — Common Spaces",
+      hint: "Pool, patio, exercise room, gear, gardens. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/115-2021-0125-102.jpg", "/rooms/100-2019-0704-168.jpg", "/rooms/20-2018-1003-197.jpg", "/rooms/110-2019-0704-137.jpg", "/rooms/145-2019-0704-186.jpg", "/rooms/115-2019-0704-177.jpg", "/rooms/120-2019-0710-204.jpg", "/rooms/125-2019-0727-116.jpg", "/rooms/130-2019-0710-201.jpg", "/rooms/135-2019-0710-202.jpg", "/rooms/140-2018-1003-185.jpg", "/rooms/120-2018-0108-107.jpg", "/rooms/205-2021-0626-100.jpg"]
+    },
+    room_koukouvayia: {
+      label: "Rooms page — Koukouvayia Suite (Main House)",
+      hint: "Slideshow for the Koukouvayia Suite, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/79-2019-1105-119.jpg", "/rooms/65-2019-1105-106.jpg", "/rooms/100-2019-1105-116.jpg", "/rooms/110-2019-1105-101.jpg", "/rooms/115-2019-1122-105.jpg", "/rooms/120-2019-1105-113.jpg", "/rooms/125-2019-1108-100.jpg", "/rooms/130-2019-1105-108.jpg", "/rooms/90-2019-1105-124.jpg", "/rooms/150-2019-1106-108.jpg", "/rooms/145-2019-1106-101.jpg", "/rooms/75-2019-1106-104.jpg"]
+    },
+    room_falcon: {
+      label: "Rooms page — Falcon Nest (Main House)",
+      hint: "Slideshow for the Falcon Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/120-2015-0815-116.jpg", "/rooms/110-2019-1127-100.jpg", "/rooms/105-2019-1127-107.jpg", "/rooms/81-2019-1030-119.jpg", "/rooms/115-2019-1030-121.jpg"]
+    },
+    room_griffon: {
+      label: "Rooms page — Griffon Nest (Main House)",
+      hint: "Slideshow for the Griffon Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/72-2019-1121-102.jpg", "/rooms/105-2019-1120-104.jpg", "/rooms/71-2019-1120-105.jpg"]
+    },
+    room_hawk: {
+      label: "Rooms page — Hawk’s Nest (Guest House)",
+      hint: "Slideshow for the Hawk’s Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/120-2020-0131-110.jpg", "/rooms/66-2019-0727-103.jpg", "/rooms/105-2019-1019-102.jpg", "/rooms/80-2019-0727-106.jpg", "/rooms/115-2020-0131-105.jpg"]
+    },
+    room_crow: {
+      label: "Rooms page — Crow’s Nest (Guest House)",
+      hint: "Slideshow for the Crow’s Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/82-2020-0131-101.jpg", "/rooms/130-2019-1019-113.jpg", "/rooms/170-2019-1019-116.jpg"]
+    },
+    room_pheasant: {
+      label: "Rooms page — Pheasant Nest (Garden Suite)",
+      hint: "Slideshow for the Pheasant Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/150-2022-1105-106.jpg", "/rooms/100-2022-1120-254.jpg", "/rooms/105-2022-1116-201.jpg", "/rooms/110-2022-1105-105.jpg", "/rooms/115-2022-1105-109.jpg", "/rooms/150-2022-1120-235-scaled.jpg", "/rooms/330-2022-1120-236.jpg", "/rooms/130-2022-1120-248.jpg", "/rooms/165-2022-1120-249.jpg", "/rooms/335-2022-1120-242.jpg", "/rooms/125-2022-1120-243.jpg"]
+    },
+    room_partridge: {
+      label: "Rooms page — Partridge Nest (Garden Suite)",
+      hint: "Slideshow for the Partridge Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/2023-0619-112.jpg", "/rooms/100-2022-1105-113.jpg", "/rooms/105-2022-1120-259.jpg", "/rooms/125-2022-1120-259.jpg", "/rooms/110-2022-1120-261.jpg", "/rooms/115-2022-1120-262.jpg", "/rooms/120-2022-1120-263.jpg", "/rooms/190-2022-1120-266.jpg", "/rooms/180-2022-1120-267.jpg", "/rooms/355-2022-1120-268.jpg", "/rooms/185-2022-1120-270.jpg", "/rooms/135-2022-1120-271.jpg", "/rooms/2023-0619-111.jpg"]
+    },
+    room_swallow: {
+      label: "Rooms page — Swallow’s Nest (Garden Suite)",
+      hint: "Slideshow for the Swallow’s Nest, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/230-2023-0618-703.jpg", "/rooms/100-2023-0618-100.jpg", "/rooms/105-2023-0619-110.jpg", "/rooms/110-2023-0618-221.jpg", "/rooms/115-2023-0618-210.jpg", "/rooms/120-2023-0618-406.jpg", "/rooms/125-2023-0618-405.jpg", "/rooms/130-2023-0618-215-1.jpg", "/rooms/135-2023-0618-600.jpg", "/rooms/140-2023-0618-110.jpg", "/rooms/145-2023-0618-135.jpg", "/rooms/150-2023-0618-223.jpg", "/rooms/155-2023-0618-401.jpg", "/rooms/220-2023-0618-702.jpg", "/rooms/225-2023-0618-704.jpg"]
+    },
+    room_chaperone: {
+      label: "Rooms page — Chaperone Quarters (Garden Suite)",
+      hint: "Slideshow for the Chaperone Quarters, shown in its house and in the Entire Estate list. 4:3 landscape.",
+      multiple: true,
+      defaults: ["/rooms/120-2022-1120-214.jpg", "/rooms/125-2022-1120-206.jpg", "/rooms/135-2022-1120-219.jpg", "/rooms/110-2022-1120-232.jpg", "/rooms/115-2022-1120-205.jpg"]
     }
+
   },
 
   /* ---------- Cretan Destination Retreats ---------- */

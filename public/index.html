@@ -561,6 +561,7 @@ section { padding: 100px 0; }
   gap: 24px;
   flex-wrap: wrap;
 }
+.residence-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 .price-from {
   display: flex;
   flex-direction: column;
@@ -1485,7 +1486,7 @@ section { padding: 100px 0; }
           <li>Open-plan first floor, fully equipped kitchen under stone arch.</li>
           <li>Private office with ethernet docking, printer, monitor &amp; peripherals.</li>
           <li>Koukouvayia Suite: En suite bath, library, fireplace, teak king bed &amp; private balcony.</li>
-          <li>Gryphon's Nest: A studio &amp; loft set into a stone turret overlooking Gramvousa Peninsula &amp; the Gulf of Kissamos.</li>
+          <li>Griffon Nest: A studio &amp; loft set into a stone turret overlooking Gramvousa Peninsula &amp; the Gulf of Kissamos.</li>
           <li>Falcon's Nest: Antique maple bed &amp; wrap-around balcony facing Topolio Gorge.</li>
         </ul>
         <div class="residence-footer">
@@ -1493,7 +1494,10 @@ section { padding: 100px 0; }
             <span class="price-from-label">Winter to Summer nightly rates of</span>
             <span class="price-from-value">€116 to €337</span>
           </div>
+          <div class="residence-actions">
+          <a href="/rooms#main-house" class="btn btn-outline">See the Rooms</a>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('main')">Check Dates →</a>
+          </div>
         </div>
       </div>
     </article>
@@ -1535,7 +1539,10 @@ section { padding: 100px 0; }
             <span class="price-from-label">Winter to Summer nightly rates of</span>
             <span class="price-from-value">€64 to €182</span>
           </div>
+          <div class="residence-actions">
+          <a href="/rooms#guest-house" class="btn btn-outline">See the Rooms</a>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('guest')">Check Dates →</a>
+          </div>
         </div>
       </div>
     </article>
@@ -1575,7 +1582,10 @@ section { padding: 100px 0; }
             <span class="price-from-label">Winter to Summer nightly rates of</span>
             <span class="price-from-value">€60 to €182</span>
           </div>
+          <div class="residence-actions">
+          <a href="/rooms#garden-suite" class="btn btn-outline">See the Rooms</a>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('garden')">Check Dates →</a>
+          </div>
         </div>
       </div>
     </article>
@@ -1615,7 +1625,10 @@ section { padding: 100px 0; }
             <span class="price-from-label">Winter to Summer nightly rates of</span>
             <span class="price-from-value">€295 to €790</span>
           </div>
+          <div class="residence-actions">
+          <a href="/rooms#entire-estate" class="btn btn-outline">See the Rooms</a>
           <a href="#booking" class="btn btn-primary" onclick="preselectProperty('estate')">Check Dates →</a>
+          </div>
         </div>
       </div>
     </article>
@@ -1852,6 +1865,7 @@ section { padding: 100px 0; }
           <li><a href="#guest">Guest House</a></li>
           <li><a href="#garden">Garden Suite</a></li>
           <li><a href="#estate">Entire Estate</a></li>
+          <li><a href="/rooms">Rooms &amp; Living Spaces</a></li>
         </ul>
       </div>
       <!-- The Location -->
@@ -2539,6 +2553,14 @@ function fullPhone() {
   const local = opt.dataset.code === '39' ? n : n.replace(/^0(?=\d)/, '');
   return '+' + opt.dataset.code + ' ' + local + ' (' + opt.dataset.country + ')';
 }
+
+// Coming from /rooms "Check Dates for the …": preselect that residence
+(() => {
+  try {
+    const k = sessionStorage.getItem('vkfProperty');
+    if (k) { sessionStorage.removeItem('vkfProperty'); preselectProperty(k); }
+  } catch (e) {}
+})();
 
 // Hero opener: hide the booking box while the first slide (estate long shot) shows.
 // Once a visitor has used the box it stays put, so it never vanishes mid-typing on a later loop.
