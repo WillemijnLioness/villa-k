@@ -1752,12 +1752,12 @@ section { padding: 100px 0; }
             </div>
           </div>
           <div class="form-field">
-            <label for="phone">Phone <span style="color: var(--muted); font-weight: 400; text-transform: none; letter-spacing: 0;">(optional)</span></label>
+            <label for="phone">Phone</label>
             <div class="phone-row">
-              <select id="phoneCountry" aria-label="Country code for your phone number" autocomplete="tel-country-code">
+              <select id="phoneCountry" aria-label="Country code for your phone number" autocomplete="tel-country-code" required>
                 <option value="">Country code…</option>
               </select>
-              <input type="tel" id="phone" placeholder="Phone number" autocomplete="tel-national">
+              <input type="tel" id="phone" placeholder="Phone number" autocomplete="tel-national" required>
             </div>
           </div>
           <div class="form-field">
@@ -2518,12 +2518,13 @@ const PHONE_COUNTRIES = [
   const check = () => {
     const n = phone.value.trim();
     let msg = '';
-    if (n && !hasCode(n) && !sel.value) msg = 'Please choose the country code for your phone number.';
+    if (!sel.value) msg = 'Please choose the country code for your phone number.';
     else if (n && !hasCode(n) && sel.value === 'other') msg = 'Please type your number with its country code, starting with +.';
     sel.setCustomValidity(msg);
   };
   phone.addEventListener('input', check);
   sel.addEventListener('change', check);
+  check();
 })();
 
 // The phone number as H&R need it: +code number (country). A number already typed with + or 00 is kept.
