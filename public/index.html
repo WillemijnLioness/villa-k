@@ -1580,7 +1580,7 @@ section { padding: 100px 0; }
         <div class="residence-footer">
           <div class="price-from">
             <span class="price-from-label">Winter to Summer nightly rates of</span>
-            <span class="price-from-value">€60 to €182</span>
+            <span class="price-from-value">€66 to €189</span>
           </div>
           <div class="residence-actions">
           <a href="/rooms#garden-suite" class="btn btn-outline">See the Rooms</a>
@@ -1928,7 +1928,9 @@ section { padding: 100px 0; }
 const BASE_RATES = {
   guest:  [50, 50, 60, 70,  85, 110, 140, 140, 110,  85, 70,  60], // Apr + Nov 65 -> 70 (H&R, 18 Nov 2026: inclusive €95 Apr, €89 Nov)
   main:   [90, 90,115,125, 155, 200, 260, 260, 200, 155,125, 115],
-  garden: [45, 45, 55, 60,  80, 105, 135, 135, 105,  80, 60,  55],
+  // Garden Suite (H&R, 18 Nov 2026): set from their all-inclusive rates (24% tax + climate tax)
+  // Jan-Dec €66 66 79 102 121 152 189 189 152 121 91 79, i.e. pre-tax = (inclusive - climate) / 1.24
+  garden: [50, 50, 60.48, 70.16, 85.48, 110.48, 140.32, 140.32, 110.48, 85.48, 70.16, 60.48],
   estate: [235,235,285,310,390, 495, 625, 625, 495, 390,310, 285]
 };
 
