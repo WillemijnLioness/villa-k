@@ -29,7 +29,7 @@ const PHOTO_REGISTRY = {
     },
     mh_main: {
       label: 'Main House — slideshow',
-      hint: 'Upload in order: exterior verandas, interior living spaces, kitchen, bedrooms (Koukouvayia Suite, Gryphon\'s Nest, Falcon\'s Nest), bathrooms, roof terrace. 4:3 landscape.',
+      hint: 'Upload in order: exterior verandas, interior living spaces, kitchen, bedrooms (Koukouvayia Suite, Griffon Nest, Falcon\'s Nest), bathrooms, roof terrace. 4:3 landscape.',
       multiple: true,
       defaults: ['https://images.squarespace-cdn.com/content/v1/693ebd5cd625ea5b123f1a7e/1765912097838-BPPGSEP2YNM8MGDA01PK/Main+House4.jpeg']
     },
